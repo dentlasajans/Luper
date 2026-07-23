@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, query, orderBy, limit, doc, setDoc, getDoc } from 'firebase/firestore';
 import { ChangelogEntry, OptimizationSetting } from '../types';
-import { mockChangelog, mockNetworkSettings, getMockDummySettings } from '../mocks';
+import { mockChangelog } from '../mocks';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyCB3eOBbtuzKEOwzR1F_maKgKq6hYoXcT0",
@@ -24,10 +24,8 @@ export const getCategorySettingsFromFirebase = async (categoryId: string): Promi
     return categoryCache[categoryId];
   }
 
-  if (USE_MOCKS || !db) {
-    const mockData = categoryId === 'network' ? mockNetworkSettings : getMockDummySettings(categoryId);
-    categoryCache[categoryId] = mockData;
-    return mockData;
+  if (!db) {
+    throw new Error("Firebase yapılandırması bulunamadı (API Key eksik). Build işlemi sırasında .env dosyasının dahil edildiğinden emin olun.");
   }
   try {
     const q = query(collection(db, `optimizations/${categoryId}/settings`));
@@ -36,18 +34,11 @@ export const getCategorySettingsFromFirebase = async (categoryId: string): Promi
     querySnapshot.forEach((doc) => {
       settings.push({ id: doc.id, ...doc.data(), status: 'default' } as OptimizationSetting);
     });
-    if (settings.length > 0) {
-      categoryCache[categoryId] = settings;
-      return settings;
-    }
-    const mockData = categoryId === 'network' ? mockNetworkSettings : getMockDummySettings(categoryId);
-    categoryCache[categoryId] = mockData;
-    return mockData;
+    categoryCache[categoryId] = settings;
+    return settings;
   } catch (error: any) {
-    console.warn(`Firebase'den ${categoryId} ayarları çekilirken hata oluştu, mock verilere geçiliyor:`, error);
-    const mockData = categoryId === 'network' ? mockNetworkSettings : getMockDummySettings(categoryId);
-    categoryCache[categoryId] = mockData;
-    return mockData;
+    console.error(`Firebase'den ${categoryId} ayarları çekilirken hata oluştu:`, error);
+    throw new Error(`Veritabanına erişilemedi: ${error.message || "Bilinmeyen hata"}`);
   }
 };
 
