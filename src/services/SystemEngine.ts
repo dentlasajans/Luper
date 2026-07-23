@@ -3,7 +3,8 @@ import { getCategorySettingsFromFirebase } from './FirebaseService';
 import { mockOptimizationCounts, mockSystemStatus, mockSteamGames } from '../mocks';
 
 const IPC_TIMEOUT_MS = 60000;
-const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
+const isElectron = typeof window !== 'undefined' && !!(window as any).electron?.ipcRenderer;
+const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true' || !isElectron;
 
 class IpcTimeoutError extends Error {
   constructor(channel: string) {
