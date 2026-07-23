@@ -1,14 +1,19 @@
 {
   "name": "luper",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Windows Optimizer",
+  "author": "Himmet Muhammed <himmetmuhammedk@gmail.com>",
   "type": "module",
   "main": "electron/main.js",
+  "repository": "https://github.com/user/windows-optimizer",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "start": "vite build && electron .",
+    "electron": "electron .",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "clean": "node -e \"fs.rmSync('dist', {recursive: true, force: true})\"",
     "lint": "tsc --noEmit",
     "dist": "electron-builder"
   },
@@ -25,7 +30,8 @@
     "win": {
       "target": [
         "nsis"
-      ]
+      ],
+      "requestedExecutionLevel": "requireAdministrator"
     },
     "nsis": {
       "oneClick": false,

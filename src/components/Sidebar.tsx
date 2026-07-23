@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Home, Zap, Wrench, Gamepad2, Gauge, FileText, ArrowUpCircle, Settings, Github, Twitter, Globe, Cpu, User, ChevronDown, Archive } from 'lucide-react';
+import { Home, Zap, Wrench, Gamepad2, FileText, ArrowUpCircle, Settings, Github, Twitter, Globe, Cpu, User, ChevronDown, Archive } from 'lucide-react';
 import { motion } from 'motion/react';
 import { AppLogo } from './Icons';
 
@@ -53,7 +53,6 @@ const navItems: NavItem[] = [
     ]
   },
   { id: 'games', icon: Gamepad2, label: 'Oyunlar' },
-  { id: 'benchmark', icon: Gauge, label: 'Benchmark' },
   { id: 'system-info', icon: Cpu, label: 'Sistem Bilgisi' },
   { id: 'release-notes', icon: FileText, label: 'Sürüm Notları' },
   { id: 'update', icon: ArrowUpCircle, label: 'Güncelleme' },
@@ -192,7 +191,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   }, [activeTab]);
 
   return (
-    <div className="w-64 shrink-0 h-full bg-transparent flex flex-col relative z-20 pt-12 pb-6 px-4">
+    <div className="w-64 shrink-0 h-full bg-transparent flex flex-col relative z-20 pt-8 pb-4 px-3">
       {/* Logo */}
       <div className="flex items-center px-2 mb-6 w-full text-[#f5f5f7] select-none drag-region group hover:brightness-110 transition-all cursor-pointer">
         <AppLogo className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-500 ease-out drop-shadow-md" />

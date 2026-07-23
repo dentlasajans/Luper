@@ -2,9 +2,8 @@ import { OPTIMIZATION_CARDS } from '../data/categories';
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { Loader2 } from 'lucide-react';
-import { getOptimizationCounts } from '../services/SystemEngine';
 import { useSettings } from '../context/SettingsContext';
-import { CategoryOptimizationCount } from '../types';
+import { getAllCategorySettingCounts } from '../services/FirebaseService';
 
 interface OptimizationCardProps {
   id: string;
@@ -18,6 +17,7 @@ interface OptimizationCardProps {
 
 const OptimizationCard = React.memo(function OptimizationCard({ id, icon: Icon, title, description, settingCount, improvements, onClick }: OptimizationCardProps) {
   const { lowQualityMode } = useSettings();
+
   return (
     <div 
       onClick={() => onClick(id)}
@@ -58,20 +58,10 @@ const OptimizationCard = React.memo(function OptimizationCard({ id, icon: Icon, 
 
 
 export function Optimization({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
-  const [counts, setCounts] = useState<CategoryOptimizationCount | null>(null);
+  const [counts, setCounts] = useState<Record<string, number>>(() => getAllCategorySettingCounts());
 
   useEffect(() => {
-    let isMounted = true;
-    
-    getOptimizationCounts()
-      .then(data => {
-        if (isMounted) setCounts(data);
-      })
-      .catch(() => {
-        if (isMounted) setCounts({});
-      });
-
-    return () => { isMounted = false; };
+    setCounts(getAllCategorySettingCounts());
   }, []);
 
   const cards = OPTIMIZATION_CARDS;
@@ -103,7 +93,7 @@ export function Optimization({ setActiveTab }: { setActiveTab: (tab: string) => 
             >
               <OptimizationCard
                 {...card}
-                settingCount={counts ? (counts[card.id] || 0) : null}
+                settingCount={counts ? (counts[card.id] ?? 0) : 0}
                 onClick={handleCardClick}
               />
             </motion.div>

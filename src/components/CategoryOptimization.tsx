@@ -1,10 +1,11 @@
 import { useState, memo } from 'react';
-import { motion } from 'motion/react';
-import { ChevronRight, Settings, Loader2, Check, RefreshCw } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronRight, Settings, Loader2, Check, RefreshCw, AlertTriangle, AlertCircle, X } from 'lucide-react';
 import { useCategorySettings } from '../hooks/useCategorySettings';
 
 
 import { CATEGORY_META } from '../data/categories';
+import { OptimizationSetting } from '../types';
 
 const ImpactBadge = memo(function ImpactBadge({ label, detail }: { label: string, detail: { level: string, description: string } | undefined }) {
   const level = detail?.level || 'none';
@@ -76,13 +77,108 @@ const ImpactBadge = memo(function ImpactBadge({ label, detail }: { label: string
   );
 });
 
+const OptimizationCard = memo(function OptimizationCard({
+  setting,
+  idx,
+  processingState,
+  handleToggle
+}: {
+  setting: OptimizationSetting,
+  idx: number,
+  processingState: Record<string, 'processing' | 'success' | 'error'>,
+  handleToggle: (id: string, currentStatus: string) => void
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: Math.min(idx * 0.04, 0.2) }}
+      className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 flex flex-col group hover:bg-white/[0.06] hover:border-white/[0.12] transition-all min-h-[180px]"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-start space-x-3 pr-2">
+          <div className="w-10 h-10 rounded-xl bg-white/[0.03] flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)] shrink-0">
+            <Settings size={18} className="text-text-muted" />
+          </div>
+          <div>
+            <h3 className="text-[#f5f5f7] text-[15px] font-medium leading-snug">{setting.name}</h3>
+            <p className="text-text-muted text-[13px] mt-1.5 leading-relaxed line-clamp-2">{setting.description}</p>
+          </div>
+        </div>
+        <div className="shrink-0 mt-1 flex flex-col items-end space-y-1.5">
+          <button
+            onClick={() => !processingState[setting.id] && handleToggle(setting.id, setting.status)}
+            disabled={!!processingState[setting.id]}
+            className={`relative w-[52px] h-[28px] rounded-full transition-colors duration-300  flex items-center justify-center ${setting.status === 'optimized' ? 'bg-[#f5f5f7]' : 'bg-white/[0.15] border border-white/[0.08]'} ${(processingState[setting.id] === 'processing') ? 'opacity-80 cursor-not-allowed' : ''} focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none`}
+          >
+            {processingState[setting.id] === 'processing' && (
+              <Loader2 size={12} className={`absolute animate-spin ${setting.status === 'optimized' ? 'text-surface-base left-[8px]' : 'text-text-muted right-[8px]'}`} />
+            )}
+            {processingState[setting.id] === 'success' && (
+              <Check size={12} className={`absolute ${setting.status === 'optimized' ? 'text-surface-base left-[8px]' : 'text-[#81c784] right-[8px]'}`} />
+            )}
+            <motion.div
+              className={`absolute top-1 bottom-1 w-[20px] rounded-full shadow-sm ${setting.status === 'optimized' ? 'bg-surface-base' : 'bg-white'}`}
+              initial={false}
+              animate={{
+                left: setting.status === 'optimized' ? '28px' : '4px',
+              }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            />
+          </button>
+          <span className={`text-[11px] font-medium mr-1 ${setting.status === 'optimized' ? 'text-white' : 'text-text-muted'}`}>
+            {setting.status === 'optimized' ? 'Optimize Edildi' : 'Varsayılan'}
+          </span>
+        </div>
+      </div>
+      <div className="mt-auto pt-4 border-t border-white/[0.04] grid grid-cols-5 gap-1">
+        <ImpactBadge label="Perf" detail={setting.impacts?.performance} />
+        <ImpactBadge label="Gecikme" detail={setting.impacts?.latency} />
+        <ImpactBadge label="İnput" detail={setting.impacts?.input} />
+        <ImpactBadge label="Güç" detail={setting.impacts?.power} />
+        <ImpactBadge label="Isı" detail={setting.impacts?.heat} />
+      </div>
+    </motion.div>
+  );
+});
+
 export function CategoryOptimization({ categoryId, onBack }: { categoryId: string; onBack: () => void }) {
   const meta = CATEGORY_META[categoryId] || { title: 'Bilinmeyen', description: 'Bu kategori bulunamadı.' };
   const [retryCount, setRetryCount] = useState(0);
-  const { settings, loading, processingState, handleToggle } = useCategorySettings(categoryId, retryCount);
+  const { settings, loading, error, processingState, handleToggle, toastMessage, setToastMessage } = useCategorySettings(categoryId, retryCount);
 
   return (
-    <div className="p-8 max-w-6xl mx-auto h-full flex flex-col" style={{ WebkitAppRegion: 'no-drag' } as any}>
+    <div className="p-8 max-w-6xl mx-auto h-full flex flex-col relative" style={{ WebkitAppRegion: 'no-drag' } as any}>
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center p-4 rounded-2xl border shadow-2xl min-w-[320px] max-w-lg ${
+              toastMessage.type === 'error' 
+                ? 'bg-[#1c1c1e] border-[#e57373]/30 text-[#e57373]' 
+                : 'bg-[#1c1c1e] border-[#81c784]/30 text-[#81c784]'
+            }`}
+          >
+            <div className={`p-2 rounded-xl shrink-0 mr-4 ${toastMessage.type === 'error' ? 'bg-[#e57373]/10' : 'bg-[#81c784]/10'}`}>
+              {toastMessage.type === 'error' ? <AlertCircle size={20} /> : <Check size={20} />}
+            </div>
+            <p className="flex-1 text-[14px] font-medium leading-snug text-[#f5f5f7]">
+              {toastMessage.message}
+            </p>
+            <button 
+              onClick={() => setToastMessage(null)}
+              className="ml-4 p-1.5 rounded-lg text-text-muted hover:text-white hover:bg-white/10 transition-colors shrink-0"
+            >
+              <X size={16} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -123,75 +219,13 @@ export function CategoryOptimization({ categoryId, onBack }: { categoryId: strin
                 </div>
               ))}
             </div>
-          ) : settings && settings.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto pr-2 pb-4 content-start">
-              {settings.map((setting, idx) => (
-                <motion.div 
-                  key={setting.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: Math.min(idx * 0.04, 0.2) }}
-                  className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 flex flex-col group hover:bg-white/[0.06] hover:border-white/[0.12] transition-all min-h-[180px]"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-start space-x-3 pr-2">
-                      <div className="w-10 h-10 rounded-xl bg-white/[0.03] flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)] shrink-0">
-                        <Settings size={18} className="text-text-muted" />
-                      </div>
-                      <div>
-                        <h3 className="text-[#f5f5f7] text-[15px] font-medium leading-snug">{setting.name}</h3>
-                        <p className="text-text-muted text-[13px] mt-1.5 leading-relaxed">{setting.description}</p>
-                      </div>
-                    </div>
-                    <div className="shrink-0 mt-1 flex flex-col items-end space-y-1.5">
-                      <button
-                        onClick={() => !processingState[setting.id] && handleToggle(setting.id, setting.status)}
-                        disabled={!!processingState[setting.id]}
-                        className={`relative w-[52px] h-[28px] rounded-full transition-colors duration-300  flex items-center justify-center ${setting.status === 'optimized' ? 'bg-[#f5f5f7]' : 'bg-white/[0.15] border border-white/[0.08]'} ${(processingState[setting.id] === 'processing') ? 'opacity-80 cursor-not-allowed' : ''} focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none`}
-                      >
-                        {processingState[setting.id] === 'processing' && (
-                          <Loader2 size={12} className={`absolute animate-spin ${setting.status === 'optimized' ? 'text-surface-base left-[8px]' : 'text-text-muted right-[8px]'}`} />
-                        )}
-                        {processingState[setting.id] === 'success' && (
-                          <Check size={12} className={`absolute ${setting.status === 'optimized' ? 'text-surface-base left-[8px]' : 'text-[#81c784] right-[8px]'}`} />
-                        )}
-                        <motion.div
-                          className={`absolute top-1 bottom-1 w-[20px] rounded-full shadow-sm ${setting.status === 'optimized' ? 'bg-surface-base' : 'bg-white'}`}
-                          initial={false}
-                          animate={{
-                            left: setting.status === 'optimized' ? '28px' : '4px',
-                          }}
-                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                        />
-                      </button>
-                      <span className={`text-[11px] font-medium mr-1 ${setting.status === 'optimized' ? 'text-white' : 'text-text-muted'}`}>
-                        {setting.status === 'optimized' ? 'Optimize' : 'Varsayılan'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-auto pt-4 border-t border-white/[0.04] grid grid-cols-5 gap-1">
-                    <ImpactBadge label="Perf" detail={setting.impacts?.performance} />
-                    <ImpactBadge label="Gecikme" detail={setting.impacts?.latency} />
-                    <ImpactBadge label="İnput" detail={setting.impacts?.input} />
-                    <ImpactBadge label="Güç" detail={setting.impacts?.power} />
-                    <ImpactBadge label="Isı" detail={setting.impacts?.heat} />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
+          ) : error ? (
             <div className="flex-1 flex items-center justify-center">
-              <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-3xl p-10 max-w-md">
-                <motion.div 
-                  animate={{ y: [0, -8, 0] }} 
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <Settings size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
-                </motion.div>
-                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Ayarlar Yüklenemedi</h3>
-                <p className="text-text-muted text-[14px] font-normal leading-relaxed max-w-sm mb-6 mx-auto">
-                  Bu kategori için ayarlar sistemden çekilemedi veya boş.
+              <div className="text-center bg-white/[0.04] border border-[#e57373]/30 rounded-3xl p-10 max-w-md">
+                <AlertTriangle size={36} className="text-[#e57373] mx-auto mb-5 opacity-80" />
+                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Bağlantı Hatası</h3>
+                <p className="text-[#e57373]/90 text-[14px] font-normal leading-relaxed max-w-sm mb-6 mx-auto">
+                  {error.message}
                 </p>
                 <button 
                   onClick={() => setRetryCount(prev => prev + 1)}
@@ -199,6 +233,40 @@ export function CategoryOptimization({ categoryId, onBack }: { categoryId: strin
                 >
                   <RefreshCw size={14} className="text-text-muted" />
                   <span className="text-[13px] font-medium">Yeniden Dene</span>
+                </button>
+              </div>
+            </div>
+          ) : settings && settings.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto pr-2 pb-4 content-start">
+              {settings.map((setting, idx) => (
+                <OptimizationCard
+                  key={setting.id}
+                  setting={setting}
+                  idx={idx}
+                  processingState={processingState}
+                  handleToggle={handleToggle}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex-1 flex items-center justify-center">
+              <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-3xl p-10 max-w-md">
+                <motion.div 
+                  animate={{ scale: [1, 1.05, 1] }} 
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Settings size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
+                </motion.div>
+                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Henüz Ayar Bulunmuyor</h3>
+                <p className="text-text-muted text-[14px] font-normal leading-relaxed max-w-sm mb-6 mx-auto">
+                  Bu kategori için optimizasyon kartları yakında eklenecektir.
+                </p>
+                <button 
+                  onClick={() => setRetryCount(prev => prev + 1)}
+                  className="flex items-center space-x-2 mx-auto px-5 py-2.5 bg-white/[0.05] hover:bg-white/[0.08] text-white rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-all"
+                >
+                  <RefreshCw size={14} className="text-text-muted" />
+                  <span className="text-[13px] font-medium">Yenile</span>
                 </button>
               </div>
             </div>

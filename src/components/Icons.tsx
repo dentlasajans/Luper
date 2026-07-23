@@ -12,6 +12,6 @@ export function AppIcon({ className }: { className?: string }) {
 
 export const AppLogo = React.memo(function AppLogo({ className }: { className?: string }) {
   return (
-    <img src="/logo.svg" alt="LUPER" className={className} draggable={false} />
+    <img src="./logo.svg" alt="LUPER" className={className} draggable={false} />
   );
 });

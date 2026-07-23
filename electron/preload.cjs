@@ -7,7 +7,8 @@ contextBridge.exposeInMainWorld('electron', {
       const validChannels = [
         'window-minimize', 'window-maximize', 'window-close',
         'execute-quick-action', 'get-optimization-counts',
-        'get-category-settings', 'get-system-status'
+        'get-category-settings', 'get-system-status',
+        'apply-optimization', 'restore-optimization', 'get-startup-items', 'toggle-startup-item', 'get-installed-apps', 'uninstall-app', 'get-cleaner-items', 'execute-cleaner', 'get-installed-steam-games', 'launch-steam-game', 'finish-splash'
       ];
       if (validChannels.includes(channel)) {
         return ipcRenderer.invoke(channel, ...args);

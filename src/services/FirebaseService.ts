@@ -1,54 +1,31 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, orderBy, limit, doc, setDoc, onSnapshot, getCountFromServer } from 'firebase/firestore';
-import { ChangelogEntry, OptimizationSetting, CategoryOptimizationCount } from '../types';
+import { getFirestore, collection, getDocs, query, orderBy, limit, doc, setDoc, getDoc } from 'firebase/firestore';
+import { ChangelogEntry, OptimizationSetting } from '../types';
 import { mockChangelog } from '../mocks';
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "dummy",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "dummy",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "dummy",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "dummy",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "dummy",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "dummy"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyCB3eOBbtuzKEOwzR1F_maKgKq6hYoXcT0",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "luper-cd5df.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "luper-cd5df",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "luper-cd5df.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "935608092725",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:935608092725:web:6637d59e958d5f83ea497c"
 };
 
-const isConfigured = import.meta.env.VITE_FIREBASE_API_KEY !== undefined && import.meta.env.VITE_FIREBASE_API_KEY !== "";
-const app = isConfigured ? initializeApp(firebaseConfig) : null;
-export const db = app ? getFirestore(app) : null;
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
 
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
 
-export const subscribeToCategorySettingsFromFirebase = (
-  categoryId: string,
-  onUpdate: (settings: OptimizationSetting[]) => void,
-  onError: (error: Error) => void
-): (() => void) | null => {
-  if (!db) return null;
-  
-  try {
-    const q = query(collection(db, `optimizations/${categoryId}/settings`));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const settings: OptimizationSetting[] = [];
-      querySnapshot.forEach((doc) => {
-        settings.push({ id: doc.id, ...doc.data(), status: 'default' } as OptimizationSetting);
-      });
-      onUpdate(settings);
-    }, (error) => {
-      console.error(`Firebase'den ${categoryId} ayarları dinlenirken hata oluştu:`, error);
-      onError(error);
-    });
-    
-    return unsubscribe;
-  } catch (error) {
-    console.error(`Firebase listener kurulamadı:`, error);
-    onError(error as Error);
-    return null;
-  }
-};
+const categoryCache: Record<string, OptimizationSetting[]> = {};
 
 export const getCategorySettingsFromFirebase = async (categoryId: string): Promise<OptimizationSetting[]> => {
+  if (categoryCache[categoryId]) {
+    return categoryCache[categoryId];
+  }
+
   if (!db) {
-    return [];
+    throw new Error("Firebase yapılandırması bulunamadı (API Key eksik). Build işlemi sırasında .env dosyasının dahil edildiğinden emin olun.");
   }
   try {
     const q = query(collection(db, `optimizations/${categoryId}/settings`));
@@ -57,36 +34,75 @@ export const getCategorySettingsFromFirebase = async (categoryId: string): Promi
     querySnapshot.forEach((doc) => {
       settings.push({ id: doc.id, ...doc.data(), status: 'default' } as OptimizationSetting);
     });
+    categoryCache[categoryId] = settings;
     return settings;
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Firebase'den ${categoryId} ayarları çekilirken hata oluştu:`, error);
-    return [];
+    throw new Error(`Veritabanına erişilemedi: ${error.message || "Bilinmeyen hata"}`);
   }
 };
 
-export const getOptimizationCountsFromFirebase = async (categoryIds: string[]): Promise<CategoryOptimizationCount | null> => {
-  if (!db) return null;
-  
+let changelogCache: ChangelogEntry | null | undefined = undefined;
+
+const SUBCATEGORIES = [
+  'network', 'cpu', 'storage', 'mouse', 'privacy', 
+  'gpu', 'power', 'security', 'personalization', 
+  'keyboard', 'audio', 'browser', 'telemetry'
+];
+
+let preloaded = false;
+
+export const preloadAllCategorySettings = async (): Promise<void> => {
+  if (preloaded) return;
+  preloaded = true;
+
   try {
-    const counts: CategoryOptimizationCount = {};
-    const promises = categoryIds.map(async (categoryId) => {
-      try {
-        const coll = collection(db, `optimizations/${categoryId}/settings`);
-        const snapshot = await getCountFromServer(coll);
-        counts[categoryId] = snapshot.data().count;
-      } catch (err) {
-        counts[categoryId] = 0;
-      }
-    });
-    await Promise.all(promises);
-    return counts;
-  } catch (error) {
-    console.error("Firebase'den optimizasyon sayıları çekilirken hata oluştu:", error);
-    return null;
+    await seedInitialData();
+  } catch (e) {
+    console.error("Seed error:", e);
   }
+
+  await Promise.all(
+    SUBCATEGORIES.map(async (cat) => {
+      try {
+        await getCategorySettingsFromFirebase(cat);
+      } catch (e) {
+        console.warn(`Failed to preload category ${cat} from Firebase:`, e);
+      }
+    })
+  );
+};
+
+export const getTotalOptimizationSettingsCount = (): number => {
+  let total = 0;
+  for (const cat of SUBCATEGORIES) {
+    if (categoryCache[cat]) {
+      total += categoryCache[cat].length;
+    }
+  }
+  return total > 0 ? total : 25;
+};
+
+export const getCategorySettingCount = (categoryId: string): number => {
+  if (categoryCache[categoryId]) {
+    return categoryCache[categoryId].length;
+  }
+  return 0;
+};
+
+export const getAllCategorySettingCounts = (): Record<string, number> => {
+  const result: Record<string, number> = {};
+  for (const cat of SUBCATEGORIES) {
+    result[cat] = categoryCache[cat] ? categoryCache[cat].length : 0;
+  }
+  return result;
 };
 
 export const getLatestChangelog = async (): Promise<ChangelogEntry | null> => {
+  if (changelogCache !== undefined) {
+    return changelogCache;
+  }
+  
   if (USE_MOCKS || !db) {
     return mockChangelog;
   }
@@ -95,8 +111,11 @@ export const getLatestChangelog = async (): Promise<ChangelogEntry | null> => {
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
       const doc = querySnapshot.docs[0];
-      return { id: doc.id, ...doc.data() } as ChangelogEntry;
+      const entry = { id: doc.id, ...doc.data() } as ChangelogEntry;
+      changelogCache = entry;
+      return entry;
     }
+    changelogCache = null;
     return null;
   } catch (error) {
     console.error("Changelog çekilirken hata oluştu:", error);
@@ -107,29 +126,23 @@ export const getLatestChangelog = async (): Promise<ChangelogEntry | null> => {
 export const seedInitialData = async () => {
   if (!db) return;
   try {
-    await setDoc(doc(db, 'optimizations/network/settings', 'network_throttling'), {
-      name: 'Ağ Kısıtlamasını (Network Throttling) Kapat',
-      description: 'Windows ağ kısıtlamalarını devre dışı bırakarak gecikmeyi (ping) düşürür ve paket iletimini hızlandırır.',
-      impacts: {
-        performance: { level: 'positive_medium', description: 'Performansa etkisi orta düzeyde olumludur.' },
-        latency: { level: 'positive_high', description: 'Gecikmeyi yüksek oranda düşürür.' },
-        input: { level: 'none', description: 'İnput üzerinde belirgin bir etkisi yoktur.' },
-        power: { level: 'negative_low', description: 'Güç tüketimini hafif düzeyde artırabilir.' },
-        heat: { level: 'none', description: 'Isı üzerinde belirgin bir etkisi yoktur.' }
-      }
-    });
-
-    await setDoc(doc(db, 'optimizations/network/settings', 'dns_cache'), {
-      name: 'DNS Önbelleğini Temizle ve Optimize Et',
-      description: 'Eski DNS kayıtlarını temizler ve daha hızlı alan adı çözümlemesi için ayarları yapılandırır.',
-      impacts: {
-        performance: { level: 'positive_low', description: 'Performansa etkisi hafif düzeyde olumludur.' },
-        latency: { level: 'positive_medium', description: 'Gecikmeyi orta oranda düşürür.' },
-        input: { level: 'none', description: 'İnput üzerinde belirgin bir etkisi yoktur.' },
-        power: { level: 'none', description: 'Güç üzerinde belirgin bir etkisi yoktur.' },
-        heat: { level: 'none', description: 'Isı üzerinde belirgin bir etkisi yoktur.' }
-      }
-    });
+    const netThrottleRef = doc(db, 'optimizations/network/settings', 'network_throttling');
+    const netThrottleSnap = await getDoc(netThrottleRef);
+    if (!netThrottleSnap.exists()) {
+      await setDoc(netThrottleRef, {
+        name: 'Ağ Kısıtlamasını (Network Throttling) Kapat',
+        description: 'Windows ağ kısıtlamalarını devre dışı bırakarak gecikmeyi (ping) düşürür ve paket iletimini hızlandırır.',
+        applyCode: 'Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xffffffff -Type DWord',
+        restoreCode: 'Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xa -Type DWord',
+        impacts: {
+          performance: { level: 'positive_medium', description: 'Performansa etkisi orta düzeyde olumludur.' },
+          latency: { level: 'positive_high', description: 'Gecikmeyi yüksek oranda düşürür.' },
+          input: { level: 'none', description: 'İnput üzerinde belirgin bir etkisi yoktur.' },
+          power: { level: 'negative_low', description: 'Güç tüketimini hafif düzeyde artırabilir.' },
+          heat: { level: 'none', description: 'Isı üzerinde belirgin bir etkisi yoktur.' }
+        }
+      });
+    }
 
     const changelogRef = collection(db, 'changelog');
     const changelogQuery = query(changelogRef, orderBy('date', 'desc'), limit(1));

@@ -1,42 +1,47 @@
 import { useState, useEffect } from 'react';
 import { SystemStatus } from '../types';
-import { getSystemStatus } from '../services/SystemEngine';
+import { getSystemStatus, getCachedSystemStatus } from '../services/SystemEngine';
 
-let cachedStatus: SystemStatus | null = null;
-let fetchPromise: Promise<SystemStatus> | null = null;
-
-export function useSystemStatus() {
-  const [status, setStatus] = useState<SystemStatus | null>(cachedStatus);
+export function useSystemStatus(pollingIntervalMs: number = 3000) {
+  const initialData = getCachedSystemStatus();
+  const [status, setStatus] = useState<SystemStatus | null>(initialData);
   const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState(!cachedStatus);
+  const [loading, setLoading] = useState<boolean>(!initialData);
 
   useEffect(() => {
-    if (cachedStatus) return;
-
     let isMounted = true;
     
-    if (!fetchPromise) {
-      fetchPromise = getSystemStatus();
-    }
-
-    fetchPromise
-      .then(data => {
-        cachedStatus = data;
+    const fetchStatus = async () => {
+      if (document.hidden) return;
+      try {
+        const data = await getSystemStatus();
         if (isMounted) {
           setStatus(data);
+          setError(null);
           setLoading(false);
         }
-      })
-      .catch(err => {
+      } catch (err: any) {
         if (isMounted) {
-          console.error("Dashboard veri çekme hatası:", err);
+          console.error("Dashboard status error:", err);
           setError(err);
           setLoading(false);
         }
-      });
+      }
+    };
 
-    return () => { isMounted = false; };
-  }, []);
+    if (!initialData) {
+      fetchStatus();
+    } else {
+      setLoading(false);
+    }
+
+    const interval = setInterval(fetchStatus, pollingIntervalMs);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [pollingIntervalMs, initialData]);
 
   return { status, error, loading };
 }

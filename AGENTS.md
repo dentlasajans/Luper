@@ -1,51 +1,52 @@
 # Project Rules & Guidelines
 
 ## 1. Project Overview
-- **Purpose:** Windows Operating System Optimization Application.
-- **Architecture:** React + TypeScript for web preview. Electron + Node.js will be used for the final build.
-- **Data Flow:** All data will strictly be fetched from the Electron environment (via IPC to native Windows APIs or PowerShell). Mock data will NOT be used in the web environment; if data cannot be fetched, the UI must gracefully indicate a passive/error state. ABSOLUTELY NO MOCK DATA in production (except when the `VITE_USE_MOCKS` flag is active in development).
+- **Purpose:** Luper - Windows Operating System Optimization & Performance Application.
+- **Architecture:** React 19 + TypeScript + Vite for frontend UI. Electron + Node.js for native Windows system integration and IPC calls.
+- **Data Flow:** All real system metrics and optimization commands run through Electron IPC (`electron/main.js`) executing native Windows registry operations and PowerShell commands. Mock data is isolated under `src/mocks` and only runs when `VITE_USE_MOCKS=true` is set.
+- **Language Standard:** The application operates **100% natively in Turkish**. Multi-language dropdowns or translation contexts are strictly removed; all UI elements, tooltips, cards, and notification messages must remain in clean, concise Turkish.
 
 ## 2. Design Language (Design & UI)
-- **Concept:** Confident, elite, smooth, and premium. A sleek identity that brings the precision of Apple/macOS interfaces to the Windows environment with highly fluid transitions. Dark mode focus, utilizing elegant anthracite/dark gray tones instead of pure black.
-- **Materials & Textures:** Soft curves (`rounded-2xl`, `rounded-3xl`), smooth dark backgrounds (`#1c1c1e`, `#121214`), ultra-thin elegant borders (`border-white/5` or `border-white/10`), and solid card designs.
-- **Animations:** Spring-based, ultra-smooth, fluid, and natural micro-interactions using Framer Motion. Heavy animations and blur effects must have a fallback design to be isolated/disabled for low-end devices.
-- **Color Palette:** Rich dark tones (Anthracite / Charcoal). Primary text colors are light gray/white (`#f5f5f7`) and secondary text is (`#86868b`). Avoid excessive RGB/colorful icons; accents must be subtle and measured.
-- **Typography:** Use `Helvetica Neue`, `Helvetica`, or the OS's native sans-serif fonts for flawless readability and a sharp, grounded look. Hierarchy will be maintained through varying weights, color tones, and modern spacing.
+- **Concept:** Confident, elite, smooth, and premium dark mode design inspired by Apple/macOS precision adapted to Windows.
+- **Color Palette & Contrast:** Deep anthracite backgrounds (`#121214`, `#1c1c1e`), white primary text (`#f5f5f7`), soft secondary text (`#86868b`), subtle primary blue accents (`#1a5efd` / `brand-primary`), and subtle success greens (`#81c784`).
+- **Framing & Oval Corners:**
+  - Window frame layout is **full-bleed** without outer margin gaps (`p-0`).
+  - Container edges feature soft oval top and bottom corners (`rounded-[24px]`) in normal windowed mode, collapsing seamlessly to `rounded-none` when maximized.
+- **Animations:** Spring-based fluid micro-interactions using Framer Motion (`motion/react`).
+- **Typography & Icons:** Clean sans-serif typography (`Helvetica Neue`, `Helvetica`, native OS sans-serif). Only `lucide-react` icons are used, with colorless/subtle blue defaults.
 
-## 3. Coding Standards
-- **Language:** TypeScript + React (Functional components and hooks).
-- **Type Safety:** TypeScript must strictly follow `strict: true` standards. The use of `any` is strictly prohibited; use explicit typing or `unknown` with type narrowing instead.
-- **Style:** Tailwind CSS. Instead of hardcoding theme colors (e.g., `#1a5efd`), they must be converted into centralized variables within the Tailwind v4 `@theme` block (e.g., `bg-brand-primary`).
-- **Modularity & File Structure:** Every module and category (e.g., Dashboard, Optimization, Network, etc.) must reside in its own separate file and operate in isolation.
-- **Clean Code:** 
-  - Unused imports, unused React hooks, or unused variables are strictly forbidden in production code.
-  - Debugging `console.log` statements and commented-out (dead) code blocks must be deleted.
-  - Temporary script files like `fix_*.js` or `update_*.js` left in the root directory **must be deleted** immediately after their job is done.
-- **Icons:** Only the `lucide-react` library will be used. Unless denoting specific meanings like warnings or success, icons will be colorless/blue-accented by default to avoid an unnecessary jumble of colors.
+## 3. System Optimization Score Logic (Sistem Optimizasyon Puanı)
+- **Score Calculation:** System Score (0-100) is calculated **strictly dynamically based on applied optimization codes**:
+  $$\text{Score} = \text{Math.round}\left(\frac{\text{Applied Optimizations Count}}{\text{Total Optimization Settings Count}}\right) \times 100$$
+- **Real-Time Dynamic Updates:** Updates automatically whenever an optimization toggle is switched, restored, or reset across any category.
+- **Score Badges:**
+  - `80 - 100`: Maksimum Performans (Primary Blue)
+  - `50 - 79`: Yüksek Performans (Emerald Green)
+  - `1 - 49`: Temel Optimizasyon (Amber Warning)
+  - `0`: Optimizasyon Yapılmadı (Rose Red)
+- **No Metric Coupling:** CPU, GPU, or RAM real-time usage metrics DO NOT affect the System Score.
 
-## 4. Performance & Cohesion
-- **Minimum Resource Consumption:** The program must run exceptionally smooth, fast, and stable. CPU, GPU, and RAM consumption will be kept to an absolute minimum. Avoid unnecessary animation loops or unoptimized re-renders.
-- **React Optimization:**
-  - Purely presentational components (cards, badges, icons) MUST be wrapped in `React.memo()` to prevent unnecessary re-renders.
-  - Inline functions or complex derived states passed as props MUST be wrapped and protected using `useCallback` and `useMemo`.
-  - Rarely used heavy components (e.g., ChangelogModal, secondary pages) must be lazy-loaded using `React.lazy()` and `<Suspense>`.
-- **Error Boundaries:** The main component tree must be wrapped in a global Error Boundary. If a module crashes, a "white-screen of death" must not occur; instead, an elite-designed "Something went wrong" fallback card should be displayed.
-- **Sense of Cohesion:** Even though categories, pages, fonts, icons, and components live in independent files, they must blend seamlessly in design, maintaining the feel of a "singular, professional Windows application."
+## 4. State Persistence & Data Architecture (Çift Katmanlı Kalıcılık)
+- **Dual-Layer Persistence:** To ensure settings remain active after app restarts or Windows reboots:
+  1. `localStorage.applied_optimizations`: Fast client-side cache for instant UI state restoration.
+  2. `%APPDATA%\luper\optimization_backups.json`: Electron native JSON backup storing registry keys, original values, and applied state nodes via IPC (`get-applied-optimizations`, `deleteBackupNode`).
+- **Firebase Pre-caching:** Optimization categories and settings are dynamically pre-loaded from Firebase Firestore (`preloadAllCategorySettings`), providing instant category setting counts without loading delays.
 
-## 5. Service Architecture (Data Flow)
-- **Interface Layer:** UI components do not generate data directly. All system read/write operations must go through a dedicated service layer (e.g., `src/services/SystemEngine.ts`).
-- **Real Data Requirement:** 
-  - Mock data can ONLY run from an isolated folder (`src/mocks`) when the `VITE_USE_MOCKS=true` flag is active in the `.env` file. Mock data must NEVER pollute the production service logic (`SystemEngine.ts`).
-  - Temporary delays (Promise/setTimeout) or non-functional (dummy) buttons are strictly prohibited. Every button or card must trigger a real function or Windows API call.
-- **Strict Addition Constraint:** Unless explicitly requested by the user, NO new categories, cards, background processes, functions, or UI elements will be added. The development process advances step-by-step strictly according to the user's directives.
-- **Silent Background Execution:** All optimization and system operations will run silently in the background via Node.js/Electron. No non-UI screens like Command Prompt (CMD), PowerShell windows, or system notifications will be shown to the user. Furthermore, technical codes, scripts, or terminal logs will NEVER be displayed on the app interface; results will only be communicated via user-friendly messages and UI elements.
-- **IPC Architectural Standards:**
-  - All Electron `ipcRenderer.invoke` calls MUST be wrapped with a Promise Timeout mechanism (e.g., 5000ms) and include try/catch error handling to prevent the React frontend from hanging indefinitely.
-  - IPC channel names must be strictly typed as TypeScript enums or strict string literal unions (e.g., `type IpcChannel = 'window-minimize'`) to prevent errors.
-- **User-Friendly Explanations (Zero Code Visibility):** Optimization cards or details will absolutely NOT contain registry paths (e.g., `HKEY_LOCAL_MACHINE\...`), PowerShell commands, or technical script contents. Only brief, concise, and functional explanations in a language the user can easily understand will be used.
+## 5. Native Application Features & Settings
+- **Düşük Kalite Modu (Reduce Motion):** Toggles off background ambient blurs and heavy spring animations to minimize GPU/CPU overhead on lower-end devices.
+- **Windows Açılışında Çalıştırma (Auto-Start):** Controls Electron login item settings via `set-auto-start` IPC handler.
+- **Sistem Tepsisi (System Tray):**
+  - Closing the app window minimizes silently to the Windows System Tray when enabled.
+  - Tray icon features double-click window restore and a right-click context menu ("Aç / Göster", "Çıkış").
+- **Akıllı RAM Temizliği:** Background monitoring automatically clears standby RAM memory when usage exceeds 85%.
+- **1-Tıkla Tümünü Sıfırla (Reset All Optimizations):** Iterates over all applied optimization IDs, reverting registry values back to Windows original defaults (`restoreOptimization`).
 
-## 6. Deployment & Auto-Update
-- **CI/CD:** The project is planned to be automatically built via GitHub Actions (Workflows) and published to GitHub Releases whenever code is pushed.
-- **Auto-Update:** An infrastructure aiming to silently download and install newly published GitHub Releases in the background using `electron-updater` in the Electron environment is targeted. This feature will be integrated in later stages when the Electron project is bootstrapped.
+## 6. Coding & Quality Standards
+- **Strict TypeScript:** Strictly follows `strict: true`. The `any` type is forbidden in new code.
+- **Zero Technical Jargon to User:** Registry paths (e.g. `HKEY_LOCAL_MACHINE\...`), PowerShell syntax, or technical log output must NEVER be visible on the user interface.
+- **Clean Code & Maintenance:**
+  - Dead code, commented-out blocks, unused imports, or unused React hooks are strictly prohibited.
+  - Temporary helper scripts (`fix_*.js`, `update_*.js`) must be deleted immediately after execution.
+- **React Performance Optimization:** Presentational components wrapped in `React.memo()`, derived state wrapped in `useMemo`/`useCallback`, and heavy views lazy-loaded via `React.lazy()` and `<Suspense>`.
 
-*(Note: This file will be updated by AI as new rules are added. If a conflicting rule is detected, the user will be notified.)*
+*(Note: This file is kept up-to-date with application architecture changes and user directives.)*

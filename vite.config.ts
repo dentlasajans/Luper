@@ -17,7 +17,8 @@ export default defineConfig(() => {
         output: {
           manualChunks: {
             vendor: ['react', 'react-dom', 'motion'],
-            icons: ['lucide-react']
+            icons: ['lucide-react'],
+            firebase: ['firebase/app', 'firebase/firestore']
           }
         }
       }
