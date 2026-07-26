@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { applyOptimization, getCategorySettings, restoreOptimization } from '../services/SystemEngine';
 import { OptimizationSetting } from '../types';
-import { getCategorySettings, applyOptimization, restoreOptimization } from '../services/SystemEngine';
+import { notifyError, notifyInfo, notifySuccess } from '../utils/notify';
 
 export function useCategorySettings(categoryId: string, retryCount: number) {
   const [settings, setSettings] = useState<OptimizationSetting[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [processingState, setProcessingState] = useState<Record<string, 'processing' | 'success' | 'error'>>({});
   const [error, setError] = useState<Error | null>(null);
-  const [toastMessage, setToastMessage] = useState<{message: string, type: 'error' | 'success'} | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -16,7 +16,18 @@ export function useCategorySettings(categoryId: string, retryCount: number) {
     getCategorySettings(categoryId)
       .then(data => {
         if (isMounted) {
-          setSettings(data);
+          try {
+            const stored = JSON.parse(localStorage.getItem('applied_optimizations') || '[]');
+            const appliedIds = Array.isArray(stored) ? stored : [];
+            const hydratedData = data.map((item: OptimizationSetting) => ({
+              ...item,
+              status: (appliedIds.includes(item.id) ? 'optimized' : 'default') as "optimized" | "default"
+            }));
+            setSettings(hydratedData);
+          } catch (e) {
+            console.error('Failed to parse applied_optimizations:', e);
+            setSettings(data);
+          }
           setLoading(false);
           setError(null);
         }
@@ -36,7 +47,50 @@ export function useCategorySettings(categoryId: string, retryCount: number) {
   const settingsRef = React.useRef<OptimizationSetting[] | null>(null);
   React.useEffect(() => { settingsRef.current = settings; }, [settings]);
 
-  const handleToggle = useCallback((id: string, currentStatus: string) => {
+  const timeoutsRef = React.useRef<Set<NodeJS.Timeout>>(new Set());
+
+  React.useEffect(() => {
+    const timeouts = timeoutsRef.current;
+    return () => {
+      timeouts.forEach(t => clearTimeout(t));
+      timeouts.clear();
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setSettings(prevSettings => {
+        if (!prevSettings) return prevSettings;
+        try {
+          const stored = JSON.parse(localStorage.getItem('applied_optimizations') || '[]');
+          const appliedIds = Array.isArray(stored) ? stored : [];
+          let changed = false;
+          const newSettings = prevSettings.map(item => {
+            const isApplied = appliedIds.includes(item.id);
+            const expectedStatus = isApplied ? 'optimized' : 'default';
+            if (item.status !== expectedStatus) {
+              changed = true;
+              return { ...item, status: expectedStatus as "optimized" | "default" };
+            }
+            return item;
+          });
+          return changed ? newSettings : prevSettings;
+        } catch (e) {
+          return prevSettings;
+        }
+      });
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('applied_optimizations_changed', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('applied_optimizations_changed', handleStorageChange);
+    };
+  }, []);
+
+  const handleToggle = useCallback(async (id: string, currentStatus: string) => {
     if (!settingsRef.current) return;
     const setting = settingsRef.current.find(s => s.id === id);
     if (!setting) return;
@@ -44,32 +98,17 @@ export function useCategorySettings(categoryId: string, retryCount: number) {
     // 1. Visual processing feedback
     setProcessingState(prev => ({ ...prev, [id]: 'processing' }));
 
-    // 2. Fire-and-forget background execution (System process runs non-blocking)
-    const bgTask = (async () => {
+    try {
+      const startTime = Date.now();
+
       if (currentStatus === 'optimized') {
         if (setting.restoreCode) await restoreOptimization(id, setting.restoreCode);
       } else {
         if (setting.applyCode) await applyOptimization(id, setting.applyCode);
       }
-    })();
 
-    bgTask.catch((err: any) => {
-      console.error(`Background error toggling optimization ${id}:`, err);
-      setSettings(prevSettings => 
-        prevSettings ? prevSettings.map(s => s.id === id ? { ...s, status: currentStatus as any } : s) : null
-      );
-      setProcessingState(prev => ({ ...prev, [id]: 'error' }));
+      await new Promise(r => setTimeout(r, Math.max(0, 500 - (Date.now() - startTime))));
 
-      const actionName = currentStatus === 'optimized' ? 'Geri yükleme' : 'Optimizasyon';
-      setToastMessage({
-        message: `${actionName} başarısız oldu: ${err.message || 'Kod uygulanamadı.'}`,
-        type: 'error'
-      });
-      setTimeout(() => setToastMessage(null), 5000);
-    });
-
-    // 3. UI state transitions in exactly 0.5 seconds (500ms)
-    setTimeout(() => {
       const newStatus = currentStatus === 'optimized' ? 'default' : 'optimized';
       
       // Sync applied optimizations in localStorage for System Score calculation
@@ -88,19 +127,40 @@ export function useCategorySettings(categoryId: string, retryCount: number) {
       }
 
       setSettings(prevSettings => 
-        prevSettings ? prevSettings.map(s => s.id === id ? { ...s, status: newStatus as any } : s) : null
+        prevSettings ? prevSettings.map(s => s.id === id ? { ...s, status: newStatus as "optimized" | "default" } : s) : null
       );
       setProcessingState(prev => ({ ...prev, [id]: 'success' }));
 
-      setTimeout(() => {
+      if (newStatus === 'optimized') {
+        notifySuccess('Optimizasyon Uygulandı', setting.name);
+      } else {
+        notifyInfo('Varsayılana Döndürüldü', setting.name);
+      }
+
+      const timer1 = setTimeout(() => {
         setProcessingState(prev => {
           const next = { ...prev };
           delete next[id];
           return next;
         });
-      }, 300);
-    }, 500);
+        timeoutsRef.current.delete(timer1);
+      }, 1500);
+      timeoutsRef.current.add(timer1);
+
+    } catch (err: unknown) {
+      const errorObj = err instanceof Error ? err : new Error(String(err));
+      console.error(`Error toggling optimization ${id}:`, errorObj);
+      
+      setSettings(prevSettings => 
+        prevSettings ? prevSettings.map(s => s.id === id ? { ...s, status: currentStatus as "optimized" | "default" } : s) : null
+      );
+      setProcessingState(prev => ({ ...prev, [id]: 'error' }));
+
+      const actionName = currentStatus === 'optimized' ? 'Geri yükleme' : 'Optimizasyon';
+      notifyError(`${actionName} Başarısız`, errorObj.message || 'Optimizasyon uygulanamadı.');
+    }
   }, []);
 
-  return { settings, loading, error, processingState, handleToggle, toastMessage, setToastMessage };
+
+  return { settings, loading, error, processingState, handleToggle };
 }

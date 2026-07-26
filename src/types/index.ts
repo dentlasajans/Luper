@@ -1,6 +1,6 @@
-export type ImpactLevel = 'none' | 'positive_low' | 'positive_medium' | 'positive_high' | 'negative_low' | 'negative_medium' | 'negative_high';
+type ImpactLevel = 'none' | 'positive_low' | 'positive_medium' | 'positive_high' | 'negative_low' | 'negative_medium' | 'negative_high';
 
-export interface ImpactDetail {
+interface ImpactDetail {
   level: ImpactLevel;
   description: string;
 }
@@ -57,8 +57,34 @@ export enum IpcChannels {
   UNINSTALL_APP = 'uninstall-app',
   GET_CLEANER_ITEMS = 'get-cleaner-items',
   EXECUTE_CLEANER = 'execute-cleaner',
-  GET_INSTALLED_STEAM_GAMES = 'get-installed-steam-games',
-  LAUNCH_STEAM_GAME = 'launch-steam-game',
+  GET_ALL_INSTALLED_GAMES = 'get-all-installed-games',
+  LAUNCH_GAME = 'launch-game',
+  GET_APPLIED_OPTIMIZATIONS = 'get-applied-optimizations',
+  SET_AUTO_START = 'set-auto-start',
+  GET_SYSTEM_METRICS = 'get-system-metrics',
+  SAVE_SETTINGS = 'save-settings',
+  LOAD_SETTINGS = 'load-settings',
+  GET_HARDWARE_SPECS = 'get-hardware-specs',
+  CHECK_FOR_UPDATES = 'check-for-updates',
+}
+
+export interface SystemMetricsData {
+  cpuUsage: number;
+  cpuName?: string;
+  freeMemoryMB: number;
+  totalMemoryMB: number;
+  usedMemoryMB: number;
+  ramUsagePercent: number;
+  osUptimeSeconds: number;
+  osRelease: string;
+  platform: string;
+  arch: string;
+}
+
+export interface SystemMetricsResponse {
+  success: boolean;
+  data?: SystemMetricsData;
+  error?: { code: string; message: string };
 }
 
 export interface StartupItem {
@@ -86,9 +112,10 @@ export interface CleanerItem {
   sizeBytes: number;
 }
 
-export interface SteamGame {
+export interface Game {
   appid: string;
   name: string;
+  launcher: 'steam' | 'epic' | 'riot' | 'ea' | 'pc';
   sizeBytes?: number;
   installDir?: string;
   lastPlayed?: number;
@@ -99,3 +126,14 @@ export interface SteamGame {
   heroImage?: string;
   isOptimized?: boolean;
 }
+
+export interface HardwareSpecs {
+  bios?: { manufacturer: string; version: string; serial: string; tpm?: string; secureBoot?: string };
+  cpu: { model: string; cores: number; threads: number; speed: string; cache?: string };
+  gpu: { name: string; memory: string; driver: string }[];
+  ram: { total: string; free: string; speed: string; formFactor: string; memoryType?: string };
+  motherboard: { manufacturer: string; product: string; version: string };
+  storage: { name?: string; size: string; type: string; model?: string; interface?: string; }[];
+}
+
+

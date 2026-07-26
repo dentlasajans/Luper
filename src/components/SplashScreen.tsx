@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { AppLogo } from './Icons';
-import { preloadAllApplicationData } from '../services/SystemEngine';
+import React, { useEffect, useState } from 'react';
 import { preloadAllCategorySettings } from '../services/FirebaseService';
+import { getCachedSystemStatus, preloadAllApplicationData, preloadSystemStatus, preloadHardwareSpecs } from '../services/SystemEngine';
+import { AppLogo } from './Icons';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -15,37 +15,63 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
   useEffect(() => {
     let isDataReady = false;
 
-    // Concurrently pre-fetch ALL Firebase categories, Dashboard status & Tool items
-    Promise.allSettled([
-      preloadAllCategorySettings(),
-      preloadAllApplicationData()
-    ]).then(() => {
-      isDataReady = true;
-    });
+    // Concurrently pre-fetch ALL Firebase category settings, system metrics & app data
+    const prepareAllData = async () => {
+      try {
+        await Promise.allSettled([
+          preloadAllCategorySettings(),
+          preloadAllApplicationData()
+        ]);
+        
+        const specs = await preloadHardwareSpecs();
+        
+        let status = getCachedSystemStatus();
+        if (!status) {
+          status = await preloadSystemStatus();
+        }
+        
+        if (status && specs) {
+          isDataReady = true;
+        } else {
+          isDataReady = false;
+        }
+      } catch (e) {
+        console.error('Data preparation error:', e);
+        isDataReady = false;
+      }
+    };
 
-    const minSplashMs = 2500;
-    const intervalTime = 50;
-    const minSteps = minSplashMs / intervalTime;
-    let currentStep = 0;
+    prepareAllData();
+
+    const minSplashMs = 1500;
+    const maxSplashMs = 7000;
+    const intervalTime = 30;
+    let elapsedTime = 0;
 
     const timer = setInterval(() => {
-      currentStep++;
-      const p = Math.min(currentStep / minSteps, 1);
-      const easedProgress = 1 - Math.pow(1 - p, 3);
-      
-      let targetProgress = easedProgress * 95;
-      if (isDataReady) {
-        targetProgress = Math.min(easedProgress * 100, 100);
-      }
+      elapsedTime += intervalTime;
 
-      setProgress(targetProgress);
-
-      if (currentStep >= minSteps && isDataReady) {
+      // Finish only when all homepage data is 100% ready and min duration passed (or max safety timeout)
+      if ((isDataReady && elapsedTime >= minSplashMs) || elapsedTime >= maxSplashMs) {
         clearInterval(timer);
         setProgress(100);
         setTimeout(() => {
           onComplete();
-        }, 300);
+        }, 250);
+        return;
+      }
+
+      // Smooth progress calculation:
+      // While data is still loading: progress moves smoothly up to 92%
+      // As soon as data is ready: progress surges to 100%
+      if (!isDataReady) {
+        const ratio = Math.min(elapsedTime / 3000, 1);
+        const p = Math.round((1 - Math.pow(1 - ratio, 2)) * 92);
+        setProgress(prev => Math.max(prev, p));
+      } else {
+        const ratio = Math.min(elapsedTime / minSplashMs, 1);
+        const p = Math.round((1 - Math.pow(1 - ratio, 3)) * 100);
+        setProgress(prev => Math.max(prev, p));
       }
     }, intervalTime);
 
@@ -53,32 +79,38 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
   }, [onComplete]);
 
   return (
-    <div className="w-full h-full bg-[#121214] flex items-center justify-center">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
+      className="splash-screen fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-xl"
+    >
       <motion.div 
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+        exit={{ opacity: 0, scale: 0.95, y: -15 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="w-[400px] bg-[#1c1c1e] rounded-[2rem] border border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.6)] p-10 flex flex-col items-center relative overflow-hidden drag-region"
+        className="w-[420px] bg-[#18181c]/80 backdrop-blur-2xl rounded-[2.5rem] border border-white/[0.12] shadow-[0_25px_60px_rgba(0,0,0,0.7)] p-10 flex flex-col items-center relative overflow-hidden drag-region"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
         
         {/* Logo */}
-        <AppLogo className="h-16 w-auto mb-8 drop-shadow-lg relative z-10" />
+        <AppLogo className="h-16 w-auto mb-8 drop-shadow-lg relative z-10 shrink-0" />
         
         {/* Status */}
-        <p className="text-text-muted text-[12.5px] mb-10 relative z-10">{
-          progress < 30 ? "Sistem bileşenleri başlatılıyor..." :
-          progress < 60 ? "Servisler kontrol ediliyor..." :
-          progress < 90 ? "Arayüz hazırlanıyor..." :
+        <p className="text-text-muted text-[12px] mb-10 relative z-10">{
+          progress < 25 ? "Sistem bileşenleri başlatılıyor..." :
+          progress < 50 ? "Donanım parçaları taranıyor (CPU, GPU, RAM, Disk)..." :
+          progress < 75 ? "Servisler kontrol ediliyor..." :
+          progress < 95 ? "Arayüz hazırlanıyor..." :
           "Neredeyse hazır!"
         }</p>
         
         {/* Progress Container */}
         <div className="w-full relative z-10">
           <div className="flex justify-between items-end mb-2">
-            <span className="text-[10.5px] uppercase tracking-widest font-medium text-text-muted">Yükleniyor</span>
-            <span className="text-[10.5px] font-mono font-medium text-[#f5f5f7]">{Math.round(progress)}%</span>
+            <span className="text-[12px] uppercase tracking-widest font-medium text-text-muted">Yükleniyor</span>
+            <span className="text-[12px] font-mono font-medium text-[#f5f5f7]">{Math.round(progress)}%</span>
           </div>
           
           <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden shadow-inner">
@@ -91,6 +123,6 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

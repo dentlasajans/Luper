@@ -1,9 +1,8 @@
-import { CategoryOptimizationCount, OptimizationSetting, SystemStatus, IpcChannels } from '../types';
+import { IpcChannels, OptimizationSetting, SystemMetricsResponse, SystemStatus } from '../types';
 import { getCategorySettingsFromFirebase } from './FirebaseService';
-import { mockOptimizationCounts, mockSystemStatus, mockSteamGames } from '../mocks';
 
-const IPC_TIMEOUT_MS = 60000;
-const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
+const IPC_TIMEOUT_MS = 5000;
+const IPC_TTL_MS = 3000; // 3 seconds TTL
 
 class IpcTimeoutError extends Error {
   constructor(channel: string) {
@@ -12,13 +11,46 @@ class IpcTimeoutError extends Error {
   }
 }
 
-async function invokeIpc<T>(channel: IpcChannels, ...args: any[]): Promise<T> {
-  if (typeof window !== 'undefined' && window.electron && window.electron.ipcRenderer) {
-    const invokePromise = window.electron.ipcRenderer.invoke(channel, ...args);
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+}
+const ipcCache = new Map<string, CacheEntry<unknown>>();
+const MAX_CACHE_SIZE = 50;
+
+async function invokeIpc<T>(channel: IpcChannels, ...args: unknown[]): Promise<T> {
+  const isGetQuery = channel.toString().includes('GET_') || channel.toString().includes('LOAD_');
+  const cacheKey = `${channel}-${JSON.stringify(args)}`;
+
+  if (isGetQuery) {
+    const cached = ipcCache.get(cacheKey);
+    if (cached && (Date.now() - cached.timestamp < IPC_TTL_MS)) {
+      ipcCache.delete(cacheKey);
+      cached.timestamp = Date.now();
+      ipcCache.set(cacheKey, cached);
+      return cached.data as T;
+    }
+  }
+
+  if (typeof window !== 'undefined' && (window as any).electronAPI && (window as any).electronAPI.invoke) {
+    const invokePromise = (window as any).electronAPI.invoke(channel, ...args) as Promise<T>;
     const timeoutPromise = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new IpcTimeoutError(channel)), IPC_TIMEOUT_MS);
     });
-    return Promise.race([invokePromise, timeoutPromise]);
+    
+    const result = await Promise.race([invokePromise, timeoutPromise]);
+    
+    if (isGetQuery) {
+      ipcCache.set(cacheKey, { data: result, timestamp: Date.now() });
+      if (ipcCache.size > MAX_CACHE_SIZE) {
+        const oldestKey = ipcCache.keys().next().value;
+        if (oldestKey !== undefined) {
+          ipcCache.delete(oldestKey);
+        }
+      }
+    }
+    
+    return result;
   }
   throw new Error('Electron API not found');
 }
@@ -49,42 +81,24 @@ export const closeWindow = async () => {
 };
 
 export const applyOptimization = async (id: string, code: string) => {
-  if (USE_MOCKS) {
-    return new Promise(resolve => setTimeout(resolve, 1000));
-  }
-  return await invokeIpc(IpcChannels.APPLY_OPTIMIZATION, { id, code });
+  const result = await invokeIpc(IpcChannels.APPLY_OPTIMIZATION, { id, code });
+  await syncAppliedOptimizationsFromElectron();
+  return result;
 };
 
 export const restoreOptimization = async (id: string, code: string) => {
-  if (USE_MOCKS) {
-    return new Promise(resolve => setTimeout(resolve, 1000));
-  }
-  return await invokeIpc(IpcChannels.RESTORE_OPTIMIZATION, { id, code });
+  const result = await invokeIpc(IpcChannels.RESTORE_OPTIMIZATION, { id, code });
+  await syncAppliedOptimizationsFromElectron();
+  return result;
 };
 
 export const executeQuickAction = async (actionId: string): Promise<void> => {
-  if (USE_MOCKS) {
-    return new Promise(resolve => setTimeout(resolve, 1000));
-  }
   
   try {
     await invokeIpc(IpcChannels.EXECUTE_QUICK_ACTION, actionId);
   } catch (error) {
     console.error(`Failed to execute quick action ${actionId} from Electron:`, error);
     throw new Error('İşlem gerçekleştirilemedi');
-  }
-};
-
-export const getOptimizationCounts = async (): Promise<CategoryOptimizationCount> => {
-  if (USE_MOCKS) {
-    return mockOptimizationCounts;
-  }
-  
-  try {
-    return await invokeIpc(IpcChannels.GET_OPTIMIZATION_COUNTS);
-  } catch (error) {
-    console.error('Failed to fetch optimization counts from Electron:', error);
-    throw new Error('Veri çekilemiyor');
   }
 };
 
@@ -101,12 +115,12 @@ export const getAppliedOptimizationIds = (): string[] => {
 
 export const syncAppliedOptimizationsFromElectron = async () => {
   try {
-    if (typeof window !== 'undefined' && window.electron && window.electron.ipcRenderer) {
-      const backupKeys = await invokeIpc<string[]>('get-applied-optimizations' as any);
+    if (typeof window !== 'undefined' && (window as any).electronAPI && (window as any).electronAPI.invoke) {
+      const backupKeys = await invokeIpc<string[]>(IpcChannels.GET_APPLIED_OPTIMIZATIONS);
       if (Array.isArray(backupKeys)) {
-        const stored = getAppliedOptimizationIds();
-        const merged = Array.from(new Set([...stored, ...backupKeys]));
-        localStorage.setItem('applied_optimizations', JSON.stringify(merged));
+        const localArray = getAppliedOptimizationIds();
+        const mergedKeys = Array.from(new Set([...localArray, ...backupKeys]));
+        localStorage.setItem('applied_optimizations', JSON.stringify(mergedKeys));
         window.dispatchEvent(new Event('applied_optimizations_changed'));
       }
     }
@@ -115,6 +129,7 @@ export const syncAppliedOptimizationsFromElectron = async () => {
 
 export const getCategorySettings = async (categoryId: string): Promise<OptimizationSetting[]> => {
   try {
+    await syncAppliedOptimizationsFromElectron();
     const firebaseSettings = await getCategorySettingsFromFirebase(categoryId);
     const appliedIds = getAppliedOptimizationIds();
     return firebaseSettings.map(setting => ({
@@ -122,7 +137,7 @@ export const getCategorySettings = async (categoryId: string): Promise<Optimizat
       status: appliedIds.includes(setting.id) ? 'optimized' : 'default'
     }));
   } catch (err) {
-    console.error("Firebase'den ayarlar çekilemedi", err);
+    console.error("Ayarlar çekilemedi", err);
     throw err;
   }
 };
@@ -145,10 +160,6 @@ export const getCachedSystemStatus = (): SystemStatus | null => {
 };
 
 export const getSystemStatus = async (): Promise<SystemStatus> => {
-  if (USE_MOCKS) {
-    return mockSystemStatus;
-  }
-
   try {
     const status = await invokeIpc<SystemStatus>(IpcChannels.GET_SYSTEM_STATUS);
     cachedSystemStatus = status;
@@ -159,11 +170,23 @@ export const getSystemStatus = async (): Promise<SystemStatus> => {
   }
 };
 
+export const getSystemMetrics = async (): Promise<SystemMetricsResponse> => {
+  try {
+    return await invokeIpc<SystemMetricsResponse>(IpcChannels.GET_SYSTEM_METRICS);
+  } catch (error) {
+    console.error('Failed to fetch system metrics from Electron:', error);
+    return {
+      success: false,
+      error: { code: 'IPC_ERROR', message: 'Metrik verisi çekilemedi' }
+    };
+  }
+};
+
 let cachedStartupItems: import('../types').StartupItem[] | null = null;
 let cachedInstalledApps: import('../types').InstalledApp[] | null = null;
 let cachedCleanerItems: import('../types').CleanerItem[] | null = null;
 
-export const preloadToolsData = async (): Promise<void> => {
+const preloadToolsData = async (): Promise<void> => {
   try {
     await Promise.allSettled([
       getStartupItems().then(data => { cachedStartupItems = data; }),
@@ -185,113 +208,122 @@ export const preloadAllApplicationData = async (): Promise<void> => {
     console.error('Failed to preload all application data:', e);
   }
 };
-
-export const getCachedStartupItems = (): import('../types').StartupItem[] | null => cachedStartupItems;
 export const getCachedInstalledApps = (): import('../types').InstalledApp[] | null => cachedInstalledApps;
-export const getCachedCleanerItems = (): import('../types').CleanerItem[] | null => cachedCleanerItems;
-
 export const getStartupItems = async (): Promise<import('../types').StartupItem[]> => {
   if (cachedStartupItems) return cachedStartupItems;
 
-  if (USE_MOCKS) {
-    const mockData = [
-      { name: 'OneDrive', command: '"C:\\Program Files\\OneDrive.exe"', location: 'HKCU\\Run', user: 'Admin', enabled: true },
-      { name: 'Spotify', command: '"C:\\Users\\Admin\\AppData\\Roaming\\Spotify\\Spotify.exe"', location: 'HKCU\\Run', user: 'Admin', enabled: true },
-      { name: 'Discord', command: '"C:\\Users\\Admin\\AppData\\Local\\Discord\\Update.exe"', location: 'HKCU\\Run', user: 'Admin', enabled: false }
-    ];
-    cachedStartupItems = mockData;
-    return mockData;
-  }
   const items = await invokeIpc<import('../types').StartupItem[]>(IpcChannels.GET_STARTUP_ITEMS);
   cachedStartupItems = items;
   return items;
 };
 
 export const toggleStartupItem = async (item: import('../types').StartupItem): Promise<void> => {
-  if (USE_MOCKS) {
-    return new Promise(resolve => setTimeout(resolve, 500));
-  }
   return await invokeIpc(IpcChannels.TOGGLE_STARTUP_ITEM, item);
 };
 
 export const getInstalledApps = async (): Promise<import('../types').InstalledApp[]> => {
   if (cachedInstalledApps) return cachedInstalledApps;
 
-  if (USE_MOCKS) {
-    const mockApps: import('../types').InstalledApp[] = [
-      { id: '1', name: 'Microsoft Solitaire Collection', publisher: 'Microsoft', version: '1.0.0.0', type: 'uwp', packageFullName: 'Microsoft.MicrosoftSolitaireCollection_8wekyb3d8bbwe', uninstallString: '' },
-      { id: '2', name: 'Netflix', publisher: 'Netflix, Inc.', version: '6.99.5.0', type: 'uwp', packageFullName: '4DF9E0F8.Netflix_mcm4njqhnhss8', uninstallString: '' },
-      { id: '3', name: 'Google Chrome', publisher: 'Google LLC', version: '114.0.5735.199', type: 'desktop', packageFullName: '', uninstallString: 'C:\\Program Files\\Google\\Chrome\\Application\\114.0.5735.199\\Installer\\setup.exe --uninstall' },
-      { id: '4', name: 'Spotify', publisher: 'Spotify AB', version: '1.2.14.0', type: 'desktop', packageFullName: '', uninstallString: 'C:\\Users\\Admin\\AppData\\Roaming\\Spotify\\Spotify.exe --uninstall' }
-    ];
-    cachedInstalledApps = mockApps;
-    return mockApps;
-  }
   const apps = await invokeIpc<import('../types').InstalledApp[]>(IpcChannels.GET_INSTALLED_APPS);
   cachedInstalledApps = apps;
   return apps;
 };
 
 export const uninstallApp = async (app: import('../types').InstalledApp): Promise<void> => {
-  if (USE_MOCKS) {
-    return new Promise(resolve => setTimeout(resolve, 1500));
-  }
   return await invokeIpc(IpcChannels.UNINSTALL_APP, app);
 };
 
-export const getCleanerItems = async (): Promise<import('../types').CleanerItem[]> => {
+const getCleanerItems = async (): Promise<import('../types').CleanerItem[]> => {
   if (cachedCleanerItems) return cachedCleanerItems;
 
-  if (USE_MOCKS) {
-    const mockCleaner = [
-      { id: 'temp', name: 'Geçici Dosyalar', description: 'Uygulamaların oluşturduğu gereksiz geçici dosyalar.', sizeBytes: 1024 * 1024 * 450 },
-      { id: 'recycle_bin', name: 'Geri Dönüşüm Kutusu', description: 'Silinmiş dosyaların tutulduğu alan.', sizeBytes: 1024 * 1024 * 1024 * 2.5 },
-      { id: 'prefetch', name: 'Prefetch Verileri', description: 'Program hızlandırma verileri.', sizeBytes: 1024 * 1024 * 120 },
-      { id: 'windows_update', name: 'Windows Update Önbelleği', description: 'Eski güncelleme kalıntıları.', sizeBytes: 1024 * 1024 * 800 }
-    ];
-    cachedCleanerItems = mockCleaner;
-    return mockCleaner;
-  }
   const items = await invokeIpc<import('../types').CleanerItem[]>(IpcChannels.GET_CLEANER_ITEMS);
   cachedCleanerItems = items;
   return items;
 };
 
 export const executeCleaner = async (itemsToClean: string[]): Promise<boolean> => {
-  if (USE_MOCKS) {
-    return new Promise(resolve => setTimeout(() => resolve(true), 2000));
-  }
   return await invokeIpc(IpcChannels.EXECUTE_CLEANER, itemsToClean);
 };
 
-let cachedSteamGames: import('../types').SteamGame[] | null = null;
+let cachedGames: import('../types').Game[] | null = null;
 
-export const getCachedSteamGames = (): import('../types').SteamGame[] | null => cachedSteamGames;
+export const getCachedGames = (): import('../types').Game[] | null => cachedGames;
 
-export const getInstalledSteamGames = async (force = false): Promise<import('../types').SteamGame[]> => {
-  if (cachedSteamGames && !force) return cachedSteamGames;
 
-  if (USE_MOCKS) {
-    cachedSteamGames = mockSteamGames;
-    return mockSteamGames;
-  }
+
+export const getAllInstalledGames = async (force = false): Promise<import('../types').Game[]> => {
+  if (cachedGames && !force) return cachedGames;
 
   try {
-    const games = await invokeIpc<import('../types').SteamGame[]>(IpcChannels.GET_INSTALLED_STEAM_GAMES);
-    if (Array.isArray(games)) {
-      cachedSteamGames = games;
+    const games = await invokeIpc<import('../types').Game[]>(IpcChannels.GET_ALL_INSTALLED_GAMES);
+    if (Array.isArray(games) && games.length > 0) {
+      cachedGames = games;
       return games;
     }
   } catch (e) {
-    console.error('Failed to get Steam games from Electron:', e);
+    console.error('Failed to get games from Electron:', e);
   }
 
+  // Removed mock data fallback
+  cachedGames = [];
   return [];
 };
 
-export const launchSteamGame = async (appid: string): Promise<boolean> => {
-  if (USE_MOCKS) {
-    return true;
+export const setAppAutoStart = async (enable: boolean, openAsHidden: boolean): Promise<boolean> => {
+  try {
+    return await invokeIpc(IpcChannels.SET_AUTO_START, { enable, openAsHidden });
+  } catch (e) {
+    return false;
   }
-  return await invokeIpc(IpcChannels.LAUNCH_STEAM_GAME, appid);
+};
+
+export const saveSettingsToElectron = async (settings: unknown): Promise<boolean> => {
+  try {
+    return await invokeIpc(IpcChannels.SAVE_SETTINGS, settings);
+  } catch (e) { return false; }
+};
+
+export const loadSettingsFromElectron = async (): Promise<unknown> => {
+  try {
+    return await invokeIpc(IpcChannels.LOAD_SETTINGS);
+  } catch (e) { return null; }
+};
+
+
+
+export const preloadHardwareSpecs = async (): Promise<import('../types').HardwareSpecs | null> => {
+  try {
+    let specs = await getHardwareSpecs();
+    let retries = 0;
+    while (!specs && retries < 15) {
+      await new Promise(r => setTimeout(r, 500));
+      specs = await getHardwareSpecs();
+      retries++;
+    }
+
+    return specs;
+  } catch (error) {
+    console.error('Failed to preload hardware specs:', error);
+    return null;
+  }
+};
+
+export const getHardwareSpecs = async (): Promise<import('../types').HardwareSpecs | null> => {
+  try {
+    const specs = await invokeIpc<import('../types').HardwareSpecs>(IpcChannels.GET_HARDWARE_SPECS);
+
+    return specs;
+  } catch (e) {
+    console.error('Failed to get hardware specs from Electron:', e);
+    return null;
+  }
+};
+
+export const checkForUpdates = async (): Promise<unknown> => {
+  try {
+    return await invokeIpc(IpcChannels.CHECK_FOR_UPDATES);
+  } catch (error) {
+    console.error('Failed to check for updates from Electron:', error);
+    return { hasUpdate: false, error: 'Bağlantı hatası' };
+  }
 };

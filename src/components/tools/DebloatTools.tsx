@@ -1,11 +1,16 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Trash2, Loader2, Search, Check, AlertTriangle, AlertCircle, X, Box, Monitor, PackageOpen } from 'lucide-react';
+import { WarningCircle, Warning, Package, Check, SpinnerGap, Monitor, MagnifyingGlass, Trash, X } from '@phosphor-icons/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { getCachedInstalledApps, getInstalledApps, uninstallApp } from '../../services/SystemEngine';
 import { InstalledApp } from '../../types';
-import { getInstalledApps, uninstallApp, getCachedInstalledApps } from '../../services/SystemEngine';
 
+interface DebloatAppCardProps {
+  app: InstalledApp;
+  processingState: Record<string, string>;
+  handleUninstall: (app: InstalledApp) => void;
+}
 
-const DebloatAppCard = React.memo(({ app, processingState, handleUninstall }: any) => {
+const DebloatAppCard = memo(({ app, processingState, handleUninstall }: DebloatAppCardProps) => {
   const appId = app.id;
   const isUwp = app.type === 'uwp';
   return (
@@ -15,15 +20,15 @@ const DebloatAppCard = React.memo(({ app, processingState, handleUninstall }: an
       className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-4 flex items-center group hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
     >
       <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center shrink-0 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
-        {isUwp ? <PackageOpen size={20} className="text-brand-primary" /> : <Monitor size={20} className="text-text-muted" />}
+        {isUwp ? <Package weight="duotone" size={20} className="text-brand-primary" /> : <Monitor weight="duotone" size={20} className="text-text-muted" />}
       </div>
       
       <div className="flex-1 min-w-0 ml-4">
         <div className="flex items-center space-x-2">
-          <h3 className="text-[15px] font-medium text-[#f5f5f7] leading-snug truncate">
+          <h3 className="text-[16px] font-medium text-[#f5f5f7] leading-snug truncate">
             {app.name}
           </h3>
-          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border uppercase tracking-wider ${isUwp ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-white/5 border-white/10 text-text-muted'}`}>
+          <span className={`text-[12px] font-semibold px-2 py-0.5 rounded-full border uppercase tracking-wider ${isUwp ? 'bg-brand-primary/10 border-brand-primary/20 text-brand-primary' : 'bg-white/5 border-white/10 text-text-muted'}`}>
             {isUwp ? 'UWP' : 'Masaüstü'}
           </span>
         </div>
@@ -44,15 +49,15 @@ const DebloatAppCard = React.memo(({ app, processingState, handleUninstall }: an
         <button
           onClick={() => handleUninstall(app)}
           disabled={processingState[appId] === 'processing'}
-          className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-[#ff5f56]/10 hover:text-[#ff5f56] text-text-muted transition-all duration-300 border border-white/[0.04] hover:border-[#ff5f56]/20 focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none"
+          className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-[#ff5f56]/10 hover:text-[#ff5f56] text-text-muted transition-all duration-300 border border-white/[0.04] hover:border-[#ff5f56]/20 focus-visible:ring-2 focus-visible:ring-[#1a5efd] focus-visible:outline-none"
           title="Uygulamayı Kaldır"
         >
           {processingState[appId] === 'processing' ? (
-            <Loader2 size={16} className="animate-spin text-[#ff5f56]" />
+            <SpinnerGap weight="duotone" size={16} className="animate-spin text-[#ff5f56]" />
           ) : processingState[appId] === 'success' ? (
-            <Check size={16} className="text-[#81c784]" />
+            <Check weight="duotone" size={16} className="text-[#81c784]" />
           ) : (
-            <Trash2 size={16} />
+            <Trash weight="duotone" size={16} />
           )}
         </button>
       </div>
@@ -141,7 +146,7 @@ export function DebloatTools() {
   }, [apps, searchQuery, filterType]);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto h-full flex flex-col relative" style={{ WebkitAppRegion: 'no-drag' } as any}>
+    <div className="p-8 w-full h-full flex flex-col relative" style={{ WebkitAppRegion: 'no-drag' } as any}>
       {/* Toast Notification */}
       <AnimatePresence>
         {toastMessage && (
@@ -157,7 +162,7 @@ export function DebloatTools() {
             }`}
           >
             <div className={`p-2 rounded-xl shrink-0 mr-4 ${toastMessage.type === 'error' ? 'bg-[#e57373]/10' : 'bg-[#81c784]/10'}`}>
-              {toastMessage.type === 'error' ? <AlertCircle size={20} /> : <Check size={20} />}
+              {toastMessage.type === 'error' ? <WarningCircle weight="duotone" size={20} /> : <Check weight="duotone" size={20} />}
             </div>
             <p className="flex-1 text-[14px] font-medium leading-snug text-[#f5f5f7]">
               {toastMessage.message}
@@ -166,7 +171,7 @@ export function DebloatTools() {
               onClick={() => setToastMessage(null)}
               className="ml-4 p-1.5 rounded-lg text-text-muted hover:text-white hover:bg-white/10 transition-colors shrink-0"
             >
-              <X size={16} />
+              <X weight="duotone" size={16} />
             </button>
           </motion.div>
         )}
@@ -178,9 +183,9 @@ export function DebloatTools() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="flex-1 flex flex-col min-h-0"
       >
-        <div className="flex flex-col mb-6 shrink-0">
-          <h1 className="text-[32px] font-semibold leading-tight text-[#f5f5f7] tracking-tight mb-2">Debloat & Uygulamalar</h1>
-          <p className="text-text-muted text-[15px] font-normal leading-relaxed max-w-2xl">
+        <div className="flex flex-col mb-8 pt-1 shrink-0">
+          <h1 className="text-[28px] font-bold text-[#f5f5f7] tracking-tight leading-snug mb-2">Debloat & Uygulamalar</h1>
+          <p className="text-text-muted/90 text-[14px] mt-2 leading-relaxed max-w-3xl">
             Bilgisayarınızda yüklü olan masaüstü ve mağaza (UWP) uygulamalarını görüntüleyin ve gereksizleri kaldırarak sisteminizi rahatlatın.
           </p>
         </div>
@@ -190,26 +195,26 @@ export function DebloatTools() {
           <div className="flex items-center space-x-2 bg-white/[0.03] border border-white/[0.06] rounded-xl p-1 w-full sm:w-auto">
             <button 
               onClick={() => setFilterType('all')} 
-              className={`flex-1 sm:flex-none px-4 py-2 text-[13px] font-medium rounded-lg transition-colors ${filterType === 'all' ? 'bg-white/10 text-white' : 'text-text-muted hover:text-[#f5f5f7]'}`}
+              className={`flex-1 sm:flex-none px-4 py-2 text-[14px] font-medium rounded-lg transition-colors ${filterType === 'all' ? 'bg-white/10 text-white' : 'text-text-muted hover:text-[#f5f5f7]'}`}
             >
               Tümü
             </button>
             <button 
               onClick={() => setFilterType('desktop')} 
-              className={`flex-1 sm:flex-none px-4 py-2 text-[13px] font-medium rounded-lg transition-colors ${filterType === 'desktop' ? 'bg-white/10 text-white' : 'text-text-muted hover:text-[#f5f5f7]'}`}
+              className={`flex-1 sm:flex-none px-4 py-2 text-[14px] font-medium rounded-lg transition-colors ${filterType === 'desktop' ? 'bg-white/10 text-white' : 'text-text-muted hover:text-[#f5f5f7]'}`}
             >
               Masaüstü
             </button>
             <button 
               onClick={() => setFilterType('uwp')} 
-              className={`flex-1 sm:flex-none px-4 py-2 text-[13px] font-medium rounded-lg transition-colors ${filterType === 'uwp' ? 'bg-white/10 text-white' : 'text-text-muted hover:text-[#f5f5f7]'}`}
+              className={`flex-1 sm:flex-none px-4 py-2 text-[14px] font-medium rounded-lg transition-colors ${filterType === 'uwp' ? 'bg-white/10 text-white' : 'text-text-muted hover:text-[#f5f5f7]'}`}
             >
               Windows Uygulamaları
             </button>
           </div>
 
           <div className="relative w-full sm:w-64 shrink-0">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
+            <MagnifyingGlass weight="duotone" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
             <input 
               type="text" 
               placeholder="Uygulama ara..." 
@@ -222,7 +227,7 @@ export function DebloatTools() {
                 onClick={() => setSearchQuery('')}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-white"
               >
-                <X size={14} />
+                <X weight="duotone" size={14} />
               </button>
             )}
           </div>
@@ -246,8 +251,8 @@ export function DebloatTools() {
           ) : error ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center bg-white/[0.04] border border-[#e57373]/30 rounded-3xl p-10 max-w-md">
-                <AlertTriangle size={36} className="text-[#e57373] mx-auto mb-5 opacity-80" />
-                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Uygulamalar Alınamadı</h3>
+                <Warning weight="duotone" size={36} className="text-[#e57373] mx-auto mb-5 opacity-80" />
+                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Uygulamalar Alınamadı</h3>
                 <p className="text-[#e57373]/90 text-[14px] font-normal leading-relaxed max-w-sm mb-6 mx-auto">
                   {error.message}
                 </p>
@@ -255,8 +260,8 @@ export function DebloatTools() {
                   onClick={() => setRetryCount(prev => prev + 1)}
                   className="flex items-center space-x-2 mx-auto px-5 py-2.5 bg-white/[0.05] hover:bg-white/[0.08] text-white rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-all"
                 >
-                  <Monitor size={14} className="text-text-muted" />
-                  <span className="text-[13px] font-medium">Yeniden Dene</span>
+                  <Monitor weight="duotone" size={14} className="text-text-muted" />
+                  <span className="text-[14px] font-medium">Yeniden Dene</span>
                 </button>
               </div>
             </div>
@@ -274,8 +279,8 @@ export function DebloatTools() {
           ) : (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-3xl p-10 max-w-md">
-                <Box size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
-                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Uygulama Bulunamadı</h3>
+                <Package weight="duotone" size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
+                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Uygulama Bulunamadı</h3>
                 <p className="text-text-muted text-[14px] font-normal leading-relaxed max-w-sm mx-auto">
                   Arama kriterlerinize uyan bir uygulama bulunamadı veya sisteminizde yüklü program yok.
                 </p>
@@ -287,3 +292,4 @@ export function DebloatTools() {
     </div>
   );
 }
+

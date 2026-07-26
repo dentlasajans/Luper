@@ -1,6 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Home, Zap, Wrench, Gamepad2, FileText, ArrowUpCircle, Settings, Github, Twitter, Globe, Cpu, User, ChevronDown, Archive } from 'lucide-react';
+import { User as FirebaseUser, onAuthStateChanged } from 'firebase/auth';
+import {
+    Archive,
+    ArrowCircleUp,
+    CaretDown,
+    Cpu,
+    FileText,
+    GameController,
+    GithubLogo,
+    Globe,
+    House,
+    SpinnerGap,
+    SignOut,
+    Gear,
+    Sparkle,
+    TwitterLogo,
+    Wrench,
+    Lightning
+} from '@phosphor-icons/react';
 import { motion } from 'motion/react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { auth, loginWithGoogle, logoutGoogle } from '../services/FirebaseService';
 import { AppLogo } from './Icons';
 
 interface SidebarProps {
@@ -17,15 +36,19 @@ type NavItem = {
   id: string;
   icon: React.ElementType;
   label: string;
+  group: string;
+  badge?: string;
   subItems?: SubItem[];
 };
 
 const navItems: NavItem[] = [
-  { id: 'dashboard', icon: Home, label: 'Anasayfa' },
+  // Group 1: Ana Menü
+  { id: 'dashboard', icon: House, label: 'Anasayfa', group: 'Ana Menü' },
   { 
     id: 'optimization', 
-    icon: Zap, 
+    icon: Lightning, 
     label: 'Optimizasyon',
+    group: 'Ana Menü',
     subItems: [
       { id: 'network', label: 'Ağ & İnternet' },
       { id: 'cpu', label: 'CPU' },
@@ -46,42 +69,50 @@ const navItems: NavItem[] = [
     id: 'tools', 
     icon: Wrench, 
     label: 'Araçlar',
+    group: 'Ana Menü',
     subItems: [
       { id: 'startup', label: 'Başlangıç' },
       { id: 'cleaner', label: 'Temizlik' },
       { id: 'debloat', label: 'Debloat' }
     ]
   },
-  { id: 'games', icon: Gamepad2, label: 'Oyunlar' },
-  { id: 'system-info', icon: Cpu, label: 'Sistem Bilgisi' },
-  { id: 'release-notes', icon: FileText, label: 'Sürüm Notları' },
-  { id: 'update', icon: ArrowUpCircle, label: 'Güncelleme' },
-  { id: 'backup', icon: Archive, label: 'Yedekleme' },
-  { id: 'settings', icon: Settings, label: 'Ayarlar' },
+  { id: 'games', icon: GameController, label: 'Oyunlar', group: 'Ana Menü' },
+  { id: 'my-system', icon: Cpu, label: 'Sistemim', group: 'Ana Menü' },
+
+
+  // Group 3: Sistem & Yönetim
+  { id: 'update', icon: ArrowCircleUp, label: 'Güncelleme', group: 'Sistem & Yönetim' },
+  { id: 'backup', icon: Archive, label: 'Yedekleme', group: 'Sistem & Yönetim' },
+  { id: 'release-notes', icon: FileText, label: 'Sürüm Notları', group: 'Sistem & Yönetim' },
+  { id: 'settings', icon: Gear, label: 'Ayarlar', group: 'Sistem & Yönetim' }
 ];
 
+navItems.forEach(item => {
+  if (item.subItems) {
+    item.subItems.sort((a, b) => a.label.localeCompare(b.label));
+  }
+});
 
 const SidebarSubItem = React.memo(({ sub, isSubActive, onClick }: { sub: SubItem, isSubActive: boolean, onClick: (id: string) => void }) => {
   return (
     <button
       onClick={() => onClick(sub.id)}
-      className={`w-full flex items-center px-3 py-2.5 rounded-xl transition-all duration-300 relative group focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none  ${isSubActive ? '' : ''}   hover:scale-[1.02] active:scale-[0.98] ${
-        isSubActive ? 'text-white' : 'text-text-muted hover:text-white'
+      className={`w-full flex items-center px-3 py-2 rounded-xl transition-all duration-200 relative group focus-visible:ring-1 focus-visible:ring-[#1a5efd] focus-visible:outline-none ${
+        isSubActive ? 'text-white font-medium' : 'text-[#86868b] hover:text-white'
       }`}
     >
-      <SelectionSpinEffect isActive={isSubActive} rx={12} />
       {isSubActive && (
         <motion.div
           layoutId="sidebar-active-sub"
-          className="absolute inset-0 bg-white/5 backdrop-blur-md rounded-xl border border-white/[0.04] "
-          transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+          className="absolute inset-0 bg-[#1a5efd]/15 backdrop-blur-md rounded-xl border border-[#1a5efd]/30"
+          transition={{ duration: 0.2, ease: 'easeOut' }}
         />
       )}
       {!isSubActive && (
-        <div className="absolute inset-0 bg-white/[0.04] opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-xl border border-white/[0.04] transition-all duration-300" />
+        <div className="absolute inset-0 bg-white/[0.04] opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-200" />
       )}
-      <div className="w-1.5 h-1.5 rounded-full bg-white/20 mr-3 relative z-10 group-hover:bg-white/40 transition-colors duration-300" />
-      <span className="text-[15px] relative z-10">{sub.label}</span>
+      <div className={`w-1.5 h-1.5 rounded-full mr-3 relative z-10 transition-colors duration-200 ${isSubActive ? 'bg-[#1a5efd] shadow-[0_0_8px_rgba(26,94,253,0.8)]' : 'bg-white/20 group-hover:bg-white/50'}`} />
+      <span className="text-[13.5px] relative z-10">{sub.label}</span>
     </button>
   );
 });
@@ -89,7 +120,6 @@ const SidebarSubItem = React.memo(({ sub, isSubActive, onClick }: { sub: SubItem
 const SidebarNavItem = React.memo(({
   item,
   isActive,
-  isComingSoon,
   hasSubItems,
   expandedCategory,
   activeTab,
@@ -98,7 +128,6 @@ const SidebarNavItem = React.memo(({
 }: {
   item: NavItem,
   isActive: boolean,
-  isComingSoon: boolean,
   hasSubItems: boolean,
   expandedCategory: string | null,
   activeTab: string,
@@ -108,32 +137,36 @@ const SidebarNavItem = React.memo(({
   return (
     <div className="w-full">
       <button
-        disabled={isComingSoon}
+        aria-label={item.label}
         onClick={() => onItemClick(item, hasSubItems)}
-        className={`w-full flex items-center px-4 py-3 rounded-[1.25rem] transition-all duration-300 relative group focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none  ${isActive ? '' : ''}   hover:scale-[1.02] active:scale-[0.98] ${
-          isActive ? 'text-white' : 'text-text-muted hover:text-white'
-        } ${isComingSoon ? 'opacity-50 cursor-not-allowed hover:scale-100 hover:text-text-muted' : ''}`}
+        className={`w-full flex items-center px-3.5 py-2.5 rounded-xl transition-all duration-200 relative group focus-visible:ring-2 focus-visible:ring-[#1a5efd] focus-visible:outline-none ${
+          isActive ? 'text-white' : 'text-[#86868b] hover:text-white'
+        }`}
       >
-        <SelectionSpinEffect isActive={isActive} rx={20} />
         {isActive && (
           <motion.div
             layoutId="sidebar-active"
-            className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-[1.25rem] border border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.2)] "
-            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+            className="absolute inset-0 bg-white/[0.08] backdrop-blur-md rounded-xl border border-white/[0.12] shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           />
         )}
         {!isActive && (
-          <div className="absolute inset-0 bg-white/[0.04] opacity-0 group-hover:opacity-100 backdrop-blur-sm rounded-[1.25rem] border border-white/[0.04] transition-all duration-300" />
+          <div className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-200" />
         )}
-        <item.icon size={18} strokeWidth={isActive ? 2 : 1.5} className={`mr-4 relative z-10 transition-colors duration-300 ${isActive ? 'text-brand-primary' : 'text-text-muted group-hover:text-[#f5f5f7]'} group-hover:translate-y-[-1px] group-hover:scale-[1.08]`} />
-        <span className="text-[15px] font-normal relative z-10 flex-1 text-left">{item.label}</span>
-        {isComingSoon && (
-          <span className="text-[10px] bg-white/[0.05] text-text-muted px-2 py-0.5 rounded-full border border-white/10 uppercase tracking-wider font-semibold relative z-10 whitespace-nowrap ml-2">Yakında</span>
+        
+        <item.icon size={18} weight="duotone" className={`relative z-10 transition-all duration-300 mr-3.5 ${isActive ? 'text-[#1a5efd]' : 'text-[#86868b] group-hover:text-white group-hover:scale-105'}`} />
+        
+        <span className="text-[14px] font-medium relative z-10 flex-1 text-left">{item.label}</span>
+        {item.badge && (
+          <span className="text-[10px] bg-[#1a5efd]/20 text-[#64d2ff] px-2 py-0.5 rounded-full border border-[#1a5efd]/30 font-bold uppercase tracking-wider relative z-10 mr-1">
+            {item.badge}
+          </span>
         )}
-        {!isComingSoon && hasSubItems && (
-          <ChevronDown
+        {hasSubItems && (
+          <CaretDown
             size={14}
-            className={`relative z-10 transition-transform duration-300 ${expandedCategory === item.id ? 'rotate-180' : ''} ${isActive ? 'text-white' : 'text-text-muted'}`}
+            weight="duotone"
+            className={`relative z-10 transition-transform duration-200 ${expandedCategory === item.id ? 'rotate-180 text-white' : 'text-[#86868b]'}`}
           />
         )}
       </button>
@@ -142,11 +175,12 @@ const SidebarNavItem = React.memo(({
         <motion.div
           initial={false}
           animate={{ height: expandedCategory === item.id ? 'auto' : 0, opacity: expandedCategory === item.id ? 1 : 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          transition={{ duration: 0.25, ease: 'easeInOut' }}
+          style={{ transform: 'translateZ(0)', willChange: 'height, opacity' }}
           className="overflow-hidden"
         >
-          <div className="pl-11 pr-2 py-1 space-y-1 mt-1">
-            {[...item.subItems!].sort((a, b) => a.label.localeCompare(b.label)).map(sub => (
+          <div className="pl-9 pr-1 py-1 space-y-1 mt-1">
+            {(item.subItems ?? []).map(sub => (
               <SidebarSubItem 
                 key={sub.id} 
                 sub={sub} 
@@ -161,9 +195,36 @@ const SidebarNavItem = React.memo(({
   );
 });
 
-export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
+  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
+  const [authLoading, setAuthLoading] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleGoogleLogin = React.useCallback(async () => {
+    setAuthLoading(true);
+    try {
+      await loginWithGoogle();
+    } catch (e) {
+      console.error("Google auth error:", e);
+    } finally {
+      setAuthLoading(false);
+    }
+  }, []);
+
+  const handleLogout = React.useCallback(async () => {
+    try {
+      await logoutGoogle();
+    } catch (e) {
+      console.error("Logout error:", e);
+    }
+  }, []);
 
   const handleItemClick = React.useCallback((item: NavItem, hasSubItems: boolean) => {
     setActiveTab(item.id);
@@ -178,10 +239,7 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
     setActiveTab(id);
   }, [setActiveTab]);
 
-
-
   useEffect(() => {
-    // If activeTab is a sub-item of any category, ensure it's expanded
     const parentItem = navItems.find(item => 
       item.subItems?.some(sub => sub.id === activeTab)
     );
@@ -190,109 +248,108 @@ export function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
     }
   }, [activeTab]);
 
+  const groupedNav = useMemo(() => {
+    const groups: { [key: string]: NavItem[] } = {};
+    navItems.forEach(item => {
+      if (!groups[item.group]) groups[item.group] = [];
+      groups[item.group].push(item);
+    });
+    return groups;
+  }, []);
+
   return (
-    <div className="w-64 shrink-0 h-full bg-transparent flex flex-col relative z-20 pt-8 pb-4 px-3">
-      {/* Logo */}
-      <div className="flex items-center px-2 mb-6 w-full text-[#f5f5f7] select-none drag-region group hover:brightness-110 transition-all cursor-pointer">
-        <AppLogo className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-500 ease-out drop-shadow-md" />
+    <div 
+      className="shrink-0 w-[260px] h-[calc(100vh-24px)] my-3 ml-3 bg-[#161619]/90 border border-white/[0.08] rounded-[20px] shadow-2xl flex flex-col relative z-20 pt-5 pb-4 px-3 overflow-hidden backdrop-blur-2xl luper-glass"
+    >
+      {/* Header & Logo */}
+      <div className="flex items-center justify-center py-2 mb-4 w-full select-none drag-region">
+        <div className="flex items-center shrink-0">
+          <AppLogo className="h-12 w-auto max-w-[180px] drop-shadow-md" />
+        </div>
       </div>
 
-      {/* Nav */}
-      <nav aria-label="Main Navigation" className="flex-1 space-y-1 overflow-y-auto overflow-x-hidden pr-2 -mr-2" style={{ maskImage: 'linear-gradient(to bottom, black 0%, black 90%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 90%, transparent 100%)', WebkitAppRegion: 'no-drag' } as any}>
-        {navItems.map((item, index) => {
-          const isTopDivider = index === 2;
-          const isMidDivider = index === 6;
-          const isActive = activeTab === item.id;
-          const hasSubItems = item.subItems && item.subItems.length > 0;
-          const isComingSoon = false;
-
-          return (
-            <React.Fragment key={item.id}>
-              {(isTopDivider || isMidDivider) && (
-                <div className="h-px bg-white/[0.04] mx-4 my-2" />
-              )}
+      {/* Nav List */}
+      <nav aria-label="Main Navigation" className="flex-1 space-y-6 overflow-y-auto overflow-x-hidden pr-1" style={{ WebkitAppRegion: 'no-drag' }}>
+        {Object.entries(groupedNav).map(([groupName, items]) => (
+          <div key={groupName} className="space-y-1">
+            <h4 className="text-[12px] font-bold text-[#86868b] uppercase tracking-wider px-3 mb-2.5 mt-2">
+              {groupName}
+            </h4>
+            {items.map((item) => (
               <SidebarNavItem 
+                key={item.id}
                 item={item}
-                isActive={isActive}
-                isComingSoon={isComingSoon}
-                hasSubItems={!!hasSubItems}
+                isActive={activeTab === item.id}
+                hasSubItems={!!(item.subItems && item.subItems.length > 0)}
                 expandedCategory={expandedCategory}
                 activeTab={activeTab}
                 onItemClick={handleItemClick}
                 onSubItemClick={handleSubItemClick}
               />
-            </React.Fragment>
-          );
-        })}
+            ))}
+          </div>
+        ))}
       </nav>
 
-      {/* User Section */}
-      <div className="mt-6 mb-4 px-2" style={{ WebkitAppRegion: 'no-drag' } as any}>
-        {!isLoggedIn ? (
+      {/* Active User Footer Section */}
+      <div className="mt-4 pt-3 border-t border-white/[0.06]" style={{ WebkitAppRegion: 'no-drag' }}>
+        {!currentUser ? (
           <button 
-            disabled
-            onClick={() => setIsLoggedIn(true)}
-            className="w-full flex items-center justify-center space-x-2 py-3 px-4 bg-white/[0.03] border border-white/[0.04] rounded-2xl transition-all duration-300 group opacity-50 cursor-not-allowed "
+            onClick={handleGoogleLogin}
+            disabled={authLoading}
+            className="w-full flex items-center justify-center space-x-2 py-2.5 px-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-xl transition-all group shadow-sm"
           >
-            <User size={16} className="text-text-muted transition-colors" />
-            <span className="text-[15px] font-normal text-text-muted">Google ile giriş yap</span>
+            {authLoading ? (
+              <SpinnerGap size={16} weight="duotone" className="animate-spin text-[#1a5efd]" />
+            ) : (
+              <Sparkle size={16} weight="duotone" className="text-[#1a5efd]" />
+            )}
+            <span className="text-[13px] font-medium text-white group-hover:text-[#64d2ff] transition-colors">
+              {authLoading ? 'Giriş Yapılıyor...' : 'Google ile Giriş'}
+            </span>
           </button>
         ) : (
-          <div className="flex items-center space-x-3 p-3 bg-white/[0.02] border border-white/[0.04] rounded-2xl cursor-pointer hover:bg-white/[0.04] transition-all duration-300 group" onClick={() => setIsLoggedIn(false)}>
-            <div className="w-10 h-10 rounded-full ring-2 ring-brand-primary/30 ring-offset-2 ring-offset-[#121214] bg-gradient-to-br from-brand-primary to-[#407eff] flex items-center justify-center shadow-lg overflow-hidden border border-white/10 shrink-0">
-              <span className="text-white font-medium text-[15px]">HK</span>
+          <div className="flex items-center justify-between p-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+            <div className="flex items-center space-x-2.5 min-w-0">
+              {currentUser.photoURL ? (
+                <img 
+                  src={currentUser.photoURL} 
+                  alt={currentUser.displayName || 'Kullanıcı'} 
+                  className="w-8 h-8 rounded-full border border-[#1a5efd]/40 shrink-0 object-cover"
+                />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-[#1a5efd] flex items-center justify-center text-white font-bold text-[13px] shrink-0">
+                  {(currentUser.displayName || currentUser.email || 'U')[0].toUpperCase()}
+                </div>
+              )}
+              <div className="min-w-0 flex-1">
+                <h4 className="text-[#f5f5f7] text-[13px] font-medium truncate">
+                  {currentUser.displayName || 'Kullanıcı'}
+                </h4>
+                <p className="text-[#64d2ff] text-[11px] font-semibold">Premium</p>
+              </div>
             </div>
-            <div className="flex-1 min-w-0">
-              <h4 className="text-[#f5f5f7] text-[15px] font-normal truncate">Himmet Muhammed</h4>
-              <p className="text-brand-primary text-[11px] font-medium tracking-wide mt-0.5">Premium Plan</p>
-            </div>
+
+            <button
+              onClick={handleLogout}
+              className="w-7 h-7 rounded-lg bg-white/[0.04] hover:bg-red-500/20 hover:text-red-400 text-[#86868b] flex items-center justify-center transition-colors shrink-0"
+              title="Çıkış Yap"
+            >
+              <SignOut size={16} weight="duotone" className="group-hover:scale-105 transition-all duration-300" />
+            </button>
           </div>
         )}
       </div>
 
-      {/* Footer / Version & Socials */}
-      <div className="pt-4 px-2 flex items-center justify-between border-t border-white/[0.04]" style={{ WebkitAppRegion: 'no-drag' } as any}>
-        <div className="text-[11px] font-mono text-text-muted tracking-widest opacity-60">v0.0.1</div>
-        <div className="flex items-center space-x-3 text-text-muted">
-          <a href="#" className="hover:text-white transition-colors duration-300"><Github size={15} strokeWidth={1.5} /></a>
-          <a href="#" className="hover:text-white transition-colors duration-300"><Twitter size={15} strokeWidth={1.5} /></a>
-          <a href="#" className="hover:text-white transition-colors duration-300"><Globe size={15} strokeWidth={1.5} /></a>
+      {/* Footer / Version & Links */}
+      <div className="pt-3 px-1 flex items-center justify-between" style={{ WebkitAppRegion: 'no-drag' }}>
+        <span className="text-[11px] font-mono text-[#86868b] font-medium">v1.1.0 Stable</span>
+        <div className="flex items-center space-x-2 text-[#86868b]">
+          <a href="#" aria-label="GitHub" className="hover:text-white hover:scale-105 transition-all duration-300"><GithubLogo size={14} weight="duotone" /></a>
+          <a href="#" aria-label="Twitter" className="hover:text-white hover:scale-105 transition-all duration-300"><TwitterLogo size={14} weight="duotone" /></a>
+          <a href="#" aria-label="Web" className="hover:text-white hover:scale-105 transition-all duration-300"><Globe size={14} weight="duotone" /></a>
         </div>
       </div>
     </div>
   );
-}
-
-function SelectionSpinEffect({ isActive, rx }: { isActive: boolean, rx: number }) {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (isActive) {
-      setShow(true);
-      const t = setTimeout(() => setShow(false), 900);
-      return () => clearTimeout(t);
-    }
-  }, [isActive]);
-
-  if (!show) return null;
-
-  return (
-    <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
-      <motion.rect
-        x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)"
-        rx={rx}
-        fill="none"
-        stroke="#1a5efd"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, pathOffset: 0, opacity: 0 }}
-        animate={{ 
-          pathLength: [0, 0.3, 0.3, 0.01], 
-          pathOffset: [0, 0, 0.7, 1],
-          opacity: [0, 1, 1, 0] 
-        }}
-        transition={{ duration: 0.9, ease: "easeInOut" }}
-      />
-    </svg>
-  );
-}
+});

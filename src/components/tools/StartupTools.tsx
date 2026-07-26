@@ -1,11 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Power, Loader2, Check, RefreshCw, AlertTriangle, AlertCircle, X, TerminalSquare, User as UserIcon } from 'lucide-react';
-import { StartupItem } from '../../types';
+import { WarningCircle, Warning, Check, SpinnerGap, Power, ArrowsClockwise, Terminal, User as UserIcon, X } from '@phosphor-icons/react';
+import { AnimatePresence, motion } from 'motion/react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { getStartupItems, toggleStartupItem } from '../../services/SystemEngine';
+import { StartupItem } from '../../types';
 
+interface StartupAppCardProps {
+  item: StartupItem;
+  idx: number;
+  processingState: Record<string, string>;
+  handleToggle: (item: StartupItem) => void;
+}
 
-const StartupAppCard = React.memo(({ item, idx, processingState, handleToggle }: any) => {
+const StartupAppCard = memo(({ item, idx, processingState, handleToggle }: StartupAppCardProps) => {
   const itemId = item.name + item.location;
 
   return (
@@ -13,20 +19,20 @@ const StartupAppCard = React.memo(({ item, idx, processingState, handleToggle }:
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: Math.min(idx * 0.03, 0.15) }}
-      className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-4 flex items-center group hover:bg-white/[0.05] hover:border-white/[0.1] transition-all"
+      className="bg-[#1c1c1e]/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 flex items-center group hover:bg-[#1c1c1e]/80 hover:border-white/[0.15] transition-all shadow-lg"
     >
       <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center shrink-0 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
-        <Power size={20} className={item.enabled ? 'text-brand-primary' : 'text-text-muted opacity-50'} />
+        <Power weight="duotone" size={20} className={item.enabled ? 'text-brand-primary' : 'text-text-muted opacity-50'} />
       </div>
       
       <div className="flex-1 min-w-0 ml-4">
-        <h3 className={`text-[15px] font-medium leading-snug truncate transition-colors ${item.enabled ? 'text-[#f5f5f7]' : 'text-text-muted opacity-60'}`}>
+        <h3 className={`text-[16px] font-medium leading-snug truncate transition-colors ${item.enabled ? 'text-[#f5f5f7]' : 'text-text-muted opacity-60'}`}>
           {item.name}
         </h3>
         
         <div className="flex items-center mt-1.5 space-x-4">
           <div className="flex items-center space-x-1.5 opacity-60">
-            <TerminalSquare size={12} className="text-text-muted shrink-0" />
+            <Terminal weight="duotone" size={12} className="text-text-muted shrink-0" />
             <p className="text-text-muted text-[12px] truncate max-w-[280px]" title={item.command}>
               {item.command || 'Bilinmeyen komut'}
             </p>
@@ -47,16 +53,16 @@ const StartupAppCard = React.memo(({ item, idx, processingState, handleToggle }:
         <button
           onClick={() => !processingState[itemId] && handleToggle(item)}
           disabled={!!processingState[itemId]}
-          className={`relative w-[48px] h-[26px] rounded-full transition-colors duration-300 flex items-center justify-center ${item.enabled ? 'bg-[#f5f5f7]' : 'bg-white/[0.1] border border-white/[0.05]'} ${(processingState[itemId] === 'processing') ? 'opacity-80 cursor-not-allowed' : ''} focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none`}
+          className={`relative w-[48px] h-[26px] rounded-full transition-colors duration-300 flex items-center justify-center ${item.enabled ? 'bg-[#1a5efd]' : 'bg-white/[0.1] border border-white/[0.05]'} ${(processingState[itemId] === 'processing') ? 'opacity-80 cursor-not-allowed' : ''} focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none`}
         >
           {processingState[itemId] === 'processing' && (
-            <Loader2 size={12} className={`absolute animate-spin ${item.enabled ? 'text-surface-base left-[7px]' : 'text-text-muted right-[7px]'}`} />
+            <SpinnerGap weight="duotone" size={12} className={`absolute animate-spin ${item.enabled ? 'text-surface-base left-[7px]' : 'text-text-muted right-[7px]'}`} />
           )}
           {processingState[itemId] === 'success' && (
-            <Check size={12} className={`absolute ${item.enabled ? 'text-surface-base left-[7px]' : 'text-[#81c784] right-[7px]'}`} />
+            <Check weight="duotone" size={12} className={`absolute ${item.enabled ? 'text-surface-base left-[7px]' : 'text-[#81c784] right-[7px]'}`} />
           )}
           <motion.div
-            className={`absolute top-1 bottom-1 w-[18px] rounded-full shadow-sm ${item.enabled ? 'bg-surface-base' : 'bg-text-muted'}`}
+            className={`absolute top-1 bottom-1 w-[18px] rounded-full shadow-md ${item.enabled ? 'bg-white' : 'bg-[#98989d]'}`}
             initial={false}
             animate={{
               left: item.enabled ? '26px' : '4px',
@@ -134,7 +140,7 @@ export function StartupTools() {
   }, []);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto h-full flex flex-col relative" style={{ WebkitAppRegion: 'no-drag' } as any}>
+    <div className="p-8 w-full h-full flex flex-col relative" style={{ WebkitAppRegion: 'no-drag' } as any}>
       {/* Toast Notification */}
       <AnimatePresence>
         {toastMessage && (
@@ -150,7 +156,7 @@ export function StartupTools() {
             }`}
           >
             <div className={`p-2 rounded-xl shrink-0 mr-4 ${toastMessage.type === 'error' ? 'bg-[#e57373]/10' : 'bg-[#81c784]/10'}`}>
-              {toastMessage.type === 'error' ? <AlertCircle size={20} /> : <Check size={20} />}
+              {toastMessage.type === 'error' ? <WarningCircle weight="duotone" size={20} /> : <Check weight="duotone" size={20} />}
             </div>
             <p className="flex-1 text-[14px] font-medium leading-snug text-[#f5f5f7]">
               {toastMessage.message}
@@ -159,7 +165,7 @@ export function StartupTools() {
               onClick={() => setToastMessage(null)}
               className="ml-4 p-1.5 rounded-lg text-text-muted hover:text-white hover:bg-white/10 transition-colors shrink-0"
             >
-              <X size={16} />
+              <X weight="duotone" size={16} />
             </button>
           </motion.div>
         )}
@@ -169,18 +175,18 @@ export function StartupTools() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="flex-1 flex flex-col"
+        className="flex-1 flex flex-col min-h-0"
       >
-        <div className="flex flex-col mb-8 shrink-0">
-          <h1 className="text-[32px] font-semibold leading-tight text-[#f5f5f7] tracking-tight mb-2">Başlangıç Uygulamaları</h1>
-          <p className="text-text-muted text-[15px] font-normal leading-relaxed max-w-2xl">
+        <div className="flex flex-col mb-8 pt-1 shrink-0">
+          <h1 className="text-[28px] font-bold text-[#f5f5f7] tracking-tight leading-snug mb-2">Başlangıç Uygulamaları</h1>
+          <p className="text-text-muted/90 text-[14px] mt-2 leading-relaxed max-w-3xl">
             Sistem başlatıldığında otomatik olarak çalışan uygulamaları yönetin. Gereksiz programları devre dışı bırakarak açılış süresini hızlandırabilirsiniz.
           </p>
         </div>
 
         <div className="flex-1 flex flex-col min-h-0 relative">
           {loading ? (
-            <div className="flex flex-col space-y-3 overflow-y-auto pr-2 pb-4">
+            <div className="flex-1 flex flex-col space-y-3 overflow-y-auto pr-2 pb-4">
               {[1, 2, 3, 4, 5].map((idx) => (
                 <div key={idx} className="bg-white/[0.02] border border-white/[0.04] rounded-2xl p-4 flex items-center justify-between h-[84px] animate-pulse">
                   <div className="flex items-center space-x-4 w-full">
@@ -196,8 +202,8 @@ export function StartupTools() {
           ) : error ? (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center bg-white/[0.04] border border-[#e57373]/30 rounded-3xl p-10 max-w-md">
-                <AlertTriangle size={36} className="text-[#e57373] mx-auto mb-5 opacity-80" />
-                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Sistem Verisi Alınamadı</h3>
+                <Warning weight="duotone" size={36} className="text-[#e57373] mx-auto mb-5 opacity-80" />
+                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Sistem Verisi Alınamadı</h3>
                 <p className="text-[#e57373]/90 text-[14px] font-normal leading-relaxed max-w-sm mb-6 mx-auto">
                   {error.message}
                 </p>
@@ -205,13 +211,13 @@ export function StartupTools() {
                   onClick={() => setRetryCount(prev => prev + 1)}
                   className="flex items-center space-x-2 mx-auto px-5 py-2.5 bg-white/[0.05] hover:bg-white/[0.08] text-white rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-all"
                 >
-                  <RefreshCw size={14} className="text-text-muted" />
-                  <span className="text-[13px] font-medium">Yeniden Dene</span>
+                  <ArrowsClockwise weight="duotone" size={14} className="text-text-muted" />
+                  <span className="text-[14px] font-medium">Yeniden Dene</span>
                 </button>
               </div>
             </div>
           ) : items && items.length > 0 ? (
-            <div className="flex flex-col space-y-3 overflow-y-auto pr-2 pb-4">
+            <div className="flex-1 flex flex-col space-y-3 overflow-y-auto pr-2 pb-4 custom-scrollbar">
               {items.map((item, idx) => (
                 <StartupAppCard 
                   key={idx} 
@@ -229,9 +235,9 @@ export function StartupTools() {
                   animate={{ scale: [1, 1.05, 1] }} 
                   transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                  <Power size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
+                  <Power weight="duotone" size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
                 </motion.div>
-                <h3 className="text-[#f5f5f7] text-[18px] font-medium leading-tight mb-3">Başlangıç Öğesi Bulunamadı</h3>
+                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Başlangıç Öğesi Bulunamadı</h3>
                 <p className="text-text-muted text-[14px] font-normal leading-relaxed max-w-sm mx-auto">
                   Sisteminizde yapılandırılmış herhangi bir başlangıç öğesi bulunamadı.
                 </p>
@@ -243,3 +249,4 @@ export function StartupTools() {
     </div>
   );
 }
+

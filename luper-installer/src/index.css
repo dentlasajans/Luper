@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-luper-purple: #9d4edd;
+  --color-luper-purple-light: #c77dff;
+  --color-luper-purple-dark: #7b2cbf;
+  --color-luper-dark: #121212;
+  --color-luper-dark-surface: #1e1e1e;
+  
+  --color-luper-sapphire: #1a5efd;
+  --color-luper-sapphire-light: #3a75ff;
+  --color-luper-sapphire-dark: #0a40d0;
+}
+
+:root {
+  /* Mica / Acrylic fallback vars */
+  --bg-app: rgba(18, 18, 20, 0.4); 
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Scrollbar for Logs */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Glass UI Utilities */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+/* Titlebar Drag Region */
+.drag-region {
+  -webkit-app-region: drag;
+}
+.no-drag {
+  -webkit-app-region: no-drag;
+}

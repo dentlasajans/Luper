@@ -1,7 +1,31 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, orderBy, limit, doc, setDoc, getDoc } from 'firebase/firestore';
+import { User as FirebaseUser, getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { collection, getDocs, getFirestore, limit, orderBy, query, doc, setDoc } from 'firebase/firestore';
+import { z } from 'zod';
+
 import { ChangelogEntry, OptimizationSetting } from '../types';
-import { mockChangelog } from '../mocks';
+import { getLatestChangelogEntry } from './ChangelogService';
+
+const ImpactDetailSchema = z.object({
+  level: z.enum(['none', 'positive_low', 'positive_medium', 'positive_high', 'negative_low', 'negative_medium', 'negative_high']),
+  description: z.string()
+});
+
+const OptimizationSettingSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  status: z.enum(['optimized', 'default', 'checking']).optional().default('default'),
+  applyCode: z.string().optional(),
+  restoreCode: z.string().optional(),
+  impacts: z.object({
+    performance: ImpactDetailSchema,
+    latency: ImpactDetailSchema,
+    input: ImpactDetailSchema,
+    power: ImpactDetailSchema,
+    heat: ImpactDetailSchema,
+  }).optional()
+});
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyCB3eOBbtuzKEOwzR1F_maKgKq6hYoXcT0",
@@ -13,9 +37,31 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+const db = getFirestore(app);
+export const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
+export const loginWithGoogle = async (): Promise<FirebaseUser | null> => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result.user;
+  } catch (error: unknown) {
+    console.error("Google login error:", error);
+    const authError = error as { code?: string };
+    if (authError?.code === 'auth/popup-blocked' || authError?.code === 'auth/popup-closed-by-user') {
+      return null;
+    }
+    throw error;
+  }
+};
+
+export const logoutGoogle = async (): Promise<void> => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Google logout error:", error);
+  }
+};
 
 const categoryCache: Record<string, OptimizationSetting[]> = {};
 
@@ -25,20 +71,47 @@ export const getCategorySettingsFromFirebase = async (categoryId: string): Promi
   }
 
   if (!db) {
-    throw new Error("Firebase yapılandırması bulunamadı (API Key eksik). Build işlemi sırasında .env dosyasının dahil edildiğinden emin olun.");
+    categoryCache[categoryId] = [];
+    window.dispatchEvent(new CustomEvent('settings_cache_updated'));
+    return [];
   }
+  
   try {
     const q = query(collection(db, `optimizations/${categoryId}/settings`));
     const querySnapshot = await getDocs(q);
-    const settings: OptimizationSetting[] = [];
+    const firestoreSettings: OptimizationSetting[] = [];
+    
     querySnapshot.forEach((doc) => {
-      settings.push({ id: doc.id, ...doc.data(), status: 'default' } as OptimizationSetting);
+      try {
+        const rawData = { id: doc.id, ...doc.data() } as any;
+        if (!rawData.status) rawData.status = 'default';
+        const parsed = OptimizationSettingSchema.parse(rawData);
+        firestoreSettings.push(parsed as OptimizationSetting);
+      } catch (err) {
+        console.warn(`Firestore schema validation failed for ${doc.id}:`, err);
+      }
     });
-    categoryCache[categoryId] = settings;
-    return settings;
-  } catch (error: any) {
-    console.error(`Firebase'den ${categoryId} ayarları çekilirken hata oluştu:`, error);
-    throw new Error(`Veritabanına erişilemedi: ${error.message || "Bilinmeyen hata"}`);
+    
+    categoryCache[categoryId] = firestoreSettings;
+    window.dispatchEvent(new CustomEvent('settings_cache_updated'));
+    return firestoreSettings;
+  } catch (error: unknown) {
+    const errObj = error as { message?: string };
+    console.error(`Firebase'den ${categoryId} ayarları çekilemedi:`, errObj?.message || error);
+    categoryCache[categoryId] = [];
+    window.dispatchEvent(new CustomEvent('settings_cache_updated'));
+    return [];
+  }
+};
+
+export const saveOptimizationSettingToFirestore = async (categoryId: string, setting: OptimizationSetting): Promise<void> => {
+  if (!db) return;
+  try {
+    await setDoc(doc(db, `optimizations/${categoryId}/settings`, setting.id), setting, { merge: true });
+    console.log(`Firestore'a başarıyla kaydedildi: ${setting.id}`);
+  } catch (error) {
+    console.error(`Firestore'a ${setting.id} kaydedilirken hata oluştu:`, error);
+    throw error;
   }
 };
 
@@ -71,6 +144,11 @@ export const preloadAllCategorySettings = async (): Promise<void> => {
       }
     })
   );
+  window.dispatchEvent(new CustomEvent('settings_cache_updated'));
+};
+
+export const getAllOptimizationSettings = (): OptimizationSetting[] => {
+  return SUBCATEGORIES.flatMap(cat => categoryCache[cat] || []);
 };
 
 export const getTotalOptimizationSettingsCount = (): number => {
@@ -80,15 +158,10 @@ export const getTotalOptimizationSettingsCount = (): number => {
       total += categoryCache[cat].length;
     }
   }
-  return total > 0 ? total : 25;
+  return total;
 };
 
-export const getCategorySettingCount = (categoryId: string): number => {
-  if (categoryCache[categoryId]) {
-    return categoryCache[categoryId].length;
-  }
-  return 0;
-};
+
 
 export const getAllCategorySettingCounts = (): Record<string, number> => {
   const result: Record<string, number> = {};
@@ -103,8 +176,11 @@ export const getLatestChangelog = async (): Promise<ChangelogEntry | null> => {
     return changelogCache;
   }
   
-  if (USE_MOCKS || !db) {
-    return mockChangelog;
+  const fallback = getLatestChangelogEntry() || null;
+
+  if (!db) {
+    changelogCache = fallback;
+    return fallback;
   }
   try {
     const q = query(collection(db, "changelog"), orderBy("date", "desc"), limit(1));
@@ -115,52 +191,35 @@ export const getLatestChangelog = async (): Promise<ChangelogEntry | null> => {
       changelogCache = entry;
       return entry;
     }
-    changelogCache = null;
-    return null;
+    changelogCache = fallback;
+    return fallback;
   } catch (error) {
-    console.error("Changelog çekilirken hata oluştu:", error);
-    return null;
+    console.error("Changelog çekilirken hata oluştu, yerel veriye dönülüyor:", error);
+    changelogCache = fallback;
+    return fallback;
   }
 };
 
-export const seedInitialData = async () => {
-  if (!db) return;
+const seedInitialData = async () => {
+  // Kullanıcının talebi üzerine storage_ntfs_memory_boost ekleniyor
   try {
-    const netThrottleRef = doc(db, 'optimizations/network/settings', 'network_throttling');
-    const netThrottleSnap = await getDoc(netThrottleRef);
-    if (!netThrottleSnap.exists()) {
-      await setDoc(netThrottleRef, {
-        name: 'Ağ Kısıtlamasını (Network Throttling) Kapat',
-        description: 'Windows ağ kısıtlamalarını devre dışı bırakarak gecikmeyi (ping) düşürür ve paket iletimini hızlandırır.',
-        applyCode: 'Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xffffffff -Type DWord',
-        restoreCode: 'Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile" -Name "NetworkThrottlingIndex" -Value 0xa -Type DWord',
-        impacts: {
-          performance: { level: 'positive_medium', description: 'Performansa etkisi orta düzeyde olumludur.' },
-          latency: { level: 'positive_high', description: 'Gecikmeyi yüksek oranda düşürür.' },
-          input: { level: 'none', description: 'İnput üzerinde belirgin bir etkisi yoktur.' },
-          power: { level: 'negative_low', description: 'Güç tüketimini hafif düzeyde artırabilir.' },
-          heat: { level: 'none', description: 'Isı üzerinde belirgin bir etkisi yoktur.' }
-        }
-      });
-    }
-
-    const changelogRef = collection(db, 'changelog');
-    const changelogQuery = query(changelogRef, orderBy('date', 'desc'), limit(1));
-    const changelogSnap = await getDocs(changelogQuery);
-    
-    if (changelogSnap.empty) {
-      await setDoc(doc(db, 'changelog', 'v1.0.0'), {
-        version: '1.0.0',
-        title: 'İlk Sürüm Yayında!',
-        features: [
-          'Ağ optimizasyonları için altyapı Firebase\'e taşındı.',
-          'Sistem verileri dinamik olarak çekilmeye başlandı.',
-          'Kullanıcı dostu yeni changelog bildirim ekranı eklendi.'
-        ],
-        date: new Date().toISOString()
-      });
-    }
+    await saveOptimizationSettingToFirestore('storage', {
+      id: 'storage_ntfs_memory_boost',
+      name: 'NTFS Bellek Kullanımını Optimize Et (Fsutil)',
+      description: 'NTFS dosya sisteminin bellek kullanımını artırarak büyük dosya işlemlerinde performansı iyileştirir.',
+      status: 'default',
+      applyCode: 'fsutil behavior set memoryusage 2',
+      restoreCode: 'fsutil behavior set memoryusage 1',
+      impacts: {
+        performance: { level: 'positive_medium', description: 'Büyük dosya kopyalama hızını artırır.' },
+        latency: { level: 'positive_low', description: 'Disk okuma/yazma gecikmelerini azaltır.' },
+        input: { level: 'none', description: 'Giriş gecikmesine etkisi yoktur.' },
+        power: { level: 'none', description: 'Güç tüketimine etkisi yoktur.' },
+        heat: { level: 'none', description: 'Isınmaya etkisi yoktur.' }
+      }
+    });
   } catch (err) {
-    console.error("Örnek veriler eklenirken hata:", err);
+    console.error("Error seeding storage_ntfs_memory_boost:", err);
   }
+  return;
 };

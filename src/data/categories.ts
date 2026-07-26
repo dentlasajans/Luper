@@ -1,112 +1,112 @@
-import { Network, Cpu, HardDrive, Mouse, EyeOff, Monitor, Battery, ShieldCheck, Palette, Keyboard, Volume2, Globe, Activity } from 'lucide-react';
+import { Pulse, BatteryFull, Cpu, EyeSlash, Globe, HardDrive, Keyboard, Monitor, Mouse, WifiHigh, Palette, ShieldCheck, SpeakerHigh } from '@phosphor-icons/react';
 
 
 export const CATEGORY_META: Record<string, { title: string; description: string }> = {
-  network: { title: 'Ağ & İnternet', description: 'Bağlantı hızını ve kararlılığını artırarak gecikme sürelerini minimize eder.' },
-  cpu: { title: 'CPU', description: 'İşlemci çekirdeklerini uykudan uyandırır ve yüksek performans modlarını etkinleştirir.' },
-  storage: { title: 'Depolama', description: 'Disk okuma/yazma hızlarını optimize eder ve gereksiz indeksleme servislerini durdurur.' },
-  mouse: { title: 'Fare', description: 'Fare ivmelenmesini kapatır ve ham giriş sinyalini (raw input) optimize eder.' },
-  privacy: { title: 'Gizlilik', description: 'Kişisel veri toplayan Windows servislerini devre dışı bırakarak arka plan yükünü azaltır.' },
-  gpu: { title: 'GPU', description: 'Görsel kaliteyi koruyarak maksimum kare hızı için donanım ivmelendirmesini optimize eder.' },
-  power: { title: 'Güç', description: 'Gizli "Nihai Performans" planını aktif ederek bileşenlerin tam potansiyelinde çalışmasını sağlar.' },
-  security: { title: 'Güvenlik', description: 'Defender ve güvenlik duvarı kurallarını oyun performansını etkilemeyecek şekilde düzenler.' },
-  personalization: { title: 'Kişiselleştirme', description: 'Arayüz animasyonlarını ve saydamlık efektlerini kapatarak arayüz tepkime hızını artırır.' },
-  keyboard: { title: 'Klavye', description: 'Tuş gecikmesini (input lag) ve tekrar oranını en düşük seviyeye indirir.' },
-  audio: { title: 'Ses', description: 'Uzamsal ses ve geliştirme efektlerini kapatarak CPU yükünü ve ses gecikmesini azaltır.' },
-  browser: { title: 'Tarayıcı', description: 'Donanım hızlandırma ve arka plan eklentilerini kontrol ederek tarayıcı tüketimini azaltır.' },
-  telemetry: { title: 'Telemetri', description: 'Microsoft sunucularına veri gönderen tüm telemetri servislerini durdurur.' }
+  network: { title: 'Ağ & İnternet', description: 'Ağ kısıtlamalarını ve veri akışını optimize ederek çevrimiçi oyunlarda ping ve paket kaybını en aza indirir.' },
+  cpu: { title: 'İşlemci (CPU)', description: 'Çekirdek uyku modlarını düzenler ve arka plan işlemlerini kısıtlayarak işlemcinizin tam güçte çalışmasını sağlar.' },
+  storage: { title: 'Depolama', description: 'Gereksiz disk indekslemesini durdurur, SSD erişim hızlarını artırır ve yükleme sürelerini kısaltır.' },
+  mouse: { title: 'Fare', description: 'İvmelenme sapmalarını kaldırır; fare hareketlerinizin ekrana birebir (1:1) hassasiyetle iletilmesini sağlar.' },
+  privacy: { title: 'Gizlilik', description: 'Arka planda veri toplayan servisleri durdurarak sisteminiz üzerindeki gizli yükleri ortadan kaldırır.' },
+  gpu: { title: 'Ekran Kartı (GPU)', description: 'Donanım ivmelendirmesini ve gölgelendirici ayarlarını yapılandırarak oyun içi takılmaları (stuttering) engeller.' },
+  power: { title: 'Güç Yönetimi', description: 'Nihai Performans modunu aktif ederek donanımlarınızın güç tasarrufu kısıtlamalarına takılmasını önler.' },
+  security: { title: 'Güvenlik', description: 'Koruma katmanlarını, oyun esnasında ani işlemci yükselmelerine yol açmayacak şekilde akıllıca uyarlar.' },
+  personalization: { title: 'Arayüz Akıcılığı', description: 'Gereksiz görsel efektleri ve pencere gecikmelerini kapatarak sistem tepki süresini hızlandırır.' },
+  keyboard: { title: 'Klavye', description: 'Tuş vuruşlarındaki sistemsel gecikmeleri (input lag) sıfıra indirerek komutların anında iletilmesini sağlar.' },
+  audio: { title: 'Ses Akıcılığı', description: 'Gereksiz uzamsal işleme yükünü kaldırarak işlemci kullanımını ve ses gecikmesini azaltır.' },
+  browser: { title: 'Tarayıcı', description: 'Arka plan web işlemlerini ve donanım hızlandırma kaynaklarını kontrol ederek bellek kullanımını düşürür.' },
+  telemetry: { title: 'Telemetri', description: 'Microsoft sunucularına veri gönderen arka plan servislerini kapatarak bant genişliğini ve kaynakları korur.' }
 };
 
 export const OPTIMIZATION_CARDS = [
   {
     id: 'network',
-    icon: Network,
+    icon: WifiHigh,
     title: 'Ağ & İnternet',
-    description: 'Bağlantı hızını ve kararlılığını artırarak gecikme sürelerini minimize eder. Oyunlar ve yayınlar için ideal ayarları uygular.',
-    improvements: ['Düşük ping ve paket kaybı', 'Daha hızlı web gezintisi', 'DNS ve TCP/IP optimizasyonu']
+    description: 'Ağ kısıtlamalarını ve veri akışını optimize ederek çevrimiçi oyunlarda ping ve paket kaybını en aza indirir.',
+    improvements: ['Düşük ping ve kararlı paket iletimi', 'Hızlı ve takılmasız web erişimi', 'İdeal TCP/IP ve DNS yapılandırması']
   },
   {
     id: 'cpu',
     icon: Cpu,
-    title: 'CPU',
-    description: 'İşlemci çekirdeklerini uykudan uyandırır ve yüksek performans modlarını etkinleştirir.',
-    improvements: ['Çekirdek parkını kapatma', 'Gereksiz hizmetleri durdurma', 'Daha stabil FPS değerleri']
+    title: 'İşlemci (CPU)',
+    description: 'Çekirdek uyku modlarını düzenler ve arka plan işlemlerini kısıtlayarak işlemcinizin tam güçte çalışmasını sağlar.',
+    improvements: ['Çekirdek uykusu (Core Park) iptali', 'Arka plan hizmet kısıtlaması', 'Yüksek ve kararlı FPS değerleri']
   },
   {
     id: 'storage',
     icon: HardDrive,
     title: 'Depolama',
-    description: 'Disk okuma/yazma hızlarını optimize eder ve gereksiz indeksleme servislerini durdurur.',
-    improvements: ['SSD ömrünü uzatma', 'Hızlı dosya erişimi', 'Gereksiz önbellek temizliği']
+    description: 'Gereksiz disk indekslemesini durdurur, SSD erişim hızlarını artırır ve yükleme sürelerini kısaltır.',
+    improvements: ['SSD ömrü ve performans koruması', 'Anında dosya ve oyun yükleme', 'Otomatik geçici önbellek temizliği']
   },
   {
     id: 'mouse',
     icon: Mouse,
     title: 'Fare',
-    description: 'Fare ivmelenmesini kapatır ve ham giriş sinyalini (raw input) optimize eder.',
-    improvements: ['1:1 piksel doğruluğu', 'Gecikmesiz fare tepkisi', 'Windows ivme ayarlarını kaldırma']
+    description: 'İvmelenme sapmalarını kaldırır; fare hareketlerinizin ekrana birebir (1:1) hassasiyetle iletilmesini sağlar.',
+    improvements: ['1:1 pürüzsüz piksel takibi', 'Sıfıra yakın fare tepki süresi', 'Yapay Windows ivmesinin iptali']
   },
   {
     id: 'privacy',
-    icon: EyeOff,
+    icon: EyeSlash,
     title: 'Gizlilik',
-    description: 'Kişisel veri toplayan Windows servislerini devre dışı bırakarak arka plan yükünü azaltır.',
-    improvements: ['Reklam kimliğini kapatma', 'Konum ve mikrofon izleme durdurma', 'Cortana optimizasyonu']
+    description: 'Arka planda veri toplayan servisleri durdurarak sisteminiz üzerindeki gizli yükleri ortadan kaldırır.',
+    improvements: ['Gizli reklam kimliği kapatma', 'Konum ve mikrofon takibi iptali', 'Cortana ve sesli asistan devre dışı']
   },
   {
     id: 'gpu',
     icon: Monitor,
-    title: 'GPU',
-    description: 'Görsel kaliteyi koruyarak maksimum kare hızı için donanım ivmelendirmesini optimize eder.',
-    improvements: ['Gecikme süresini azaltma', 'Donanım hızlandırma ayarları', 'Oyun içi takılmaları önleme']
+    title: 'Ekran Kartı (GPU)',
+    description: 'Donanım ivmelendirmesini ve gölgelendirici ayarlarını yapılandırarak oyun içi takılmaları (stuttering) engeller.',
+    improvements: ['Kare işleme gecikmesi düşürme', 'Akıllı donanım hızlandırma', 'FPS düşüşlerini ve takılmayı önleme']
   },
   {
     id: 'power',
-    icon: Battery,
-    title: 'Güç',
-    description: 'Gizli "Nihai Performans" planını aktif ederek bileşenlerin tam potansiyelinde çalışmasını sağlar.',
-    improvements: ['Nihai Performans modu', 'Uyku ve bekleme ayarları', 'USB güç tasarrufu iptali']
+    icon: BatteryFull,
+    title: 'Güç Yönetimi',
+    description: 'Nihai Performans modunu aktif ederek donanımlarınızın güç tasarrufu kısıtlamalarına takılmasını önler.',
+    improvements: ['Nihai Performans profil aktifleştirme', 'Donanım uyku modlarının iptali', 'Kesintisiz USB gücü ve veri akışı']
   },
   {
     id: 'security',
     icon: ShieldCheck,
     title: 'Güvenlik',
-    description: 'Defender ve güvenlik duvarı kurallarını oyun performansını etkilemeyecek şekilde düzenler.',
-    improvements: ['Oyun klasörlerini dışlama', 'Gerçek zamanlı koruma optimizasyonu', 'SmartScreen ayarları']
+    description: 'Koruma katmanlarını, oyun esnasında ani işlemci yükselmelerine yol açmayacak şekilde akıllıca uyarlar.',
+    improvements: ['Oyun klasörleri için akıllı tarama', 'İşlemciyi yormayan koruma modu', 'SmartScreen arka plan optimizasyonu']
   },
   {
     id: 'personalization',
     icon: Palette,
-    title: 'Kişiselleştirme',
-    description: 'Arayüz animasyonlarını ve saydamlık efektlerini kapatarak arayüz tepkime hızını artırır.',
-    improvements: ['Görsel efektleri kapatma', 'Animasyon hızlandırma', 'Akıcı arayüz deneyimi']
+    title: 'Arayüz Akıcılığı',
+    description: 'Gereksiz görsel efektleri ve pencere gecikmelerini kapatarak sistem tepki süresini hızlandırır.',
+    improvements: ['Pencere animasyon gecikmesi iptali', 'Saydamlık yüklerinin kaldırılması', 'Anında tepki veren masaüstü']
   },
   {
     id: 'keyboard',
     icon: Keyboard,
     title: 'Klavye',
-    description: 'Tuş gecikmesini (input lag) ve tekrar oranını en düşük seviyeye indirir.',
-    improvements: ['Filtre tuşlarını kapatma', 'Klavye tepki süresi', 'Kayıt defteri klavye hızı']
+    description: 'Tuş vuruşlarındaki sistemsel gecikmeleri (input lag) sıfıra indirerek komutların anında iletilmesini sağlar.',
+    improvements: ['Tuş filtreleme engellerinin kaldırılması', 'Maksimum tuş yineleme hızı', 'Minimum girdi tepki süresi']
   },
   {
     id: 'audio',
-    icon: Volume2,
-    title: 'Ses',
-    description: 'Uzamsal ses ve geliştirme efektlerini kapatarak CPU yükünü ve ses gecikmesini azaltır.',
-    improvements: ['Uzamsal sesi kapatma', 'Özel kullanım modunu açma', 'Gereksiz ses efektleri']
+    icon: SpeakerHigh,
+    title: 'Ses Akıcılığı',
+    description: 'Gereksiz uzamsal işleme yükünü kaldırarak işlemci kullanımını ve ses gecikmesini azaltır.',
+    improvements: ['Gereksiz ses efektlerinin iptali', 'Doğrudan ses sürücü erişimi', 'İşlemci yükünü düşüren ses işleme']
   },
   {
     id: 'browser',
     icon: Globe,
     title: 'Tarayıcı',
-    description: 'Donanım hızlandırma ve arka plan eklentilerini kontrol ederek tarayıcı tüketimini azaltır.',
-    improvements: ['Donanım hızlandırma optimizasyonu', 'Arka plan işlemleri', 'Önbellek boyutu limiti']
+    description: 'Arka plan web işlemlerini ve donanım hızlandırma kaynaklarını kontrol ederek bellek kullanımını düşürür.',
+    improvements: ['Dengeli donanım ivmelendirmesi', 'Arka plan sekme kısıtlaması', 'Düşük RAM ve işlemci tüketimi']
   },
   {
     id: 'telemetry',
-    icon: Activity,
+    icon: Pulse,
     title: 'Telemetri',
-    description: 'Microsoft sunucularına veri gönderen tüm telemetri servislerini durdurur.',
-    improvements: ['Geri bildirimleri kapatma', 'Müşteri deneyim programı iptali', 'Hata raporlama durdurma']
+    description: 'Microsoft sunucularına veri gönderen arka plan servislerini kapatarak bant genişliğini ve kaynakları korur.',
+    improvements: ['Otomatik bildirim ve veri aktarımı iptali', 'Deneyim iyileştirme programı kapatma', 'Sessiz ve hafif arka plan']
   }
 ];
