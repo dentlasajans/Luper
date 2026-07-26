@@ -5,6 +5,7 @@ import { Games } from './components/Games';
 import { SupportedGames } from './components/SupportedGames';
 import { Updates } from './components/Updates';
 import { Security } from './components/Security';
+import { Changelog } from './components/Changelog';
 import { HowItWorks } from './components/HowItWorks';
 import { Performance } from './components/Performance';
 import { WaitlistCTA } from './components/WaitlistCTA';
@@ -25,6 +26,7 @@ function App() {
         <Categories />
         <Performance />
         <Security />
+        <Changelog />
         <Updates />
         <WaitlistCTA />
       </main>
