@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import React, { useEffect, useState } from 'react';
 import { preloadAllCategorySettings } from '../services/FirebaseService';
 import { getCachedSystemStatus, preloadAllApplicationData, preloadSystemStatus, preloadHardwareSpecs } from '../services/SystemEngine';
-import { AppLogo } from './Icons';
+import { AppLogo } from './ui/AppLogo';
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -67,11 +67,11 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
       if (!isDataReady) {
         const ratio = Math.min(elapsedTime / 3000, 1);
         const p = Math.round((1 - Math.pow(1 - ratio, 2)) * 92);
-        setProgress(prev => Math.max(prev, p));
+        setProgress((prev) => Math.max(prev, p));
       } else {
         const ratio = Math.min(elapsedTime / minSplashMs, 1);
         const p = Math.round((1 - Math.pow(1 - ratio, 3)) * 100);
-        setProgress(prev => Math.max(prev, p));
+        setProgress((prev) => Math.max(prev, p));
       }
     }, intervalTime);
 
@@ -90,7 +90,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: -15 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="w-[420px] bg-[#18181c]/80 backdrop-blur-2xl rounded-[2.5rem] border border-white/[0.12] shadow-[0_25px_60px_rgba(0,0,0,0.7)] p-10 flex flex-col items-center relative overflow-hidden drag-region"
+        className="w-[420px] bg-[#1a1a1d]/80 backdrop-blur-2xl rounded-[2.5rem] border border-white/[0.12] shadow-[0_25px_60px_rgba(0,0,0,0.7)] p-10 flex flex-col items-center relative overflow-hidden drag-region"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
         

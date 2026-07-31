@@ -1,4 +1,4 @@
-import { Package, Power, MagnifyingGlass, ShieldCheck, Trash } from '@phosphor-icons/react';
+﻿import { Package, Power, MagnifyingGlass, ShieldCheck, Trash } from '@/src/components/ui/Icons';
 import { memo, useMemo, useState } from 'react';
 
 export interface ExtensionItem {
@@ -21,15 +21,15 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const activeExt = useMemo(() => {
-    return extensions.find(e => e.id === selectedId) || extensions[0];
+    return extensions.find((e) => e.id === selectedId) || extensions[0];
   }, [extensions, selectedId]);
 
   const filteredExtensions = useMemo(() => {
-    return extensions.filter(e => e.name.toLowerCase().includes(searchQuery.toLowerCase()) || e.category.toLowerCase().includes(searchQuery.toLowerCase()));
+    return extensions.filter((e) => e.name.toLowerCase().includes(searchQuery.toLowerCase()) || e.category.toLowerCase().includes(searchQuery.toLowerCase()));
   }, [extensions, searchQuery]);
 
   const toggleExtension = (id: string) => {
-    setExtensions(prev => prev.map(e => {
+    setExtensions((prev) => prev.map((e) => {
       if (e.id === id) {
         const newStatus = e.status === 'Active' ? 'Disabled' : 'Active';
         return { ...e, status: newStatus };
@@ -39,7 +39,7 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
   };
 
   const handleUpdate = (id: string) => {
-    setExtensions(prev => prev.map(e => e.id === id ? { ...e, version: 'v2.2.0 (Güncellendi)', status: 'Active' } : e));
+    setExtensions((prev) => prev.map((e) => e.id === id ? { ...e, version: 'v2.2.0 (Güncellendi)', status: 'Active' } : e));
   };
 
   return (
@@ -48,7 +48,7 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <Package weight="duotone" className="text-[#1a5efd]" size={28} />
+            <Package weight="duotone" className="text-luper-primary" size={28} />
             <span>Gelişmiş Eklenti & Modül Yöneticisi (Extension Manager)</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">Yüklü LUPER eklentilerini yönetin, güncelleyin, izin durumlarını ve dijital imzaları denetleyin.</p>
@@ -75,7 +75,7 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Modül veya kategori ara..."
-            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-[#1a5efd] w-full"
+            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-luper-primary w-full"
           />
         </div>
 
@@ -86,12 +86,12 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
         {/* Left Extensions Manager List */}
         <div className="col-span-5 space-y-3">
           {filteredExtensions.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619] border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
             <h3 className="text-[14px] font-bold text-white mb-1">Veri Bulunamadı</h3>
             <p className="text-[12.5px] text-[#86868b]">Şu anda görüntülenecek veri bulunmuyor. Gerçek veri akışı bekleniyor.</p>
           </div>
         )}
-        {filteredExtensions.length > 0 && filteredExtensions.map(ext => {
+        {filteredExtensions.length > 0 && filteredExtensions.map((ext) => {
             const isSelected = ext.id === selectedId;
             return (
               <div
@@ -99,8 +99,8 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
                 onClick={() => setSelectedId(ext.id)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#1a5efd]/10 border-[#1a5efd] shadow-lg shadow-blue-500/10'
-                    : 'bg-[#161619] border-white/[0.08] hover:bg-white/[0.04]'
+                    ? 'bg-luper-primary/10 border-luper-primary shadow-lg shadow-blue-500/10'
+                    : 'bg-luper-surface border-white/[0.08] hover:bg-white/[0.04]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -125,11 +125,11 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
         </div>
 
         {/* Right Details & Controls */}
-        <div className="col-span-7 bg-[#161619] border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card flex flex-col justify-between">
+        <div className="col-span-7 bg-luper-surface border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card flex flex-col justify-between">
           <div className="space-y-5">
             <div className="border-b border-white/[0.06] pb-4 flex items-center justify-between">
               <div>
-                <span className="text-[11px] text-[#1a5efd] font-bold font-mono uppercase tracking-wider">Modül Detayı & Yönetim</span>
+                <span className="text-[11px] text-luper-primary font-bold font-mono uppercase tracking-wider">Modül Detayı & Yönetim</span>
                 <h2 className="text-xl font-bold text-white mt-1">{activeExt.name}</h2>
               </div>
 
@@ -187,3 +187,4 @@ export const ExtensionManagerTools = memo(function ExtensionManagerTools() {
     </div>
   );
 });
+

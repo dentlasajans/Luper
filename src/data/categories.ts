@@ -1,4 +1,4 @@
-import { Pulse, BatteryFull, Cpu, EyeSlash, Globe, HardDrive, Keyboard, Monitor, Mouse, WifiHigh, Palette, ShieldCheck, SpeakerHigh } from '@phosphor-icons/react';
+import { Pulse, BatteryFull, Cpu, EyeSlash, Globe, HardDrive, Keyboard, Monitor, Mouse, WifiHigh, Palette, ShieldCheck, SpeakerHigh } from '@/src/components/ui/Icons';
 
 
 export const CATEGORY_META: Record<string, { title: string; description: string }> = {
@@ -8,7 +8,7 @@ export const CATEGORY_META: Record<string, { title: string; description: string 
   mouse: { title: 'Fare', description: 'İvmelenme sapmalarını kaldırır; fare hareketlerinizin ekrana birebir (1:1) hassasiyetle iletilmesini sağlar.' },
   privacy: { title: 'Gizlilik', description: 'Arka planda veri toplayan servisleri durdurarak sisteminiz üzerindeki gizli yükleri ortadan kaldırır.' },
   gpu: { title: 'Ekran Kartı (GPU)', description: 'Donanım ivmelendirmesini ve gölgelendirici ayarlarını yapılandırarak oyun içi takılmaları (stuttering) engeller.' },
-  power: { title: 'Güç Yönetimi', description: 'Nihai Performans modunu aktif ederek donanımlarınızın güç tasarrufu kısıtlamalarına takılmasını önler.' },
+  power: { title: 'Güç Yönetimi', description: 'Size özel LUPER güç planlarını seçerek, donanımlarınızın güç tasarrufu kısıtlamalarına takılmasını önler.' },
   security: { title: 'Güvenlik', description: 'Koruma katmanlarını, oyun esnasında ani işlemci yükselmelerine yol açmayacak şekilde akıllıca uyarlar.' },
   personalization: { title: 'Arayüz Akıcılığı', description: 'Gereksiz görsel efektleri ve pencere gecikmelerini kapatarak sistem tepki süresini hızlandırır.' },
   keyboard: { title: 'Klavye', description: 'Tuş vuruşlarındaki sistemsel gecikmeleri (input lag) sıfıra indirerek komutların anında iletilmesini sağlar.' },
@@ -64,8 +64,8 @@ export const OPTIMIZATION_CARDS = [
     id: 'power',
     icon: BatteryFull,
     title: 'Güç Yönetimi',
-    description: 'Nihai Performans modunu aktif ederek donanımlarınızın güç tasarrufu kısıtlamalarına takılmasını önler.',
-    improvements: ['Nihai Performans profil aktifleştirme', 'Donanım uyku modlarının iptali', 'Kesintisiz USB gücü ve veri akışı']
+    description: 'Size özel LUPER güç planlarını seçerek, donanımlarınızın güç tasarrufu kısıtlamalarına takılmasını önler.',
+    improvements: ['Özel LUPER Güç planı aktif etme', 'Donanım uyku modlarının iptali', 'Kesintisiz USB gücü ve veri akışı']
   },
   {
     id: 'security',
@@ -110,3 +110,43 @@ export const OPTIMIZATION_CARDS = [
     improvements: ['Otomatik bildirim ve veri aktarımı iptali', 'Deneyim iyileştirme programı kapatma', 'Sessiz ve hafif arka plan']
   }
 ];
+
+export interface HardwareSpecs {
+  cpuCores: number;
+  ramGB: number;
+  gpuVramGB?: number;
+  isLaptop: boolean;
+  diskType?: 'SSD' | 'HDD' | 'Unknown';
+}
+
+export const HEURISTIC_RECOMMENDATIONS = {
+  analyze(specs: HardwareSpecs): string[] {
+    const recommendations = new Set<string>();
+
+    if (specs.cpuCores < 6) {
+      recommendations.add('cpu');
+      recommendations.add('power');
+    }
+
+    if (specs.ramGB <= 8) {
+      recommendations.add('browser');
+      recommendations.add('personalization');
+      recommendations.add('privacy');
+    }
+
+    if (specs.diskType === 'HDD') {
+      recommendations.add('storage');
+    }
+
+    if (specs.isLaptop) {
+      recommendations.add('telemetry');
+    }
+
+    // Always recommend baseline latency optimizations for gamers
+    recommendations.add('mouse');
+    recommendations.add('keyboard');
+    recommendations.add('network');
+
+    return Array.from(recommendations);
+  }
+};

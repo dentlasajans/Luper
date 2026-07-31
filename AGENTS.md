@@ -40,7 +40,7 @@ Before performing ANY task, reading ANY code, or modifying ANY file:
 8. **Read `RULES/master_governance.md`:** (if present) and **EVERY** Markdown file inside `RULES/` directory:
    - All shared rule files (`coding_rules.md`, `design_rules.md`, `project_rules.md`, `ui_ux_rules.md`, `git_rules.md`, `release_rules.md`, `naming_rules.md`, `documentation_rules.md`, `security_rules.md`, `performance_rules.md`, `electron_rules.md`, `ipc_rules.md`, `api_rules.md`, `telemetry_rules.md`, `plugin_rules.md`, `localization_rules.md`, `review_rules.md`, `code_quality_rules.md`, `architecture_decision_rules.md`, `migration_rules.md`, `update_rules.md`, `license_rules.md`, `privacy_rules.md`, `observability_rules.md`, `feature_rules.md`).
    - Your dedicated agent spec file inside `RULES/agents/` (e.g., `RULES/agents/<your_agent_name>.md`).
-9. **Mandatory Subagent Delegation & Orchestration Policy:** Whenever the Project Owner assigns any task, prompt, feature, bug fix, or refactoring, the Lead Orchestrator Agent MUST IMMEDIATELY delegate execution to the specialized AI subagent(s) via `invoke_subagent`. The main agent directs, coordinates, and audits; subagents do the execution.
+9. **Mandatory Subagent Delegation & Orchestration Policy (The 32-Agent Rule):** The Lead Orchestrator Agent MUST ACT ONLY AS A MANAGER. Whenever the Project Owner assigns any task, prompt, feature, bug fix, or refactoring, the Lead Orchestrator Agent MUST IMMEDIATELY delegate execution to the 32 specialized AI subagent(s) via `invoke_subagent`. The main agent NEVER writes code directly; it only directs, coordinates, assigns tasks, and audits. The 32 expert subagents do the actual execution in their specific domains.
    - **Parallel Subagent Invocation Rule:** For tasks involving both UI and Backend, launch UI (Developer/Design Agent) and Backend (Windows System Expert Agent) subagents simultaneously to complete work in parallel.
    - **Model Priority Order Rule:** Always utilize **Claude** & **GPT** first for primary reasoning, architecture, and code execution until quota limits are hit, then utilize **Gemini** as the secondary/fallback engine.
    - **Model Tier Distribution Rule:** 
@@ -153,10 +153,28 @@ The LUPER AI Agent Ecosystem consists of **12 Core Agents** and **18 Specialist 
 | ⚛️ **React & TypeScript Specialist Agent** | **Claude / GPT First** → Gemini | **`pro` / `inherit`** | [react_typescript_specialist_agent.md](RULES/agents/react_typescript_specialist_agent.md) |
 | 💾 **State & Persistence Agent** | **Claude / GPT First** → Gemini | **`pro`** | [state_persistence_agent.md](RULES/agents/state_persistence_agent.md) |
 | ♿ **UX & Accessibility Specialist Agent** | **Claude / GPT First** → Gemini | **`flash`** | [ux_accessibility_specialist_agent.md](RULES/agents/ux_accessibility_specialist_agent.md) |
+| 🌐 **Web Developer Agent** | **Claude / GPT First** → Gemini | **`pro`** | [web_developer_agent.md](RULES/agents/web_developer_agent.md) |
+| 📦 **Installer Engineer Agent** | **Claude / GPT First** → Gemini | **`pro`** | [installer_engineer_agent.md](RULES/agents/installer_engineer_agent.md) |
 
 ---
 
 ## Specialized AI Agent Specifications
+
+### 🌐 Web Developer Agent
+- **Mission:** Build and maintain the official LUPER Website and Landing Pages within `web/`.
+- **Responsibilities:** Develop responsive web interfaces matching LUPER's Solid Premium Fluent design.
+- **Authority:** Authoritative owner of all HTML, CSS, and JS inside `web/`. The `web/` folder must never be deleted.
+- **Dedicated Rule Specification:** 📜 [web_developer_agent.md](RULES/agents/web_developer_agent.md)
+
+---
+
+### 📦 Installer Engineer Agent
+- **Mission:** Design and maintain the LUPER Windows Installer (.exe / MSI) setup experience within `installer/`.
+- **Responsibilities:** Configure NSIS/InnoSetup and build a custom premium fluent installer UI.
+- **Authority:** Authoritative owner of all installer scripts inside `installer/`. The `installer/` folder must never be deleted.
+- **Dedicated Rule Specification:** 📜 [installer_engineer_agent.md](RULES/agents/installer_engineer_agent.md)
+
+---
 
 ### ⚡ 1. Electron Platform Engineer
 - **Mission:** Owns Electron main process lifecycle, window state management, webPreferences hardening, and native platform integration.

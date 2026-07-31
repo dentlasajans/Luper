@@ -1,4 +1,4 @@
-import { ArrowsClockwise, ShieldCheck, Lightning } from '@phosphor-icons/react';
+﻿import { ArrowsClockwise, ShieldCheck, Lightning } from '@/src/components/ui/Icons';
 import { memo, useState } from 'react';
 
 export interface SimulationResult {
@@ -27,7 +27,7 @@ export const OptimizationSimulatorTools = memo(function OptimizationSimulatorToo
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <Lightning weight="duotone" className="text-[#1a5efd]" size={28} />
+            <Lightning weight="duotone" className="text-luper-primary" size={28} />
             <span>Optimizasyon Simülatörü (Predictive Engine)</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">Sistem değişiklikleri uygulanmadan önce tahmini performans ve kazanım analizi (Salt Okunur Simülasyon).</p>
@@ -36,7 +36,7 @@ export const OptimizationSimulatorTools = memo(function OptimizationSimulatorToo
         <button
           onClick={runSimulation}
           disabled={isSimulating}
-          className="px-5 py-2.5 bg-[#1a5efd] hover:bg-[#2d6bfe] text-white font-bold text-[13.5px] rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
+          className="px-5 py-2.5 bg-luper-primary hover:bg-[#2d6bfe] text-white font-bold text-[13.5px] rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
         >
           <ArrowsClockwise weight="duotone" size={16} className={isSimulating ? 'animate-spin' : ''} />
           <span>{isSimulating ? 'Hesaplanıyor...' : 'Simülasyonu Yeniden Çalıştır'}</span>
@@ -44,9 +44,9 @@ export const OptimizationSimulatorTools = memo(function OptimizationSimulatorToo
       </div>
 
       {/* Profile Selector Toolbar */}
-      <div className="flex items-center justify-between bg-[#161619] border border-white/[0.08] p-2 rounded-2xl luper-card">
+      <div className="flex items-center justify-between bg-luper-surface border border-white/[0.08] p-2 rounded-2xl luper-card">
         <div className="flex items-center space-x-2">
-          {(['Recommended', 'Gaming', 'Balanced', 'Power'] as const).map(prof => (
+          {(['Recommended', 'Gaming', 'Balanced', 'Power'] as const).map((prof) => (
             <button
               key={prof}
               onClick={() => {
@@ -55,7 +55,7 @@ export const OptimizationSimulatorTools = memo(function OptimizationSimulatorToo
               }}
               className={`px-5 py-2 rounded-xl text-[13.5px] font-bold transition-all ${
                 activeProfile === prof
-                  ? 'bg-[#1a5efd] text-white shadow-md'
+                  ? 'bg-luper-primary text-white shadow-md'
                   : 'text-[#86868b] hover:text-white hover:bg-white/[0.04]'
               }`}
             >
@@ -68,14 +68,14 @@ export const OptimizationSimulatorTools = memo(function OptimizationSimulatorToo
 
         <div className="flex items-center space-x-2 px-3 text-[12px] font-mono text-[#34c759] font-bold">
           <ShieldCheck weight="duotone" size={16} />
-          <span>Sıfır Risk • %100 Tahmin Güvenilirliği</span>
+          <span>Sıfır Risk â€¢ %100 Tahmin Güvenilirliği</span>
         </div>
       </div>
 
       {/* Simulated Metrics Cards */}
       <div className="grid grid-cols-2 gap-6">
-        {([] as SimulationResult[]).map(res => (
-          <div key={res.metric} className="bg-[#161619] border border-white/[0.08] p-6 rounded-2xl space-y-4 luper-card">
+        {([] as SimulationResult[]).map((res) => (
+          <div key={res.metric} className="bg-luper-surface border border-white/[0.08] p-6 rounded-2xl space-y-4 luper-card">
             <div className="flex items-center justify-between">
               <span className="text-[14px] font-bold text-white">{res.metric}</span>
               <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-[#34c759]/10 text-[#34c759] font-bold">
@@ -105,3 +105,4 @@ export const OptimizationSimulatorTools = memo(function OptimizationSimulatorToo
     </div>
   );
 });
+

@@ -1,4 +1,4 @@
-import { Clock, Database, FileText, Stack, ArrowCounterClockwise } from '@phosphor-icons/react';
+﻿import { Clock, Database, FileText, Stack, ArrowCounterClockwise } from '@/src/components/ui/Icons';
 import { memo, useState } from 'react';
 
 export interface RepairPlanItem {
@@ -18,7 +18,7 @@ export interface RepairPlanItem {
 export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewTools() {
   const [repairPlans] = useState<RepairPlanItem[]>([]);
   const [selectedPlanId, setSelectedPlanId] = useState<string>('');
-  const activePlan = repairPlans.find(p => p.id === selectedPlanId) || repairPlans[0];
+  const activePlan = repairPlans.find((p) => p.id === selectedPlanId) || repairPlans[0];
 
   return (
     <div className="h-full w-full overflow-y-auto p-8 space-y-8">
@@ -26,7 +26,7 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <FileText weight="duotone" className="text-[#1a5efd]" size={28} />
+            <FileText weight="duotone" className="text-luper-primary" size={28} />
             <span>Onarım Planı & İcra Önizleme Engine</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">Sistem değişiklikleri öncesi güvenli etki analizi ve geri alma simulation önizlemesi (Önizleme Modu).</p>
@@ -45,12 +45,12 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
         <div className="col-span-5 space-y-3">
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#86868b] px-1">Hazırlanan Onarım Planları</h3>
           {repairPlans.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619] border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
+            <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
               <h3 className="text-[14px] font-bold text-white mb-1">Veri Bulunamadı</h3>
               <p className="text-[12.5px] text-[#86868b]">Şu anda görüntülenecek veri bulunmuyor. Gerçek veri akışı bekleniyor.</p>
             </div>
           )}
-          {repairPlans.length > 0 && repairPlans.map(item => {
+          {repairPlans.length > 0 && repairPlans.map((item) => {
             const isSelected = item.id === selectedPlanId;
             return (
               <div
@@ -58,8 +58,8 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
                 onClick={() => setSelectedPlanId(item.id)}
                 className={`p-5 rounded-2xl border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#1a5efd]/10 border-[#1a5efd] shadow-lg shadow-blue-500/10'
-                    : 'bg-[#161619] border-white/[0.08] hover:bg-white/[0.04]'
+                    ? 'bg-luper-primary/10 border-luper-primary shadow-lg shadow-blue-500/10'
+                    : 'bg-luper-surface border-white/[0.08] hover:bg-white/[0.04]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1.5">
@@ -69,7 +69,7 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
                 <h4 className="text-white font-bold text-[14.5px] leading-snug">{item.title}</h4>
                 <div className="flex items-center space-x-3 text-[12px] text-[#86868b] mt-3 font-mono">
                   <span className="flex items-center space-x-1"><Clock weight="duotone" size={13} /><span>{item.estimatedTime}</span></span>
-                  <span>•</span>
+                  <span>â€¢</span>
                   <span>{item.requiresRestart ? 'Yeniden Başlatma Şart' : 'Anında Etkin'}</span>
                 </div>
               </div>
@@ -78,11 +78,11 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
         </div>
 
         {/* Right Plan Preview Details */}
-        <div className="col-span-7 bg-[#161619] border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card flex flex-col justify-center">
+        <div className="col-span-7 bg-luper-surface border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card flex flex-col justify-center">
           {activePlan ? (
             <div className="space-y-6">
               <div className="border-b border-white/[0.06] pb-4">
-                <span className="text-[11px] text-[#1a5efd] font-bold font-mono uppercase tracking-wider">İcra Önizleme Raporu</span>
+                <span className="text-[11px] text-luper-primary font-bold font-mono uppercase tracking-wider">İcra Önizleme Raporu</span>
                 <h2 className="text-xl font-bold text-white mt-1">{activePlan.title}</h2>
               </div>
 
@@ -101,7 +101,7 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
               {/* Affected Registry Keys */}
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#86868b] mb-2 flex items-center space-x-1.5">
-                  <Database weight="duotone" size={14} className="text-[#1a5efd]" />
+                  <Database weight="duotone" size={14} className="text-luper-primary" />
                   <span>Etkilenen Kayıt Defteri (Registry) Anahtarları</span>
                 </h4>
                 <div className="space-y-1.5 font-mono text-[12px]">
@@ -139,3 +139,4 @@ export const RepairExecutionPreviewTools = memo(function RepairExecutionPreviewT
     </div>
   );
 });
+

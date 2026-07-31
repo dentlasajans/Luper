@@ -1,0 +1,1440 @@
+[
+  {
+    "id": "disable_windows_telemetry",
+    "title": "Sistem İzlemesini Tamamen Kapat",
+    "description": "Arka plan veri toplama hizmetlerini durdurur. Kaynakları korur ve gizliliği artırır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "telemetry",
+      "background",
+      "services",
+      "privacy",
+      "reporting"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\DiagTrack",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\dmwappushservice",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows",
+        "key": "CEIPEnable",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+        "key": "Disabled",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "key": "Enabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "key": "MaxTelemetryAllowed",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection",
+        "key": "AllowTelemetry",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+        "key": "AITEnable",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+        "key": "VDMDisallowed",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "optimize_system_timers",
+    "title": "Sistem Zamanlayıcılarını İyileştir",
+    "description": "Dinamik saatleri kapatıp sistem zamanlamasını ayarlar. İşlem gecikmesini doğrudan düşürür.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 90,
+    "risk_level": "medium",
+    "tags": [
+      "latency",
+      "hpet",
+      "bcdedit",
+      "dynamictick",
+      "platformtick"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "bcdedit /deletevalue useplatformclock"
+      },
+      {
+        "type": "powershell",
+        "command": "bcdedit /set disabledynamictick yes"
+      },
+      {
+        "type": "powershell",
+        "command": "bcdedit /set useplatformtick yes"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_gamedvr_optimizations",
+    "title": "Oyun Kaydını Tamamen Kapat",
+    "description": "Oyun kayıt özelliklerini kapatarak kare düşüşlerini önler. Oyun içi takılmaları giderir.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "gaming",
+      "gamedvr",
+      "fps"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\System\\GameConfigStore",
+        "key": "GameDVR_FSEBehaviorMode",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+        "key": "AllowGameDVR",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "optimize_tcp_network",
+    "title": "Ağ Gecikmesini İyileştir",
+    "description": "Veri paketlerini bekletmeden göndererek bağlantı süresini iyileştirir. Çevrimiçi oyunlarda gecikmeyi azaltır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "tcp"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces\\{AĞ_KARTI_GUID}",
+        "key": "TcpAckFrequency",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces\\{AĞ_KARTI_GUID}",
+        "key": "TCPNoDelay",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces\\{AĞ_KARTI_GUID}",
+        "key": "TcpDelAckTicks",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_windows11_ai_telemetry",
+    "title": "Yapay Zeka İzlemesini Kapat",
+    "description": "Yapay zeka asistanlarının veri toplamasını engeller. Arka plan işlemlerini hafifletir.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "ai",
+      "recall",
+      "copilot",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "key": "DisableAIDataAnalysis",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "key": "AllowRecallEnablement",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+        "key": "TurnOffWindowsCopilot",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_activity_history",
+    "title": "Etkinlik Geçmişini Tamamen Kapat",
+    "description": "Kullanım geçmişinin aktarılmasını durdurur. Gizliliği sağlar ve gereksiz eşitlemeyi önler.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "activity",
+      "history",
+      "telemetry",
+      "privacy"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "PublishUserActivities",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "UploadUserActivities",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "EnableActivityFeed",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_app_experience_tasks",
+    "title": "Uygulama Uyumluluk Görevlerini Kapat",
+    "description": "Yüksek işlemci ve disk tüketen taramaları durdurur. Sistem yükünü ciddi oranda hafifletir.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "application",
+      "experience",
+      "tasks",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Application Experience\\\" -TaskName \"Microsoft Compatibility Appraiser\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Application Experience\\\" -TaskName \"ProgramDataUpdater\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Application Experience\\\" -TaskName \"StartupAppTask\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\DeviceInformation\\\" -TaskName \"Device\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+        "key": "AITEnable",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat",
+        "key": "DisableInventory",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_ceip_sqm_tasks",
+    "title": "Müşteri Deneyimi Görevlerini Kapat",
+    "description": "Kullanıcı deneyimi veri toplama işlemlerini engeller. Arka plan aktivitelerini azaltır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "ceip",
+      "sqm",
+      "telemetry",
+      "tasks"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Customer Experience Improvement Program\\\" -TaskName \"Consolidator\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Customer Experience Improvement Program\\\" -TaskName \"UsbCeip\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Customer Experience Improvement Program\\\" -TaskName \"KernelCeipTask\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\Customer Experience Improvement Program\\\" -TaskName \"BthSQM\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows",
+        "key": "CEIPEnable",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_feedback_tailored_experiences",
+    "title": "Geri Bildirimleri Tamamen Kapat",
+    "description": "Sürekli çıkan anketleri ve önerileri engeller. İstenmeyen bildirim trafiğini keser.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "feedback",
+      "telemetry",
+      "privacy"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Siuf\\Rules",
+        "key": "NumberOfSIUFInPeriod",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy",
+        "key": "TailoredExperiencesWithDiagnosticDataEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_etw_autologger",
+    "title": "Olay İzleme Oturumlarını Kapat",
+    "description": "Başlangıç sırasında açılan gizli izleme oturumlarını durdurur. Açılış hızını artırır ve gecikmeleri önler.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "etw",
+      "autologger",
+      "telemetry",
+      "boot"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\AutoLogger-Diagtrack-Listener",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\SQMLogger",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_inking_typing_telemetry",
+    "title": "Yazma ve Çizimi İzleme",
+    "description": "Klavye ve kalem kullanım verilerinin toplanmasını engeller. Tam gizlilik sağlar.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "inking",
+      "typing",
+      "telemetry",
+      "privacy"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization",
+        "key": "RestrictImplicitInkCollection",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization",
+        "key": "RestrictImplicitTextCollection",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization\\TrainedDataStore",
+        "key": "HarvestContacts",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_defender_maps_samples",
+    "title": "Otomatik Örnek Gönderimini Kapat",
+    "description": "Şüpheli dosyaların buluta otomatik yüklenmesini durdurur. Gereksiz ağ kullanımını önler.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "defender",
+      "maps",
+      "telemetry",
+      "security"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+        "key": "SpyNetReporting",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+        "key": "SubmitSamplesConsent",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_diagnostic_services",
+    "title": "Teşhis Hizmetlerini Tamamen Kapat",
+    "description": "Sürekli çalışan teşhis hizmetlerini durdurur. Kaynak kullanımını azaltarak performansı artırır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "diagnostic",
+      "services",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"DPS\" -StartupType Disabled -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"WdiServiceHost\" -StartupType Manual -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"WdiSystemHost\" -StartupType Manual -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"diagnosticshub.standardcollector.service\" -StartupType Disabled -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\DPS",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_perftrack_autologgers",
+    "title": "Performans İzleyicilerini Kapat",
+    "description": "Sürekli çalışan performans izleyicileri durdurur. Mikro takılmaları tamamen ortadan kaldırır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "etw",
+      "autologger",
+      "latency",
+      "perftrack",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\PerfTrack",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\ReadyBoot",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\WiFiSession",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\WdiContextLog",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_disk_diagnostic",
+    "title": "Disk Teşhis Görevlerini Kapat",
+    "description": "Arka plandaki periyodik disk taramalarını durdurur. Diskinizi gereksiz yükten kurtarır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "disk",
+      "diagnostic",
+      "storage",
+      "telemetry",
+      "tasks"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\DiskDiagnostic\\\" -TaskName \"Microsoft-Windows-DiskDiagnosticDataCollector\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\DiskDiagnostic\\\" -TaskName \"Microsoft-Windows-DiskDiagnosticResolver\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense",
+        "key": "AllowStorageSenseGlobal",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_gpu_telemetry",
+    "title": "Grafik Kartı İzlemesini Kapat",
+    "description": "Ekran kartı arka plan izleme hizmetlerini durdurur. Kart kaynaklarını oyunlara saklar.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "gpu",
+      "nvidia",
+      "amd",
+      "intel",
+      "telemetry",
+      "services"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"NvTelemetryContainer\" -StartupType Disabled -ErrorAction SilentlyContinue\nStop-Service -Name \"NvTelemetryContainer\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"AMD Crash Defender Service\" -StartupType Disabled -ErrorAction SilentlyContinue\nStop-Service -Name \"AMD Crash Defender Service\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-Service -Name \"SystemUsageReportSvc\" -StartupType Disabled -ErrorAction SilentlyContinue\nStop-Service -Name \"SystemUsageReportSvc\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\NVIDIA Corporation\\Global\\NVTweak",
+        "key": "DisplayTelemetry",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_bing_search_telemetry",
+    "title": "İnternet Arama İzlemesini Kapat",
+    "description": "Başlat menüsü aramalarının buluta gönderilmesini engeller. Aramaları tamamen yerel ve hızlı yapar.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "search",
+      "bing",
+      "telemetry",
+      "startmenu"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "key": "AllowCloudSearch",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "key": "AllowSearchToUseLocation",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "key": "ConnectedSearchUseWeb",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "key": "DisableWebSearch",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+        "key": "BingSearchEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_flighting_experimentation",
+    "title": "Sistem Deneylerini Tamamen Kapat",
+    "description": "İşletim sistemindeki gizli testleri engeller. Kararlılığı artırır ve gereksiz indirmeleri durdurur.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "flighting",
+      "experimentation",
+      "telemetry",
+      "insider"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+        "key": "EnableConfigFlighting",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+        "key": "EnableExperimentation",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\PolicyManager\\default\\System\\AllowExperimentation",
+        "key": "value",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "key": "DisableEnterpriseAuthProxy",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_wfp_network_diagnostic",
+    "title": "Ağ Teşhisini Tamamen Kapat",
+    "description": "Ağ paketlerini izleyen gizli oturumları durdurur. Gecikme dalgalanmalarını büyük ölçüde azaltır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "wfp",
+      "etw",
+      "telemetry",
+      "ping"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\NetCore",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\Autologger\\TCPIP",
+        "key": "Start",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NDIS\\Parameters",
+        "key": "MaxNumRssCpus",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_dha_licensing_telemetry",
+    "title": "Cihaz Sağlık Teşhisini Kapat",
+    "description": "Donanım doğrulama raporlarının buluta gönderilmesini durdurur. Arka planda kaynak tüketimini azaltır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "dha",
+      "health",
+      "licensing",
+      "telemetry",
+      "tpm"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceHealthAttestation",
+        "key": "EnableDeviceHealthAttestation",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Licensing",
+        "key": "DisableLicensingTelemetry",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-ScheduledTask -TaskPath \"\\Microsoft\\Windows\\SoftwareProtectionPlatform\\\" -TaskName \"SvcRestartTask\" -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_smartscreen_telemetry",
+    "title": "Güvenlik Ekranı İzlemesini Kapat",
+    "description": "Çalıştırılan dosyaların analiz için buluta gönderilmesini engeller. Dosya açılışlarını hızlandırır.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "smartscreen",
+      "defender",
+      "telemetry",
+      "security"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "EnableSmartScreen",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter",
+        "key": "EnabledV9",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost",
+        "key": "EnableWebContentEvaluation",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "block_telemetry_ips_firewall",
+    "title": "İzleme Sunucularını Tamamen Engelle",
+    "description": "Veri sızdıran adresleri güvenlik duvarı ile engeller. Tam gizlilik ve ağ hızı sağlar.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "firewall",
+      "block",
+      "telemetry",
+      "ips",
+      "network"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-NetFirewallRule -DisplayName \"Luper_Block_Telemetry_1\" -Direction Outbound -Action Block -RemoteAddress \"20.189.173.0/24\", \"51.104.0.0/15\", \"13.107.4.0/22\" -Protocol Any -Enabled True"
+      },
+      {
+        "type": "powershell",
+        "command": "New-NetFirewallRule -DisplayName \"Luper_Block_Telemetry_2\" -Direction Outbound -Action Block -RemoteAddress \"20.42.0.0/15\", \"52.224.0.0/11\" -Protocol Any -Enabled True"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_widgets_feeds_oobe",
+    "title": "Araçları ve Akışları Kapat",
+    "description": "Görev çubuğu araçlarını ve haber akışlarını tamamen kapatır. Bellek ve internet tüketimini önler.",
+    "category_id": "telemetry",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "widgets",
+      "feeds",
+      "oobe",
+      "telemetry",
+      "windows11"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+        "key": "AllowNewsAndInterests",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Widgets",
+        "key": "TaskbarWidgetsEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "key": "DisableWindowsConsumerFeatures",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]
