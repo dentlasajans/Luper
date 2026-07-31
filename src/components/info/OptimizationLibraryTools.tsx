@@ -1,4 +1,4 @@
-import { BookOpen, MagnifyingGlass, ShieldCheck, Star } from '@phosphor-icons/react';
+﻿import { BookOpen, MagnifyingGlass, ShieldCheck, Star } from '@/src/components/ui/Icons';
 import { memo, useMemo, useState } from 'react';
 
 export interface LibraryItem {
@@ -21,11 +21,11 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
   const [searchQuery, setSearchQuery] = useState('');
 
   const activeItem = useMemo(() => {
-    return items.find(i => i.id === selectedId) || items[0];
+    return items.find((i) => i.id === selectedId) || items[0];
   }, [items, selectedId]);
 
   const filteredItems = useMemo(() => {
-    return items.filter(item => {
+    return items.filter((item) => {
       const matchesCat = activeCategory === 'all' || item.category.toLowerCase() === activeCategory.toLowerCase();
       const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             item.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -34,7 +34,7 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
   }, [items, activeCategory, searchQuery]);
 
   const toggleFavorite = (id: string) => {
-    setItems(prev => prev.map(i => i.id === id ? { ...i, isFavorite: !i.isFavorite } : i));
+    setItems((prev) => prev.map((i) => i.id === id ? { ...i, isFavorite: !i.isFavorite } : i));
   };
 
   return (
@@ -43,7 +43,7 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <BookOpen weight="duotone" className="text-[#1a5efd]" size={28} />
+            <BookOpen weight="duotone" className="text-luper-primary" size={28} />
             <span>Optimizasyon Kütüphanesi & Kataloğu</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">LUPER bünyesindeki tüm sistem ve oyun iyileştirmelerinin detaylı kataloğu.</p>
@@ -58,13 +58,13 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
       {/* Search & Category Filter Toolbar */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center space-x-2">
-          {['all', 'Gaming', 'CPU', 'Network', 'Storage'].map(cat => (
+          {['all', 'Gaming', 'CPU', 'Network', 'Storage'].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-[13px] font-medium transition-all ${
                 activeCategory === cat
-                  ? 'bg-[#1a5efd] text-white shadow-md'
+                  ? 'bg-luper-primary text-white shadow-md'
                   : 'bg-white/[0.04] text-[#86868b] hover:text-white hover:bg-white/[0.08]'
               }`}
             >
@@ -80,7 +80,7 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Kütüphanede ara..."
-            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-[#1a5efd] w-64"
+            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-luper-primary w-64"
           />
         </div>
       </div>
@@ -89,12 +89,12 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
         {/* Left Library Catalog List */}
         <div className="col-span-5 space-y-3">
           {filteredItems.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619] border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
             <h3 className="text-[14px] font-bold text-white mb-1">Veri Bulunamadı</h3>
             <p className="text-[12.5px] text-[#86868b]">Şu anda görüntülenecek veri bulunmuyor. Gerçek veri akışı bekleniyor.</p>
           </div>
         )}
-        {filteredItems.length > 0 && filteredItems.map(item => {
+        {filteredItems.length > 0 && filteredItems.map((item) => {
             const isSelected = item.id === selectedId;
             return (
               <div
@@ -102,8 +102,8 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
                 onClick={() => setSelectedId(item.id)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#1a5efd]/10 border-[#1a5efd] shadow-lg shadow-blue-500/10'
-                    : 'bg-[#161619] border-white/[0.08] hover:bg-white/[0.04]'
+                    ? 'bg-luper-primary/10 border-luper-primary shadow-lg shadow-blue-500/10'
+                    : 'bg-luper-surface border-white/[0.08] hover:bg-white/[0.04]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -123,7 +123,7 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
 
                 <div className="flex items-center space-x-3 text-[11.5px] text-[#86868b] mt-2 font-mono">
                   <span>FPS: <strong className="text-[#34c759]">{item.fpsImpact}</strong></span>
-                  <span>•</span>
+                  <span>â€¢</span>
                   <span>Gecikme: <strong className="text-[#34c759]">{item.latencyImpact}</strong></span>
                 </div>
               </div>
@@ -132,10 +132,10 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
         </div>
 
         {/* Right Detail Card */}
-        <div className="col-span-7 bg-[#161619] border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card">
+        <div className="col-span-7 bg-luper-surface border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card">
           <div className="border-b border-white/[0.06] pb-4 flex items-center justify-between">
             <div>
-              <span className="text-[11px] text-[#1a5efd] font-bold font-mono uppercase tracking-wider">İyileştirme Detayı</span>
+              <span className="text-[11px] text-luper-primary font-bold font-mono uppercase tracking-wider">İyileştirme Detayı</span>
               <h2 className="text-xl font-bold text-white mt-1">{activeItem.name}</h2>
             </div>
             <span className="text-[11px] px-3 py-1 bg-white/[0.04] border border-white/[0.08] text-[#34c759] font-mono font-bold rounded-lg">
@@ -171,3 +171,4 @@ export const OptimizationLibraryTools = memo(function OptimizationLibraryTools()
     </div>
   );
 });
+

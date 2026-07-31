@@ -50,7 +50,7 @@ export interface ElectronAPI {
   executeQuickAction: (actionId: string) => Promise<boolean>;
 
   // State Persistence
-  saveSettings: (settings: unknown) => Promise<boolean>;
+  saveSettings: (settings) => Promise<boolean>;
   loadSettings: () => Promise<unknown>;
   getHardwareSpecs: () => Promise<import('./index').HardwareSpecs>;
 }
@@ -59,6 +59,7 @@ declare global {
   interface Window {
     electronAPI?: ElectronAPI;
     electron?: {
+      executeOptimization(id: string, enable: boolean): Promise<boolean>;
       ipcRenderer: {
         invoke: (channel: string, ...args: unknown[]) => Promise<unknown>;
         on: (channel: string, listener: (...args: unknown[]) => void) => void;

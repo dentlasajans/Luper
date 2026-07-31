@@ -1,4 +1,4 @@
-import { memo } from 'react';
+﻿import { memo } from 'react';
 import { CHANGELOG_HISTORY } from '../../data/changelogs';
 
 export const StableReleaseTools = memo(function StableReleaseTools() {
@@ -9,12 +9,12 @@ export const StableReleaseTools = memo(function StableReleaseTools() {
         {CHANGELOG_HISTORY.map((changelog) => (
           <div
             key={changelog.id}
-            className="bg-[#161619] border border-white/[0.08] p-6 rounded-2xl luper-card space-y-4"
+            className="bg-luper-surface border border-white/[0.08] p-6 rounded-2xl luper-card space-y-4"
           >
             <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
               <div>
                 <h3 className="text-xl font-bold text-white flex items-center space-x-3">
-                  <span className="text-[#1a5efd] font-mono">{changelog.version}</span>
+                  <span className="text-luper-primary font-mono">{changelog.version}</span>
                   <span>{changelog.title}</span>
                 </h3>
               </div>
@@ -26,7 +26,7 @@ export const StableReleaseTools = memo(function StableReleaseTools() {
             <ul className="space-y-2">
               {changelog.features.map((feature, idx) => (
                 <li key={idx} className="flex items-start space-x-3 text-[14px] text-[#a1a1a6]">
-                  <span className="text-[#1a5efd] mt-1.5 text-[10px]">●</span>
+                  <span className="text-luper-primary mt-1.5 text-[10px]">â—</span>
                   <span className="leading-relaxed">{feature}</span>
                 </li>
               ))}
@@ -37,3 +37,4 @@ export const StableReleaseTools = memo(function StableReleaseTools() {
     </div>
   );
 });
+

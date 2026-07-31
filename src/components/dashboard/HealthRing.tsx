@@ -1,4 +1,4 @@
-import { WarningCircle, Warning, ShieldCheck, Lightning } from '@phosphor-icons/react';
+﻿import { WarningCircle, Warning, ShieldCheck, Lightning } from '@/src/components/ui/Icons';
 import { motion } from 'motion/react';
 import React, { useMemo } from 'react';
 
@@ -15,16 +15,16 @@ export const HealthRing: React.FC<HealthRingProps> = React.memo(({ score, size =
       return {
         label: 'Maksimum Performans',
         color: '#1a5efd',
-        icon: <Lightning size={18} weight="duotone" className="text-[#1a5efd]" />,
-        badgeBg: 'bg-[#1a5efd]/10 text-[#1a5efd] border-[#1a5efd]/20'
+        icon: <Lightning size={18} weight="duotone" className="text-luper-primary" />,
+        badgeBg: 'bg-luper-primary/10 text-luper-primary border-luper-primary/20'
       };
     }
     if (clampedScore >= 50) {
       return {
         label: 'Yüksek Performans',
         color: '#81c784',
-        icon: <ShieldCheck size={18} weight="duotone" className="text-[#81c784]" />,
-        badgeBg: 'bg-[#81c784]/10 text-[#81c784] border-[#81c784]/20'
+        icon: <ShieldCheck size={18} weight="duotone" className="text-luper-success" />,
+        badgeBg: 'bg-luper-success/10 text-luper-success border-luper-success/20'
       };
     }
     if (clampedScore >= 1) {
@@ -100,3 +100,4 @@ export const HealthRing: React.FC<HealthRingProps> = React.memo(({ score, size =
     </div>
   );
 });
+

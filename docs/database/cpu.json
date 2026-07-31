@@ -1,0 +1,2014 @@
+[
+  {
+    "id": "x2apic_policy_enable",
+    "title": "Gelişmiş Kesinti Denetleyicisi Kullanımı",
+    "description": "Başlangıçta gelişmiş kesinti denetimini açar. Donanımsal kesinti yönetimini iyileştirir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "interrupt",
+      "apic",
+      "x2apic",
+      "bcdedit",
+      "boot"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set x2apicpolicy enable"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "mmcss_optimizations",
+    "title": "Çoklu Ortam Oyun Önceliği",
+    "description": "Çoklu ortam ve oyunlara işlemci önceliği tanır. Ağ ve zamanlama darboğazlarını giderir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "mmcss",
+      "gaming",
+      "latency",
+      "multimedia",
+      "scheduler",
+      "network",
+      "registry",
+      "cpu",
+      "priority"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v SystemResponsiveness /t REG_DWORD /d 0 /f",
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v NetworkThrottlingIndex /t REG_DWORD /d 0xffffffff /f",
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v NoLazyMode /t REG_DWORD /d 1 /f",
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v Priority /t REG_DWORD /d 6 /f",
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"Scheduling Category\" /t REG_SZ /d High /f",
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"SFIO Priority\" /t REG_SZ /d High /f",
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\" /v \"GPU Priority\" /t REG_DWORD /d 8 /f",
+          "powercfg -setactive scheme_current"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "win32_priority_separation",
+    "title": "Ön Plan Uygulama Önceliği",
+    "description": "Görev zamanlayıcının ön plan işlemlere ayırdığı işlemci dilimini iyileştirir. Etkileşimli uygulamalar hızlanır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "scheduler",
+      "foreground",
+      "gaming",
+      "cpu",
+      "priority",
+      "registry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+        "key": "Win32PrioritySeparation",
+        "value": "0x00000026",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "system_timer_optimizations",
+    "title": "Sistem Zamanlayıcı İyileştirmesi",
+    "description": "Dinamik saat sinyalini kapatır ve döngüyü sabitler. Daha tutarlı ve düşük gecikmeli kare süreleri sağlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "low",
+    "tags": [
+      "system",
+      "timer",
+      "scheduler",
+      "latency",
+      "bcdedit",
+      "tsc",
+      "resolution",
+      "frametime",
+      "cpu"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set disabledynamictick yes"
+        ]
+      },
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set useplatformclock false"
+        ]
+      },
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set tscsyncpolicy Enhanced"
+        ]
+      },
+      {
+        "type": "command",
+        "commands": [
+          "Write-Host 'NtSetTimerResolution API çağrısı ile 0.5ms zorlaması.'"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "boot_optimizations",
+    "title": "Hızlı Sistem Başlatma İyileştirmesi",
+    "description": "Sessiz başlatmayı etkinleştirir. Hata ekranlarını atlayarak sistem açılışını hızlandırır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "medium",
+    "tags": [
+      "boot",
+      "bcdedit",
+      "startup",
+      "quietboot",
+      "recovery"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set {current} quietboot yes"
+        ]
+      },
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set {current} bootstatuspolicy ignoreallfailures"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_paging_executive",
+    "title": "Çekirdek Bellek Sabitleme",
+    "description": "Sistem çekirdeğini disk yerine ana bellekte tutar. Bellek sayfası hatası kaynaklı donmaları bitirir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "memory",
+      "kernel",
+      "latency",
+      "registry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "key": "DisablePagingExecutive",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_cpu_mitigations",
+    "title": "İşlemci Güvenlik Yamalarını Kapat",
+    "description": "Güvenlik yamalarını kapatarak en yüksek işlemci performansını sağlar. Girdi ve çıktı gecikmelerini sıfırlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 94,
+    "risk_level": "high",
+    "tags": [
+      "cpu",
+      "spectre",
+      "meltdown",
+      "performance",
+      "registry",
+      "security"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f",
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_core_parking",
+    "title": "Çekirdek Uyutma İptali",
+    "description": "Çekirdeklerin uykuya geçişini engelleyerek uyanma gecikmesini siler. Anlık takılma sorunlarını doğrudan çözer.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "core parking",
+      "powercfg",
+      "stuttering",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg -attributes SUB_PROCESSOR 0cc5b647-c1df-4637-891a-dec35c318583 -ATTRIB_HIDE",
+          "powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR 0cc5b647-c1df-4637-891a-dec35c318583 100",
+          "powercfg -setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "enable_msi_mode",
+    "title": "Mesaj Tabanlı Kesinti Modu",
+    "description": "Cihazların işlemciye doğrudan kesinti göndermesini sağlar. Gecikmeli yordam çağrısı süresini en aza indirir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 92,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "dpc",
+      "latency",
+      "msi",
+      "interrupt",
+      "esports"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "Write-Host 'LUPER C++ / Native API çağrısı ile cihaz bazlı MSI modifikasyonu uygulanacaktır.'"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "cpu_affinity_isolation",
+    "title": "Gelişmiş Çekirdek Yalıtımı",
+    "description": "Oyunları performanslı işlem birimlerine kilitler ve diğer görevleri ayırır. Kesintisiz oyun deneyimi sağlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 94,
+    "risk_level": "high",
+    "tags": [
+      "cpu",
+      "affinity",
+      "dpc",
+      "latency",
+      "drivers",
+      "isolation",
+      "scheduler",
+      "gaming",
+      "esports"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "Write-Host 'Native API veya Interrupt Affinity Policy Tool mantığıyla Core 0 izolasyonu.'"
+        ]
+      },
+      {
+        "type": "command",
+        "commands": [
+          "Write-Host 'Zero-Injection SetProcessAffinityMask API çağrılarıyla uygulanacaktır.'"
+        ]
+      },
+      {
+        "type": "command",
+        "commands": [
+          "Write-Host 'LUPER görev yöneticisi modülü üzerinden dinamik süreç izolasyonu.'"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "heterogeneous_thread_scheduling",
+    "title": "Karma Performans Çekirdeği Zamanlaması",
+    "description": "İşletim sistemini oyunlar için daima yüksek performanslı işlem birimlerini seçmeye zorlar. Yüksek kare hızları sağlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 93b8b6dc-0698-4d1c-9ee4-0644e900c85d 1",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "heterogeneous_short_thread_scheduling",
+    "title": "Kısa Görev Performans Zorlaması",
+    "description": "Kısa süreli ufak görevlerin düşük güçlü çekirdeklere atılıp takıntı yapmasını engeller. Kesintisiz akıcılık hedefler.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 bae08b81-2d5e-4688-ad6a-13243356654b 1",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "energy_performance_preference_epp",
+    "title": "Sıfır Gecikmeli Enerji Profili",
+    "description": "Güç tasarrufunu tamamen devre dışı bırakır. Saat hızı artışının anında gerçekleşmesini sağlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 368095db-5c92-4d25-a626-d07f5010747e 0",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_high",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "e_core_full_parking",
+    "title": "Verimlilik Çekirdeklerini Tamamen Uyutma",
+    "description": "Oyun esnasında tüm düşük güçlü çekirdekleri uyutur. Yüksek performanslı çekirdeklere tam güç odaklanmasını sağlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 ea062031-0e34-4ff1-9b6d-eb1059334029 0",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "processor_performance_boost_mode",
+    "title": "Saldırgan İşlemci Hızlandırma Modu",
+    "description": "Hızlandırma teknolojisini en hızlı tepki verecek şekilde ayarlar. Saat hızının daima en yüksekte kalmasını sağlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 be337238-0d82-4146-a960-4f3749d470c7 2",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "processor_performance_boost_policy",
+    "title": "En Yüksek Hız Politikası",
+    "description": "Güç koruma sınırlarını yoksayar. En yüksek hızların zorlu yüklerde bile korunmasını hedefler.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 45bcc044-d885-43e2-8605-ee0ec6e96b59 100",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "processor_idle_disable_c_states",
+    "title": "İşlemci Uyku Durumu Kapalı",
+    "description": "İşlemci derin uyku durumlarını tamamen yasaklayarak çekirdekleri uyanık tutar. Uyanma gecikmesi kaynaklı takılmaları engeller.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 5d76a2ca-e8c0-402f-a133-2158492d58ad 1",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "global_power_throttling_off",
+    "title": "Güç Kısma Özelliğini Kapat",
+    "description": "Arka plan süreçlerinin ve oyun hizmetlerinin hızı düşürmesini engeller. Sistemin hız kesmesini kalıcı olarak durdurur.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\" /v PowerThrottlingOff /t REG_DWORD /d 1 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "ifeo_cpu_priority_override",
+    "title": "Uygulama İçi Oyun Önceliği",
+    "description": "Seçili oyunların ve yazılımların her zaman yüksek öncelikle çalışmasını otomatikleştirir. İşlemci darboğazını ortadan kaldırır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\cs2.exe\\PerfOptions\" /v CpuPriorityClass /t REG_DWORD /d 3 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "processor_perf_increase_threshold",
+    "title": "Anlık Hız Sıçrama Eşiği",
+    "description": "Hız artırma sınırını en aza indirir. En küçük işlem talebinde işlemci anında en yüksek hıza çıkar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 06bed4fe-9e74-4a0e-8d9d-e54022423726 1",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "processor_perf_decrease_threshold",
+    "title": "Düşmeyen İşlemci Saat Hızı",
+    "description": "Hız düşürme sınırını tepeye kilitler. İşlem bitene kadar işlemcinin yavaşlaması kesinlikle yasaklanır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 12a0ab44-fe28-4fa9-b3bd-4b64f44960a7 100",
+          "powercfg /setactive SCHEME_CURRENT"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "bcdedit_config_access_policy",
+    "title": "Doğrudan Donanım Erişim Modu",
+    "description": "İşletim sisteminin donanıma ulaşırken kullandığı bellek eşlemeli erişimi kapatır. Ana kart gecikmelerini yok eder.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set configaccesspolicy disallowmmconfig"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "device_interrupt_routing_policy",
+    "title": "Kesinti Çekirdek Yalıtımı",
+    "description": "Ağ ve görüntü bağdaştırıcısı kesintilerini boşta olan yüksek hızlı çekirdeklere atar. İlk çekirdek darboğazını kalıcı çözer.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "cpu",
+      "performance",
+      "system"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Interrupt Management\\DevicePolicy\" /v DevicePolicy /t REG_DWORD /d 4 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_virtualization_based_security_hyper_v_cpu_katmani_kapatma",
+    "title": "Sanallaştırma Güvenliğini Kapatma",
+    "description": "Sanallaştırma katmanını devreden çıkararak donanıma doğrudan erişim sağlar. Güvenlik yerine doğrudan hıza odaklanır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set hypervisorlaunchtype off",
+          "bcdedit /set vsmlaunchtype off"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_5_level_paging_cpu_adres_cevirim_gecikmesini_kapatma",
+    "title": "Gelişmiş Bellek Gecikme İptali",
+    "description": "Çok seviyeli bellek adresleme yükünü kapatarak önbellek gecikmelerini düşürür. Oyunlar için gerekli veri yolunu açar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set linearaddress57 OptOut"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_slemci_otonom_frekans_penceresi_sifirlama",
+    "title": "Kendiliğinden Hız Penceresini Sıfırla",
+    "description": "İşlemci donanım seviyesindeki hız hesaplama süresini sıfırlar. Yük değişimlerine anında ve gecikmesiz yanıt verilir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 cf49253d-22a9-407e-8712-94b16334f7a8 0"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_slemci_gorev_dongusu_kapatma",
+    "title": "Saat Sinyali Kesintilerini Kapat",
+    "description": "Isı sınırında işlemcinin gücü anlık kesmesini durdurur. Güç kesintisi kaynaklı takılmalar tamamen engellenir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 4b92d758-5a2b-4856-a6f6-a563dfe5516a 0"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_gecikmeye_duyarli_s_parcaciklari_cin_cekirdek_parki_devre_disi_birakma",
+    "title": "Gecikme Duyarlı Uyanma Modu",
+    "description": "Girdi veya çizim işlemi algılandığı an uykudaki çekirdekleri uyandırır. Fare hareketlerindeki pürüzleri bitirir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 619bcc8d-b632-427a-a400-5640d6da94b2 100"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_amd_cppc_tercih_edilen_cekirdek_zorlamasi",
+    "title": "En İyi Çekirdek Zorlaması",
+    "description": "Görevleri her zaman işlemcideki en kaliteli ve en hızlı donanıma sahip çekirdeklere yönlendirir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 8b0e950d-72a1-4ca7-b391-7f8c5a974f11 1"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_kritik_cekirdek_s_parcacigi_havuzu_genisletme",
+    "title": "Kritik İş Parçacığı Genişletme",
+    "description": "Arka plan işlemlerini yapacak yardımcı görev sayısını artırır. Girdi ve çıktı gecikmelerini tamamen kaldırır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v AdditionalCriticalWorkerThreads /t REG_DWORD /d 16 /f",
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v AdditionalWorkerThreads /t REG_DWORD /d 16 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "negative_low",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_slemci_enerji_tahmin_ve_telemetri_arka_plan_zlemesini_kapatma",
+    "title": "Enerji İzlemeyi Durdur",
+    "description": "Güç tüketimi hesaplayan sistem izlemesini kapatır. Gereksiz çekirdek döngülerini donanıma iade eder.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v EnergyEstimationDisabled /t REG_DWORD /d 1 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_platform_aoac_ve_modern_standby_slemci_guc_kisitlamalarini_kapatma",
+    "title": "Yeni Nesil Beklemeyi Kapat",
+    "description": "İşlemciyi uykuya sokan yeni nesil bekleme özelliklerini kapatarak masaüstü performans profiline sabitler.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v PlatformAoAcOverride /t REG_DWORD /d 0 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_tam_ekran_oyunlar_cin_ultra_dusuk_gecikmeli_quantum_secimi",
+    "title": "Oyunlar İçin Zaman Dilimi",
+    "description": "İşlemci zaman dilimlerini sert bir şekilde kısaltır. Fare ve klavye girdilerinin oyun motoruna akışını hızlandırır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\" /v Win32PrioritySeparation /t REG_DWORD /d 22 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_dpc_kuyruk_derinligi_ve_kesme_zamanlamasi_yilestirmesi",
+    "title": "Gecikmeli Çağrı Kuyruğunu Düşür",
+    "description": "Kuyruk derinliğini en aza indirerek sürücü gecikmelerini beklemeden hedef işlem biriminde anında işletir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v DpcQueueDepth /t REG_DWORD /d 1 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_l2_cache_boyutu_dogrudan_hizalama",
+    "title": "İkinci Seviye Önbellek Hizalaması",
+    "description": "İkinci seviye önbellek boyutunu sisteme kilitler. İşletim sisteminin sığayı eksik kullanmasını kalıcı engeller.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\" /v SecondLevelDataCache /t REG_DWORD /d 1024 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_kernel_spinlock_dogrulama_asiri_yukunu_kapatma",
+    "title": "Çekirdek Kilit Kontrolü İptali",
+    "description": "Çoklu çekirdek kilit çakışmalarının denetimini kaldırır. Çekirdekler arası yönetim yükünü bitirerek işleme odaklanır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v DisableSpinlockVerification /t REG_DWORD /d 1 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_slemci_kontrol_akis_korumasi_cpu_nceleme_gecikmesini_kapatma",
+    "title": "Akış Kontrol Gecikmesini Kapat",
+    "description": "İşlemcinin kodları güvenlik denetimine karşı tarama zorunluluğunu kaldırır. Uygulamaların saf yürütme hızını katlar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powershell -Command \"Set-ProcessMitigation -System -Disable CFG\""
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_bcdedit_slemci_grup_mimarisi_ve_numa_node_ayari",
+    "title": "Çoklu Düğüm Grubu Zorlaması",
+    "description": "İşletim sistemini tüm bellek erişim düğümlerinden eşit şekilde yararlanmaya zorlar. Çekirdek fazlalığı olan sistemlerde darboğazları yıkar.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "bcdedit /set groupaware yes",
+          "bcdedit /set maxgroup true"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_kisa_sureli_s_parcaciklari_cin_epp_performans_egilimi",
+    "title": "Ufak Görev Performans Profili",
+    "description": "Fare ve arayüz çizimi gibi kısa görevleri yüksek hızda çalıştırır. Girdi gecikmelerini anında düşürür.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 40b2d6d1-72e0-45e9-963d-b659c25b07c9 0"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_intelppm_amdppm_surucusu_dusuk_guc_durumu_gecis_gecikmesini_engelleme",
+    "title": "Güç Sürücüsü Uyku Engeli",
+    "description": "Çekirdek sürücüsünün işlemciyi derin uyku durumlarına sokmasını tamamen yasaklayarak en yüksek performans durumuna sabitler.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\IntelPPM\" /v DisableCStates /t REG_DWORD /d 1 /f",
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\AmdPPM\" /v DisableCStates /t REG_DWORD /d 1 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_slemci_frekans_dusurme_geciktirme_suresi",
+    "title": "Hız Düşürme Gecikmesi",
+    "description": "Yük düştükten sonra saat hızını uzun süre tepede tutar. Ani yük dalgalanmalarında işlemcinin yavaşlamasını önler.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "powercfg /setacvalueindex SCHEME_CURRENT 54533251-82be-4824-96c1-47b60b740d00 2ddd5a84-5a71-437e-912a-db708878f1a5 100"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_on_plan_uygulama_s_parcacigi_taban_oncelik_tabani_zorlamasi",
+    "title": "İş Görevi Öncelik Zorlaması",
+    "description": "Oyun görevlerinin normal seviyenin altına düşmesini kalıcı olarak engeller. Kritik hesaplamaların gecikmesini bitirir.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\" /v ThreadPriorityFloor /t REG_DWORD /d 1 /f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_bellek_butunlugu_donanim_nceleme_yukunu_kaldirma",
+    "title": "Bellek Bütünlüğünü Kapat",
+    "description": "Sürücü erişimlerinin sanallaştırma kontrolünü kaldırır. İşlemcinin bellek işlemlerindeki yavaşlığını tamamen ortadan kaldırır.",
+    "category_id": "cpu",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "cpu",
+      "phase2"
+    ],
+    "script_payloads": [
+      {
+        "type": "command",
+        "commands": [
+          "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity\" -v Enabled -t REG_DWORD -d 0 -f"
+        ]
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]

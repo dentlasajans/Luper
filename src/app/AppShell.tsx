@@ -18,7 +18,7 @@ export function AppShell() {
   return (
     <ErrorBoundary>
       <AppProvider>
-        <div className="w-full h-full relative overflow-hidden bg-[#121214]">
+        <div className="w-full h-full relative overflow-hidden bg-[#161618]">
           {/* Main Application Layout in the Background */}
           <Layout />
 

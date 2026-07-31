@@ -1,4 +1,4 @@
-import { CheckCircle, DownloadSimple, ArrowsClockwise, ShieldCheck, GithubLogo, Calendar, FileText, Tag } from '@phosphor-icons/react';
+﻿import { CheckCircle, DownloadSimple, ArrowsClockwise, ShieldCheck, GithubLogo, Calendar, FileText, Tag } from '@/src/components/ui/Icons';
 import { memo, useState } from 'react';
 import { checkForUpdates } from '../../services/SystemEngine';
 
@@ -99,7 +99,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <ArrowsClockwise weight="duotone" className="text-[#1a5efd]" size={28} />
+            <ArrowsClockwise weight="duotone" className="text-luper-primary" size={28} />
             <span>Gelişmiş Güncelleme Merkezi (Advanced Update Center)</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">LUPER platformunun sürüm güncellemelerini ve değişiklikleri yönetin.</p>
@@ -109,7 +109,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
           <button
             onClick={handleCheckUpdates}
             disabled={isChecking}
-            className="px-5 py-2.5 bg-[#1a5efd] hover:bg-[#2d6bfe] text-white font-bold text-[13.5px] rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
+            className="px-5 py-2.5 bg-luper-primary hover:bg-[#2d6bfe] text-white font-bold text-[13.5px] rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-blue-500/20 disabled:opacity-50"
           >
             <ArrowsClockwise weight="duotone" size={16} className={isChecking ? 'animate-spin' : ''} />
             <span>{isChecking ? 'GitHub Üzerinden Sorgulanıyor...' : 'Güncellemeleri Kontrol Et'}</span>
@@ -118,10 +118,10 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
       </div>
 
       {/* Channel Selector & Version Overview (Sadece Stable) */}
-      <div className="flex items-center justify-between bg-[#161619]/60 backdrop-blur-md border border-white/[0.08] p-4 rounded-2xl luper-card shadow-xl">
+      <div className="flex items-center justify-between bg-luper-surface/60 backdrop-blur-md border border-white/[0.08] p-4 rounded-2xl luper-card shadow-xl">
         <div className="flex items-center space-x-2">
           <span className="text-[12.5px] text-[#86868b] font-medium mr-2">Güncelleme Kanalı:</span>
-          <button className="px-4 py-2 rounded-xl text-[13px] font-bold transition-all bg-[#1a5efd] text-white shadow-md cursor-default">
+          <button className="px-4 py-2 rounded-xl text-[13px] font-bold transition-all bg-luper-primary text-white shadow-md cursor-default">
             Kararlı Sürüm (Stable Release)
           </button>
         </div>
@@ -143,7 +143,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
         )}
 
         {!updateInfo && !error && (
-          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619]/40 backdrop-blur-sm border border-white/[0.04] rounded-2xl w-full col-span-full my-4">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface/40 backdrop-blur-sm border border-white/[0.04] rounded-2xl w-full col-span-full my-4">
             <GithubLogo weight="duotone" size={32} className="text-[#86868b] mb-3 opacity-50" />
             <h3 className="text-[14px] font-bold text-white mb-1">Henüz Kontrol Edilmedi</h3>
             <p className="text-[12.5px] text-[#86868b]">Uygulamanın en güncel halini indirmek için "Güncellemeleri Kontrol Et" butonuna tıklayın.</p>
@@ -151,9 +151,9 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
         )}
 
         {updateInfo && (
-          <div className="bg-[#161619]/80 backdrop-blur-xl border border-white/[0.1] p-6 rounded-2xl luper-card flex flex-col space-y-6 shadow-2xl relative overflow-hidden">
+          <div className="bg-luper-surface/80 backdrop-blur-xl border border-white/[0.1] p-6 rounded-2xl luper-card flex flex-col space-y-6 shadow-2xl relative overflow-hidden">
             {/* Glassmorphism gradient effect */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#1a5efd]/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-luper-primary/5 rounded-full blur-3xl pointer-events-none"></div>
             
             <div className="flex items-start justify-between relative z-10">
               <div className="space-y-2">
@@ -163,7 +163,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
                   </span>
                   <h4 className="text-white font-bold text-lg">{updateInfo.name}</h4>
                   {updateInfo.updateAvailable ? (
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-[#1a5efd]/20 text-[#1a5efd] font-bold border border-[#1a5efd]/30 animate-pulse">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-luper-primary/20 text-luper-primary font-bold border border-luper-primary/30 animate-pulse">
                       YENİ GÜNCELLEME
                     </span>
                   ) : (
@@ -210,7 +210,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
             {/* Changelog section */}
             <div className="bg-[#0f0f11]/80 rounded-xl p-4 border border-white/[0.05] relative z-10">
               <div className="flex items-center space-x-2 mb-3 text-white/80">
-                <FileText weight="duotone" size={16} className="text-[#1a5efd]" />
+                <FileText weight="duotone" size={16} className="text-luper-primary" />
                 <h5 className="text-[13px] font-bold">GitHub Sürüm Notları (Changelog)</h5>
               </div>
               <div className="text-[12.5px] text-[#86868b] whitespace-pre-wrap max-h-48 overflow-y-auto pr-2 custom-scrollbar font-mono leading-relaxed">
@@ -223,4 +223,5 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
     </div>
   );
 });
+
 

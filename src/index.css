@@ -1,14 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap&subset=latin,latin-ext');
 @import "tailwindcss";
+@config "../tailwind.config.js";
 
 :root {
   /* Color Tokens */
+  --luper-primary: #1a5efd;
+  --luper-surface: #161619;
   --luper-brand: #1a5efd;
   --luper-brand-hover: #2d6bfe;
   --luper-brand-active: #154ecc;
   --luper-brand-glow: rgba(26, 94, 253, 0.25);
   
-  --luper-bg-base: #121214;
+  --luper-bg-base: #161618;
   --luper-bg-surface: #161619;
   --luper-bg-elevated: #1c1c20;
   --luper-bg-glass: rgba(22, 22, 25, 0.7);
@@ -91,7 +94,7 @@
 
 @theme {
   --color-brand-primary: #1a5efd;
-  --color-surface-base: #121214;
+  --color-surface-base: #161618;
   --color-text-muted: #86868b;
 
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
@@ -213,7 +216,6 @@ input, textarea, [contenteditable="true"] {
 
 .luper-card:hover {
   border-color: var(--luper-border-medium);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px var(--luper-brand-glow);
   transform: translateY(-2px);
 }
 
@@ -223,13 +225,11 @@ input, textarea, [contenteditable="true"] {
   font-weight: 500;
   border-radius: var(--luper-radius-md);
   transition: all var(--luper-transition-normal);
-  box-shadow: 0 4px 14px rgba(26, 94, 253, 0.35);
-  will-change: transform, box-shadow;
+  will-change: transform;
 }
 
 .luper-button-primary:hover {
   transform: scale(1.02) translateY(-1px);
-  box-shadow: 0 6px 20px rgba(26, 94, 253, 0.5);
   filter: brightness(1.1);
 }
 

@@ -32,12 +32,18 @@ Gecikmeleri en aza indirir, arka plan sistem yüklerini ortadan kaldırır ve do
 
 ## 🛠️ Hızlı Başlangıç
 
+**Gereksinimler:**
+- Node.js v20+
+- Windows Yönetici (Administrator) İzni
+
 Geliştirici ortamında çalıştırmak için:
 
 ```bash
 npm install
 npm run dev
 ```
+
+(Test ortamı ve mock verilerle çalıştırmak için: `VITE_USE_MOCKS=true npm run dev`)
 
 Uygulamayı başlatmak için:
 

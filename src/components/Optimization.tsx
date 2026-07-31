@@ -1,4 +1,4 @@
-import { GridFour, List, SpinnerGap, MagnifyingGlass } from '@phosphor-icons/react';
+import { GridFour, List, SpinnerGap, MagnifyingGlass } from '@/src/components/ui/Icons';
 import { motion } from 'motion/react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSettings } from '../context/SettingsContext';
@@ -23,11 +23,11 @@ const OptimizationCard = React.memo(function OptimizationCard({ id, icon: Icon, 
       whileHover={{ y: -2 }}
       onClick={() => onClick(id)}
       style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
-      className={`bg-[#161619] border border-white/[0.08] ${lowQualityMode ? '' : 'backdrop-blur-xl'} rounded-2xl p-6 hover:bg-[#1a1a1e] hover:border-[#1a5efd]/40 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_16px_rgba(26,94,253,0.2)] transition-all duration-200 group cursor-pointer flex flex-col h-full relative overflow-hidden luper-card`}
+      className={`bg-luper-surface border border-white/[0.08] ${lowQualityMode ? '' : 'backdrop-blur-xl'} rounded-2xl p-6 hover:bg-[#1a1a1e] hover:border-luper-primary/40 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_16px_rgba(26,94,253,0.2)] transition-all duration-200 group cursor-pointer flex flex-col h-full relative overflow-hidden luper-card`}
     >
       <div className="flex items-center space-x-4 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center shrink-0 group-hover:bg-[#1a5efd]/10 group-hover:border-[#1a5efd]/20 transition-all duration-300">
-          <Icon size={20} weight="duotone" className="text-[#86868b] group-hover:text-[#1a5efd] group-hover:scale-105 transition-all duration-300" />
+        <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center shrink-0 group-hover:bg-luper-primary/10 group-hover:border-luper-primary/20 transition-all duration-300">
+          <Icon size={20} weight="duotone" className="text-[#86868b] group-hover:text-luper-primary group-hover:scale-105 transition-all duration-300" />
         </div>
         <div>
           <h3 className="text-[#f5f5f7] font-semibold text-[17px] group-hover:text-white transition-colors">{title}</h3>
@@ -49,7 +49,7 @@ const OptimizationCard = React.memo(function OptimizationCard({ id, icon: Icon, 
       <div className="space-y-2 mt-auto pt-4 border-t border-white/[0.04]">
         {improvements.map((imp, idx) => (
           <div key={idx} className="flex items-center space-x-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#1a5efd]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-luper-primary" />
             <span className="text-[#86868b] text-[13px] font-medium">{imp}</span>
           </div>
         ))}
@@ -70,7 +70,7 @@ export const Optimization = React.memo(function Optimization({ setActiveTab }: {
   const cards = useMemo(() => OPTIMIZATION_CARDS, []);
 
   const filteredCards = useMemo(() => {
-    return cards.filter(c => {
+    return cards.filter((c) => {
       return c.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
              c.description.toLowerCase().includes(searchQuery.toLowerCase());
     });
@@ -93,7 +93,7 @@ export const Optimization = React.memo(function Optimization({ setActiveTab }: {
           <div>
             <div className="flex items-center space-x-2 mb-1">
               <h1 className="text-3xl font-bold tracking-tight text-white">Sistem Optimizasyonu</h1>
-              <span className="px-2.5 py-0.5 rounded-full bg-[#1a5efd]/15 border border-[#1a5efd]/30 text-[#64d2ff] text-[11px] font-bold uppercase tracking-wider">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#161618] border border-luper-primary/40 text-[#64d2ff] text-[11px] font-bold uppercase tracking-wider shadow-[0_0_8px_rgba(26,94,253,0.15)]">
                 13 KATEGORİ
               </span>
             </div>
@@ -102,7 +102,7 @@ export const Optimization = React.memo(function Optimization({ setActiveTab }: {
         </div>
 
         {/* Toolbar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-[#161619] border border-white/[0.08] rounded-2xl p-3.5">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-luper-surface border border-white/[0.08] rounded-2xl p-3.5">
           {/* Search Box */}
           <div className="relative flex-1 w-full">
             <MagnifyingGlass size={16} weight="duotone" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#86868b]" />
@@ -111,7 +111,7 @@ export const Optimization = React.memo(function Optimization({ setActiveTab }: {
               placeholder="Optimizasyon kategorisi veya ayar ara..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-xl text-[13.5px] text-white placeholder-[#86868b] focus:outline-none focus:border-[#1a5efd] transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-white/[0.03] border border-white/[0.06] rounded-xl text-[13.5px] text-white placeholder-[#86868b] focus:outline-none focus:border-luper-primary transition-all"
             />
           </div>
 
@@ -156,3 +156,4 @@ export const Optimization = React.memo(function Optimization({ setActiveTab }: {
     </div>
   );
 });
+

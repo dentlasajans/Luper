@@ -12,9 +12,10 @@ import {
     Wrench,
     X,
     Lightning
-} from '@phosphor-icons/react';
+} from '@/src/components/ui/Icons';
 import { AnimatePresence, motion } from 'motion/react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import Fuse from 'fuse.js';
 
 interface CommandItem {
   id: string;
@@ -39,7 +40,7 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setIsOpen(prev => !prev);
+        setIsOpen((prev) => !prev);
       }
       if (e.key === 'Escape' && isOpen) {
         setIsOpen(false);
@@ -68,14 +69,15 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
     { id: 'act_reset', title: 'Varsayılan Ayarlara Dön', category: 'Eylemler', icon: ArrowCounterClockwise, action: () => setActiveTab('settings') }
   ], [setActiveTab]);
 
+  const fuse = useMemo(() => new Fuse(commands, {
+    keys: ['title', 'category'],
+    threshold: 0.4,
+  }), [commands]);
+
   const filteredCommands = useMemo(() => {
     if (!query.trim()) return commands;
-    const q = query.toLowerCase();
-    return commands.filter(c => 
-      c.title.toLowerCase().includes(q) || 
-      c.category.toLowerCase().includes(q)
-    );
-  }, [commands, query]);
+    return fuse.search(query).map((result) => result.item);
+  }, [commands, query, fuse]);
 
   useEffect(() => {
     setSelectedIndex(0);
@@ -90,10 +92,10 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
   const handleKeyDownModal = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex(prev => (prev + 1) % Math.max(1, filteredCommands.length));
+      setSelectedIndex((prev) => (prev + 1) % Math.max(1, filteredCommands.length));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedIndex(prev => (prev - 1 + filteredCommands.length) % Math.max(1, filteredCommands.length));
+      setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % Math.max(1, filteredCommands.length));
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (filteredCommands[selectedIndex]) {
@@ -110,7 +112,7 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/70 backdrop-blur-md"
+            className="absolute inset-0 bg-black/80"
             onClick={() => setIsOpen(false)}
           />
 
@@ -120,11 +122,11 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             onKeyDown={handleKeyDownModal}
-            className="relative w-full max-w-xl bg-[#161619]/95 backdrop-blur-2xl border border-white/[0.12] rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.8)] flex flex-col z-10"
+            className="relative w-full max-w-xl bg-[#1a1a1d] border border-luper-subtle rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.8)] flex flex-col z-10"
           >
             {/* Search Input Bar */}
             <div className="p-4 border-b border-white/[0.08] flex items-center space-x-3">
-              <MagnifyingGlass size={18} weight="duotone" className="text-[#1a5efd] shrink-0" />
+              <MagnifyingGlass size={18} weight="duotone" className="text-luper-primary shrink-0" />
               <input
                 aria-label="Komut Ara"
                 type="text"
@@ -160,12 +162,12 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all text-left ${
                         isSelected 
-                          ? 'bg-[#1a5efd] text-white shadow-md' 
+                          ? 'bg-luper-primary text-white shadow-md' 
                           : 'text-[#86868b] hover:text-white hover:bg-white/[0.04]'
                       }`}
                     >
                       <div className="flex items-center space-x-3 min-w-0">
-                        <Icon size={18} weight="duotone" className={`shrink-0 ${isSelected ? 'text-white' : 'text-[#1a5efd]'}`} />
+                        <Icon size={18} weight="duotone" className={`shrink-0 ${isSelected ? 'text-white' : 'text-luper-primary'}`} />
                         <span className="text-[14px] font-medium truncate text-white">{cmd.title}</span>
                       </div>
 
@@ -188,7 +190,7 @@ export function CommandPaletteModal({ setActiveTab }: CommandPaletteModalProps) 
                 <span>↵ Seç</span>
                 <span>ESC Kapat</span>
               </div>
-              <span className="font-mono text-[#1a5efd]">LUPER Command Palette</span>
+              <span className="font-mono text-luper-primary">LUPER Command Palette</span>
             </div>
           </motion.div>
         </div>
