@@ -1,8 +1,9 @@
-import { WarningCircle, Warning, Check, SpinnerGap, Power, ArrowsClockwise, Terminal, User as UserIcon, X } from '@phosphor-icons/react';
+import { WarningCircle, Warning, Check, Power, ArrowsClockwise, Terminal, User as UserIcon, X } from '@/src/components/ui/Icons';
 import { AnimatePresence, motion } from 'motion/react';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { getStartupItems, toggleStartupItem } from '../../services/SystemEngine';
 import { StartupItem } from '../../types';
+import { LuperToggle } from '../ui/LuperToggle';
 
 interface StartupAppCardProps {
   item: StartupItem;
@@ -19,7 +20,7 @@ const StartupAppCard = memo(({ item, idx, processingState, handleToggle }: Start
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: Math.min(idx * 0.03, 0.15) }}
-      className="bg-[#1c1c1e]/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 flex items-center group hover:bg-[#1c1c1e]/80 hover:border-white/[0.15] transition-all shadow-lg"
+      className="bg-[#161618]/60 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 flex items-center group hover:bg-[#161618]/80 hover:border-white/[0.15] transition-all shadow-lg"
     >
       <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center shrink-0 shadow-[inset_0_1px_1px_rgba(255,255,255,0.04)]">
         <Power weight="duotone" size={20} className={item.enabled ? 'text-brand-primary' : 'text-text-muted opacity-50'} />
@@ -48,28 +49,15 @@ const StartupAppCard = memo(({ item, idx, processingState, handleToggle }: Start
       
       <div className="shrink-0 ml-4 flex items-center space-x-3">
         <span className={`text-[12px] font-medium ${item.enabled ? 'text-brand-primary' : 'text-text-muted'} hidden sm:block`}>
-          {item.enabled ? 'Etkin' : 'Devre Dışı'}
+          {item.enabled ? 'Etkin' : 'Devre Disi'}
         </span>
-        <button
-          onClick={() => !processingState[itemId] && handleToggle(item)}
+        <LuperToggle
+          checked={item.enabled}
+          onChange={() => handleToggle(item)}
           disabled={!!processingState[itemId]}
-          className={`relative w-[48px] h-[26px] rounded-full transition-colors duration-300 flex items-center justify-center ${item.enabled ? 'bg-[#1a5efd]' : 'bg-white/[0.1] border border-white/[0.05]'} ${(processingState[itemId] === 'processing') ? 'opacity-80 cursor-not-allowed' : ''} focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none`}
-        >
-          {processingState[itemId] === 'processing' && (
-            <SpinnerGap weight="duotone" size={12} className={`absolute animate-spin ${item.enabled ? 'text-surface-base left-[7px]' : 'text-text-muted right-[7px]'}`} />
-          )}
-          {processingState[itemId] === 'success' && (
-            <Check weight="duotone" size={12} className={`absolute ${item.enabled ? 'text-surface-base left-[7px]' : 'text-[#81c784] right-[7px]'}`} />
-          )}
-          <motion.div
-            className={`absolute top-1 bottom-1 w-[18px] rounded-full shadow-md ${item.enabled ? 'bg-white' : 'bg-[#98989d]'}`}
-            initial={false}
-            animate={{
-              left: item.enabled ? '26px' : '4px',
-            }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-          />
-        </button>
+          isProcessing={processingState[itemId] === 'processing'}
+          isSuccess={processingState[itemId] === 'success'}
+        />
       </div>
     </motion.div>
   );
@@ -105,21 +93,21 @@ export function StartupTools() {
 
   const handleToggle = useCallback(async (item: StartupItem) => {
     const itemId = item.name + item.location;
-    setProcessingState(prev => ({ ...prev, [itemId]: 'processing' }));
+    setProcessingState((prev) => ({ ...prev, [itemId]: 'processing' }));
     
     try {
       await toggleStartupItem(item);
-      setProcessingState(prev => ({ ...prev, [itemId]: 'success' }));
+      setProcessingState((prev) => ({ ...prev, [itemId]: 'success' }));
       
       // Update local state for optimistic UI
-      setItems(prev => prev.map(i => 
+      setItems((prev) => prev.map((i) => 
         (i.name === item.name && i.location === item.location) 
           ? { ...i, enabled: !i.enabled } 
           : i
       ));
       
       setTimeout(() => {
-        setProcessingState(prev => {
+        setProcessingState((prev) => {
           const newState = { ...prev };
           delete newState[itemId];
           return newState;
@@ -128,10 +116,10 @@ export function StartupTools() {
       
     } catch (err: any) {
       console.error('Toggle error:', err);
-      setToastMessage({ type: 'error', message: err.message || 'İşlem başarısız.' });
+      setToastMessage({ type: 'error', message: (err as Error).message || 'Islem basarisiz.' });
       setTimeout(() => setToastMessage(null), 3000);
       
-      setProcessingState(prev => {
+      setProcessingState((prev) => {
         const newState = { ...prev };
         delete newState[itemId];
         return newState;
@@ -151,11 +139,11 @@ export function StartupTools() {
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
             className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center p-4 rounded-2xl border shadow-2xl min-w-[320px] max-w-lg ${
               toastMessage.type === 'error' 
-                ? 'bg-[#1c1c1e] border-[#e57373]/30 text-[#e57373]' 
-                : 'bg-[#1c1c1e] border-[#81c784]/30 text-[#81c784]'
+                ? 'bg-[#161618] border-[#e57373]/30 text-[#e57373]' 
+                : 'bg-[#161618] border-luper-success/30 text-luper-success'
             }`}
           >
-            <div className={`p-2 rounded-xl shrink-0 mr-4 ${toastMessage.type === 'error' ? 'bg-[#e57373]/10' : 'bg-[#81c784]/10'}`}>
+            <div className={`p-2 rounded-xl shrink-0 mr-4 ${toastMessage.type === 'error' ? 'bg-[#e57373]/10' : 'bg-luper-success/10'}`}>
               {toastMessage.type === 'error' ? <WarningCircle weight="duotone" size={20} /> : <Check weight="duotone" size={20} />}
             </div>
             <p className="flex-1 text-[14px] font-medium leading-snug text-[#f5f5f7]">
@@ -178,9 +166,9 @@ export function StartupTools() {
         className="flex-1 flex flex-col min-h-0"
       >
         <div className="flex flex-col mb-8 pt-1 shrink-0">
-          <h1 className="text-[28px] font-bold text-[#f5f5f7] tracking-tight leading-snug mb-2">Başlangıç Uygulamaları</h1>
+          <h1 className="text-[32px] font-bold text-[#f5f5f7] tracking-tight leading-snug mb-2">Baslangi� Uygulamalari</h1>
           <p className="text-text-muted/90 text-[14px] mt-2 leading-relaxed max-w-3xl">
-            Sistem başlatıldığında otomatik olarak çalışan uygulamaları yönetin. Gereksiz programları devre dışı bırakarak açılış süresini hızlandırabilirsiniz.
+            Sistem baslatildiginda otomatik olarak �alisan uygulamalari y�netin. Gereksiz programlari devre disi birakarak a�ilis s�resini hizlandirabilirsiniz.
           </p>
         </div>
 
@@ -203,12 +191,12 @@ export function StartupTools() {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center bg-white/[0.04] border border-[#e57373]/30 rounded-3xl p-10 max-w-md">
                 <Warning weight="duotone" size={36} className="text-[#e57373] mx-auto mb-5 opacity-80" />
-                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Sistem Verisi Alınamadı</h3>
+                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Sistem Verisi Alinamadi</h3>
                 <p className="text-[#e57373]/90 text-[14px] font-normal leading-relaxed max-w-sm mb-6 mx-auto">
                   {error.message}
                 </p>
                 <button 
-                  onClick={() => setRetryCount(prev => prev + 1)}
+                  onClick={() => setRetryCount((prev) => prev + 1)}
                   className="flex items-center space-x-2 mx-auto px-5 py-2.5 bg-white/[0.05] hover:bg-white/[0.08] text-white rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-all"
                 >
                   <ArrowsClockwise weight="duotone" size={14} className="text-text-muted" />
@@ -237,9 +225,9 @@ export function StartupTools() {
                 >
                   <Power weight="duotone" size={36} className="text-text-muted mx-auto mb-5 opacity-60" />
                 </motion.div>
-                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Başlangıç Öğesi Bulunamadı</h3>
+                <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Baslangi� �gesi Bulunamadi</h3>
                 <p className="text-text-muted text-[14px] font-normal leading-relaxed max-w-sm mx-auto">
-                  Sisteminizde yapılandırılmış herhangi bir başlangıç öğesi bulunamadı.
+                  Sisteminizde yapilandirilmis herhangi bir baslangi� �gesi bulunamadi.
                 </p>
               </div>
             </div>
@@ -249,4 +237,5 @@ export function StartupTools() {
     </div>
   );
 }
+
 

@@ -1,0 +1,1556 @@
+[
+  {
+    "id": "privacy_disable_advertising_id",
+    "title": "Reklam Kimliğini Kapat",
+    "description": "Uygulamaların arka planda size özel reklam göstermesini engeller. Gizliliğinizi korurken izlenmenizi durdurur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "background",
+      "tracking",
+      "ads"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+        "key": "Enabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\AdvertisingInfo",
+        "key": "Enabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_cortana",
+    "title": "Sesli Asistanı Kapat",
+    "description": "Sesli asistanı tamamen kapatarak bellek tasarrufu sağlar. Arka planda çalışmasını engeller.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "background",
+      "cortana"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+        "key": "AllowCortana",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_activity_history",
+    "title": "Etkinlik Geçmişini Kapat",
+    "description": "Cihazınızdaki eylemlerin kaydedilmesini durdurur. Microsoft'a etkinlik gönderimini kapatır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "background",
+      "history"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "PublishUserActivities",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_telemetry",
+    "title": "Telemetriyi Kapat",
+    "description": "Kullanım verilerinizin Microsoft'a gönderilmesini tamamen engeller. Arka plan ağ kullanımını sıfırlar.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "background",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+        "key": "AllowTelemetry",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_tailored_experiences",
+    "title": "Özel Deneyimleri Kapat",
+    "description": "Kişisel verilerinize dayalı reklam ve ipuçlarını durdurur. Daha temiz bir deneyim sunar.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "background"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Privacy",
+        "key": "TailoredExperiencesWithDiagnosticDataEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_telemetry_services",
+    "title": "Telemetri Servislerini Kapat",
+    "description": "DiagTrack gibi alışkanlık izleyen servisleri durdurur. Arka plan tüketimini azaltır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "medium",
+    "tags": [
+      "privacy",
+      "telemetry",
+      "service"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Stop-Service -Name 'DiagTrack' -WarningAction SilentlyContinue; Set-Service -Name 'DiagTrack' -StartupType Disabled"
+      },
+      {
+        "type": "powershell",
+        "command": "Stop-Service -Name 'dmwappushservice' -WarningAction SilentlyContinue; Set-Service -Name 'dmwappushservice' -StartupType Disabled"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_telemetry_tasks",
+    "title": "Telemetri Görevlerini Kapat",
+    "description": "Müşteri deneyimi geliştirme (CEIP) görevlerini iptal eder. Gereksiz raporlamaları engeller.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "tasks",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-ScheduledTask -TaskPath '\\\\Microsoft\\\\Windows\\\\Customer Experience Improvement Program\\\\' | Disable-ScheduledTask"
+      },
+      {
+        "type": "powershell",
+        "command": "Get-ScheduledTask -TaskPath '\\\\Microsoft\\\\Windows\\\\Application Experience\\\\' | Disable-ScheduledTask"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_search_box_suggestions",
+    "title": "Arama Önerilerini Kapat",
+    "description": "Başlat menüsünde web ve Cortana aramalarını durdurur. Aramaların hızlı sonuçlanmasını sağlar.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "search",
+      "bing"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Software\\\\Policies\\\\Microsoft\\\\Windows\\\\Explorer",
+        "key": "DisableSearchBoxSuggestions",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_uwp_background_apps",
+    "title": "Mağaza Arkaplan Uygulamalarını Kapat",
+    "description": "Mağaza uygulamalarının arka planda sessizce çalışmasını engeller. Sistem kaynaklarını korur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "privacy",
+      "background",
+      "uwp"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\BackgroundAccessApplications",
+        "key": "GlobalUserDisabled",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_game_dvr",
+    "title": "Oyun Kaydını Kapat",
+    "description": "Oyun kayıt sistemini devre dışı bırakır. Oyun oynarken arka planda klip alınmasını engeller.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "gaming",
+      "gamedvr"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\System\\GameConfigStore",
+        "key": "GameDVR_Enabled",
+        "value": "0"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_recall_ai",
+    "title": "Yapay Zeka Geçmişini Kapat",
+    "description": "Otomatik ekran görüntüsü alan akıllı özelliği kapatır. Yapay zeka veri akışını durdurur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "ai",
+      "recall"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "key": "DisableAIDataAnalysis",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+        "key": "AllowRecallEnablement",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_windows_copilot",
+    "title": "Yapay Zeka Asistanını Kapat",
+    "description": "Akıllı asistanı ve servislerini iptal eder. Sistemi yapay zeka yükünden kurtarır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "ai",
+      "copilot"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+        "key": "TurnOffWindowsCopilot",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+        "key": "TurnOffWindowsCopilot",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_force_deny_app_privacy",
+    "title": "Uygulama İzinlerini Zorunlu Engelle",
+    "description": "Kamera, mikrofon ve konum erişimini sistem genelinde reddeder. İzinsiz erişimi önler.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "camera",
+      "microphone",
+      "location",
+      "contacts"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "key": "LetAppsAccessCamera",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "key": "LetAppsAccessMicrophone",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "key": "LetAppsAccessLocation",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "key": "LetAppsAccessContacts",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_cloud_clipboard",
+    "title": "Bulut Pano Eşitlemesini Kapat",
+    "description": "Kopyalanan verilerin Microsoft bulutuna gitmesini engeller. Cihazlar arası eşitlemeyi durdurur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "clipboard",
+      "cloud"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "AllowClipboardHistory",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "AllowCrossDeviceClipboard",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_ink_typing_personalization",
+    "title": "Yazma Kişiselleştirmesini Kapat",
+    "description": "Klavyede yazılanların Microsoft sözlüğüne kaydedilmesini önler. Veri toplanmasını kapatır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "typing",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization",
+        "key": "RestrictImplicitTextCollection",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization",
+        "key": "RestrictImplicitInkCollection",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\InputPersonalization",
+        "key": "AllowInputPersonalization",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_location_sensors",
+    "title": "Konum ve Sensörleri Kapat",
+    "description": "Konum takibini ve sensör analizlerini devre dışı bırakır. Sürekli pinglenmeyi durdurur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "location",
+      "sensors"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "key": "DisableLocation",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "key": "DisableLocationScripting",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "key": "DisableSensors",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\LocationAndSensors",
+        "key": "DisableWindowsLocationProvider",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_windows_spotlight_consumer",
+    "title": "Kilit Ekranı Önerilerini Kapat",
+    "description": "Kilit ekranındaki ve ayarlardaki reklam önerilerini engeller. Sadece kendi görsellerinizle çalışın.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "spotlight",
+      "ads"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "key": "DisableWindowsSpotlightFeatures",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "key": "DisableWindowsConsumerFeatures",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+        "key": "DisableSoftLanding",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+        "key": "SubscribedContent-338388Enabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_widgets_news",
+    "title": "Araç Takımlarını Kapat",
+    "description": "Görev çubuğundaki haber ve araç takımı akışını tamamen kapatır. İnternet tüketen servisleri durdurur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "widgets",
+      "news"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+        "key": "AllowNewsAndInterests",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+        "key": "DisableWidgetsBoard",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_defender_maps_spynet",
+    "title": "Antivirüs Veri Gönderimini Kapat",
+    "description": "Antivirüsün şüpheli dosyaları otomatik göndermesini engeller. Ağ kullanımını azaltır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "defender",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+        "key": "SpynetReporting",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+        "key": "SubmitSamplesConsent",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_enable_doh_encrypted_dns",
+    "title": "Şifreli Ağ Adreslemesini Aktifleştir",
+    "description": "Sağlayıcınızın ağ sorgularınızı izlemesini engeller. Ekstra şifreleme ile güvenliği sağlar.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "dns",
+      "network",
+      "doh"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters",
+        "key": "EnableAutoDoh",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_disable_edge_telemetry_reporting",
+    "title": "Tarayıcı Veri Gönderimini Kapat",
+    "description": "Varsayılan tarayıcının gezinti verilerinizi raporlamasını durdurur. Gizliliğinizi maksimuma çıkarır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "edge",
+      "telemetry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "key": "PersonalizationReportingEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "key": "ShowRecommendationsEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "key": "DiagnosticData",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+        "key": "HubsSidebarEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_f849be90",
+    "title": "Hata Raporu Gönderimini Kapat",
+    "description": "Çökme anındaki hata verilerinin buluta gitmesini engeller. Ağ kilitlenmelerini önler.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_760a8043",
+    "title": "Çekirdek Veri Gönderimini Kapat",
+    "description": "Çekirdek düzeyindeki sistem olay takibini kapatır. Mikro takılmaları engelleyerek akıcılığı artırır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_634f8c65",
+    "title": "Eşler Arası Güncellemeyi Kapat",
+    "description": "Güncelleme dosyalarınızın başkalarına yüklenmesini durdurur. Bant genişliğinizi rahatlatır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_858471fc",
+    "title": "Cihaz Keşfi Verilerini Kapat",
+    "description": "Yakındaki cihazları bulma servislerini devre dışı bırakır. Buluta gereksiz bağlantıyı önler.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_0bc81ab9",
+    "title": "Güvenlik Taraması Verilerini Kapat",
+    "description": "Güvenlik filtresinin dosya özetlerini taramasını durdurur. Uygulama başlatma gecikmelerini kaldırır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_89772dc9",
+    "title": "Ağ Bağlantı Testlerini Kapat",
+    "description": "Sunuculara giden sürekli aktif ağ bağlantı testlerini keser. Gereksiz sorguları sonlandırır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_b36a3b32",
+    "title": "Mağaza Dosya Erişimini Kapat",
+    "description": "Mağaza uygulamalarının dosya sisteminize geniş çaplı erişimini sınırlar. İzinsiz okumaları durdurur.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_79ce6d9f",
+    "title": "Geri Bildirim Görevlerini Kapat",
+    "description": "Microsoft'un sürekli anket istemesini engeller. Arka plan anket görevlerini temizler.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_b29dc716",
+    "title": "El Yazısı Verilerini Kapat",
+    "description": "Dokunmatik ekran ve kalem kalıplarınızın paylaşılmasını durdurur. Çizim verileriniz sizde kalır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_1dcc346a",
+    "title": "Dosya Gezgini Telemetrisini Kapat",
+    "description": "Son açılan dosyaların kaydedilmesini ve takip edilmesini kapatır. Gezgini hızlandırır.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_87ec70b3",
+    "title": "Bulut Ses Tanımayı Kapat",
+    "description": "Sesinizin analiz edilip buluta gönderilmesini engeller. Sesli tanıma süreçlerini yerelde tutar.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "privacy_3e4f78dd",
+    "title": "Tarayıcı Arkaplan Yüklemesini Kapat",
+    "description": "Varsayılan tarayıcının arka planda gizlice ön yükleme yapmasını durdurur. Sistemin gereksiz yere yorulmasını engeller.",
+    "category_id": "privacy",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "privacy",
+      "phase2"
+    ],
+    "script_payloads": [],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]

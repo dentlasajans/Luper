@@ -1,4 +1,4 @@
-import { WarningCircle, ArrowsClockwise } from '@phosphor-icons/react';
+import { WarningCircle, ArrowsClockwise } from '@/src/components/ui/Icons';
 import { motion } from 'motion/react';
 import { Component, ErrorInfo, ReactNode } from 'react';
 
@@ -67,4 +67,6 @@ export class ErrorBoundary extends Component<Props, State> {
 
     return this.props.children;
   }
+
+
 }
