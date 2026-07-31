@@ -1,6 +1,0 @@
-{
-  "name": "LUPER",
-  "description": "Modern and premium Windows optimization application using Windows 11 Fluent Design.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
