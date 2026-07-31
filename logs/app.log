@@ -1,3 +1,0 @@
-{"level":30,"time":"2026-07-30T07:39:08.790Z","pid":14348,"hostname":"WIN-VESDITQ515U","msg":"[PublicApiFramework] Registered endpoint: [query.systemHealth]"}
-{"level":30,"time":"2026-07-30T07:39:08.790Z","pid":14348,"hostname":"WIN-VESDITQ515U","msg":"[PublicApiFramework] Registered endpoint: [command.scheduleTask]"}
-{"level":30,"time":"2026-07-30T07:39:08.790Z","pid":14348,"hostname":"WIN-VESDITQ515U","msg":"[PublicApiFramework] Registered endpoint: [query.licenseStatus]"}
