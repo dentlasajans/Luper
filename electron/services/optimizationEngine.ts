@@ -346,7 +346,7 @@ class OptimizationEngineCore {
           isPowerPlanRestore = true;
           powerPlanGuidToRestore = backup.originalValue || '';
       }
-      else if (backup.exists && backup.originalValue !== undefined) {
+      else if (backup.exists && backup.originalValue !== undefined && backup.originalValue !== null) {
         restoreCode = `Set-ItemProperty -Path "${backup.regPath}" -Name "${backup.regName}" -Value ${backup.originalValue === '' ? '""' : backup.originalValue} -ErrorAction SilentlyContinue`;
       } else if (backup.exists === false) {
         restoreCode = `Remove-ItemProperty -Path "${backup.regPath}" -Name "${backup.regName}" -ErrorAction SilentlyContinue`;

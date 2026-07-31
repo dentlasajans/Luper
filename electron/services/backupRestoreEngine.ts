@@ -57,7 +57,7 @@ class BackupRestoreEngineCore {
           timestamp: new Date().toISOString(),
           regPath,
           regName,
-          originalValue: String(originalValue),
+          originalValue: originalValue === undefined || originalValue === null ? null : String(originalValue),
           exists: Boolean(exists)
         };
         await this.saveBackupsDatabase(backups);

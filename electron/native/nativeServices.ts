@@ -7,10 +7,46 @@ export const execAsync = (command: unknown, options: unknown = {}) => {
 
 export function parseRegPathAndName(code: unknown) {
   if (!code || typeof code !== 'string') return { regPath: '', regName: '' };
-  const pathMatch = code.match(/-Path\s+(?:"([^"]+)"|'([^']+)'|(\S+))/i);
-  const nameMatch = code.match(/-Name\s+(?:"([^"]+)"|'([^']+)'|(\S+))/i);
-  const regPath = pathMatch ? (pathMatch[1] || pathMatch[2] || pathMatch[3] || '') : '';
-  const regName = nameMatch ? (nameMatch[1] || nameMatch[2] || nameMatch[3] || '') : '';
+  
+  // 1. PowerShell Set-ItemProperty / New-ItemProperty / Remove-ItemProperty
+  let pathMatch = code.match(/-Path\s+(?:"([^"]+)"|'([^']+)'|(\S+))/i);
+  let nameMatch = code.match(/-Name\s+(?:"([^"]+)"|'([^']+)'|(\S+))/i);
+  
+  let regPath = pathMatch ? (pathMatch[1] || pathMatch[2] || pathMatch[3] || '') : '';
+  let regName = nameMatch ? (nameMatch[1] || nameMatch[2] || nameMatch[3] || '') : '';
+  
+  // 2. reg.exe add / delete (e.g. reg add "HKLM\System" /v "GameMode")
+  if (!regPath || !regName) {
+      const regMatch = code.match(/reg\s+(?:add|delete)\s+(?:"([^"]+)"|'([^']+)'|(\S+))/i);
+      const valMatch = code.match(/\/v\s+(?:"([^"]+)"|'([^']+)'|(\S+))/i);
+      if (regMatch && valMatch) {
+          regPath = regMatch[1] || regMatch[2] || regMatch[3] || '';
+          regName = valMatch[1] || valMatch[2] || valMatch[3] || '';
+      }
+  }
+
+  // 3. C++ Native JSON payload: [{"action":"set","path":"HKLM\\System","name":"GameMode"}]
+  if (!regPath || !regName) {
+      if (code.trim().startsWith('[')) {
+          try {
+              const jsonCmds = JSON.parse(code);
+              if (Array.isArray(jsonCmds) && jsonCmds.length > 0) {
+                  const cmd = jsonCmds[0];
+                  if (cmd.path && cmd.name) {
+                      regPath = cmd.path;
+                      regName = cmd.name;
+                  }
+              }
+          } catch(e) {}
+      }
+  }
+  
+  // Normalize path
+  if (regPath.startsWith('HKLM\\')) regPath = regPath.replace('HKLM\\', 'HKLM:\\');
+  else if (regPath.startsWith('HKCU\\')) regPath = regPath.replace('HKCU\\', 'HKCU:\\');
+  else if (regPath.startsWith('HKEY_LOCAL_MACHINE\\')) regPath = regPath.replace('HKEY_LOCAL_MACHINE\\', 'HKLM:\\');
+  else if (regPath.startsWith('HKEY_CURRENT_USER\\')) regPath = regPath.replace('HKEY_CURRENT_USER\\', 'HKCU:\\');
+  
   return { regPath: sanitizeRegPath(regPath), regName: sanitizeRegName(regName) };
 }
 

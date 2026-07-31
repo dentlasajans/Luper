@@ -1,10 +1,12 @@
 name: Deploy LUPER Web to GitHub Pages
 
 on:
+  # Sadece main branch'e kod yüklendiğinde tetiklenir
   push:
     branches:
       - main
 
+# gh-pages branch'ine yazma izni
 permissions:
   contents: write
 
