@@ -1,4 +1,19 @@
 import { app, ipcMain } from 'electron';
+import fs from 'fs';
+import os from 'os';
+
+process.on('uncaughtException', (err) => {
+  try {
+    fs.appendFileSync(os.homedir() + '\\Desktop\\luper_main_debug.txt', `[${new Date().toISOString()}] UNCAUGHT EXCEPTION: ${err.message}\n${err.stack}\n\n`);
+  } catch (e) {}
+});
+
+process.on('unhandledRejection', (reason) => {
+  try {
+    fs.appendFileSync(os.homedir() + '\\Desktop\\luper_main_debug.txt', `[${new Date().toISOString()}] UNHANDLED REJECTION: ${reason}\n\n`);
+  } catch (e) {}
+});
+
 import { bootstrapApp } from './core/bootstrap.js';
 import { executeHeuristicOptimization } from './core/executionEngine';
 
