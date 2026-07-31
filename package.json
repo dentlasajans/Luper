@@ -1,7 +1,7 @@
 {
     "name":  "luper",
     "private":  true,
-    "version":  "1.2.0",
+    "version":  "1.2.1",
     "description":  "Luper - Windows Operating System Optimization \u0026 Performance Application",
     "author":  "Himmet Muhammed \u003chimmetmuhammedk@gmail.com\u003e",
     "type":  "module",
