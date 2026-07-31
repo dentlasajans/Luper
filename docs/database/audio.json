@@ -1,0 +1,1157 @@
+[
+  {
+    "id": "audio_sys_profile_optimization",
+    "title": "Çoklu Ortam Önceliğini Artır",
+    "description": "Ses ve çoklu ortam için sistem önceliğini yükseltir. Ağ kısıtlamasını kaldırarak gecikmeyi düşürür.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "latency",
+      "multimedia",
+      "network"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "key": "SystemResponsiveness",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "key": "NetworkThrottlingIndex",
+        "value": "4294967295",
+        "valueType": "REG_DWORD"
+      }
+    ]
+  },
+  {
+    "id": "audio_mmcss_task_optimization",
+    "title": "Ses Görevlerini İyileştir",
+    "description": "Ses görevlerine yüksek işlemci ve ekran kartı önceliği atar. Ses takılmalarını kökten çözer.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 92,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "priority",
+      "latency",
+      "cpu",
+      "io",
+      "gpu",
+      "mmcss"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Audio",
+        "key": "Priority",
+        "value": "8",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Audio",
+        "key": "Scheduling Category",
+        "value": "High",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Audio",
+        "key": "SFIO Priority",
+        "value": "High",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Audio",
+        "key": "Background Only",
+        "value": "False",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Audio",
+        "key": "GPU Priority",
+        "value": "8",
+        "valueType": "REG_DWORD"
+      }
+    ]
+  },
+  {
+    "id": "audio_disable_spatial_sound",
+    "title": "Uzamsal Sesi Kapat",
+    "description": "Sanal çevresel sesi kapatarak en saf sesi sunar. Rekabetçi oyunlarda avantaj sağlar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "latency",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio",
+        "key": "DisableSpatialSound",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ]
+  },
+  {
+    "id": "audio_disable_protected_dg",
+    "title": "Korumalı Ses Motorunu Kapat",
+    "description": "Ses motoru hizmetinin korumalı modunu kapatır. Sürücü çakışmalarını ve ek gecikmeyi önler.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 90,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "latency",
+      "audiodg"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio",
+        "key": "DisableProtectedAudioDG",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ]
+  },
+  {
+    "id": "audio_audiodg_priority_affinity",
+    "title": "Ses Motoru İşlemci Ataması",
+    "description": "Ses motoru işlemine yüksek öncelik ve özel işlemci çekirdeği atar. İşlem gecikmelerini ve ses çatlamalarını durdurur.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "latency",
+      "audiodg",
+      "cpu",
+      "priority"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\audiodg.exe\\PerfOptions\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\audiodg.exe\\PerfOptions\" -Name \"CpuPriorityClass\" -Value 3 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\audiodg.exe\\PerfOptions\" -Name \"IOPriority\" -Value 3 -Type DWord; $p = Get-Process audiodg -ErrorAction SilentlyContinue; if($p){ $p.PriorityClass = 'High'; $p.ProcessorAffinity = [IntPtr]4 }"
+      }
+    ]
+  },
+  {
+    "id": "audio_mmcss_pro_audio_optimization",
+    "title": "Profesyonel Ses Profilini Aç",
+    "description": "Profesyonel ses profiline maksimum disk ve ekran kartı önceliği verir. En düşük gecikmeli ses akışını sağlar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "mmcss",
+      "latency",
+      "priority"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$Path = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Pro Audio\"; New-Item -Path $Path -Force | Out-Null; Set-ItemProperty -Path $Path -Name \"Priority\" -Value 8 -Type DWord; Set-ItemProperty -Path $Path -Name \"Scheduling Category\" -Value \"High\" -Type String; Set-ItemProperty -Path $Path -Name \"SFIO Priority\" -Value \"High\" -Type String; Set-ItemProperty -Path $Path -Name \"Background Only\" -Value \"False\" -Type String; Set-ItemProperty -Path $Path -Name \"GPU Priority\" -Value 8 -Type DWord; Set-ItemProperty -Path $Path -Name \"Clock Rate\" -Value 10000 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_device_power_idle_timeout_override",
+    "title": "Ses Güç Tasarrufunu Kapat",
+    "description": "Ses sürücülerinin uyku moduna geçmesini engeller. İlk ses oynatımındaki uyanma gecikmesini siler.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "power",
+      "driver"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$ClassKey = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\"; Get-ChildItem -Path $ClassKey -ErrorAction SilentlyContinue | ForEach-Object { $PowerPath = Join-Path -Path $_.PSPath -ChildPath \"PowerSettings\"; if (Test-Path -Path $PowerPath) { Set-ItemProperty -Path $PowerPath -Name \"ConservationIdleTime\" -Value ([byte[]](0xFF,0xFF,0xFF,0xFF)) -Type Binary; Set-ItemProperty -Path $PowerPath -Name \"PerformanceIdleTime\" -Value ([byte[]](0xFF,0xFF,0xFF,0xFF)) -Type Binary; Set-ItemProperty -Path $PowerPath -Name \"IdlePowerState\" -Value ([byte[]](0x00,0x00,0x00,0x00)) -Type Binary } }"
+      }
+    ]
+  },
+  {
+    "id": "audio_msi_mode_optimization",
+    "title": "Ses Kartı Kesme Modu",
+    "description": "Ses denetleyicisini gelişmiş donanım kesme moduna geçirir. Çakışmaları bitirip sistem takılmalarını çözer.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "msi",
+      "irq",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$PciAudio = Get-PnpDevice -Class \"System\" -FriendlyName \"*Audio Controller*\" -ErrorAction SilentlyContinue | Where-Object {$_.InstanceId -like \"PCI\\*\"}; if (-not $PciAudio) { $PciAudio = Get-PnpDevice -Class \"MEDIA\" -ErrorAction SilentlyContinue | Where-Object {$_.InstanceId -like \"PCI\\*\"} } foreach ($Dev in $PciAudio) { $MsiPath = \"HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\$($Dev.InstanceId)\\Device Parameters\\Interrupt Management\\MessageSignaledInterruptProperties\"; $AffPath = \"HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\$($Dev.InstanceId)\\Device Parameters\\Interrupt Management\\Affinity Policy\"; New-Item -Path $MsiPath -Force | Out-Null; New-Item -Path $AffPath -Force | Out-Null; Set-ItemProperty -Path $MsiPath -Name \"MSISupported\" -Value 1 -Type DWord; Set-ItemProperty -Path $AffPath -Name \"DevicePriority\" -Value 3 -Type DWord }"
+      }
+    ]
+  },
+  {
+    "id": "audio_decouple_mmcss_service",
+    "title": "Ses Hizmetini Bağımsızlaştır",
+    "description": "Ana ses hizmetini sistem bağımlılığından kurtarır. İşlemci darboğazlarında ses donmasını engeller.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 90,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "service",
+      "mmcss"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$ServicePath = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Audiosrv\"; $CurrentDeps = (Get-ItemProperty -Path $ServicePath).DependOnService; $NewDeps = $CurrentDeps | Where-Object { $_ -ne \"MMCSS\" }; Set-ItemProperty -Path $ServicePath -Name \"DependOnService\" -Value $NewDeps -Type MultiString"
+      }
+    ]
+  },
+  {
+    "id": "audio_bluetooth_aac_disable",
+    "title": "Gecikmeli Kablosuz Sesi Kapat",
+    "description": "Yüksek gecikmeli kablosuz ses kodlayıcısını devre dışı bırakır. Alternatif kodlayıcılarla ultra düşük gecikme sağlar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "bluetooth",
+      "codec",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$BthPath = \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\BthA2dp\\Parameters\"; New-Item -Path $BthPath -Force | Out-Null; Set-ItemProperty -Path $BthPath -Name \"BluetoothAacEnable\" -Value 0 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_usb_selective_suspend_disable",
+    "title": "Harici Ses Tasarrufunu Kapat",
+    "description": "Harici kulaklıkların ve mikrofonların uykuya dalmasını engeller. Bağlantı kopmalarını ve başlatma gecikmesini yok eder.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "usb",
+      "power",
+      "reliability"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-CimInstance -ClassName MSPower_DeviceEnable -Namespace root\\wmi -ErrorAction SilentlyContinue | Where-Object {$_.InstanceName -like \"*USB*\"} | Set-CimInstance -Property @{Enable = $false}; $UsbAudioDevices = Get-ChildItem -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\" -Recurse -ErrorAction SilentlyContinue | Where-Object {$_.PSChildName -eq \"Device Parameters\"}; foreach ($DevParam in $UsbAudioDevices) { Set-ItemProperty -Path $DevParam.PSPath -Name \"SelectiveSuspendEnabled\" -Value 0 -Type DWord -ErrorAction SilentlyContinue; Set-ItemProperty -Path $DevParam.PSPath -Name \"EnhancedPowerManagementEnabled\" -Value 0 -Type DWord -ErrorAction SilentlyContinue }"
+      }
+    ]
+  },
+  {
+    "id": "audio_global_apo_disable",
+    "title": "Ses Geliştirmelerini Tamamen Kapat",
+    "description": "Yazılımsal ses efektlerini sistem genelinde kapatır. Oyun içi çevresel ses netliğini artırıp gecikmeyi düşürür.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 90,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "apo",
+      "latency",
+      "signal"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$RenderDevices = Get-ChildItem -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\" -ErrorAction SilentlyContinue; foreach ($Dev in $RenderDevices) { $FxPath = Join-Path -Path $Dev.PSPath -ChildPath \"FxProperties\"; if (Test-Path -Path $FxPath) { Set-ItemProperty -Path $FxPath -Name \"{d3544d22-8234-428d-a514-c600771c9f77},2\" -Value 1 -Type DWord; Set-ItemProperty -Path $FxPath -Name \"Disable_Mixer_APO\" -Value 1 -Type DWord } }"
+      }
+    ]
+  },
+  {
+    "id": "audio_mmcss_games_optimization",
+    "title": "Oyunlar İçin Ses İyileştirmesi",
+    "description": "Oyun görev profili için ekran kartı önceliğini artırır. Tam yükte oluşan ses kesintilerini kökten çözer.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "mmcss",
+      "games",
+      "priority",
+      "gpu"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$GamesPath = \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\"; New-Item -Path $GamesPath -Force | Out-Null; Set-ItemProperty -Path $GamesPath -Name \"Priority\" -Value 2 -Type DWord; Set-ItemProperty -Path $GamesPath -Name \"Scheduling Category\" -Value \"High\" -Type String; Set-ItemProperty -Path $GamesPath -Name \"SFIO Priority\" -Value \"High\" -Type String; Set-ItemProperty -Path $GamesPath -Name \"Background Only\" -Value \"False\" -Type String; Set-ItemProperty -Path $GamesPath -Name \"GPU Priority\" -Value 8 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_gpu_deep_sleep_disable",
+    "title": "Görüntü Sesi Uykusunu Kapat",
+    "description": "Ekran kartı sesinin derin donanım uykusuna girmesini önler. Ekran hoparlöründeki uyanma gecikmesini ortadan kaldırır.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "hdmi",
+      "displayport",
+      "power",
+      "gpu"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$ClassKey = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\"; Get-ChildItem -Path $ClassKey -ErrorAction SilentlyContinue | ForEach-Object { $Desc = (Get-ItemProperty -Path $_.PSPath -Name \"DriverDesc\" -ErrorAction SilentlyContinue).DriverDesc; if ($Desc -like \"*NVIDIA*\" -or $Desc -like \"*AMD*\" -or $Desc -like \"*Display Audio*\") { Set-ItemProperty -Path $_.PSPath -Name \"EnableD3Cold\" -Value 0 -Type DWord; Set-ItemProperty -Path $_.PSPath -Name \"PowerGating\" -Value 0 -Type DWord; Set-ItemProperty -Path $_.PSPath -Name \"EnableD3\" -Value 0 -Type DWord } }"
+      }
+    ]
+  },
+  {
+    "id": "audio_mmcss_capture_optimization",
+    "title": "Mikrofon Gecikme İyileştirmesi",
+    "description": "Mikrofon giriş görevlerine yüksek saat çözünürlüğü ve öncelik atar. Sesli sohbetlerde mikrofon gecikmesini sıfırlar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "mmcss",
+      "capture",
+      "microphone",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Name \"Priority\" -Value 8 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Name \"Scheduling Category\" -Value \"High\" -Type String; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Name \"SFIO Priority\" -Value \"High\" -Type String; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Name \"Background Only\" -Value \"False\" -Type String; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Name \"GPU Priority\" -Value 8 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Capture\" -Name \"Clock Rate\" -Value 10000 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_global_timer_resolution_force",
+    "title": "Yüksek Hassasiyetli Zamanlayıcı Zorla",
+    "description": "İşletim sisteminde genel hassas zamanlayıcıyı aktif eder. Ses dalgalanmasını ve işlem gecikmesini asgariye indirir.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "kernel",
+      "timer",
+      "latency",
+      "dpc"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" -Name \"GlobalTimerResolutionRequests\" -Value 1 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_wavert_raw_packet_override",
+    "title": "Ses Tampon Gecikmesini Düşür",
+    "description": "Ham ses paket işleme süresini en düşük seviyeye zorlar. Sürücü içi tampon gecikmesini büyük ölçüde azaltır.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "driver",
+      "wavert",
+      "latency",
+      "wasapi"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$ClassKey = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\"; Get-ChildItem -Path $ClassKey -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name \"RenderRawProcessingPacketDurationInHns\" -Value 10000 -Type DWord -ErrorAction SilentlyContinue; Set-ItemProperty -Path $_.PSPath -Name \"MinimumPacketPeriodInHns\" -Value 10000 -Type DWord -ErrorAction SilentlyContinue }"
+      }
+    ]
+  },
+  {
+    "id": "audio_realtek_power_saving_bypass",
+    "title": "Dahili Güç Tasarrufunu Kapat",
+    "description": "Dahili ses yongalarının uykuya geçişini ve bağlantı sorgulamasını iptal eder. Ses uyanma gecikmelerini ve patlama seslerini yok eder.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_medium",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 97,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "realtek",
+      "power",
+      "polling",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Realtek\\Audio\\RtkNGUI64\\PowerMgnt\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Realtek\\Audio\\RtkNGUI64\\PowerMgnt\" -Name \"Enabled\" -Value 0 -Type DWord; $ClassKey = \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96c-e325-11ce-bfc1-08002be10318}\"; Get-ChildItem -Path $ClassKey -ErrorAction SilentlyContinue | ForEach-Object { $SettingsPath = Join-Path -Path $_.PSPath -ChildPath \"Settings\"; if (Test-Path -Path $SettingsPath) { Set-ItemProperty -Path $SettingsPath -Name \"EnablePowerSave\" -Value 0 -Type DWord -ErrorAction SilentlyContinue; Set-ItemProperty -Path $SettingsPath -Name \"DisableDynamicPowerManagement\" -Value 1 -Type DWord -ErrorAction SilentlyContinue } }"
+      }
+    ]
+  },
+  {
+    "id": "audio_endpoint_builder_priority",
+    "title": "Ses Hizmeti Önceliğini Artır",
+    "description": "Ses hizmetlerinin bellekten silinmesini engeller. Oyun sırasında anlık uç nokta sorgu gecikmelerini sıfırlar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 94,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "service",
+      "priority",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\AudioEndpointBuilder\" -Name \"Start\" -Value 2 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\AudioEndpointBuilder\" -Name \"ServiceDllUnloadOnStop\" -Value 0 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\AudioEndpointBuilder\" -Name \"PagingPriority\" -Value 1 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_usb_class_2_buffer_override",
+    "title": "Harici Ses Tamponunu Düşür",
+    "description": "Dahili harici ses sürücüsü tamponunu en düşük seviyeye kilitler. Harici dönüştürücü ve kulaklıkların tepki süresini iyileştirir.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "usb",
+      "driver",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\USBAUDIO2\\Parameters\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\USBAUDIO2\\Parameters\" -Name \"BufferPeriod\" -Value 10000 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\USBAUDIO2\\Parameters\" -Name \"ResetOnPowerState\" -Value 0 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_directsound_emulation_bypass",
+    "title": "Yazılımsal Ses Öykünmesini Kapat",
+    "description": "Yazılımsal ses öykünmesini atlayarak doğrudan donanım akışını açar. Eski nesil oyunlarda gecikmeyi düşürür.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 93,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "directsound",
+      "directx",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\DirectSound\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\DirectSound\" -Name \"EmulationOnly\" -Value 0 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\DirectSound\" -Name \"DisableHardwareAcceleration\" -Value 0 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\DirectSound\" -Name \"Speaker Config\" -Value 4 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_wasapi_raw_input_force",
+    "title": "Doğrudan Ham Mikrofon Modu",
+    "description": "Tüm mikrofonlar için ham sinyal modunu zorunlu kılar. Sistem filtrelerini atlayarak giriş gecikmesini sıfırlar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "wasapi",
+      "microphone",
+      "latency",
+      "raw"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$CaptureDevices = Get-ChildItem -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Capture\" -ErrorAction SilentlyContinue; foreach ($Dev in $CaptureDevices) { $FxPath = Join-Path -Path $Dev.PSPath -ChildPath \"Properties\"; if (Test-Path -Path $FxPath) { Set-ItemProperty -Path $FxPath -Name \"{9c119480-dd2e-4978-8762-76c239922004},0\" -Value \"{c18e2f7e-933d-4965-b7d1-1eef228d2af3}\" -Type String -ErrorAction SilentlyContinue } }"
+      }
+    ]
+  },
+  {
+    "id": "audio_mmcss_clock_rate_enforcer",
+    "title": "Ses Zamanlayıcısını Sabitle",
+    "description": "Çoklu ortam görevlerinin en düşük zaman aralıklarıyla tetiklenmesini sağlar. Sistem genelindeki ses kararlılığını artırır.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "mmcss",
+      "timer",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Audio\" -Name \"Clock Rate\" -Value 10000 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_audiodg_page_lock",
+    "title": "Ses Bellek Sayfalarını Kilitle",
+    "description": "Ses motoru sürecinin diske yazılmasını engeller. Bellek darboğazlarında bile kesintisiz ses oynatımı sunar.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "audio",
+      "audiodg",
+      "memory",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\audiodg.exe\\PerfOptions\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\audiodg.exe\\PerfOptions\" -Name \"DisablePageUnloading\" -Value 1 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\audiodg.exe\\PerfOptions\" -Name \"UseLargePages\" -Value 1 -Type DWord"
+      }
+    ]
+  },
+  {
+    "id": "audio_xaudio2_low_latency_mode",
+    "title": "Gelişmiş Düşük Gecikme Modu",
+    "description": "Modern ses altyapısı için düşük gecikmeli doğrudan işleme modunu açar. Yeni nesil oyunlarda ses tepkime hızını artırır.",
+    "category_id": "audio",
+    "is_optimized": false,
+    "status": "idle",
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    },
+    "ai_confidence": 97,
+    "risk_level": "low",
+    "tags": [
+      "audio",
+      "xaudio2",
+      "directx",
+      "gaming",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\XAudio2\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\XAudio2\" -Name \"MaxAudioThreads\" -Value 4 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\XAudio2\" -Name \"LowLatencyMode\" -Value 1 -Type DWord"
+      }
+    ]
+  }
+]

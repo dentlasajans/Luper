@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1785305644181" clover="3.2.0">
+  <project timestamp="1785305644181" name="All files">
+    <metrics statements="56" coveredstatements="56" conditionals="54" coveredconditionals="50" methods="23" coveredmethods="23" elements="133" coveredelements="129" complexity="0" loc="56" ncloc="56" packages="1" files="1" classes="1"/>
+    <file name="Sidebar.tsx" path="C:\Luper\src\components\Sidebar.tsx">
+      <metrics statements="56" coveredstatements="56" conditionals="54" coveredconditionals="50" methods="23" coveredmethods="23"/>
+      <line num="1" count="2" type="stmt"/>
+      <line num="2" count="2" type="stmt"/>
+      <line num="20" count="2" type="stmt"/>
+      <line num="21" count="2" type="stmt"/>
+      <line num="22" count="2" type="stmt"/>
+      <line num="23" count="2" type="stmt"/>
+      <line num="44" count="2" type="stmt"/>
+      <line num="91" count="2" type="stmt"/>
+      <line num="92" count="18" type="cond" truecount="1" falsecount="0"/>
+      <line num="93" count="36" type="stmt"/>
+      <line num="97" count="2" type="stmt"/>
+      <line num="98" count="340" type="stmt"/>
+      <line num="100" count="2" type="stmt"/>
+      <line num="121" count="2" type="stmt"/>
+      <line num="138" count="234" type="stmt"/>
+      <line num="142" count="6" type="stmt"/>
+      <line num="185" count="442" type="stmt"/>
+      <line num="199" count="2" type="stmt"/>
+      <line num="200" count="48" type="stmt"/>
+      <line num="201" count="48" type="stmt"/>
+      <line num="202" count="48" type="stmt"/>
+      <line num="204" count="48" type="stmt"/>
+      <line num="205" count="20" type="stmt"/>
+      <line num="206" count="20" type="stmt"/>
+      <line num="208" count="20" type="stmt"/>
+      <line num="211" count="48" type="stmt"/>
+      <line num="212" count="4" type="stmt"/>
+      <line num="213" count="4" type="stmt"/>
+      <line num="214" count="4" type="stmt"/>
+      <line num="216" count="2" type="stmt"/>
+      <line num="218" count="4" type="stmt"/>
+      <line num="222" count="48" type="stmt"/>
+      <line num="223" count="4" type="stmt"/>
+      <line num="224" count="4" type="stmt"/>
+      <line num="226" count="2" type="stmt"/>
+      <line num="230" count="48" type="stmt"/>
+      <line num="231" count="6" type="stmt"/>
+      <line num="232" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="233" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="235" count="2" type="stmt"/>
+      <line num="239" count="48" type="stmt"/>
+      <line num="240" count="2" type="stmt"/>
+      <line num="243" count="48" type="stmt"/>
+      <line num="244" count="20" type="stmt"/>
+      <line num="245" count="310" type="stmt"/>
+      <line num="247" count="20" type="cond" truecount="1" falsecount="0"/>
+      <line num="248" count="2" type="stmt"/>
+      <line num="252" count="48" type="stmt"/>
+      <line num="253" count="20" type="stmt"/>
+      <line num="254" count="20" type="stmt"/>
+      <line num="255" count="180" type="cond" truecount="1" falsecount="0"/>
+      <line num="256" count="180" type="stmt"/>
+      <line num="258" count="20" type="stmt"/>
+      <line num="261" count="48" type="stmt"/>
+      <line num="275" count="96" type="stmt"/>
+      <line num="280" count="432" type="stmt"/>
+    </file>
+  </project>
+</coverage>
