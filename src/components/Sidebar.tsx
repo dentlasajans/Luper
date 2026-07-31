@@ -339,7 +339,7 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
 
       {/* Footer / Version & Links */}
       <div className="pt-3 px-1 flex items-center justify-between" style={{ WebkitAppRegion: 'no-drag' }}>
-        <span className="text-[11px] font-mono text-[#86868b] font-medium">v1.3.1 Stable</span>
+        <span className="text-[11px] font-mono text-[#86868b] font-medium">v1.3.6 Stable</span>
         <div className="flex items-center space-x-2 text-[#86868b]">
           <a href="#" aria-label="GitHub" className="hover:text-white hover:scale-105 transition-all duration-300"><GithubLogo size={14} weight="duotone" /></a>
           <a href="#" aria-label="Twitter" className="hover:text-white hover:scale-105 transition-all duration-300"><TwitterLogo size={14} weight="duotone" /></a>
