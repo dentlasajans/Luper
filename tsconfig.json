@@ -23,5 +23,6 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "strict": true, "noUnusedLocals": true, "noUnusedParameters": true
-  }
+  },
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx", "coverage", "scripts"]
 }

@@ -1,4 +1,5 @@
-import { ArrowUpRight, SpinnerGap, ShieldCheck, Sparkle, Check, CheckCircle } from '@phosphor-icons/react';
+import { LuperButton } from '../ui/LuperButton';
+import { ArrowUpRight, ShieldCheck, Sparkle, CheckCircle } from '@/src/components/ui/Icons';
 import { motion } from 'motion/react';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { getAllOptimizationSettings } from '../../services/FirebaseService';
@@ -41,13 +42,13 @@ function calculateSettingPriorityScore(setting: OptimizationSetting): number {
 
 function getPrimaryImpactLabel(setting: OptimizationSetting): string {
   const impacts = setting.impacts;
-  if (impacts?.performance?.level === 'positive_high') return 'Performans: Yüksek Pozitif';
+  if (impacts?.performance?.level === 'positive_high') return 'Performans: Y?ksek Pozitif';
   if (impacts?.performance?.level === 'positive_medium') return 'Performans: Orta Pozitif';
   if (impacts?.performance?.level === 'positive_low') return 'Performans: Hafif Pozitif';
-  if (impacts?.latency?.level === 'positive_high') return 'Gecikme: Yüksek İyileşme';
-  if (impacts?.latency?.level === 'positive_medium') return 'Gecikme: Orta İyileşme';
-  if (impacts?.latency?.level === 'positive_low') return 'Gecikme: Düşük İyileşme';
-  return 'Genel Kararlılık Artışı';
+  if (impacts?.latency?.level === 'positive_high') return 'Gecikme: Y?ksek Iyilesme';
+  if (impacts?.latency?.level === 'positive_medium') return 'Gecikme: Orta Iyilesme';
+  if (impacts?.latency?.level === 'positive_low') return 'Gecikme: D?s?k Iyilesme';
+  return 'Genel Kararlilik Artisi';
 }
 
 export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
@@ -69,7 +70,7 @@ export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
     } catch (e) {}
 
     const allSettings = getAllOptimizationSettings();
-    const unapplied = allSettings.filter(s => !appliedIds.includes(s.id));
+    const unapplied = allSettings.filter((s) => !appliedIds.includes(s.id));
 
     unapplied.sort((a, b) => calculateSettingPriorityScore(b) - calculateSettingPriorityScore(a));
 
@@ -113,7 +114,7 @@ export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
 
       window.dispatchEvent(new CustomEvent('applied_optimizations_changed', { detail: { id: setting.id, status: 'optimized' } }));
 
-      notifySuccess('Optimizasyon Uygulandı', `${setting.name} başarıyla uygulandı.`);
+      notifySuccess('Optimizasyon Uygulandi', `${setting.name} basariyla uygulandi.`);
 
 
       setProcessingId(null);
@@ -127,32 +128,32 @@ export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
       }, 1000);
 
     } catch (err) {
-      console.error('Optimizasyon uygulanamadı:', err);
-      notifyError('Optimizasyon Uygulanamadı', setting.name);
+      console.error('Optimizasyon uygulanamadi:', err);
+      notifyError('Optimizasyon Uygulanamadi', setting.name);
       setProcessingId(null);
     }
   }, [processingId, successId, loadRecommendations]);
 
   return (
-    <div style={{ transform: 'translateZ(0)', willChange: 'transform, opacity', contain: 'layout style' }} className={`flex flex-col justify-between w-full h-full bg-white/[0.02] ${lowQualityMode ? '' : 'backdrop-blur-xl'} border border-white/[0.08] rounded-3xl p-7 transition-colors duration-500 hover:bg-white/[0.03] hover:border-white/[0.12]`}>
+    <div style={{ transform: 'translateZ(0)', willChange: 'transform, opacity', contain: 'layout style' }} className={`flex flex-col justify-between w-full h-full bg-[#1a1a1d] ${lowQualityMode ? '' : ''} border border-white/[0.08] rounded-3xl p-7 transition-colors duration-500 hover:bg-[#1a1a1d] hover:border-white/[0.12]`}>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3.5">
-          <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center shrink-0 transition-all duration-300">
-            <Sparkle size={20} weight="duotone" className="text-[#1a5efd]" />
+          <div className="w-10 h-10 rounded-xl bg-[#1a1a1d] border border-white/[0.06] flex items-center justify-center shrink-0 transition-all duration-300">
+            <Sparkle size={20} weight="duotone" className="text-luper-primary" />
           </div>
           <div>
-            <h3 className="text-[#f5f5f7] font-semibold tracking-tight text-[16px]">Önerilen Optimizasyonlar</h3>
-            <p className="text-[#a1a1a6] text-[13px] font-medium tracking-tight mt-0.5">Sistem donanımınıza özel olarak eşleşen öneriler</p>
+            <h3 className="text-[#f5f5f7] font-semibold tracking-tight text-[16px]">?nerilen Optimizasyonlar</h3>
+            <p className="text-[#a1a1a6] text-[13px] font-medium tracking-tight mt-0.5">Sistem donaniminiza ?zel olarak eslesen ?neriler</p>
           </div>
         </div>
       </div>
 
       <div className="flex-1 flex flex-col justify-start overflow-y-auto px-1.5 py-2 -mx-1.5 -mt-2 custom-scrollbar">
         {recommendations.length === 0 ? (
-          <div className="w-full h-full min-h-[160px] bg-white/[0.02] border border-white/[0.06] rounded-xl flex flex-col items-center justify-center p-6 text-center mt-2">
+          <div className="w-full h-full min-h-[160px] bg-[#1a1a1d] border border-white/[0.06] rounded-xl flex flex-col items-center justify-center p-6 text-center mt-2">
             <CheckCircle size={64} weight="duotone" className="text-[#86868b] mb-2 opacity-50" />
-            <h4 className="text-white font-medium mb-1">Tüm optimizasyonlar aktif!</h4>
-            <p className="text-[#86868b] text-[13px] max-w-[250px]">Sisteminiz maksimum performansta çalışıyor.</p>
+            <h4 className="text-white font-medium mb-1">T?m optimizasyonlar aktif!</h4>
+            <p className="text-[#86868b] text-[13px] max-w-[250px]">Sisteminiz maksimum performansta ?alisiyor.</p>
           </div>
         ) : (
           <div ref={parent} className="grid grid-cols-1 w-full gap-3">
@@ -169,12 +170,12 @@ export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   whileHover={{ scale: 1.015, y: -2 }}
                   style={{ transform: 'translateZ(0)', willChange: 'transform, opacity', contain: 'layout style' }}
-                  className="w-full p-4.5 bg-white/[0.02] border border-white/[0.06] rounded-2xl hover:border-[#1a5efd]/40 transition-colors flex flex-col justify-between"
+                  className="w-full p-4.5 bg-[#1a1a1d] border border-white/[0.06] rounded-2xl hover:border-luper-primary/40 transition-colors flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-[14px] font-semibold text-white tracking-tight">{item.name}</span>
-                      <span className="px-3 py-1 rounded-full bg-[#1a5efd]/15 text-[#64d2ff] text-[12px] font-medium tracking-tight whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]" title={impactLabel}>
+                      <span className="px-3 py-1 rounded-full bg-luper-primary/15 text-[#64d2ff] text-[12px] font-medium tracking-tight whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]" title={impactLabel}>
                         {impactLabel}
                       </span>
                     </div>
@@ -184,36 +185,9 @@ export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
                   <div className="flex items-center justify-between pt-2.5 border-t border-white/[0.04]">
                     <div className="flex items-center space-x-2 text-[12px] text-[#86868b]">
                       <ShieldCheck size={14} weight="duotone" className="text-[#34c759]" />
-                      <span className="text-[#34c759] font-medium">Güvenli Optimizasyon</span>
+                      <span className="text-[#34c759] font-medium">G?venli Optimizasyon</span>
                     </div>
-                    <button
-                      onClick={() => handleApply(item)}
-                      disabled={isProcessing || isSuccess}
-                      className={`px-4 py-2 rounded-xl text-[13px] font-medium transition-all duration-200 flex items-center space-x-1.5 ${
-                        isSuccess
-                          ? 'bg-[#34c759]/20 text-[#34c759] border border-[#34c759]/30'
-                          : isProcessing
-                          ? 'bg-white/[0.05] text-[#86868b] border border-white/[0.05] cursor-not-allowed'
-                          : 'bg-[#1a5efd] text-white hover:bg-[#1a5efd]/85 active:scale-95 shadow-[0_0_12px_rgba(26,94,253,0.3)]'
-                      }`}
-                    >
-                      {isProcessing ? (
-                        <>
-                          <SpinnerGap size={14} weight="duotone" className="animate-spin text-[#1a5efd]" />
-                          <span>Uygulanıyor...</span>
-                        </>
-                      ) : isSuccess ? (
-                        <>
-                          <Check size={16} weight="bold" />
-                          <span>Uygulandı</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Uygula</span>
-                          <ArrowUpRight size={14} weight="duotone" />
-                        </>
-                      )}
-                    </button>
+                    <LuperButton variant="primary" status={isProcessing ? "loading" : isSuccess ? "success" : "idle"} onClick={() => handleApply(item)} icon={<ArrowUpRight size={14} weight="duotone" />} loadingText="Uygulaniyor..." successText="Uygulandi">Uygula</LuperButton>
                   </div>
                 </motion.div>
               );
@@ -224,3 +198,4 @@ export const RecommendedOptimizations = memo(({ lowQualityMode }: Props) => {
     </div>
   );
 }, deepEqual);
+

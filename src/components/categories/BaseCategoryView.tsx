@@ -1,10 +1,11 @@
-import { Warning, ArrowLeft, Check, CaretRight, SpinnerGap, ArrowsClockwise, Gear } from '@phosphor-icons/react';
-import { motion } from 'motion/react';
+import { Warning, ArrowLeft, CaretRight, ArrowsClockwise, Gear, CheckCircle } from '@/src/components/ui/Icons';
+import { motion, AnimatePresence } from 'motion/react';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { CATEGORY_META } from '../../data/categories';
 import { useCategorySettings } from '../../hooks/useCategorySettings';
 import { OptimizationSetting } from '../../types';
 import { deepEqual } from '../../utils/equals';
+import { LuperToggle } from '../ui/LuperToggle';
 
 const ImpactBadge = memo(function ImpactBadge({
   label,
@@ -20,24 +21,44 @@ const ImpactBadge = memo(function ImpactBadge({
   const magnitude = level.replace('positive_', '').replace('negative_', '');
 
   const getTooltipText = () => {
-    let labelPrefix = label;
-    if (label === 'Perf') labelPrefix = 'Performansa';
-    else if (label === 'Gecikme') labelPrefix = 'Gecikmeye';
-    else if (label === 'İnput') labelPrefix = 'Girdi gecikmesine';
-    else if (label === 'Güç') labelPrefix = 'Güç tüketimine';
-    else if (label === 'Isı') labelPrefix = 'Isı değerlerine';
-
-    if (level === 'none' || !level) return `${labelPrefix} doğrudan etkisi yoktur.`;
-
-    const magnitudeText = magnitude === 'high' ? 'yüksek' : magnitude === 'medium' ? 'orta' : 'hafif';
-
-    if (isPositive) {
-       return `${labelPrefix} ${magnitudeText} oranda pozitif katkısı vardır.`;
-    } else if (isNegative) {
-       return `${labelPrefix} ${magnitudeText} oranda negatif etkisi vardır.`;
+    if (level === 'none' || !level) {
+      if (label === 'Performans') return 'Genel sistem performansına doğrudan etkisi yoktur.';
+      if (label === 'Gecikme') return 'Ağ (ping) bağlantı gecikmesine doğrudan etkisi yoktur.';
+      if (label === 'Input') return 'Cihaz ve donanım tepkime sürelerine etkisi yoktur.';
+      if (label === 'Güç') return 'Güç tüketimine doğrudan bir etkisi yoktur.';
+      if (label === 'Isı') return 'Sistem ısı değerlerine doğrudan etkisi yoktur.';
+      return 'Doğrudan etkisi yoktur.';
     }
 
-    return `${labelPrefix} doğrudan etkisi yoktur.`;
+    const mag = magnitude === 'high' ? 'yüksek' : magnitude === 'medium' ? 'orta' : 'hafif';
+
+    if (label === 'Performans') {
+      return isPositive 
+        ? `Sistem performansına ${mag} oranda pozitif katkı sağlar.` 
+        : `Sistem performansını ${mag} oranda olumsuz etkileyebilir.`;
+    }
+    if (label === 'Gecikme') {
+      return isPositive 
+        ? `Ağ ve internet (ping) gecikmelerini ${mag} oranda düşürerek bağlantıyı iyileştirir.` 
+        : `Ağ gecikmelerini (ping) ${mag} oranda artırarak olumsuz etkileyebilir.`;
+    }
+    if (label === 'Input') {
+      return isPositive 
+        ? `Donanım (klavye/fare vb.) tepkime süresini ${mag} oranda hızlandırarak girdi (input) gecikmesini azaltır.` 
+        : `Cihaz girdi (input) gecikmesini ${mag} oranda artırarak akıcılığı bozabilir.`;
+    }
+    if (label === 'Güç') {
+      return isPositive 
+        ? `Güç tüketimini ${mag} oranda düşürerek enerji tasarrufu sağlar.` 
+        : `Güç tüketimini ${mag} oranda artırabilir.`;
+    }
+    if (label === 'Isı') {
+      return isPositive 
+        ? `Sistem ısı değerlerini ${mag} oranda düşürmeye yardımcı olur.` 
+        : `Sistem ısı değerlerini ${mag} oranda artırabilir.`;
+    }
+
+    return '';
   };
 
   const getMagnitudeText = () => {
@@ -47,31 +68,31 @@ const ImpactBadge = memo(function ImpactBadge({
     return 'Hafif';
   };
 
-  let style = 'bg-white/[0.015] border-white/[0.04] text-text-muted/40';
+  let style = 'bg-transparent border-white/[0.04] text-[#86868b]';
   
   if (isPositive) {
-    if (magnitude === 'high') style = 'bg-[#81c784]/12 border-[#81c784]/35 text-[#81c784] shadow-[0_0_10px_rgba(129,199,132,0.1)]';
-    else if (magnitude === 'medium') style = 'bg-[#81c784]/6 border-[#81c784]/22 text-[#81c784]';
-    else style = 'bg-[#81c784]/3 border-[#81c784]/15 text-[#81c784]/80';
+    if (magnitude === 'high') style = 'bg-transparent border-luper-success text-white shadow-[0_0_10px_rgba(52,199,89,0.15)]';
+    else if (magnitude === 'medium') style = 'bg-transparent border-luper-success/50 text-white';
+    else style = 'bg-transparent border-luper-success/25 text-white';
   } else if (isNegative) {
-    if (magnitude === 'high') style = 'bg-[#e57373]/12 border-[#e57373]/35 text-[#e57373] shadow-[0_0_10px_rgba(229,115,115,0.1)]';
-    else if (magnitude === 'medium') style = 'bg-[#e57373]/6 border-[#e57373]/22 text-[#e57373]';
-    else style = 'bg-[#e57373]/3 border-[#e57373]/15 text-[#e57373]/80';
+    if (magnitude === 'high') style = 'bg-transparent border-[#e57373] text-white shadow-[0_0_10px_rgba(229,115,115,0.15)]';
+    else if (magnitude === 'medium') style = 'bg-transparent border-[#e57373]/50 text-white';
+    else style = 'bg-transparent border-[#e57373]/25 text-white';
   }
 
-  const fullLabel = label === 'Perf' ? 'PERF' : label.toUpperCase();
+  const fullLabel = label.toUpperCase();
 
   return (
-    <div className={`group/badge p-1 rounded-lg flex flex-col items-center justify-center select-none transition-colors cursor-default border min-w-0 ${style}`}>
-      <div className="text-[10px] uppercase font-semibold tracking-tight opacity-80 mb-0.5 w-full text-center">
+    <div className={`group/badge px-1 py-0.5 rounded flex flex-col items-center justify-center select-none transition-colors cursor-default border min-w-0 ${style}`}>
+      <div className="text-[9px] uppercase font-medium tracking-wider opacity-60 pb-[2px] mb-[2px] border-b border-white/[0.06] w-full text-center">
         {fullLabel}
       </div>
-      <div className="text-[12px] font-medium tracking-tight w-full text-center">
+      <div className="text-[11px] font-medium tracking-tight w-full text-center">
         {getMagnitudeText()}
       </div>
       
       {/* Tooltip Description STRICTLY INSIDE OptimizationCard */}
-      <div className="absolute inset-x-3 bottom-[56px] bg-[#1c1c1e] border border-white/15 rounded-xl p-2.5 text-[11.5px] text-[#f5f5f7] shadow-xl text-center z-30 pointer-events-none transition-all duration-200 opacity-0 group-hover/badge:opacity-100 scale-95 group-hover/badge:scale-100">
+      <div className="absolute inset-x-3 bottom-[56px] bg-[#161618] border border-white/15 rounded-xl p-2.5 text-[13px] text-[#f5f5f7] shadow-xl text-center z-30 pointer-events-none transition-all duration-200 opacity-0 group-hover/badge:opacity-100 scale-95 group-hover/badge:scale-100">
         {getTooltipText()}
       </div>
     </div>
@@ -93,59 +114,155 @@ const OptimizationCard = memo(function OptimizationCard({
 }) {
   const isOptimized = setting.status === 'optimized';
 
+  const svgAnimate = isProcessing
+    ? {
+        pathLength: 0.85,
+        pathOffset: 0.15,
+        opacity: 1,
+      }
+    : isOptimized
+    ? {
+        pathLength: 1,
+        pathOffset: 0,
+        opacity: 1,
+      }
+    : {
+        pathLength: 0,
+        pathOffset: 1,
+        opacity: 0,
+      };
+
+  const svgTransition = isProcessing
+    ? {
+        pathLength: { duration: 1.5, ease: "easeOut" },
+        pathOffset: { duration: 1.5, ease: "easeOut" },
+        opacity: { duration: 0.2 },
+      }
+    : isOptimized
+    ? {
+        pathLength: { type: "spring", bounce: 0, duration: 0.4 },
+        pathOffset: { type: "spring", bounce: 0, duration: 0.4 },
+        opacity: { duration: 0.3 },
+      }
+    : {
+        pathLength: { duration: 0.4, ease: "easeIn" },
+        pathOffset: { duration: 0.4, ease: "easeIn" },
+        opacity: { duration: 0.4, delay: 0.1 },
+      };
+
   const impacts = [
-    { label: 'Perf', detail: setting.impacts?.performance },
+    { label: 'Performans', detail: setting.impacts?.performance },
     { label: 'Gecikme', detail: setting.impacts?.latency },
-    { label: 'İnput', detail: setting.impacts?.input },
+    { label: 'Input', detail: setting.impacts?.input },
     { label: 'Güç', detail: setting.impacts?.power },
     { label: 'Isı', detail: setting.impacts?.heat }
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 400, damping: 30, delay: Math.min(idx * 0.04, 0.2) }}
-      style={{ transform: 'translateZ(0)', willChange: 'transform, opacity', contain: 'layout style' }}
-      className={`bg-[#18181c] border ${isOptimized ? 'border-[#1a5efd]/35 bg-[#1a5efd]/[0.02]' : 'border-white/[0.06]'} shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] rounded-2xl p-5 flex flex-col group hover:bg-[#202024] hover:border-white/[0.12] transition-colors duration-300 min-h-[180px] relative z-10 hover:z-[50] focus-within:z-[50]`}
-    >
-      <div className="flex items-start justify-between mb-4 relative z-10">
-        <div className="flex items-start space-x-3 pr-2">
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105 ${isOptimized ? 'bg-[#1a5efd]/15 border border-[#1a5efd]/30 text-[#1a5efd]' : 'bg-white/[0.04] border border-white/[0.06] text-text-muted group-hover:bg-[#1a5efd]/10 group-hover:border-[#1a5efd]/20 group-hover:text-[#1a5efd]'}`}>
-            <Gear size={20} weight="duotone" className="transition-all duration-300" />
-          </div>
-          <div>
-            <h3 className="text-[#f5f5f7] text-[14px] font-semibold leading-snug">{setting.name}</h3>
-            <p className="text-text-muted text-[12px] mt-1 leading-relaxed">{setting.description}</p>
-          </div>
-        </div>
-        <div className="shrink-0 mt-0.5 flex flex-col items-end space-y-1.5">
-          <motion.button
-            role="switch"
-            aria-checked={isOptimized}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => !processingResult && handleToggle(setting.id, setting.status)}
-            disabled={!!processingResult}
-            className={`relative w-[48px] h-[26px] rounded-full transition-all duration-200 flex items-center justify-center ${setting.status === 'optimized' ? 'bg-[#1a5efd]' : 'bg-white/[0.12] border border-white/[0.06]'} ${(isProcessing) ? 'opacity-80 cursor-not-allowed' : 'hover:opacity-90 active:scale-95'} focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:outline-none`}
-          >
-            {isProcessing && (
-              <SpinnerGap size={12} weight="duotone" className={`absolute animate-spin ${setting.status === 'optimized' ? 'text-white left-[7px]' : 'text-text-muted right-[7px]'}`} />
-            )}
-            {processingResult === 'success' && (
-              <Check size={12} weight="bold" className={`absolute ${setting.status === 'optimized' ? 'text-white left-[7px]' : 'text-[#81c784] right-[7px]'}`} />
-            )}
-            <motion.div
-              className={`absolute top-0.5 bottom-0.5 w-[22px] rounded-full shadow-sm bg-white`}
-              initial={false}
-              animate={{
-                left: setting.status === 'optimized' ? '23px' : '2px',
-              }}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+      <motion.div
+        style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
+        className={`bg-[#1a1a1d] border border-white/15 ${isOptimized ? 'bg-luper-primary/[0.02]' : ''} shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] rounded-xl p-5 flex flex-col h-full group hover:bg-[#222226] hover:border-white/30 transition-colors duration-300 min-h-[180px] relative z-10 hover:z-[50] focus-within:z-[50]`}
+      >
+        {/* SVG Animated Border */}
+        <div className="absolute inset-0 pointer-events-none z-20">
+          <svg className="w-full h-full">
+            <motion.rect
+              x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="11.5" ry="11.5"
+              fill="none"
+              stroke="#1a5efd"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              initial={{ pathLength: isOptimized ? 1 : 0, opacity: isOptimized ? 1 : 0 }}
+              animate={svgAnimate}
+              transition={svgTransition as any}
             />
-          </motion.button>
-          <span className={`text-[12px] font-medium mr-0.5 ${setting.status === 'optimized' ? 'text-brand-primary font-semibold' : 'text-text-muted'}`}>
-            {setting.status === 'optimized' ? 'Optimize Edildi' : 'Varsayılan'}
-          </span>
+          </svg>
+        </div>
+  
+        {/* Success Checkmark Overlay */}
+        <AnimatePresence>
+          {processingResult === 'success' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 z-30 flex items-center justify-center bg-[#1a1a1d]/80 rounded-xl pointer-events-none"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="text-luper-success drop-shadow-[0_0_20px_rgba(52,199,89,0.5)] flex flex-col items-center gap-2.5"
+              >
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <motion.circle
+                    cx="32" cy="32" r="28"
+                    stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                  />
+                  <motion.path
+                    d="M 21 33 L 29 41 L 45 23"
+                    stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.3, delay: 0.25, ease: "easeOut" }}
+                  />
+                </svg>
+                <motion.span
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                  className="text-[13px] font-medium tracking-wide text-white drop-shadow-md"
+                >
+                  {isOptimized ? 'Optimizasyon Başarılı' : 'Geri Alma Başarılı'}
+                </motion.span>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+  
+        <div className="flex items-start justify-between mb-4 relative z-10 w-full gap-3">
+          <div className="flex items-start space-x-3 min-w-0 flex-1">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105 ${isOptimized ? 'bg-luper-primary/15 border border-luper-primary/30 text-luper-primary' : 'bg-white/[0.04] border border-white/[0.06] text-text-muted group-hover:bg-luper-primary/10 group-hover:border-luper-primary/20 group-hover:text-luper-primary'}`}>
+              <Gear size={20} weight="duotone" className="transition-all duration-300" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-[#f5f5f7] text-[15px] font-semibold leading-snug break-words whitespace-normal">{setting.name}</h3>
+              <p className="text-text-muted text-[13px] mt-1.5 leading-relaxed break-words whitespace-normal">{setting.description}</p>
+            </div>
+          </div>
+        <div className="shrink-0 mt-0.5 flex flex-col items-end space-y-1.5">
+          {setting.uiType === 'select' ? (
+             <select
+               value={setting.status}
+               onChange={(e) => handleToggle(setting.id, e.target.value)}
+               disabled={!!processingResult}
+               className="bg-[#1a1a1d] border border-white/10 text-white text-sm rounded-lg focus:ring-luper-primary focus:border-luper-primary block w-48 p-2 disabled:opacity-50"
+             >
+               {setting.options?.map((opt) => (
+                 <option key={opt.value} value={opt.value}>
+                   {opt.label}
+                 </option>
+               ))}
+             </select>
+          ) : (
+            <>
+              <LuperToggle
+                checked={setting.status === 'optimized'}
+                onChange={() => handleToggle(setting.id, setting.status)}
+                disabled={!!processingResult}
+                isProcessing={isProcessing}
+                isSuccess={processingResult === 'success'}
+              />
+              <span className={`text-[12px] font-medium mr-0.5 ${setting.status === 'optimized' ? 'text-brand-primary font-semibold' : 'text-text-muted'}`}>
+                {setting.status === 'optimized' ? 'Optimize Edildi' : 'Varsayılan'}
+              </span>
+            </>
+          )}
         </div>
       </div>
       <div className="mt-auto grid grid-cols-5 gap-1.5 pt-3.5 border-t border-white/[0.04]">
@@ -155,7 +272,7 @@ const OptimizationCard = memo(function OptimizationCard({
       </div>
     </motion.div>
   );
-});
+}, deepEqual);
 
 export const BaseCategoryView = memo(function BaseCategoryView({ categoryId, onBack }: { categoryId: string; onBack: () => void }) {
   const meta = useMemo(() => CATEGORY_META[categoryId] || { title: 'Optimizasyon', description: 'Bu kategori ayarlarını yönetin.' }, [categoryId]);
@@ -163,7 +280,7 @@ export const BaseCategoryView = memo(function BaseCategoryView({ categoryId, onB
   const { settings, loading, error, processingState, handleToggle } = useCategorySettings(categoryId, retryCount);
 
   const handleRetry = useCallback(() => {
-    setRetryCount(prev => prev + 1);
+    setRetryCount((prev) => prev + 1);
   }, []);
 
   return (
@@ -192,34 +309,24 @@ export const BaseCategoryView = memo(function BaseCategoryView({ categoryId, onB
       {/* Main Grid Content */}
       <div className="flex-1 min-h-0 relative flex flex-col w-full">
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-hidden pt-8 pr-2 pb-4 content-start w-full">
+          <div className="flex flex-col w-full overflow-hidden border border-white/[0.04] rounded-xl bg-[#161618] mt-4">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-[#18181c] border border-white/[0.06] rounded-2xl p-5 flex flex-col min-h-[180px] relative overflow-hidden">
-                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/[0.05] to-transparent" />
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-start space-x-3 w-full">
-                    <div className="w-9 h-9 rounded-xl bg-white/[0.05] shrink-0 animate-pulse" />
-                    <div className="space-y-2 flex-1">
-                      <div className="h-4 bg-white/[0.08] rounded-md w-3/4 animate-pulse" />
-                      <div className="h-3 bg-white/[0.04] rounded-md w-full animate-pulse" />
-                      <div className="h-3 bg-white/[0.04] rounded-md w-2/3 animate-pulse" />
-                    </div>
-                  </div>
-                  <div className="w-12 h-6 bg-white/[0.08] rounded-full shrink-0 ml-2 animate-pulse" />
-                </div>
-                <div className="mt-auto pt-3.5 border-t border-white/[0.04]">
-                  <div className="grid grid-cols-5 gap-1.5 w-full">
-                    {[...Array(5)].map((_, j) => (
-                      <div key={j} className="bg-white/[0.02] border border-white/[0.06] rounded-xl h-[42px] animate-pulse" />
-                    ))}
+              <div key={i} className="w-full flex items-center justify-between p-4 border-b border-white/[0.02] relative overflow-hidden">
+                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/[0.02] to-transparent" />
+                <div className="flex items-center space-x-4 flex-1">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.02] shrink-0 animate-pulse" />
+                  <div className="space-y-2 flex-1 max-w-[500px]">
+                    <div className="h-3.5 bg-white/[0.04] rounded-md w-1/3 animate-pulse" />
+                    <div className="h-3 bg-white/[0.02] rounded-md w-2/3 animate-pulse" />
                   </div>
                 </div>
+                <div className="w-10 h-5 bg-white/[0.04] rounded-full shrink-0 ml-4 animate-pulse" />
               </div>
             ))}
           </div>
         ) : error ? (
           <div className="flex-1 flex items-center justify-center">
-            <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-2xl p-8 max-w-md">
+            <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-xl p-8 max-w-md">
               <Warning size={36} weight="duotone" className="text-[#e57373] mx-auto mb-4" />
               <h3 className="text-white text-[16px] font-semibold mb-2">Ayarlar Yüklenemedi</h3>
               <p className="text-text-muted text-[14px] mb-5">{error instanceof Error ? error.message : String(error)}</p>
@@ -233,7 +340,7 @@ export const BaseCategoryView = memo(function BaseCategoryView({ categoryId, onB
             </div>
           </div>
         ) : settings && settings.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pt-8 pr-2 pb-4 content-start w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full overflow-y-auto mt-4">
             {settings.map((setting, idx) => (
               <OptimizationCard
                 key={setting.id}
@@ -247,7 +354,7 @@ export const BaseCategoryView = memo(function BaseCategoryView({ categoryId, onB
           </div>
         ) : (
           <div className="flex-1 flex items-center justify-center">
-            <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-2xl p-10 max-w-md">
+            <div className="text-center bg-white/[0.04] border border-white/[0.08] rounded-xl p-10 max-w-md">
               <Gear size={36} weight="duotone" className="text-text-muted mx-auto mb-5 opacity-60" />
               <h3 className="text-[#f5f5f7] text-[16px] font-medium leading-tight mb-3">Henüz Ayar Bulunmuyor</h3>
               <p className="text-text-muted text-[14px] leading-relaxed">Bu kategori için tanımlanmış optimizasyon ayarı bulunamadı.</p>

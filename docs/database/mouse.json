@@ -1,0 +1,1508 @@
+[
+  {
+    "id": "disable_mouse_acceleration",
+    "title": "Fare İvmesini Kapat",
+    "description": "Farenizin ivmesini sıfırlar. Birebir saf girdi deneyimi sunar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag",
+      "aim"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "MouseSpeed",
+        "value": "0",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "MouseThreshold1",
+        "value": "0",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "MouseThreshold2",
+        "value": "0",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "csrss_priority_boost",
+    "title": "Sistem Süreci Önceliğini Artır",
+    "description": "Sistem girdi sürecini hızlandırır. Fare gecikmesini en aza indirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "process priority"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\csrss.exe\\PerfOptions",
+        "key": "CpuPriorityClass",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "mouse_data_queue_size",
+    "title": "Fare Veri Kuyruğunu İyileştir",
+    "description": "Veri kuyruğunu artırır. Hızlı hareketlerdeki kayıpları önler.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag",
+      "buffer"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters",
+        "key": "MouseDataQueueSize",
+        "value": "32",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_usb_power_management",
+    "title": "Bağlantı Güç Yönetimini Kapat",
+    "description": "Bağlantı noktalarının uykuya dalmasını engeller. Tepki süresini iyileştirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "usb",
+      "input lag",
+      "power"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bea088cb65 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0; powercfg /SETDCVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bea088cb65 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0; powercfg /S SCHEME_CURRENT"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\USB",
+        "key": "DisableSelectiveSuspend",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerSettings\\2a737441-1930-4402-8d77-b2bebba308a3\\48e6b7a6-50f5-4782-a5d4-53bb8f07e226",
+        "key": "Attributes",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "enable_ultimate_performance",
+    "title": "Nihai Performans Modu",
+    "description": "Sistemin en yüksek performans güç planını aktif eder.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "power",
+      "input lag",
+      "performance"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 | ForEach-Object { if ($_ -match '([0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})') { powercfg -setactive $matches[1] } }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "mouse_sensitivity_default",
+    "title": "Varsayılan Fare Hassasiyeti",
+    "description": "Fare hassasiyetini orta değere alır. Ekrandaki piksel atlamasını engeller.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag",
+      "aim"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "MouseSensitivity",
+        "value": "10",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_mouse_smoothing_curves",
+    "title": "Yumuşatma Eğrilerini Kapat",
+    "description": "Sistem fare yumuşatma eğrilerini kaldırır. Ham hissi geri getirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "SmoothMouseXCurve",
+        "value": "00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00",
+        "valueType": "REG_BINARY"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "SmoothMouseYCurve",
+        "value": "00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00",
+        "valueType": "REG_BINARY"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "enable_usb_msi_mode",
+    "title": "Yüksek Öncelikli Kesinti Modu",
+    "description": "Donanım kesinti önceliğini artırır. Veri iletişimini hızlandırır.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 90,
+    "risk_level": "high",
+    "tags": [
+      "mouse",
+      "msi",
+      "interrupts",
+      "input lag"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\PCI\\*\\Device Parameters\\Interrupt Management\\MessageSignaledInterruptProperties' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'MSISupported' -Value 1 -Type DWord }"
+      },
+      {
+        "type": "powershell",
+        "command": "Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\PCI\\*\\Device Parameters\\Interrupt Management\\Affinity Policy' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DevicePriority' -Value 3 -Type DWord }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "force_system_timer_resolution",
+    "title": "Yüksek Zamanlayıcı Çözünürlüğü",
+    "description": "Sistem zamanlayıcısını en düşük gecikmeye zorlar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "timer resolution",
+      "api"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class TimerRes { [DllImport(\"ntdll.dll\", SetLastError=true)] public static extern int NtSetTimerResolution(uint DesiredResolution, bool SetResolution, out uint CurrentResolution); }'; [TimerRes]::NtSetTimerResolution(5000, $true, [ref]0)"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "kernel_thread_priority_and_zero_transmission_delay",
+    "title": "Çekirdek İşlem Önceliğini Artır",
+    "description": "Fare sürücüsünün çekirdek önceliğini en üst seviyeye taşır.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters\" -Name \"ThreadPriority\" -Value 31 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters\" -Name \"MouseTransmitTimeout\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "cursor_update_and_raw_handling",
+    "title": "Saf İşaretçi İşleme",
+    "description": "İmleç güncelleme aralığını sıfırlar. Gecikmesiz takip sağlar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouhid\\Parameters\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouhid\\Parameters\" -Name \"CursorUpdateInterval\" -Value 0 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\mouhid\\Parameters\" -Name \"TreatAbsolutePointerAsAbsolute\" -Value 1 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "hidusb_idle_disable",
+    "title": "Bekleme Modunu İptal Et",
+    "description": "Fare sürücüsünün uyku moduna girmesini kalıcı olarak engeller.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\HidUsb\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\HidUsb\" -Name \"IdleEnabled\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_instance_deep_power_fix",
+    "title": "Derin Güç Yönetimini Kapat",
+    "description": "Tüm fare donanımları için gelişmiş güç kısıtlamalarını devre dışı bırakır.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-ChildItem -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB' -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -eq 'Device Parameters' } | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'EnhancedPowerManagementEnabled' -Value 0 -Type DWord -ErrorAction SilentlyContinue; Set-ItemProperty -Path $_.PSPath -Name 'AllowIdleIrpInD3' -Value 0 -Type DWord -ErrorAction SilentlyContinue; Set-ItemProperty -Path $_.PSPath -Name 'SelectiveSuspendEnabled' -Value 0 -Type DWord -ErrorAction SilentlyContinue; Set-ItemProperty -Path $_.PSPath -Name 'D3ColdSupported' -Value 0 -Type DWord -ErrorAction SilentlyContinue }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "irq",
+    "title": "Donanım Kesinti Önceliği",
+    "description": "Donanım kesintilerini ayrı bir çekirdeğe bağlar. Çakışmaları tamamen sıfırlar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\PCI\\*\\Device Parameters\\Interrupt Management\\Affinity Policy' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'DevicePriority' -Value 3 -Type DWord }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "aapthreshold",
+    "title": "Fare Gecikme Filtresini Sıfırla",
+    "description": "Avuç içi engelleme filtrelerini kaldırır. Anında tepki almanızı sağlar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad\" -Force | Out-Null; Set-ItemProperty -Path \"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\PrecisionTouchPad\" -Name \"AAPThreshold\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "dynamic_tick_and_platform_clock_removal",
+    "title": "Dinamik Zamanlayıcı İptali",
+    "description": "Zamanlayıcı optimizasyonlarını kaldırır. Fare bildirim oranını sabitler.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "bcdedit /set disabledynamictick yes; bcdedit /set useplatformclock false; bcdedit /set tscsyncpolicy Enhanced"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "systemprofile_responsiveness",
+    "title": "Maksimum Girdi İşleme",
+    "description": "İşlemci kaynaklarının tamamını ön plandaki uygulamaya ayırır.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" -Name \"SystemResponsiveness\" -Value 0 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" -Name \"NetworkThrottlingIndex\" -Value 4294967295 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "gameinput_service_fix",
+    "title": "Girdi Çakışma Düzeltmesi",
+    "description": "Arka plan taramalarından kaynaklanan mikro takılmaları tamamen durdurur.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-Service -Name \"GameInputSvc\",\"gsv\" -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled; Stop-Service -Name \"GameInputSvc\",\"gsv\" -Force -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "lowlevelhooks",
+    "title": "Düşük Seviyeli Kanca İyileştirmesi",
+    "description": "Yazılımlardan kaynaklı fare kilit gecikmesini en aza indirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "optimization"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "New-Item -Path \"HKCU:\\Control Panel\\Desktop\" -Force | Out-Null; Set-ItemProperty -Path \"HKCU:\\Control Panel\\Desktop\" -Name \"LowLevelHooksTimeout\" -Value 1000 -Type DWord; Set-ItemProperty -Path \"HKCU:\\Control Panel\\Desktop\" -Name \"ForegroundLockTimeout\" -Value 0 -Type DWord; Set-ItemProperty -Path \"HKCU:\\Control Panel\\Desktop\" -Name \"MenuShowDelay\" -Value \"0\" -Type String"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "win32inputhost_priority_boost",
+    "title": "Girdi Sunucusu Hızlandırması",
+    "description": "Yeni nesil pencere girdi işleyicisinin önceliğini zirveye çeker.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "priority"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\Win32InputHost.exe\\PerfOptions",
+        "key": "CpuPriorityClass",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\Win32InputHost.exe\\PerfOptions",
+        "key": "IoPriority",
+        "value": "3",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "dwm_hardware_cursor_acceleration",
+    "title": "Donanım İmleç Hızlandırması",
+    "description": "Dikey eşitleme kaynaklı imleç gecikmesini ortadan kaldırır.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "dwm"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\DWM",
+        "key": "HardwareCursor",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\DWM",
+        "key": "CompositionUnbuffered",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_3_lpm_disabler",
+    "title": "Gelişmiş Güç Yönetimi İptali",
+    "description": "Yüksek bildirim hızlı farelerde mikro duraklamaları yok eder.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "usb",
+      "power"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerSettings\\2a737441-1930-4402-8d77-b2bebba308a3\\d4e98f31-5fea-4eff-8164-0d0f04c969b0",
+        "key": "Attributes",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "powercfg /SETACVALUEINDEX SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bea088cb65 d4e98f31-5fea-4eff-8164-0d0f04c969b0 0; powercfg /S SCHEME_CURRENT"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usbhub3_clock_gating_disabler",
+    "title": "Bağlantı Saat Sınırlamasını Kapat",
+    "description": "Bağlantı noktası saat frekansını sürekli en yüksek seviyede tutar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "usb"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\USBHUB3\\Parameters",
+        "key": "DisablePowerManagement",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\USBHUB3\\Parameters",
+        "key": "HubGatedClock",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_touch_ink_filter_lag",
+    "title": "Dokunmatik Filtrelerini Kapat",
+    "description": "Gereksiz dokunmatik filtrelerini kaldırır. Doğrudan saf girdi sağlar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag",
+      "services"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-Service -Name \"wisvc\",\"TabletInputService\",\"TouchKeyboard\" -ErrorAction SilentlyContinue | Set-Service -StartupType Disabled; Stop-Service -Name \"wisvc\",\"TabletInputService\" -Force -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\wisvc",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\TabletInputService",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "vendor_mouse_software_priority",
+    "title": "Üretici Yazılımı Önceliğini Artır",
+    "description": "Üretici yazılımlarının profil eşzamanlama takılmalarını engeller.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag",
+      "priority"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$apps = @(\"lghub_agent.exe\",\"Razer Central.exe\",\"SteelSeriesGG.exe\",\"iCUE.exe\"); foreach($app in $apps){ New-Item -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\$app\\PerfOptions\" -Force | Out-Null; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\$app\\PerfOptions\" -Name \"CpuPriorityClass\" -Value 3 -Type DWord; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\$app\\PerfOptions\" -Name \"IoPriority\" -Value 3 -Type DWord }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "win32priorityseparation_short_variable",
+    "title": "Ön Plan Zaman İyileştirmesi",
+    "description": "İşlemci zamanlayıcısını fare girdi işlemleri için en uygun hale getirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 90,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "kernel"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+        "key": "Win32PrioritySeparation",
+        "value": "38",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "mouclass_max_queued_events",
+    "title": "Maksimum Olay Kuyruk Derinliği",
+    "description": "Ani hareketlerde yaşanan veri paketi kayıplarını tamamen engeller.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "buffer"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters",
+        "key": "MaximumAllowedQueuedEvents",
+        "value": "256",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "mouse_hover_drag_delay_zero",
+    "title": "Bekleme Gecikmesini Sıfırla",
+    "description": "Masaüstü sürükleme ve üzerine gelme hissiyatını anında tepki verir hale getirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "mouse",
+      "input lag",
+      "ui"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "MouseHoverTime",
+        "value": "0",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "DragMinDistance",
+        "value": "1",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "DragHeight",
+        "value": "1",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Mouse",
+        "key": "DragWidth",
+        "value": "1",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "mmcss_games_profile_io_priority",
+    "title": "Çoklu Ortam Girdi İyileştirmesi",
+    "description": "Sistem görevlerinin girdi gecikmesini en aza indirir.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "mmcss"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "key": "Priority",
+        "value": "8",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "key": "GPU Priority",
+        "value": "8",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "key": "Scheduling Category",
+        "value": "High",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "key": "SFIO Priority",
+        "value": "High",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_interrupt_moderation_disable",
+    "title": "Kesinti Yumuşatmasını Kapat",
+    "description": "Donanım kesinti gecikmesini sıfırlar. Doğrudan ham iletişim kurar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "usb"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-ChildItem -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Class\\{36fc9e60-c465-11cf-8056-444553540000}' -ErrorAction SilentlyContinue | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'InterruptModeration' -Value 0 -Type DWord -ErrorAction SilentlyContinue }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "nvidia_reflex_hardware_latency_queue_cleanup",
+    "title": "Görüntü Donanım Tampon Temizliği",
+    "description": "Donanım gecikmesi kuyruklarını temizler. En düşük gecikmeyi zorlar.",
+    "category_id": "mouse",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "mouse",
+      "input lag",
+      "nvidia"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\NVIDIA Corporation\\Global\\NVTweak",
+        "key": "DisplayPowerSaving",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\NVIDIA Corporation\\Global\\NVTweak",
+        "key": "PreRenderedFrames",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]

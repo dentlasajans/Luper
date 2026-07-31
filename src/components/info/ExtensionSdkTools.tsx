@@ -1,4 +1,4 @@
-import { Package, Power, ShieldCheck } from '@phosphor-icons/react';
+﻿import { Package, Power, ShieldCheck } from '@/src/components/ui/Icons';
 import { memo, useState } from 'react';
 
 export interface LuperExtension {
@@ -16,10 +16,10 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
   const [extensions, setExtensions] = useState<LuperExtension[]>([]);
   const [selectedId, setSelectedId] = useState<string>('ext-directx-directstorage');
 
-  const activeExt = extensions.find(e => e.id === selectedId) || extensions[0];
+  const activeExt = extensions.find((e) => e.id === selectedId) || extensions[0];
 
   const toggleExtension = (id: string) => {
-    setExtensions(prev => prev.map(e => e.id === id ? { ...e, enabled: !e.enabled } : e));
+    setExtensions((prev) => prev.map((e) => e.id === id ? { ...e, enabled: !e.enabled } : e));
   };
 
   return (
@@ -28,7 +28,7 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <Package weight="duotone" className="text-[#1a5efd]" size={28} />
+            <Package weight="duotone" className="text-luper-primary" size={28} />
             <span>Eklenti SDK & Modül Platformu (Extension SDK)</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">LUPER platformu için güvenli izin tabanlı SDK ve 3. parti modül yönetim merkezi.</p>
@@ -45,12 +45,12 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
         <div className="col-span-5 space-y-3">
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#86868b] px-1">Yüklü Modüller & Eklentiler</h3>
           {extensions.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619] border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
             <h3 className="text-[14px] font-bold text-white mb-1">Veri Bulunamadı</h3>
             <p className="text-[12.5px] text-[#86868b]">Şu anda görüntülenecek veri bulunmuyor. Gerçek veri akışı bekleniyor.</p>
           </div>
         )}
-        {extensions.length > 0 && extensions.map(ext => {
+        {extensions.length > 0 && extensions.map((ext) => {
             const isSelected = ext.id === selectedId;
             return (
               <div
@@ -58,8 +58,8 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
                 onClick={() => setSelectedId(ext.id)}
                 className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-[#1a5efd]/10 border-[#1a5efd] shadow-lg shadow-blue-500/10'
-                    : 'bg-[#161619] border-white/[0.08] hover:bg-white/[0.04]'
+                    ? 'bg-luper-primary/10 border-luper-primary shadow-lg shadow-blue-500/10'
+                    : 'bg-luper-surface border-white/[0.08] hover:bg-white/[0.04]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
@@ -83,11 +83,11 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
         </div>
 
         {/* Right Detail Card */}
-        <div className="col-span-7 bg-[#161619] border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card flex flex-col justify-between">
+        <div className="col-span-7 bg-luper-surface border border-white/[0.08] p-6 rounded-2xl space-y-6 luper-card flex flex-col justify-between">
           <div className="space-y-5">
             <div className="border-b border-white/[0.06] pb-4 flex items-center justify-between">
               <div>
-                <span className="text-[11px] text-[#1a5efd] font-bold font-mono uppercase tracking-wider">Modül Manifest Detayı</span>
+                <span className="text-[11px] text-luper-primary font-bold font-mono uppercase tracking-wider">Modül Manifest Detayı</span>
                 <h2 className="text-xl font-bold text-white mt-1">{activeExt.name}</h2>
               </div>
 
@@ -110,7 +110,7 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
               <span className="text-[#86868b] text-[11px] uppercase font-bold block">İstenen SDK İzinleri (Granted Sandbox Permissions)</span>
               <div className="flex flex-wrap gap-2">
                 {activeExt.permissions.map((perm, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-[#1a5efd]/10 border border-[#1a5efd]/20 text-[#64d2ff] rounded-lg font-bold">
+                  <span key={idx} className="px-3 py-1 bg-luper-primary/10 border border-luper-primary/20 text-[#64d2ff] rounded-lg font-bold">
                     {perm}
                   </span>
                 ))}
@@ -127,3 +127,4 @@ export const ExtensionSdkTools = memo(function ExtensionSdkTools() {
     </div>
   );
 });
+

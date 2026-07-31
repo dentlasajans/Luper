@@ -1,0 +1,1625 @@
+[
+    {
+        "id":  "browser_edge_startup_optimization",
+        "title":  "Edge Başlangıç Optimizasyonu",
+        "description":  "Edge\u0027in başlangıçta çalışmasını engeller. Bellek tüketimini azaltır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  100,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "ram",
+                     "edge",
+                     "startup"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "StartupBoostEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\Main",
+                                    "key":  "AllowPrelaunch",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_background_apps",
+        "title":  "Arka Plan Uygulamalarını Kapat",
+        "description":  "Kapanış sonrası çalışan eklentileri durdurur. Kaynakları serbest bırakır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  100,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "ram",
+                     "chrome",
+                     "edge"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "BackgroundModeEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "BackgroundModeEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_update_policies",
+        "title":  "Otomatik Güncellemeleri Durdur",
+        "description":  "Arka plan güncelleme denetimlerini iptal eder. Sistemi rahatlatır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_low",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_medium",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "medium",
+        "tags":  [
+                     "browser",
+                     "chrome",
+                     "edge",
+                     "update"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Update",
+                                    "key":  "AutoUpdateCheckPeriodMinutes",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Update",
+                                    "key":  "DisableAutoUpdateChecksCheckboxValue",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Update",
+                                    "key":  "UpdateDefault",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+                                    "key":  "AutoUpdateCheckPeriodMinutes",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+                                    "key":  "Update",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+                                    "key":  "UpdateDefault",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_services",
+        "title":  "Gereksiz Servisleri Kapat",
+        "description":  "Yetki ve güncelleme servislerini durdurur. Sistem kaynaklarını boşaltır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_low",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "medium",
+        "tags":  [
+                     "browser",
+                     "chrome",
+                     "edge",
+                     "service",
+                     "update"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\GoogleChromeElevationService",
+                                    "key":  "Start",
+                                    "value":  "4",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\gupdate",
+                                    "key":  "Start",
+                                    "value":  "4",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\gupdatem",
+                                    "key":  "Start",
+                                    "value":  "4",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\MicrosoftEdgeElevationService",
+                                    "key":  "Start",
+                                    "value":  "4",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\edgeupdate",
+                                    "key":  "Start",
+                                    "value":  "4",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SYSTEM\\CurrentControlSet\\Services\\edgeupdatem",
+                                    "key":  "Start",
+                                    "value":  "4",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_efficiency_mode",
+        "title":  "Tarayıcı Eko Modu",
+        "description":  "Oyunlarda tarayıcıyı kısıtlar. İşlemciyi oyunlara odaklar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_high",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  90,
+        "risk_level":  "medium",
+        "tags":  [
+                     "browser",
+                     "cpu",
+                     "efficiency",
+                     "game-mode"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "ForEach ($p in Get-Process -Name chrome,msedge,brave,opera -ErrorAction SilentlyContinue) { $p.PriorityClass = \u0027Idle\u0027 }"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_empty_working_set",
+        "title":  "Tarayıcı Bellek Temizliği",
+        "description":  "Kullanılmayan belleği sanal belleğe taşır. Ana belleği boşaltır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "ram",
+                     "memory"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "Get-Process -Name chrome,msedge,brave,opera -ErrorAction SilentlyContinue | ForEach-Object { [System.Diagnostics.Process]::GetProcessById($_.Id).MinWorkingSet = [System.IntPtr]::Zero }"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_qos",
+        "title":  "Ağ Önceliğini Düşür",
+        "description":  "Tarayıcı ağ paketlerini kısıtlar. Ağ gecikmelerini önler.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_high",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "network",
+                     "qos",
+                     "ping"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "New-NetQosPolicy -Name \u0027Browser_Chrome_LowPriority\u0027 -AppPathNameMatchCondition \u0027chrome.exe\u0027 -NetworkProfile All -DSCPAction 0; New-NetQosPolicy -Name \u0027Browser_Edge_LowPriority\u0027 -AppPathNameMatchCondition \u0027msedge.exe\u0027 -NetworkProfile All -DSCPAction 0"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_chromium_cli_flags",
+        "title":  "Gelişmiş Başlatma Parametreleri",
+        "description":  "Tarayıcıyı gecikme azaltıcı modda başlatır. Tepkimeyi hızlandırır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_high",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  85,
+        "risk_level":  "medium",
+        "tags":  [
+                     "browser",
+                     "latency",
+                     "cli",
+                     "flags"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "shortcut_modifier",
+                                    "target":  "chrome.exe, msedge.exe, brave.exe, launcher.exe",
+                                    "flags":  "--disable-gpu-vsync --disable-frame-rate-limit --enable-gpu-rasterization --enable-zero-copy --disable-background-networking --disable-sync"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_1",
+        "title":  "Gelişmiş Grafik Hızlandırma",
+        "description":  "Çizim gecikmesini düşürür. Grafik işlerini iyileştirir.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --use-angle=vulkan --enable-features=SkiaGraphite\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_2",
+        "title":  "Zorunlu Donanım Hızlandırma",
+        "description":  "İşlemci yükünü ekran kartına kaydırır. Akıcılığı artırır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "HardwareAccelerationModeEnabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "HardwareAccelerationModeEnabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_3",
+        "title":  "Veri Toplamayı Kapat",
+        "description":  "Veri toplayıcı arka plan servislerini durdurur. Disk kullanımını sıfırlar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_low",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "MetricsReportingEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "ChromeCleanupEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "ChromeCleanupReportingEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "MetricsReportingEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "ChromeCleanupEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "ChromeCleanupReportingEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_4",
+        "title":  "Gereksiz Özellikleri Temizle",
+        "description":  "Yapay zeka ve yan panel araçlarını kapatır. Belleği rahatlatır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "HubsSidebarEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "EdgeShoppingAssistantEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "Microsoft365CopilotChatIconEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "ShowAIFeatureSettings",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_5",
+        "title":  "Ağ Tahminini Devre Dışı",
+        "description":  "Otomatik ön yüklemeleri engeller. Ani bağlantı gecikmelerini çözer.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_medium",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "NetworkPredictionOptions",
+                                    "value":  "2` (REG_DWORD - 2: Network prediction disabled)",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "NetworkPredictionOptions",
+                                    "value":  "2` (REG_DWORD - 2: Network prediction disabled)",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_6",
+        "title":  "Kripto Servislerini Kapat",
+        "description":  "Kripto cüzdan ve haber akışını kapatır. Kaynak israfını önler.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_low",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_medium",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                    "key":  "BraveRewardsDisabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                    "key":  "BraveWalletDisabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                    "key":  "BraveVPNDisabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\BraveSoftware\\Brave",
+                                    "key":  "BraveNewsDisabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_7",
+        "title":  "Süreç Birleştirme",
+        "description":  "Benzer sekmeleri tek süreçte toplar. Bellek kullanımını düşürür.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --process-per-site\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_8",
+        "title":  "Çoklu Çekirdek Çizimi",
+        "description":  "Görüntü işlemeyi çoklu çekirdeğe dağıtır. Sayfa oluşturmayı hızlandırır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --num-raster-threads=4\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_9",
+        "title":  "Uyuyan Sekme ve Verimlilik",
+        "description":  "Pasif sekmeleri dondurur. Performansı oyuna odaklar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "SleepingTabsEnabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "SleepingTabsTimeoutMinutes",
+                                    "value":  "5",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "HighEfficiencyModeEnabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "SleepingTabsEnabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "SleepingTabsTimeoutMinutes",
+                                    "value":  "5",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "HighEfficiencyModeEnabled",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_10",
+        "title":  "Görüntü Aktarımını Kapat",
+        "description":  "Sürekli ağ taramalarını iptal eder. Ağı rahatlatır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_low",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "EnableMediaRouter",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "EnableMediaRouter",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_11",
+        "title":  "Doğrudan Video İşleme",
+        "description":  "Videoları doğrudan görüntü belleğinde işler. İşlemci yükünü sıfırlar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --enable-zero-copy-video-decoder --enable-direct-composition-layers\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_tweak_new_12",
+        "title":  "Bellek ve Kod İyileştirme",
+        "description":  "Web betiklerini hızlandırır. Bellek sınırlarını dengeler.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --js-flags=\"\"--turbo-fast-api-calls --max-old-space-size=2048\"\"\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_1",
+        "title":  "Zamanlayıcı Kısıtlamalarını Kaldır",
+        "description":  "Arka planda kod kısıtlamalarını engeller. Tam tepkisellik sağlar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "negative_low",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "latency",
+                     "timer"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-ipc-flooding-protection\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "IntensiveWakeUpThrottlingEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "IntensiveWakeUpThrottlingEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_2",
+        "title":  "Tasarruf Kısıtlamasını Kapat",
+        "description":  "Tarayıcıyı performans çekirdeklerinde çalıştırır. Kısıtlamaları kaldırır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_high",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "cpu",
+                     "ecoqos"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --disable-features=UseEcoQoSForBackgroundProcess --enable-features=UseHighPriorityForGpuProcess\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "EfficiencyModeEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "EfficiencyModeEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_3",
+        "title":  "Doğrudan Ekran Kartı Çözücü",
+        "description":  "Çizim motorunu doğrudan sürücüye bağlar. İşleme beklemelerini sıfırlar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "medium",
+        "tags":  [
+                     "browser",
+                     "gpu",
+                     "latency"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --use-cmd-decoder=passthrough --enable-features=PassthroughCommandDecoder --disable-features=DirectCompositionVideoOverlays\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "Disable3DAPIs",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "Disable3DAPIs",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_4",
+        "title":  "Gelişmiş Grafik Motoru",
+        "description":  "Grafik işlemlerini donanıma aktarır. İşleme gecikmesini bitirir.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_high",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "gpu",
+                     "webgpu"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --enable-unsafe-webgpu --enable-features=Vulkan,UseSkiaRenderer,WebGPUD3D12ZeroCopy\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_5",
+        "title":  "Saf Doğrudan Çizim",
+        "description":  "Bileşenleri doğrudan ekran kartına gönderir. Kaydırma gecikmelerini yok eder.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_high",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "gpu",
+                     "rendering"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --enable-features=RawDraw,UseGpuMemoryBufferForDisplayCompositor\"; $s.Save()"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_6",
+        "title":  "Ağ Bağlantı Havuzunu Genişlet",
+        "description":  "Bağlantı sınırlarını artırır. Ağ gecikmesini minimuma indirir.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "positive_high",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "network",
+                     "latency"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --max-sockets-per-group=32 --enable-tcp-fast-open --disable-features=AudioServiceOutOfProcess\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "QuicAllowed",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "QuicAllowed",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_7",
+        "title":  "Çok Düşük Gecikme",
+        "description":  "Donanım motorunu zorlar. Boyama süresini sıfırlar.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_high",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "firefox",
+                     "latency"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$ffProfiles = Get-ChildItem \"$env:APPDATA\\Mozilla\\Firefox\\Profiles\" -Directory -ErrorAction SilentlyContinue; foreach ($p in $ffProfiles) { $u = Join-Path $p.FullName \"user.js\"; Add-Content -Path $u -Value \u0027user_pref(\"nglayout.initialpaint.delay\", 0);\u0027; Add-Content -Path $u -Value \u0027user_pref(\"content.notify.interval\", 100000);\u0027; Add-Content -Path $u -Value \u0027user_pref(\"browser.sessionstore.interval\", 1800000);\u0027; Add-Content -Path $u -Value \u0027user_pref(\"gfx.webrender.all\", true);\u0027; Add-Content -Path $u -Value \u0027user_pref(\"gfx.webrender.compositor\", true);\u0027 }"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_8",
+        "title":  "Ses Önceliğini Yükselt",
+        "description":  "Ses akışlarını gerçek zamanlı yapar. Takılmaları ve senkron sorunlarını çözer.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "none",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "audio",
+                     "latency"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --enable-features=AudioWorkletRealtimeThreading --audio-buffer-size=128\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "AudioSandboxEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "AudioSandboxEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_9",
+        "title":  "Disk Takılmalarını Önle",
+        "description":  "Bellek kotalarını ayarlayarak takas alanı takılmalarını engeller. Kararlılığı artırır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "low",
+        "tags":  [
+                     "browser",
+                     "ram",
+                     "memory"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --enable-features=ProactiveTabFreezeAndDiscard --js-flags=\\\"--max-heap-size=1024\\\"\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "MemorySaverModePolicy",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "MemorySaverModePolicy",
+                                    "value":  "1",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    },
+    {
+        "id":  "browser_phase2_10",
+        "title":  "Kod Bütünlüğü Denetimini Kapat",
+        "description":  "Süreç imza kontrollerini kaldırır. Sekme açılışlarını hızlandırır.",
+        "category_id":  "browser",
+        "is_optimized":  false,
+        "status":  "idle",
+        "impacts":  {
+                        "performance":  {
+                                            "level":  "positive_medium",
+                                            "description":  ""
+                                        },
+                        "latency":  {
+                                        "level":  "none",
+                                        "description":  ""
+                                    },
+                        "input":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "power":  {
+                                      "level":  "none",
+                                      "description":  ""
+                                  },
+                        "heat":  {
+                                     "level":  "none",
+                                     "description":  ""
+                                 }
+                    },
+        "ai_confidence":  95,
+        "risk_level":  "medium",
+        "tags":  [
+                     "browser",
+                     "security",
+                     "latency"
+                 ],
+        "script_payloads":  [
+                                {
+                                    "type":  "powershell",
+                                    "command":  "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\"); $s.Arguments += \" --disable-features=RendererCodeIntegrity\"; $s.Save()"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Google\\Chrome",
+                                    "key":  "RendererCodeIntegrityEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                },
+                                {
+                                    "type":  "registry",
+                                    "path":  "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+                                    "key":  "RendererCodeIntegrityEnabled",
+                                    "value":  "0",
+                                    "valueType":  "REG_DWORD"
+                                }
+                            ]
+    }
+]
