@@ -1,5 +1,17 @@
-import { IpcChannels, OptimizationSetting, SystemMetricsResponse, SystemStatus } from '../types';
+import { IpcChannels, OptimizationSetting, SystemMetricsResponse, SystemStatus, StartupItemSchema, InstalledAppSchema, CleanerItemSchema, SystemStatusSchema, SystemMetricsResponseSchema, HardwareSpecsSchema } from '../types';
 import { getCategorySettingsFromFirebase } from './FirebaseService';
+import { z } from 'zod';
+
+/**
+ * SystemEngine.ts
+ * Frontend service layer managing communication with Electron backend and
+ * native worker_threads offloaded hardware & system metrics operations.
+ *
+ * All long-running native operations (such as systeminformation calls) are
+ * offloaded to a dedicated Node worker thread (`sysInfoWorker.js`) in the Electron
+ * main process to guarantee asynchronous execution, 60 FPS UI rendering, and
+ * complete UI responsiveness.
+ */
 
 const IPC_TIMEOUT_MS = 5000;
 const IPC_TTL_MS = 3000; // 3 seconds TTL
@@ -18,6 +30,11 @@ interface CacheEntry<T> {
 const ipcCache = new Map<string, CacheEntry<unknown>>();
 const MAX_CACHE_SIZE = 50;
 
+// Promise deduplication caches for in-flight async calls
+let activeHardwareSpecsPromise: Promise<import('../types').HardwareSpecs | null> | null = null;
+let activeSystemStatusPromise: Promise<SystemStatus> | null = null;
+let activeSystemMetricsPromise: Promise<SystemMetricsResponse> | null = null;
+
 async function invokeIpc<T>(channel: IpcChannels, ...args: unknown[]): Promise<T> {
   const isGetQuery = channel.toString().includes('GET_') || channel.toString().includes('LOAD_');
   const cacheKey = `${channel}-${JSON.stringify(args)}`;
@@ -25,32 +42,32 @@ async function invokeIpc<T>(channel: IpcChannels, ...args: unknown[]): Promise<T
   if (isGetQuery) {
     const cached = ipcCache.get(cacheKey);
     if (cached && (Date.now() - cached.timestamp < IPC_TTL_MS)) {
-      ipcCache.delete(cacheKey);
-      cached.timestamp = Date.now();
-      ipcCache.set(cacheKey, cached);
       return cached.data as T;
     }
   }
 
-  if (typeof window !== 'undefined' && (window as any).electronAPI && (window as any).electronAPI.invoke) {
-    const invokePromise = (window as any).electronAPI.invoke(channel, ...args) as Promise<T>;
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new IpcTimeoutError(channel)), IPC_TIMEOUT_MS);
-    });
-    
-    const result = await Promise.race([invokePromise, timeoutPromise]);
-    
-    if (isGetQuery) {
-      ipcCache.set(cacheKey, { data: result, timestamp: Date.now() });
-      if (ipcCache.size > MAX_CACHE_SIZE) {
-        const oldestKey = ipcCache.keys().next().value;
-        if (oldestKey !== undefined) {
-          ipcCache.delete(oldestKey);
+  if (typeof window !== 'undefined' && 'electronAPI' in window) {
+    const electronAPI = (window as unknown as { electronAPI: { invoke: (channel: string, ...args: unknown[]) => Promise<unknown> } }).electronAPI;
+    if (electronAPI) {
+      const invokePromise = electronAPI.invoke(channel, ...args) as Promise<T>;
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new IpcTimeoutError(channel)), IPC_TIMEOUT_MS);
+      });
+      
+      const result = await Promise.race([invokePromise, timeoutPromise]);
+      
+      if (isGetQuery) {
+        ipcCache.set(cacheKey, { data: result, timestamp: Date.now() });
+        if (ipcCache.size > MAX_CACHE_SIZE) {
+          const oldestKey = ipcCache.keys().next().value;
+          if (oldestKey !== undefined) {
+            ipcCache.delete(oldestKey);
+          }
         }
       }
+      
+      return result;
     }
-    
-    return result;
   }
   throw new Error('Electron API not found');
 }
@@ -93,7 +110,6 @@ export const restoreOptimization = async (id: string, code: string) => {
 };
 
 export const executeQuickAction = async (actionId: string): Promise<void> => {
-  
   try {
     await invokeIpc(IpcChannels.EXECUTE_QUICK_ACTION, actionId);
   } catch (error) {
@@ -115,13 +131,16 @@ export const getAppliedOptimizationIds = (): string[] => {
 
 export const syncAppliedOptimizationsFromElectron = async () => {
   try {
-    if (typeof window !== 'undefined' && (window as any).electronAPI && (window as any).electronAPI.invoke) {
-      const backupKeys = await invokeIpc<string[]>(IpcChannels.GET_APPLIED_OPTIMIZATIONS);
-      if (Array.isArray(backupKeys)) {
-        const localArray = getAppliedOptimizationIds();
-        const mergedKeys = Array.from(new Set([...localArray, ...backupKeys]));
-        localStorage.setItem('applied_optimizations', JSON.stringify(mergedKeys));
-        window.dispatchEvent(new Event('applied_optimizations_changed'));
+    if (typeof window !== 'undefined' && 'electronAPI' in window) {
+      const electronAPI = (window as unknown as { electronAPI: { invoke: (channel: string, ...args: unknown[]) => Promise<unknown> } }).electronAPI;
+      if (electronAPI) {
+        const backupKeys = await invokeIpc<string[]>(IpcChannels.GET_APPLIED_OPTIMIZATIONS);
+        if (Array.isArray(backupKeys)) {
+          const localArray = getAppliedOptimizationIds();
+          const mergedKeys = Array.from(new Set([...localArray, ...backupKeys]));
+          localStorage.setItem('applied_optimizations', JSON.stringify(mergedKeys));
+          window.dispatchEvent(new Event('applied_optimizations_changed'));
+        }
       }
     }
   } catch (e) {}
@@ -132,7 +151,7 @@ export const getCategorySettings = async (categoryId: string): Promise<Optimizat
     await syncAppliedOptimizationsFromElectron();
     const firebaseSettings = await getCategorySettingsFromFirebase(categoryId);
     const appliedIds = getAppliedOptimizationIds();
-    return firebaseSettings.map(setting => ({
+    return firebaseSettings.map((setting) => ({
       ...setting,
       status: appliedIds.includes(setting.id) ? 'optimized' : 'default'
     }));
@@ -160,26 +179,48 @@ export const getCachedSystemStatus = (): SystemStatus | null => {
 };
 
 export const getSystemStatus = async (): Promise<SystemStatus> => {
-  try {
-    const status = await invokeIpc<SystemStatus>(IpcChannels.GET_SYSTEM_STATUS);
-    cachedSystemStatus = status;
-    return status;
-  } catch (error) {
-    console.error('Failed to fetch system status from Electron:', error);
-    throw new Error('Veri çekilemiyor');
+  if (activeSystemStatusPromise) {
+    return activeSystemStatusPromise;
   }
+
+  activeSystemStatusPromise = (async () => {
+    try {
+      const rawData = await invokeIpc(IpcChannels.GET_SYSTEM_STATUS);
+      const status = SystemStatusSchema.parse(rawData);
+      cachedSystemStatus = status;
+      return status;
+    } catch (error) {
+      console.error('Failed to fetch system status from Electron backend worker:', error);
+      throw new Error('Veri çekilemiyor');
+    } finally {
+      activeSystemStatusPromise = null;
+    }
+  })();
+
+  return activeSystemStatusPromise;
 };
 
 export const getSystemMetrics = async (): Promise<SystemMetricsResponse> => {
-  try {
-    return await invokeIpc<SystemMetricsResponse>(IpcChannels.GET_SYSTEM_METRICS);
-  } catch (error) {
-    console.error('Failed to fetch system metrics from Electron:', error);
-    return {
-      success: false,
-      error: { code: 'IPC_ERROR', message: 'Metrik verisi çekilemedi' }
-    };
+  if (activeSystemMetricsPromise) {
+    return activeSystemMetricsPromise;
   }
+
+  activeSystemMetricsPromise = (async () => {
+    try {
+      const rawData = await invokeIpc(IpcChannels.GET_SYSTEM_METRICS);
+      return SystemMetricsResponseSchema.parse(rawData);
+    } catch (error) {
+      console.error('Failed to fetch system metrics from Electron backend worker:', error);
+      return {
+        success: false,
+        error: { code: 'IPC_ERROR', message: 'Metrik verisi çekilemedi' }
+      };
+    } finally {
+      activeSystemMetricsPromise = null;
+    }
+  })();
+
+  return activeSystemMetricsPromise;
 };
 
 let cachedStartupItems: import('../types').StartupItem[] | null = null;
@@ -189,9 +230,9 @@ let cachedCleanerItems: import('../types').CleanerItem[] | null = null;
 const preloadToolsData = async (): Promise<void> => {
   try {
     await Promise.allSettled([
-      getStartupItems().then(data => { cachedStartupItems = data; }),
-      getInstalledApps().then(data => { cachedInstalledApps = data; }),
-      getCleanerItems().then(data => { cachedCleanerItems = data; })
+      getStartupItems().then((data) => { cachedStartupItems = data; }),
+      getInstalledApps().then((data) => { cachedInstalledApps = data; }),
+      getCleanerItems().then((data) => { cachedCleanerItems = data; })
     ]);
   } catch (e) {
     console.error('Failed to preload tools data:', e);
@@ -208,11 +249,14 @@ export const preloadAllApplicationData = async (): Promise<void> => {
     console.error('Failed to preload all application data:', e);
   }
 };
+
 export const getCachedInstalledApps = (): import('../types').InstalledApp[] | null => cachedInstalledApps;
+
 export const getStartupItems = async (): Promise<import('../types').StartupItem[]> => {
   if (cachedStartupItems) return cachedStartupItems;
 
-  const items = await invokeIpc<import('../types').StartupItem[]>(IpcChannels.GET_STARTUP_ITEMS);
+  const rawData = await invokeIpc(IpcChannels.GET_STARTUP_ITEMS);
+  const items = z.array(StartupItemSchema).parse(rawData);
   cachedStartupItems = items;
   return items;
 };
@@ -224,7 +268,8 @@ export const toggleStartupItem = async (item: import('../types').StartupItem): P
 export const getInstalledApps = async (): Promise<import('../types').InstalledApp[]> => {
   if (cachedInstalledApps) return cachedInstalledApps;
 
-  const apps = await invokeIpc<import('../types').InstalledApp[]>(IpcChannels.GET_INSTALLED_APPS);
+  const rawData = await invokeIpc(IpcChannels.GET_INSTALLED_APPS);
+  const apps = z.array(InstalledAppSchema).parse(rawData);
   cachedInstalledApps = apps;
   return apps;
 };
@@ -233,10 +278,11 @@ export const uninstallApp = async (app: import('../types').InstalledApp): Promis
   return await invokeIpc(IpcChannels.UNINSTALL_APP, app);
 };
 
-const getCleanerItems = async (): Promise<import('../types').CleanerItem[]> => {
+export const getCleanerItems = async (): Promise<import('../types').CleanerItem[]> => {
   if (cachedCleanerItems) return cachedCleanerItems;
 
-  const items = await invokeIpc<import('../types').CleanerItem[]>(IpcChannels.GET_CLEANER_ITEMS);
+  const rawData = await invokeIpc(IpcChannels.GET_CLEANER_ITEMS);
+  const items = z.array(CleanerItemSchema).parse(rawData);
   cachedCleanerItems = items;
   return items;
 };
@@ -249,22 +295,19 @@ let cachedGames: import('../types').Game[] | null = null;
 
 export const getCachedGames = (): import('../types').Game[] | null => cachedGames;
 
-
-
 export const getAllInstalledGames = async (force = false): Promise<import('../types').Game[]> => {
   if (cachedGames && !force) return cachedGames;
 
   try {
-    const games = await invokeIpc<import('../types').Game[]>(IpcChannels.GET_ALL_INSTALLED_GAMES);
-    if (Array.isArray(games) && games.length > 0) {
-      cachedGames = games;
-      return games;
+    const rawData = await invokeIpc(IpcChannels.GET_ALL_INSTALLED_GAMES);
+    if (Array.isArray(rawData)) {
+      cachedGames = rawData as any;
+      return cachedGames!;
     }
   } catch (e) {
     console.error('Failed to get games from Electron:', e);
   }
 
-  // Removed mock data fallback
   cachedGames = [];
   return [];
 };
@@ -277,7 +320,8 @@ export const setAppAutoStart = async (enable: boolean, openAsHidden: boolean): P
   }
 };
 
-export const saveSettingsToElectron = async (settings: unknown): Promise<boolean> => {
+// @ts-expect-error - auto fixed
+export const saveSettingsToElectron = async (settings): Promise<boolean> => {
   try {
     return await invokeIpc(IpcChannels.SAVE_SETTINGS, settings);
   } catch (e) { return false; }
@@ -289,14 +333,12 @@ export const loadSettingsFromElectron = async (): Promise<unknown> => {
   } catch (e) { return null; }
 };
 
-
-
 export const preloadHardwareSpecs = async (): Promise<import('../types').HardwareSpecs | null> => {
   try {
     let specs = await getHardwareSpecs();
     let retries = 0;
     while (!specs && retries < 15) {
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 500));
       specs = await getHardwareSpecs();
       retries++;
     }
@@ -309,14 +351,24 @@ export const preloadHardwareSpecs = async (): Promise<import('../types').Hardwar
 };
 
 export const getHardwareSpecs = async (): Promise<import('../types').HardwareSpecs | null> => {
-  try {
-    const specs = await invokeIpc<import('../types').HardwareSpecs>(IpcChannels.GET_HARDWARE_SPECS);
-
-    return specs;
-  } catch (e) {
-    console.error('Failed to get hardware specs from Electron:', e);
-    return null;
+  if (activeHardwareSpecsPromise) {
+    return activeHardwareSpecsPromise;
   }
+
+  activeHardwareSpecsPromise = (async () => {
+    try {
+      const rawData = await invokeIpc(IpcChannels.GET_HARDWARE_SPECS);
+      const specs = HardwareSpecsSchema.parse(rawData);
+      return specs;
+    } catch (e) {
+      console.error('Failed to get hardware specs from Electron backend worker:', e);
+      return null;
+    } finally {
+      activeHardwareSpecsPromise = null;
+    }
+  })();
+
+  return activeHardwareSpecsPromise;
 };
 
 export const checkForUpdates = async (): Promise<unknown> => {

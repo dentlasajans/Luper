@@ -1,4 +1,3 @@
-import { User as FirebaseUser, onAuthStateChanged } from 'firebase/auth';
 import {
     Archive,
     ArrowCircleUp,
@@ -16,11 +15,12 @@ import {
     TwitterLogo,
     Wrench,
     Lightning
-} from '@phosphor-icons/react';
+} from '@/src/components/ui/Icons';
 import { motion } from 'motion/react';
 import React, { useEffect, useMemo, useState } from 'react';
-import { auth, loginWithGoogle, logoutGoogle } from '../services/FirebaseService';
-import { AppLogo } from './Icons';
+import { loginWithGoogle, logoutGoogle } from '../services/FirebaseService';
+import { AppLogo } from './ui/AppLogo';
+import { useAuth } from '../context/AuthContext';
 
 interface SidebarProps {
   activeTab: string;
@@ -73,7 +73,8 @@ const navItems: NavItem[] = [
     subItems: [
       { id: 'startup', label: 'Başlangıç' },
       { id: 'cleaner', label: 'Temizlik' },
-      { id: 'debloat', label: 'Debloat' }
+      { id: 'debloat', label: 'Debloat' },
+      { id: 'advanced-latency', label: 'Gelişmiş Gecikme' }
     ]
   },
   { id: 'games', icon: GameController, label: 'Oyunlar', group: 'Ana Menü' },
@@ -87,7 +88,7 @@ const navItems: NavItem[] = [
   { id: 'settings', icon: Gear, label: 'Ayarlar', group: 'Sistem & Yönetim' }
 ];
 
-navItems.forEach(item => {
+navItems.forEach((item) => {
   if (item.subItems) {
     item.subItems.sort((a, b) => a.label.localeCompare(b.label));
   }
@@ -97,22 +98,22 @@ const SidebarSubItem = React.memo(({ sub, isSubActive, onClick }: { sub: SubItem
   return (
     <button
       onClick={() => onClick(sub.id)}
-      className={`w-full flex items-center px-3 py-2 rounded-xl transition-all duration-200 relative group focus-visible:ring-1 focus-visible:ring-[#1a5efd] focus-visible:outline-none ${
+      className={`w-full flex items-center px-3 py-2 rounded-xl transition-all duration-200 relative group focus-visible:ring-1 focus-visible:ring-luper-primary focus-visible:outline-none ${
         isSubActive ? 'text-white font-medium' : 'text-[#86868b] hover:text-white'
       }`}
     >
       {isSubActive && (
         <motion.div
           layoutId="sidebar-active-sub"
-          className="absolute inset-0 bg-[#1a5efd]/15 backdrop-blur-md rounded-xl border border-[#1a5efd]/30"
+          className="absolute inset-0 bg-luper-primary/15 rounded-xl border border-luper-primary/30"
           transition={{ duration: 0.2, ease: 'easeOut' }}
         />
       )}
       {!isSubActive && (
-        <div className="absolute inset-0 bg-white/[0.04] opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-200" />
+        <div className="absolute inset-0 bg-[#1a1a1d] opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-200" />
       )}
-      <div className={`w-1.5 h-1.5 rounded-full mr-3 relative z-10 transition-colors duration-200 ${isSubActive ? 'bg-[#1a5efd] shadow-[0_0_8px_rgba(26,94,253,0.8)]' : 'bg-white/20 group-hover:bg-white/50'}`} />
-      <span className="text-[13.5px] relative z-10">{sub.label}</span>
+      <div className={`w-1.5 h-1.5 rounded-full mr-3 relative z-10 transition-colors duration-200 ${isSubActive ? 'bg-luper-primary shadow-[0_0_8px_rgba(26,94,253,0.8)]' : 'bg-white/20 group-hover:bg-white/50'}`} />
+      <span className="text-[13px] relative z-10">{sub.label}</span>
     </button>
   );
 });
@@ -139,26 +140,26 @@ const SidebarNavItem = React.memo(({
       <button
         aria-label={item.label}
         onClick={() => onItemClick(item, hasSubItems)}
-        className={`w-full flex items-center px-3.5 py-2.5 rounded-xl transition-all duration-200 relative group focus-visible:ring-2 focus-visible:ring-[#1a5efd] focus-visible:outline-none ${
+        className={`w-full flex items-center px-3.5 py-2.5 rounded-xl transition-all duration-200 relative group focus-visible:ring-2 focus-visible:ring-luper-primary focus-visible:outline-none ${
           isActive ? 'text-white' : 'text-[#86868b] hover:text-white'
         }`}
       >
         {isActive && (
           <motion.div
             layoutId="sidebar-active"
-            className="absolute inset-0 bg-white/[0.08] backdrop-blur-md rounded-xl border border-white/[0.12] shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
+            className="absolute inset-0 bg-[#161618] rounded-xl border border-white/[0.12] shadow-[0_4px_16px_rgba(0,0,0,0.3)]"
             transition={{ duration: 0.2, ease: 'easeOut' }}
           />
         )}
         {!isActive && (
-          <div className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-200" />
+          <div className="absolute inset-0 bg-[#1a1a1d] opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-200" />
         )}
         
-        <item.icon size={18} weight="duotone" className={`relative z-10 transition-all duration-300 mr-3.5 ${isActive ? 'text-[#1a5efd]' : 'text-[#86868b] group-hover:text-white group-hover:scale-105'}`} />
+        <item.icon size={18} weight="duotone" className={`relative z-10 transition-all duration-300 mr-3.5 ${isActive ? 'text-luper-primary' : 'text-[#86868b] group-hover:text-white group-hover:scale-105'}`} />
         
         <span className="text-[14px] font-medium relative z-10 flex-1 text-left">{item.label}</span>
         {item.badge && (
-          <span className="text-[10px] bg-[#1a5efd]/20 text-[#64d2ff] px-2 py-0.5 rounded-full border border-[#1a5efd]/30 font-bold uppercase tracking-wider relative z-10 mr-1">
+          <span className="text-[10px] bg-[#161618] text-[#64d2ff] px-2 py-0.5 rounded-full border border-luper-primary/40 font-bold uppercase tracking-wider shadow-[0_0_8px_rgba(26,94,253,0.15)] relative z-10 mr-1">
             {item.badge}
           </span>
         )}
@@ -180,7 +181,7 @@ const SidebarNavItem = React.memo(({
           className="overflow-hidden"
         >
           <div className="pl-9 pr-1 py-1 space-y-1 mt-1">
-            {(item.subItems ?? []).map(sub => (
+            {(item.subItems ?? []).map((sub) => (
               <SidebarSubItem 
                 key={sub.id} 
                 sub={sub} 
@@ -196,16 +197,9 @@ const SidebarNavItem = React.memo(({
 });
 
 export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
-  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
+  const { user: currentUser, isPremium } = useAuth();
   const [authLoading, setAuthLoading] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-    });
-    return () => unsubscribe();
-  }, []);
 
   const handleGoogleLogin = React.useCallback(async () => {
     setAuthLoading(true);
@@ -229,7 +223,7 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
   const handleItemClick = React.useCallback((item: NavItem, hasSubItems: boolean) => {
     setActiveTab(item.id);
     if (hasSubItems) {
-      setExpandedCategory(prev => prev === item.id ? null : item.id);
+      setExpandedCategory((prev) => prev === item.id ? null : item.id);
     } else {
       setExpandedCategory(null);
     }
@@ -240,8 +234,8 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
   }, [setActiveTab]);
 
   useEffect(() => {
-    const parentItem = navItems.find(item => 
-      item.subItems?.some(sub => sub.id === activeTab)
+    const parentItem = navItems.find((item) => 
+      item.subItems?.some((sub) => sub.id === activeTab)
     );
     if (parentItem) {
       setExpandedCategory(parentItem.id);
@@ -250,7 +244,7 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
 
   const groupedNav = useMemo(() => {
     const groups: { [key: string]: NavItem[] } = {};
-    navItems.forEach(item => {
+    navItems.forEach((item) => {
       if (!groups[item.group]) groups[item.group] = [];
       groups[item.group].push(item);
     });
@@ -259,7 +253,7 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
 
   return (
     <div 
-      className="shrink-0 w-[260px] h-[calc(100vh-24px)] my-3 ml-3 bg-[#161619]/90 border border-white/[0.08] rounded-[20px] shadow-2xl flex flex-col relative z-20 pt-5 pb-4 px-3 overflow-hidden backdrop-blur-2xl luper-glass"
+      className="shrink-0 w-[260px] h-[calc(100vh-24px)] my-3 ml-3 bg-[#161618] border border-white/[0.08] rounded-[20px] shadow-2xl flex flex-col relative z-20 pt-5 pb-4 px-3 overflow-hidden"
     >
       {/* Header & Logo */}
       <div className="flex items-center justify-center py-2 mb-4 w-full select-none drag-region">
@@ -297,28 +291,28 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
           <button 
             onClick={handleGoogleLogin}
             disabled={authLoading}
-            className="w-full flex items-center justify-center space-x-2 py-2.5 px-3 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] rounded-xl transition-all group shadow-sm"
+            className="w-full flex items-center justify-center space-x-2 py-2.5 px-3 bg-[#1a1a1d] hover:bg-[#1c1c1f] border border-white/[0.08] rounded-xl transition-all group shadow-sm"
           >
             {authLoading ? (
-              <SpinnerGap size={16} weight="duotone" className="animate-spin text-[#1a5efd]" />
+              <SpinnerGap size={16} weight="duotone" className="animate-spin text-luper-primary" />
             ) : (
-              <Sparkle size={16} weight="duotone" className="text-[#1a5efd]" />
+              <Sparkle size={16} weight="duotone" className="text-luper-primary" />
             )}
             <span className="text-[13px] font-medium text-white group-hover:text-[#64d2ff] transition-colors">
               {authLoading ? 'Giriş Yapılıyor...' : 'Google ile Giriş'}
             </span>
           </button>
         ) : (
-          <div className="flex items-center justify-between p-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl">
+          <div className="flex items-center justify-between p-2.5 bg-[#1a1a1d] border border-white/[0.06] rounded-xl">
             <div className="flex items-center space-x-2.5 min-w-0">
               {currentUser.photoURL ? (
                 <img 
                   src={currentUser.photoURL} 
                   alt={currentUser.displayName || 'Kullanıcı'} 
-                  className="w-8 h-8 rounded-full border border-[#1a5efd]/40 shrink-0 object-cover"
+                  className="w-8 h-8 rounded-full border border-luper-primary/40 shrink-0 object-cover"
                 />
               ) : (
-                <div className="w-8 h-8 rounded-full bg-[#1a5efd] flex items-center justify-center text-white font-bold text-[13px] shrink-0">
+                <div className="w-8 h-8 rounded-full bg-luper-primary flex items-center justify-center text-white font-bold text-[13px] shrink-0">
                   {(currentUser.displayName || currentUser.email || 'U')[0].toUpperCase()}
                 </div>
               )}
@@ -326,13 +320,15 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
                 <h4 className="text-[#f5f5f7] text-[13px] font-medium truncate">
                   {currentUser.displayName || 'Kullanıcı'}
                 </h4>
-                <p className="text-[#64d2ff] text-[11px] font-semibold">Premium</p>
+                <p className={`text-[11px] font-semibold ${isPremium ? 'text-[#64d2ff]' : 'text-[#86868b]'}`}>
+                  {isPremium ? 'Premium' : 'Free'}
+                </p>
               </div>
             </div>
 
             <button
               onClick={handleLogout}
-              className="w-7 h-7 rounded-lg bg-white/[0.04] hover:bg-red-500/20 hover:text-red-400 text-[#86868b] flex items-center justify-center transition-colors shrink-0"
+              className="w-7 h-7 rounded-xl bg-[#1a1a1d] hover:bg-red-500/20 hover:text-red-400 text-[#86868b] flex items-center justify-center transition-colors shrink-0"
               title="Çıkış Yap"
             >
               <SignOut size={16} weight="duotone" className="group-hover:scale-105 transition-all duration-300" />
@@ -353,3 +349,4 @@ export const Sidebar = React.memo(function Sidebar({ activeTab, setActiveTab }: 
     </div>
   );
 });
+

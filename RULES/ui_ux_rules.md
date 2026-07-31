@@ -19,7 +19,7 @@ Every screen, interaction, animation, modal, and presentation component must fee
 LUPER must feel:
 
 - **Premium:** Executive dark-mode elegance inspired by Apple/macOS Sequoia and Linear.app.
-- **Modern:** Contemporary UI aesthetics leveraging subtle glassmorphism and fine border lines.
+- **Modern:** Contemporary UI aesthetics utilizing Solid Dark Mode, clean typography, and fine border lines. (No Glassmorphism/blur).
 - **Professional:** Clean engineering precision built for power users, gamers, and IT professionals.
 - **Fast:** Instant sub-200ms visual response to user inputs; zero interface lag.
 - **Clean:** Crisp typography and intentional whitespace; zero visual clutter or RGB gaming noise.
@@ -276,6 +276,7 @@ The following practices are **STRICTLY FORBIDDEN** across LUPER:
 - ❌ Confusing, multi-level nested navigation structures.
 - ❌ Flashy, slow, 3D, or exaggerated spring-bounce decorative animations.
 - ❌ Visual clutter, rainbow circular gauges, or gaming RGB noise.
+- **STRICTLY FORBIDDEN:** Glassmorphism, `backdrop-blur`, or highly transparent background surfaces. All cards must be Solid (`bg-[#18181c]`, etc).
 - ❌ Hidden interactive actions without hover/focus indicators.
 - ❌ Unclear, ambiguous, or technical jargon labels in the user interface.
 

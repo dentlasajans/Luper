@@ -1,4 +1,4 @@
-import { CheckCircle, Gift, X } from '@phosphor-icons/react';
+import { CheckCircle, Gift, X } from '@/src/components/ui/Icons';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { getLatestChangelog } from '../services/FirebaseService';
@@ -50,7 +50,7 @@ export function ChangelogModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/60 backdrop-blur-2xl"
+            className="absolute inset-0 bg-black/80"
             onClick={handleClose}
           />
           <motion.div
@@ -58,7 +58,7 @@ export function ChangelogModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            role="dialog" aria-modal="true" aria-labelledby="modal-title" className="relative w-full max-w-xl bg-[#18181c]/90 backdrop-blur-2xl border border-white/[0.12] rounded-3xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.8),inset_0_1px_0_0_rgba(255,255,255,0.12)] flex flex-col"
+            role="dialog" aria-modal="true" aria-labelledby="modal-title" className="relative w-full max-w-xl bg-[#1a1a1d] border border-luper-subtle rounded-3xl overflow-hidden shadow-[0_24px_64px_rgba(0,0,0,0.8)] flex flex-col"
           >
             <div className="p-6 pb-4 border-b border-white/[0.04] flex items-center justify-between">
               <div className="flex items-center space-x-3">

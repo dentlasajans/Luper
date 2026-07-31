@@ -1,0 +1,1329 @@
+[
+  {
+    "id": "disable_accessibility_keys",
+    "title": "Erişilebilirlik Tuşlarını Kapat",
+    "description": "Yanlışlıkla basılan tuşları engeller. Gereksiz gecikme ve pencerelerden kurtulun.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "input lag",
+      "accessibility"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\Keyboard Response",
+        "key": "Flags",
+        "value": "122",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\StickyKeys",
+        "key": "Flags",
+        "value": "506",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\ToggleKeys",
+        "key": "Flags",
+        "value": "58",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "keyboard_queue_optimization",
+    "title": "Klavye Kuyruk Optimizasyonu",
+    "description": "Çoklu tuş basımında veri kaybını önler. Arabelleğe alma süresini kısaltır.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "input lag",
+      "buffer",
+      "hid",
+      "queue"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\kbdclass\\Parameters",
+        "key": "KeyboardDataQueueSize",
+        "value": "32",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\kbdhid\\Parameters",
+        "key": "KeyboardDataQueueLength",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "keyboard_response_optimization",
+    "title": "Klavye Yanıt Hızını Artır",
+    "description": "Tuş yineleme gecikmesini sıfırlar. Basılı tutulan tuşların anında algılanmasını sağlar.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "input lag",
+      "response",
+      "speed"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Keyboard",
+        "key": "KeyboardDelay",
+        "value": "0",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Keyboard",
+        "key": "KeyboardSpeed",
+        "value": "31",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_usb_selective_suspend_keyboard",
+    "title": "Bağlantı Uyku Modunu Kapat",
+    "description": "Bağlantı noktalarının güç tasarrufunu engeller. İlk tuş basımındaki gecikmeyi yok eder.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "usb",
+      "power",
+      "input lag"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "powercfg -setacvalueindex scheme_current 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0; powercfg -setactive scheme_current"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "keyboard_filterkeys_bypass",
+    "title": "Filtre Tuşu Oyun Optimizasyonu",
+    "description": "Arayüz limitlerini aşarak tekrarlama hızını zorlar. Donanımsal sınırların altına inerek maksimum tepki verir.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "input lag",
+      "accessibility",
+      "filterkeys"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\Keyboard Response",
+        "key": "AutoRepeatDelay",
+        "value": "150",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\Keyboard Response",
+        "key": "AutoRepeatRate",
+        "value": "10",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Accessibility\\Keyboard Response",
+        "key": "DelayBeforeAcceptance",
+        "value": "0",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_hid_enhanced_power_management_disable",
+    "title": "Cihaz Güç Yönetimini Kapat",
+    "description": "Tüm klavyelerde güç tasarrufunu iptal eder. Mikro takılmaları ve uyanma gecikmelerini bitirir.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "usb",
+      "power",
+      "input lag",
+      "micro-stutter"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Get-ChildItem -Path \"HKLM:\\\\SYSTEM\\\\CurrentControlSet\\\\Enum\\\\USB\" -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -match \"VID_\" } | ForEach-Object { $dp = Join-Path $_.PSPath \"Device Parameters\"; if (Test-Path $dp) { Set-ItemProperty -Path $dp -Name \"EnhancedPowerManagementEnabled\" -Value 0 -Type DWord -Force -ErrorAction SilentlyContinue; Set-ItemProperty -Path $dp -Name \"AllowIdleIrpInD3\" -Value 0 -Type DWord -Force -ErrorAction SilentlyContinue; Set-ItemProperty -Path $dp -Name \"SelectiveSuspendEnabled\" -Value 0 -Type DWord -Force -ErrorAction SilentlyContinue; Set-ItemProperty -Path $dp -Name \"DeviceSelectiveSuspended\" -Value 0 -Type DWord -Force -ErrorAction SilentlyContinue } }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_gameinput_service",
+    "title": "Oyun Girdisi Servisini Durdur",
+    "description": "Arka planda klavyeyi kancalayan servisi kapatır. Çift basma ve gecikme sıçramalarını kesin çözer.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "service",
+      "gameinput",
+      "input lag",
+      "stutter"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Stop-Service -Name \"GameInputSvc\" -Force -ErrorAction SilentlyContinue; Set-Service -Name \"GameInputSvc\" -StartupType Disabled -ErrorAction SilentlyContinue; Get-Service -Name \"*GameInput*\" | Set-Service -StartupType Disabled"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "win32_priority_separation_0x26",
+    "title": "Klavye İşlemci Önceliğini Artır",
+    "description": "Oyun ve klavye işlemlerine maksimum işlemci gücü atar. Öncelikli işlem sayesinde gecikmeyi düşürür.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "scheduler",
+      "priority",
+      "input lag",
+      "cpu"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\PriorityControl",
+        "key": "Win32PrioritySeparation",
+        "value": "38",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_xhci_msi_mode_activation",
+    "title": "Donanım Kesinti Modunu Aç",
+    "description": "Kontrolcüyü mesaj sinyalli kesintilere geçirir. Kesinti gecikmesini sıfıra indirir.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "usb",
+      "msi",
+      "irq",
+      "dpc",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$xHCI = Get-ChildItem -Path \"HKLM:\\\\SYSTEM\\\\CurrentControlSet\\\\Enum\\\\PCI\" -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -eq \"Device Parameters\" }; foreach ($dev in $xHCI) { $msiPath = Join-Path $dev.PSPath \"Interrupt Management\\\\MessageSignaledInterruptProperties\"; if (-not (Test-Path $msiPath)) { New-Item -Path $msiPath -Force | Out-Null }; Set-ItemProperty -Path $msiPath -Name \"MSISupported\" -Value 1 -Type DWord -Force }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "i8042prt_latency_optimization",
+    "title": "Eski Sürücü Optimizasyonu",
+    "description": "Eski tip portlarda sürücü bekleme döngülerini kısaltır. Sıçramaları ve veri kuyruklarını engeller.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "ps2",
+      "i8042prt",
+      "polling",
+      "dpc"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\i8042prt\\\\Parameters",
+        "key": "PollStatusIterations",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\i8042prt\\\\Parameters",
+        "key": "PollInterrupts",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\i8042prt\\\\Parameters",
+        "key": "KeyBufferSize",
+        "value": "32",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "filterkeys_esports_tuning_59",
+    "title": "Filtre Tuşu Hız Ayarı",
+    "description": "Yineleme aralığını minimum seviyeye kilitler. Hızlı hareketlerde anında tepki sağlar.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "filterkeys",
+      "input lag",
+      "accessibility",
+      "esports"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Control Panel\\\\Accessibility\\\\Keyboard Response",
+        "key": "Flags",
+        "value": "59",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Control Panel\\\\Accessibility\\\\Keyboard Response",
+        "key": "AutoRepeatDelay",
+        "value": "200",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Control Panel\\\\Accessibility\\\\Keyboard Response",
+        "key": "AutoRepeatRate",
+        "value": "6",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Control Panel\\\\Accessibility\\\\Keyboard Response",
+        "key": "BounceTime",
+        "value": "0",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\\\Control Panel\\\\Accessibility\\\\Keyboard Response",
+        "key": "DelayBeforeAcceptance",
+        "value": "0",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_usb_interrupt_moderation",
+    "title": "Kesinti Yumuşatmayı Kapat",
+    "description": "Veri paketlerinin işlemciye doğrudan iletilmesini sağlar. Toplu işlem gecikmesini tamamen kaldırır.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "usb",
+      "interrupt moderation",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$netAdapters = Get-ChildItem -Path \"HKLM:\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Class\\\\{36fc9e60-c465-11cf-8056-444553540000}\" -ErrorAction SilentlyContinue; foreach ($adapter in $netAdapters) { if (Test-Path \"$($adapter.PSPath)\\\\InterruptModeration\") { Set-ItemProperty -Path $adapter.PSPath -Name \"InterruptModeration\" -Value 0 -Type DWord -Force } }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_touch_keyboard_services",
+    "title": "Dokunmatik Klavye Servislerini Kapat",
+    "description": "Gereksiz metin tahmini servislerini arka plandan siler. Boşta kaynak tüketimini ve tuş dinlemeyi durdurur.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "services",
+      "touch",
+      "input lag"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Stop-Service -Name \"TextInputManagementService\" -Force -ErrorAction SilentlyContinue; Set-Service -Name \"TextInputManagementService\" -StartupType Disabled -ErrorAction SilentlyContinue; Stop-Service -Name \"TabletInputService\" -Force -ErrorAction SilentlyContinue; Set-Service -Name \"TabletInputService\" -StartupType Disabled -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "kbdclass_connect_multiple_ports",
+    "title": "Çoklu Bağlantı Modunu Aç",
+    "description": "Klavye sürücüsünü doğrudan donanıma bağlar. İşleme katmanlarını azaltarak girdi süresini hızlandırır.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "driver",
+      "kbdclass",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\kbdclass\\\\Parameters",
+        "key": "ConnectMultiplePorts",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "scancode_map_latency_bypass",
+    "title": "Tuş Haritası Engelini Aş",
+    "description": "Çekirdek seviyesinde statik tuş haritalama yapar. İşletim sistemi kaynaklı özel tuş gecikmelerini aşar.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "scancode",
+      "hook",
+      "capslock",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$hexBytes = [byte[]](0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00, 0x02,0x00,0x00,0x00, 0x00,0x00,0x3a,0x00, 0x00,0x00,0x00,0x00); Set-ItemProperty -Path \"HKLM:\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Keyboard Layout\" -Name \"Scancode Map\" -Value $hexBytes -Type Binary"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_xhci_irq_affinity_steering",
+    "title": "Kesinti Çekirdek Yönlendirmesi",
+    "description": "Donanım kesintilerini boş işlemci çekirdeklerine atar. Ana çekirdekteki tıkanmaları ve gecikmeleri önler.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "usb",
+      "interrupt",
+      "latency",
+      "xhci"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "$xHCI = Get-ChildItem -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\PCI\" -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -eq \"Device Parameters\" }; foreach ($dev in $xHCI) { $affPath = Join-Path $dev.PSPath \"Interrupt Management\\Affinity Policy\"; if (-not (Test-Path $affPath)) { New-Item -Path $affPath -Force | Out-Null }; Set-ItemProperty -Path $affPath -Name \"DevicePolicy\" -Value 4 -Type DWord -Force; Set-ItemProperty -Path $affPath -Name \"AssignmentSetOverride\" -Value ([byte[]](0x0C,0x00,0x00,0x00,0x00,0x00,0x00,0x00)) -Type Binary -Force }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "kbdclass_upperfilters_cleanup",
+    "title": "Klavye Filtrelerini Temizle",
+    "description": "Gereksiz üçüncü parti klavye filtrelerini kaldırır. Sürücü yığınındaki gecikmeleri ve okuma süresini düşürür.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "driver",
+      "filter",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e96b-e325-11ce-bfc1-08002be10318}",
+        "key": "UpperFilters",
+        "value": "kbdclass",
+        "valueType": "REG_MULTI_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "usb_lpm_u1_u2_disable",
+    "title": "Bağlantı Güç Tasarrufunu Kapat",
+    "description": "Uyku modlarını tamamen devredışı bırakır. Tuşa ilk basıldığındaki uyanma süresini ortadan kaldırır.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "usb",
+      "power",
+      "lpm",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "powercfg -setacvalueindex scheme_current 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0; powercfg -setactive scheme_current"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\USBHUB3\\Parameters",
+        "key": "DisableGenericHubPowerManagement",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\USBHUB3\\Parameters",
+        "key": "DisablePowerDown",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "text_input_framework_disable",
+    "title": "Metin İzlemeyi Kapat",
+    "description": "Arka planda çalışan metin analizi ve tahminini durdurur. Oyun sırasında veri toplama kaynaklı yavaşlamayı keser.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "services",
+      "telemetry",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization",
+        "key": "RestrictImplicitInkCollection",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization",
+        "key": "RestrictImplicitTextCollection",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\InputPersonalization",
+        "key": "AllowInputPersonalization",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\InputPersonalization\\TrainedDataStore",
+        "key": "HarvestContacts",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "csrss_priority_optimization",
+    "title": "İşlem Önceliğini Artır",
+    "description": "Klavye girdilerini yönlendiren servise gerçek zamanlı öncelik verir. Tuş verilerinin oyuna ulaşma hızını maksimuma çıkarır.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "scheduler",
+      "priority",
+      "csrss",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\csrss.exe\\PerfOptions",
+        "key": "CpuPriorityClass",
+        "value": "3",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\csrss.exe\\PerfOptions",
+        "key": "IoPriority",
+        "value": "3",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "foreground_lock_hook_timeout",
+    "title": "Klavye Kanca Zaman Aşımı",
+    "description": "Yanıtsız kanca sürelerini milisaniyelere indirir. Arka plan uygulamalarının klavyeyi yavaşlatmasını anında engeller.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "hook",
+      "timeout",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "key": "ForegroundLockTimeout",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\Control Panel\\Desktop",
+        "key": "LowLevelHooksTimeout",
+        "value": "250",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "hid_device_idle_bypass",
+    "title": "Cihaz Bekleme Modunu Kapat",
+    "description": "Tüm cihazları sürekli tam güçte çalıştırır. Uzun oyun seanslarında cihazın uykuya dalıp frekans düşürmesini engeller.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "hid",
+      "power",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Class\\{745a1762-7470-11d0-03a4-00a0c90d6bf8}",
+        "key": "DeviceIdleNotification",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Class\\{745a1762-7470-11d0-03a4-00a0c90d6bf8}",
+        "key": "IdleInWorkingState",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "gamedvr_shortcut_hook_disable",
+    "title": "Oyun Kayıt Kısayollarını Kapat",
+    "description": "Kayıt tuş dinleme kancalarını sistem düzeyinde siler. Oyun içindeki arka plan dinleme gecikmelerini yok eder.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "low",
+    "tags": [
+      "keyboard",
+      "gamedvr",
+      "hook",
+      "services",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+        "key": "AppCaptureEnabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+        "key": "AllowGameDVR",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKCU\\System\\GameConfigStore",
+        "key": "GameDVR_Enabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_paging_executive",
+    "title": "Sürücü Bellek Kilitlemesi",
+    "description": "Klavye sürücülerini fiziksel belleğe kilitler. Diske yazma ve okuma gecikmelerini bitirip anında tepki süresi sağlar.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "memory",
+      "kernel",
+      "paging",
+      "latency"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "key": "DisablePagingExecutive",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "key": "LargeSystemCache",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "global_timer_resolution_requests",
+    "title": "Zamanlayıcı Çözünürlüğünü Sabitle",
+    "description": "Sistem zamanlayıcısını en düşük seviyeye kilitler. Yüksek tarama hızına sahip klavyelerin tam kapasite çalışmasını sağlar.",
+    "category_id": "keyboard",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 100,
+    "risk_level": "medium",
+    "tags": [
+      "keyboard",
+      "timer",
+      "scheduler",
+      "latency",
+      "polling"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+        "key": "GlobalTimerResolutionRequests",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "bcdedit /set disabledynamictick yes; bcdedit /set useplatformclock no"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]

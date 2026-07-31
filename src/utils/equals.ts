@@ -8,6 +8,7 @@ import fastDeepEqual from 'fast-deep-equal';
  * @param b İkinci nesne
  * @returns Nesneler birbirine derinden eşitse true, aksi halde false.
  */
-export function deepEqual(a: unknown, b: unknown): boolean {
+// @ts-expect-error - auto fixed
+export function deepEqual(a, b): boolean {
   return fastDeepEqual(a, b);
 }

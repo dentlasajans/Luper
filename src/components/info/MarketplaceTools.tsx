@@ -1,4 +1,4 @@
-import { Medal, CheckCircle, DownloadSimple, ArrowsClockwise, MagnifyingGlass, ShieldCheck, ShoppingBag, Star } from '@phosphor-icons/react';
+﻿import { Medal, CheckCircle, DownloadSimple, ArrowsClockwise, MagnifyingGlass, ShieldCheck, ShoppingBag, Star } from '@/src/components/ui/Icons';
 import { memo, useMemo, useState } from 'react';
 
 export interface MarketplaceItem {
@@ -22,7 +22,7 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   const filteredItems = useMemo(() => {
-    return items.filter(item => {
+    return items.filter((item) => {
       const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || item.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = activeCategory === 'Hepsi' || item.category === activeCategory;
       return matchesSearch && matchesCategory;
@@ -32,7 +32,7 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
   const handleInstall = (id: string) => {
     setDownloadingId(id);
     setTimeout(() => {
-      setItems(prev => prev.map(item => item.id === id ? { ...item, installed: true } : item));
+      setItems((prev) => prev.map((item) => item.id === id ? { ...item, installed: true } : item));
       setDownloadingId(null);
     }, 1200);
   };
@@ -43,7 +43,7 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <ShoppingBag weight="duotone" className="text-[#1a5efd]" size={28} />
+            <ShoppingBag weight="duotone" className="text-luper-primary" size={28} />
             <span>LUPER Optimizasyon Pazaryeri (Optimization Marketplace)</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">Resmi ve topluluk üretimi optimizasyon paketleri, oyun profilleri ve eklentileri keşfedin.</p>
@@ -56,10 +56,10 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
       </div>
 
       {/* Hero Featured Card */}
-      <div className="bg-gradient-to-r from-[#1a5efd]/20 via-[#161619] to-[#161619] border border-[#1a5efd]/30 p-6 rounded-2xl flex items-center justify-between relative overflow-hidden">
+      <div className="bg-gradient-to-r from-[#1a5efd]/20 via-[#161619] to-[#161619] border border-luper-primary/30 p-6 rounded-2xl flex items-center justify-between relative overflow-hidden">
         <div className="space-y-3 z-10 max-w-xl">
           <div className="flex items-center space-x-2">
-            <span className="px-2.5 py-0.5 rounded-md bg-[#1a5efd] text-white text-[11px] font-mono font-bold uppercase tracking-wider flex items-center space-x-1">
+            <span className="px-2.5 py-0.5 rounded-md bg-luper-primary text-white text-[11px] font-mono font-bold uppercase tracking-wider flex items-center space-x-1">
               <Medal weight="duotone" size={12} />
               <span>Editörün Seçimi</span>
             </span>
@@ -74,7 +74,7 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
           <div className="flex items-center space-x-4 pt-2">
             <button
               onClick={() => handleInstall('pack-ultimate-esports')}
-              className="px-5 py-2.5 bg-[#1a5efd] hover:bg-[#2d6bfe] text-white font-bold text-[13.5px] rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-blue-500/20"
+              className="px-5 py-2.5 bg-luper-primary hover:bg-[#2d6bfe] text-white font-bold text-[13.5px] rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-blue-500/20"
             >
               <DownloadSimple weight="duotone" size={16} />
               <span>Yüklendi (%100 Güncel)</span>
@@ -86,14 +86,14 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
       {/* Category & Search Filter Bar */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          {['Hepsi', 'Optimization Pack', 'Game Profile', 'Workflow Template', 'Extension'].map(cat => (
+          {['Hepsi', 'Optimization Pack', 'Game Profile', 'Workflow Template', 'Extension'].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-xl text-[12.5px] font-bold transition-all ${
                 activeCategory === cat
-                  ? 'bg-[#1a5efd] text-white shadow-md'
-                  : 'bg-[#161619] text-[#86868b] border border-white/[0.08] hover:text-white'
+                  ? 'bg-luper-primary text-white shadow-md'
+                  : 'bg-luper-surface text-[#86868b] border border-white/[0.08] hover:text-white'
               }`}
             >
               {cat === 'Hepsi' ? 'Tüm Paketler' : cat}
@@ -108,7 +108,7 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Pazaryerinde ara..."
-            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-[#1a5efd] w-full"
+            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-luper-primary w-full"
           />
         </div>
       </div>
@@ -116,13 +116,13 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
       {/* Marketplace Items Grid */}
       <div className="grid grid-cols-2 gap-6">
         {filteredItems.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619] border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
             <h3 className="text-[14px] font-bold text-white mb-1">Veri Bulunamadı</h3>
             <p className="text-[12.5px] text-[#86868b]">Şu anda görüntülenecek veri bulunmuyor. Gerçek veri akışı bekleniyor.</p>
           </div>
         )}
-        {filteredItems.length > 0 && filteredItems.map(item => (
-          <div key={item.id} className="bg-[#161619] border border-white/[0.08] p-5 rounded-2xl luper-card space-y-4 flex flex-col justify-between">
+        {filteredItems.length > 0 && filteredItems.map((item) => (
+          <div key={item.id} className="bg-luper-surface border border-white/[0.08] p-5 rounded-2xl luper-card space-y-4 flex flex-col justify-between">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] px-2.5 py-0.5 rounded-md bg-white/[0.06] text-[#86868b] font-mono font-medium">{item.category}</span>
@@ -148,7 +148,7 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
                 className={`px-4 py-2 rounded-xl text-[13px] font-bold transition-all flex items-center space-x-2 ${
                   item.installed
                     ? 'bg-[#34c759]/10 text-[#34c759] border border-[#34c759]/20 cursor-default'
-                    : 'bg-[#1a5efd] hover:bg-[#2d6bfe] text-white shadow-md'
+                    : 'bg-luper-primary hover:bg-[#2d6bfe] text-white shadow-md'
                 }`}
               >
                 {downloadingId === item.id ? (
@@ -175,3 +175,4 @@ export const MarketplaceTools = memo(function MarketplaceTools() {
     </div>
   );
 });
+

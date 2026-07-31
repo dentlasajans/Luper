@@ -249,6 +249,7 @@ The following practices are **STRICTLY FORBIDDEN** across LUPER:
 - ❌ Mixed icon sets or non-Lucide vector icons.
 - ❌ Inconsistent typography sizes, font weights, or custom webfonts.
 - ❌ Gaming RGB rainbows, circular rainbow score gauges, or cluttered visual noise.
+- ❌ **STRICTLY FORBIDDEN**: Glassmorphism, `backdrop-blur`, or highly transparent background surfaces. All cards must be Solid (`bg-[#18181c]`, etc).
 - ❌ Decorative gradients that do not improve usability.
 - ❌ Unbalanced, overcrowded card layouts.
 - ❌ Heavy borders or dark drop shadow overload.
