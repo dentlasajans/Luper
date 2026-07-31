@@ -1,12 +1,12 @@
 {
     "name":  "luper",
     "private":  true,
-    "version":  "1.0.0",
+    "version":  "1.2.0",
     "description":  "Luper - Windows Operating System Optimization \u0026 Performance Application",
     "author":  "Himmet Muhammed \u003chimmetmuhammedk@gmail.com\u003e",
     "type":  "module",
     "main":  "dist-electron/main.cjs",
-    "repository":  "https://github.com/user/windows-optimizer",
+    "repository":  "https://github.com/dentlasajans/Luper",
     "scripts":  {
                     "dev":  "vite --port=3000 --host=0.0.0.0",
                     "build":  "vite build \u0026\u0026 npm run build:electron",
