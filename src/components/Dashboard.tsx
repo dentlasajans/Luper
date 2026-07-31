@@ -46,7 +46,12 @@ export const Dashboard = memo(function Dashboard() {
   };
 
   return (
-    <div className="p-8 w-full h-full flex flex-col" style={{ WebkitAppRegion: 'no-drag' }}>
+    <div className="p-8 w-full h-full flex flex-col relative" style={{ WebkitAppRegion: 'no-drag' }}>
+      {/* Deneme Etiketi */}
+      <div className="absolute top-4 right-8 bg-red-500/20 text-red-500 px-3 py-1 rounded-full font-bold text-sm border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]">
+        DENEME
+      </div>
+
       {error && (
         <motion.div 
           initial={{ opacity: 0, y: -10, scale: 0.98 }}

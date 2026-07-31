@@ -20,7 +20,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
   const [isChecking, setIsChecking] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const CURRENT_VERSION = 'v1.2.1';
+  const CURRENT_VERSION = 'v1.3.0';
   const GITHUB_REPO = 'dentlasajans/Luper';
 
   const handleCheckUpdates = async () => {
@@ -30,7 +30,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
       const result = (await checkForUpdates()) as any;
       
       const latestVersion = result?.updateInfo?.version || CURRENT_VERSION;
-      const changelog = result?.updateInfo?.releaseNotes || 'Henüz yeni bir sürüm yayınlanmadı. LUPER v1.2.1 (Kararlı Sürüm) Güncel.';
+      const changelog = result?.updateInfo?.releaseNotes || 'Henüz yeni bir sürüm yayınlanmadı. LUPER v1.3.0 (Kararlı Sürüm) Güncel.';
       const publishDate = result?.updateInfo?.releaseDate || new Date().toLocaleDateString('tr-TR', {
         year: 'numeric',
         month: 'long',
@@ -72,7 +72,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
           month: 'long',
           day: 'numeric'
         }),
-        changelog: 'Henüz yeni bir sürüm yayınlanmadı. LUPER v1.2.1 (Kararlı Sürüm) Güncel.',
+        changelog: 'Henüz yeni bir sürüm yayınlanmadı. LUPER v1.3.0 (Kararlı Sürüm) Güncel.',
         updateAvailable: false,
         htmlUrl: 'https://github.com/dentlasajans/Luper/releases'
       });
@@ -201,7 +201,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
                 ) : (
                   <div className="px-5 py-3 bg-gradient-to-r from-[#34c759]/20 to-[#34c759]/5 border border-[#34c759]/30 text-[#34c759] font-bold text-[13.5px] rounded-xl flex items-center space-x-2.5 shadow-[0_0_15px_rgba(52,199,89,0.15)]">
                     <CheckCircle weight="duotone" size={18} className="text-[#34c759]" />
-                    <span>LUPER v1.2.1 (Kararli Sürüm) Güncel - Henüz yeni bir sürüm yayinlanmadi</span>
+                    <span>LUPER v1.3.0 (Kararli Sürüm) Güncel - Henüz yeni bir sürüm yayinlanmadi</span>
                   </div>
                 )}
               </div>
