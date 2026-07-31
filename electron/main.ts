@@ -5,6 +5,9 @@ import { executeHeuristicOptimization } from './core/executionEngine';
 // Record initial process start time for performance measurement
 const startTime = performance.now();
 
+// Disable Hardware Acceleration to prevent blank/empty window issues on some Windows GPUs
+app.disableHardwareAcceleration();
+
 // Bootstraps modular Electron Main Process architecture
 bootstrapApp();
 

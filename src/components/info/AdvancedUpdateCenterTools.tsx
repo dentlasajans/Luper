@@ -20,7 +20,7 @@ export const AdvancedUpdateCenterTools = memo(function AdvancedUpdateCenterTools
   const [isChecking, setIsChecking] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const CURRENT_VERSION = 'v1.3.0';
+  const CURRENT_VERSION = 'v1.3.1';
   const GITHUB_REPO = 'dentlasajans/Luper';
 
   const handleCheckUpdates = async () => {
