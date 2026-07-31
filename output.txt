@@ -1,6 +1,0 @@
-disable_smbv1 - SMBv1 Devre Dışı Bırakma ve
-rdp_nla_require - Uzaktan Masaüstü Bağlantılarında NLA Zorlama
-phase2_security_tweak_2 - Windows Defender Ağ İnceleme Sürücüsü
-phase2_security_tweak_8 - Windows Defender Güvenlik Duvarı Paket
-phase2_security_tweak_10 - LLMNR ve NetBIOS Ağ Yayın
-phase2_security_tweak_16 - İsimlendirilmiş Boru ve Anonim IPC
