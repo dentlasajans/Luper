@@ -1,0 +1,100 @@
+# ==============================================================================
+# LUPER Repository Code Ownership Matrix (.github/CODEOWNERS)
+# Maps project architectural domains to specialized engineering teams and AI agents
+# ==============================================================================
+
+# Global Default Owners (Architect Agent & Lead Orchestrator)
+* @luper-org/lead-architects @luper-org/maintainers
+
+# ------------------------------------------------------------------------------
+# 1. Electron Main Process & Native Windows API Layer
+# ------------------------------------------------------------------------------
+# Owner: Windows System Expert Agent, Electron Specialist & Security Agent
+/electron/                           @luper-org/windows-system-team @luper-org/electron-team
+/electron/main.js                    @luper-org/windows-system-team @luper-org/security-team
+/electron/preload.cjs                 @luper-org/electron-team @luper-org/security-team
+
+# ------------------------------------------------------------------------------
+# 2. React 19 Frontend Layer & Core Application Entry
+# ------------------------------------------------------------------------------
+# Owner: Developer Agent & Frontend Core Team
+/src/                                @luper-org/frontend-team @luper-org/developer-team
+/src/App.tsx                         @luper-org/frontend-team
+/src/main.tsx                        @luper-org/frontend-team
+/index.html                          @luper-org/frontend-team
+
+# ------------------------------------------------------------------------------
+# 3. UI Components & Design System
+# ------------------------------------------------------------------------------
+# Owner: Design System Agent & UI/UX Team
+/src/components/                     @luper-org/design-system-team @luper-org/ui-ux-team
+
+# ------------------------------------------------------------------------------
+# 4. Services, IPC Bridges & External APIs
+# ------------------------------------------------------------------------------
+# Owner: Developer Agent & System Expert Agent
+/src/services/                       @luper-org/developer-team @luper-org/windows-system-team
+
+# ------------------------------------------------------------------------------
+# 5. React Hooks & Custom Logic
+# ------------------------------------------------------------------------------
+# Owner: Developer Agent & Performance Agent
+/src/hooks/                          @luper-org/developer-team @luper-org/performance-team
+
+# ------------------------------------------------------------------------------
+# 6. React Context API & State Stores
+# ------------------------------------------------------------------------------
+# Owner: Developer Agent & Architect Agent
+/src/context/                        @luper-org/developer-team @luper-org/lead-architects
+
+# ------------------------------------------------------------------------------
+# 7. Static Assets, Images, Fonts & Public Files
+# ------------------------------------------------------------------------------
+# Owner: Design System Agent
+/assets/                             @luper-org/design-system-team
+/public/                             @luper-org/design-system-team
+/src/assets/                         @luper-org/design-system-team
+
+# ------------------------------------------------------------------------------
+# 8. Project Documentation & User Guides
+# ------------------------------------------------------------------------------
+# Owner: Documentation Agent
+/*.md                                @luper-org/documentation-team
+/docs/                               @luper-org/documentation-team
+
+# ------------------------------------------------------------------------------
+# 9. Governance & System Rules (RULES/)
+# ------------------------------------------------------------------------------
+# Owner: Architect Agent & Critic Agent
+/RULES/                              @luper-org/lead-architects @luper-org/critic-team
+/AGENTS.md                           @luper-org/lead-architects @luper-org/critic-team
+
+# ------------------------------------------------------------------------------
+# 10. Architecture Decision Records (ADR)
+# ------------------------------------------------------------------------------
+# Owner: Architect Agent & Product Owner Agent
+/docs/adr/                           @luper-org/lead-architects @luper-org/product-owner-team
+
+# ------------------------------------------------------------------------------
+# 11. GitHub CI/CD Workflows & Repository Governance
+# ------------------------------------------------------------------------------
+# Owner: QA Automation Agent & DevOps Team
+/.github/                            @luper-org/qa-automation-team @luper-org/devops-team
+/.github/workflows/                  @luper-org/qa-automation-team @luper-org/devops-team
+
+# ------------------------------------------------------------------------------
+# 12. Build Configuration & Dependency Management
+# ------------------------------------------------------------------------------
+# Owner: Performance Agent, Developer Agent & DevOps Team
+package.json                         @luper-org/lead-architects @luper-org/devops-team
+package-lock.json                    @luper-org/lead-architects @luper-org/devops-team
+bun.lock                             @luper-org/lead-architects @luper-org/devops-team
+tsconfig.json                        @luper-org/developer-team @luper-org/lead-architects
+vite.config.ts                       @luper-org/performance-team @luper-org/developer-team
+
+# ------------------------------------------------------------------------------
+# 13. Release & Packaging Configuration
+# ------------------------------------------------------------------------------
+# Owner: Release Manager & Windows System Expert Agent
+/dist/                               @luper-org/devops-team @luper-org/windows-system-team
+/release/                            @luper-org/devops-team @luper-org/windows-system-team
