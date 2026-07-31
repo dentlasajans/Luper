@@ -1,0 +1,1320 @@
+﻿electron/modules/autonomousPlatformEngine.ts(64,9): error TS18046: 'context' is of type 'unknown'.
+electron/modules/autonomousPlatformEngine.ts(73,28): error TS18046: 'context' is of type 'unknown'.
+electron/modules/autoruns.ts(123,13): error TS2339: Property 'stdout' does not exist on type 'unknown'.
+electron/modules/autoruns.ts(127,15): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(127,28): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(128,18): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(128,34): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(129,19): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(129,36): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(130,18): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(130,47): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(130,63): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(130,92): error TS18046: 'item' is of type 'unknown'.
+electron/modules/autoruns.ts(144,11): error TS2339: Property 'name' does not exist on type 'unknown'.
+electron/modules/autoruns.ts(144,17): error TS2339: Property 'location' does not exist on type 'unknown'.
+electron/modules/autoruns.ts(144,27): error TS2339: Property 'command' does not exist on type 'unknown'.
+electron/modules/autoruns.ts(144,36): error TS2339: Property 'enabled' does not exist on type 'unknown'.
+electron/modules/backupRestoreEngine.ts(52,20): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/backupRestoreEngine.ts(53,17): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/backupRestoreEngine.ts(62,103): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/backupRestoreEngine.ts(75,19): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/backupRestoreEngine.ts(76,24): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/backupRestoreEngine.ts(93,46): error TS18046: 'description' is of type 'unknown'.
+electron/modules/backupRestoreEngine.ts(107,22): error TS2339: Property 'regPath' does not exist on type '{}'.
+electron/modules/backupRestoreEngine.ts(107,46): error TS2339: Property 'regName' does not exist on type '{}'.
+electron/modules/benchmarkEngine.ts(78,62): error TS2571: Object is of type 'unknown'.
+electron/modules/benchmarkEngine.ts(91,41): error TS2339: Property 'baselineSample' does not exist on type '{}'.
+electron/modules/benchmarkEngine.ts(94,64): error TS2339: Property 'networkLatencyMs' does not exist on type '{ timestamp: string; cpuUsagePercent: number; ramTotalMB: number; ramUsedMB: number; ramFreeMB: number; ramUsagePercent: number; storageDrives: unknown[]; uptimeSeconds: number; }'.
+electron/modules/benchmarkEngine.ts(100,91): error TS2339: Property 'networkLatencyMs' does not exist on type '{ timestamp: string; cpuUsagePercent: number; ramTotalMB: number; ramUsedMB: number; ramFreeMB: number; ramUsagePercent: number; storageDrives: unknown[]; uptimeSeconds: number; }'.
+electron/modules/benchmarkEngine.ts(104,30): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/benchmarkEngine.ts(105,39): error TS2339: Property 'profileName' does not exist on type '{}'.
+electron/modules/benchmarkEngine.ts(106,37): error TS2339: Property 'startTime' does not exist on type '{}'.
+electron/modules/cloudContentPlatform.ts(10,10): error TS2339: Property 'catalogCache' does not exist on type 'CloudContentPlatformCore'.
+electron/modules/cloudContentPlatform.ts(32,26): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'PathLike'.
+electron/modules/cloudContentPlatform.ts(33,16): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/cloudContentPlatform.ts(36,42): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'PathLike'.
+electron/modules/cloudContentPlatform.ts(37,57): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'BinaryLike'.
+electron/modules/cloudContentPlatform.ts(38,30): error TS18046: 'resolve' is of type 'unknown'.
+electron/modules/cloudContentPlatform.ts(39,44): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/cloudContentPlatform.ts(49,23): error TS18046: 'actualHash' is of type 'unknown'.
+electron/modules/cloudContentPlatform.ts(49,52): error TS18046: 'expectedSha256' is of type 'unknown'.
+electron/modules/cloudContentPlatform.ts(51,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/configManager.ts(7,10): error TS6133: 'getBackupFilePath' is declared but its value is never read.
+electron/modules/crashPlatformEngine.ts(49,65): error TS2339: Property 'message' does not exist on type '{}'.
+electron/modules/crashPlatformEngine.ts(50,31): error TS2339: Property 'stack' does not exist on type '{}'.
+electron/modules/crashPlatformEngine.ts(75,80): error TS18046: 'c' is of type 'unknown'.
+electron/modules/enterprisePlatformEngine.ts(9,10): error TS2339: Property 'activeProfile' does not exist on type 'EnterprisePlatformEngineCore'.
+electron/modules/enterprisePlatformEngine.ts(63,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/enterprisePlatformEngine.ts(64,73): error TS18046: 'packageMeta' is of type 'unknown'.
+electron/modules/enterprisePlatformEngine.ts(65,97): error TS18046: 'packageMeta' is of type 'unknown'.
+electron/modules/enterprisePlatformEngine.ts(67,52): error TS18046: 'packageMeta' is of type 'unknown'.
+electron/modules/errorManager.ts(7,14): error TS18046: 'error' is of type 'unknown'.
+electron/modules/errorManager.ts(8,14): error TS18046: 'error' is of type 'unknown'.
+electron/modules/errorManager.ts(13,54): error TS6133: 'promise' is declared but its value is never read.
+electron/modules/featureManagementPlatformEngine.ts(32,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/featureManagementPlatformEngine.ts(41,5): error TS2571: Object is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(41,23): error TS18046: 'feature' is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(42,71): error TS18046: 'feature' is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(42,95): error TS18046: 'feature' is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(49,21): error TS2571: Object is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(73,28): error TS2571: Object is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(76,56): error TS18046: 'f' is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(77,56): error TS18046: 'f' is of type 'unknown'.
+electron/modules/featureManagementPlatformEngine.ts(78,61): error TS18046: 'f' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(10,5): error TS7034: Variable 'activeGameSession' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/fpsMonitor.ts(11,5): error TS7034: Variable 'backgroundMonitorInterval' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/fpsMonitor.ts(15,7): error TS7005: Variable 'activeGameSession' implicitly has an 'any' type.
+electron/modules/fpsMonitor.ts(25,7): error TS7005: Variable 'activeGameSession' implicitly has an 'any' type.
+electron/modules/fpsMonitor.ts(56,69): error TS18046: 'err' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(65,8): error TS7005: Variable 'activeGameSession' implicitly has an 'any' type.
+electron/modules/fpsMonitor.ts(73,54): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(callback: () => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '() => void'.
+  Overload 2 of 3, '(callback: (_: void) => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(_: void) => void'.
+  Overload 3 of 3, '(handler: TimerHandler, timeout?: number | undefined, ...arguments: any[]): number', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'TimerHandler'.
+electron/modules/fpsMonitor.ts(99,24): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/fpsMonitor.ts(104,28): error TS18046: 'h' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(137,59): error TS18046: 'b' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(137,63): error TS18046: 'a' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(184,7): error TS7005: Variable 'backgroundMonitorInterval' implicitly has an 'any' type.
+electron/modules/fpsMonitor.ts(191,29): error TS2349: This expression is not callable.
+  Type '{}' has no call signatures.
+electron/modules/fpsMonitor.ts(203,25): error TS18046: 'line' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(211,62): error TS18046: 'e' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(224,18): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/fpsMonitor.ts(225,34): error TS2339: Property 'name' does not exist on type '{}'.
+electron/modules/fpsMonitor.ts(226,36): error TS2339: Property 'name' does not exist on type '{}'.
+electron/modules/fpsMonitor.ts(231,32): error TS2339: Property 'toLowerCase' does not exist on type '{}'.
+electron/modules/fpsMonitor.ts(241,52): error TS18046: 'b' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(241,63): error TS18046: 'a' is of type 'unknown'.
+electron/modules/fpsMonitor.ts(244,70): error TS2339: Property 'name' does not exist on type '{}'.
+electron/modules/fpsMonitor.ts(253,14): error TS7005: Variable 'activeGameSession' implicitly has an 'any' type.
+electron/modules/fpsMonitor.ts(254,44): error TS2339: Property 'appid' does not exist on type '{ processName: any; }'.
+electron/modules/fpsMonitor.ts(254,68): error TS2339: Property 'name' does not exist on type '{ processName: any; }'.
+electron/modules/fpsMonitor.ts(255,66): error TS2339: Property 'appid' does not exist on type '{ processName: any; }'.
+electron/modules/fpsMonitor.ts(257,44): error TS2339: Property 'appid' does not exist on type '{ processName: any; }'.
+electron/modules/fpsMonitor.ts(257,68): error TS2339: Property 'name' does not exist on type '{ processName: any; }'.
+electron/modules/fpsMonitor.ts(260,13): error TS7005: Variable 'activeGameSession' implicitly has an 'any' type.
+electron/modules/gameEngine.ts(86,10): error TS2571: Object is of type 'unknown'.
+electron/modules/gameEngine.ts(87,7): error TS2571: Object is of type 'unknown'.
+electron/modules/gameEngine.ts(95,12): error TS2571: Object is of type 'unknown'.
+electron/modules/gameEngine.ts(103,35): error TS2698: Spread types may only be created from object types.
+electron/modules/gameEngine.ts(104,5): error TS2571: Object is of type 'unknown'.
+electron/modules/gameEngine.ts(167,7): error TS2571: Object is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(40,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(49,19): error TS18046: 'content' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(83,18): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(102,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(106,13): error TS18046: 'file' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(106,48): error TS18046: 'file' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(108,48): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/gameScannerIpc.ts(132,26): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(138,26): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(178,13): error TS18046: 'file' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(180,79): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/gameScannerIpc.ts(211,50): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/gameScannerIpc.ts(213,25): error TS18046: 'dir' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(214,82): error TS18046: 'l' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(269,16): error TS6133: 'scanStandaloneGamesNode' is declared but its value is never read.
+electron/modules/gameScannerIpc.ts(280,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(285,13): error TS18046: 'file' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(287,46): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/gameScannerIpc.ts(294,81): error TS18046: 'bp' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(299,48): error TS18046: 'file' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(299,66): error TS18046: 'file' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(326,53): error TS18046: 'games' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(326,82): error TS2698: Spread types may only be created from object types.
+electron/modules/gameScannerIpc.ts(332,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/gameScannerIpc.ts(358,3): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(362,3): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(362,70): error TS6133: 'event' is declared but its value is never read.
+electron/modules/gameScannerIpc.ts(362,88): error TS2339: Property 'appid' does not exist on type 'unknown'.
+electron/modules/gameScannerIpc.ts(362,95): error TS2339: Property 'launcher' does not exist on type 'unknown'.
+electron/modules/gameScannerIpc.ts(366,3): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(370,3): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(370,82): error TS6133: 'event' is declared but its value is never read.
+electron/modules/gameScannerIpc.ts(374,3): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/gameScannerIpc.ts(374,78): error TS6133: 'event' is declared but its value is never read.
+electron/modules/hardwareIpc.ts(11,9): error TS7034: Variable 'systemMetricsCache' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/hardwareIpc.ts(14,5): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/hardwareIpc.ts(16,13): error TS7005: Variable 'systemMetricsCache' implicitly has an 'any' type.
+electron/modules/hardwareIpc.ts(54,5): error TS18046: 'ipcMain' is of type 'unknown'.
+electron/modules/healthEngine.ts(15,10): error TS2339: Property 'healthHistory' does not exist on type 'DiagnosticsHealthEngineCore'.
+electron/modules/innovationPlatformEngine.ts(62,5): error TS2571: Object is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(62,26): error TS18046: 'experimentSpec' is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(63,86): error TS18046: 'experimentSpec' is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(63,120): error TS18046: 'experimentSpec' is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(70,17): error TS2571: Object is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(89,5): error TS2571: Object is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(103,19): error TS2571: Object is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(104,33): error TS2571: Object is of type 'unknown'.
+electron/modules/innovationPlatformEngine.ts(104,83): error TS18046: 'e' is of type 'unknown'.
+electron/modules/ipc/optimizationHandlers.ts(49,48): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipc/optimizationHandlers.ts(50,13): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/ipc/optimizationHandlers.ts(57,50): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipc/optimizationHandlers.ts(58,13): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/ipc/optimizationHandlers.ts(65,55): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(4,1): error TS6133: 'path' is declared but its value is never read.
+electron/modules/ipcManager.ts(6,5): error TS6133: 'getBackupsNode' is declared but its value is never read.
+electron/modules/ipcManager.ts(14,5): error TS6133: 'runElevatedPowerShellScript' is declared but its value is never read.
+electron/modules/ipcManager.ts(15,5): error TS6133: 'runPowerShellScript' is declared but its value is never read.
+electron/modules/ipcManager.ts(19,5): error TS7034: Variable 'currentMainWindow' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/ipcManager.ts(32,3): error TS2304: Cannot find name 'initHardwareIpc'.
+electron/modules/ipcManager.ts(33,3): error TS2304: Cannot find name 'initGameScannerIpc'.
+electron/modules/ipcManager.ts(34,3): error TS2304: Cannot find name 'initStatsDatabase'.
+electron/modules/ipcManager.ts(35,3): error TS2304: Cannot find name 'startBackgroundMonitor'.
+electron/modules/ipcManager.ts(35,26): error TS2304: Cannot find name 'getAllGamesNode'.
+electron/modules/ipcManager.ts(38,20): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/ipcManager.ts(42,9): error TS7005: Variable 'currentMainWindow' implicitly has an 'any' type.
+electron/modules/ipcManager.ts(48,12): error TS2304: Cannot find name 'getFpsStats'.
+electron/modules/ipcManager.ts(52,10): error TS7005: Variable 'currentMainWindow' implicitly has an 'any' type.
+electron/modules/ipcManager.ts(60,36): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(61,10): error TS7005: Variable 'currentMainWindow' implicitly has an 'any' type.
+electron/modules/ipcManager.ts(62,32): error TS2339: Property 'isQuitting' does not exist on type 'App'.
+electron/modules/ipcManager.ts(65,11): error TS2339: Property 'isQuitting' does not exist on type 'App'.
+electron/modules/ipcManager.ts(70,38): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(70,56): error TS2339: Property 'enable' does not exist on type 'unknown'.
+electron/modules/ipcManager.ts(70,64): error TS2339: Property 'openAsHidden' does not exist on type 'unknown'.
+electron/modules/ipcManager.ts(83,7): error TS7034: Variable 'systemStatusCache' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/ipcManager.ts(88,9): error TS7005: Variable 'systemStatusCache' implicitly has an 'any' type.
+electron/modules/ipcManager.ts(94,22): error TS2304: Cannot find name 'getCpuUsageInstant'.
+electron/modules/ipcManager.ts(105,26): error TS2304: Cannot find name 'cachedStorageDrives'.
+electron/modules/ipcManager.ts(111,50): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(177,50): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(callback: () => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '() => void'.
+  Overload 2 of 3, '(callback: (_: void) => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(_: void) => void'.
+  Overload 3 of 3, '(handler: TimerHandler, timeout?: number | undefined, ...arguments: any[]): number', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'TimerHandler'.
+electron/modules/ipcManager.ts(185,18): error TS2304: Cannot find name 'getAutorunsItems'.
+electron/modules/ipcManager.ts(188,49): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(189,18): error TS2304: Cannot find name 'toggleAutorunItem'.
+electron/modules/ipcManager.ts(192,7): error TS7034: Variable 'installedAppsCache' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/ipcManager.ts(197,9): error TS7005: Variable 'installedAppsCache' implicitly has an 'any' type.
+electron/modules/ipcManager.ts(227,17): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(227,41): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(227,65): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(228,19): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(229,24): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(230,22): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(231,19): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(232,30): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(233,30): error TS18046: 'item' is of type 'unknown'.
+electron/modules/ipcManager.ts(235,65): error TS18046: 'i' is of type 'unknown'.
+electron/modules/ipcManager.ts(235,86): error TS18046: 'i' is of type 'unknown'.
+electron/modules/ipcManager.ts(235,110): error TS18046: 'i' is of type 'unknown'.
+electron/modules/ipcManager.ts(250,43): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(253,13): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(253,46): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(254,43): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(257,111): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(258,20): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(258,57): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(259,24): error TS18046: 'appToUninstall' is of type 'unknown'.
+electron/modules/ipcManager.ts(271,30): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(...args: any[]) => void'.
+electron/modules/ipcManager.ts(272,30): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(...args: any[]) => void'.
+electron/modules/ipcManager.ts(284,7): error TS7034: Variable 'cleanerItemsCache' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/ipcManager.ts(289,9): error TS7005: Variable 'cleanerItemsCache' implicitly has an 'any' type.
+electron/modules/ipcManager.ts(328,45): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(362,43): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(371,18): error TS2304: Cannot find name 'UpdatePlatformEngine'.
+electron/modules/ipcManager.ts(374,50): error TS6133: 'event' is declared but its value is never read.
+electron/modules/ipcManager.ts(375,18): error TS2304: Cannot find name 'applyNvidiaProfileMode'.
+electron/modules/ipcManager.ts(394,36): error TS2345: Argument of type '{}' is not assignable to parameter of type 'PathLike'.
+electron/modules/ipcValidator.ts(3,10): error TS6133: 'validateIpcChannel' is declared but its value is never read.
+electron/modules/ipcValidator.ts(7,8): error TS18046: 'allowedChannels' is of type 'unknown'.
+electron/modules/ipcValidator.ts(20,20): error TS2339: Property 'id' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(20,41): error TS2339: Property 'id' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(23,15): error TS2339: Property 'id' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(23,39): error TS2339: Property 'id' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(30,20): error TS2339: Property 'name' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(30,43): error TS2339: Property 'name' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(39,20): error TS2339: Property 'name' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(39,37): error TS2339: Property 'packageFullName' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(39,65): error TS2339: Property 'uninstallString' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(48,20): error TS2339: Property 'appid' does not exist on type 'object'.
+electron/modules/ipcValidator.ts(48,38): error TS2339: Property 'launcher' does not exist on type 'object'.
+electron/modules/ipcWrapper.ts(5,33): error TS2370: A rest parameter must be of an array type.
+electron/modules/ipcWrapper.ts(8,11): error TS18046: 'args' is of type 'unknown'.
+electron/modules/ipcWrapper.ts(9,41): error TS18046: 'args' is of type 'unknown'.
+electron/modules/ipcWrapper.ts(12,28): error TS18046: 'handlerFn' is of type 'unknown'.
+electron/modules/ipcWrapper.ts(12,48): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+electron/modules/ipcWrapper.ts(21,16): error TS18046: 'error' is of type 'unknown'.
+electron/modules/licensePlatform.ts(118,39): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/lifecycleManager.ts(40,7): error TS2322: Type 'null' is not assignable to type 'BrowserWindow'.
+electron/modules/lifecycleManager.ts(41,56): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/lifecycleManager.ts(63,9): error TS2339: Property 'isQuitting' does not exist on type 'App'.
+electron/modules/logger.ts(1,1): error TS6133: 'app' is declared but its value is never read.
+electron/modules/logger.ts(2,1): error TS6133: 'fs' is declared but its value is never read.
+electron/modules/logger.ts(3,1): error TS6133: 'path' is declared but its value is never read.
+electron/modules/logger.ts(5,5): error TS6133: 'logStream' is declared but its value is never read.
+electron/modules/logger.ts(6,5): error TS6133: 'currentLogFilePath' is declared but its value is never read.
+electron/modules/logger.ts(7,5): error TS6133: 'currentLogDir' is declared but its value is never read.
+electron/modules/logger.ts(8,5): error TS6133: 'currentLogSize' is declared but its value is never read.
+electron/modules/logger.ts(9,7): error TS6133: 'MAX_LOG_SIZE' is declared but its value is never read.
+electron/modules/logger.ts(30,10): error TS7023: 'sanitizeLogMeta' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
+electron/modules/logger.ts(32,7): error TS18046: 'depth' is of type 'unknown'.
+electron/modules/logger.ts(39,18): error TS2339: Property 'code' does not exist on type 'Error'.
+electron/modules/logger.ts(47,7): error TS18046: 'seen' is of type 'unknown'.
+electron/modules/logger.ts(48,3): error TS18046: 'seen' is of type 'unknown'.
+electron/modules/logger.ts(51,21): error TS7024: Function implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
+electron/modules/logger.ts(51,62): error TS18046: 'depth' is of type 'unknown'.
+electron/modules/logger.ts(55,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/logger.ts(58,7): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+electron/modules/logger.ts(60,7): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+electron/modules/logger.ts(60,36): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{}'.
+  No index signature with a parameter of type 'string' was found on type '{}'.
+electron/modules/logger.ts(60,47): error TS18046: 'depth' is of type 'unknown'.
+electron/modules/logger.ts(73,85): error TS18046: 'e' is of type 'unknown'.
+electron/modules/logger.ts(95,10): error TS6133: 'closeLogger' is declared but its value is never read.
+electron/modules/ltsPlatformEngine.ts(25,12): error TS2571: Object is of type 'unknown'.
+electron/modules/menuManager.ts(7,73): error TS2339: Property 'show' does not exist on type '{}'.
+electron/modules/menuManager.ts(7,92): error TS2339: Property 'focus' does not exist on type '{}'.
+electron/modules/menuManager.ts(8,23): error TS2322: Type 'unknown' is not assignable to type 'Function | ((menuItem: MenuItem, window: BaseWindow | undefined, event: KeyboardEvent) => void) | undefined'.
+electron/modules/nextGenFoundationEngine.ts(46,5): error TS2571: Object is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(47,86): error TS18046: 'providerSpec' is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(54,5): error TS2571: Object is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(54,35): error TS18046: 'featureSpec' is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(55,84): error TS18046: 'featureSpec' is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(62,18): error TS2571: Object is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(67,5): error TS2571: Object is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(76,31): error TS2571: Object is of type 'unknown'.
+electron/modules/nextGenFoundationEngine.ts(77,22): error TS2571: Object is of type 'unknown'.
+electron/modules/nvidiaProfileEngine.ts(66,25): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/nvidiaProfileEngine.ts(70,43): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/nvidiaProfileEngine.ts(75,22): error TS18046: 's' is of type 'unknown'.
+electron/modules/nvidiaProfileEngine.ts(76,25): error TS18046: 's' is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(40,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/observabilityPlatformEngine.ts(41,7): error TS2571: Object is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(55,21): error TS2571: Object is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(65,54): error TS2571: Object is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(67,5): error TS2571: Object is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(75,32): error TS2571: Object is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(78,34): error TS18046: 'a' is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(79,14): error TS18046: 'a' is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(79,56): error TS18046: 'a' is of type 'unknown'.
+electron/modules/observabilityPlatformEngine.ts(80,16): error TS18046: 'a' is of type 'unknown'.
+electron/modules/optimizationEngine.ts(16,10): error TS2339: Property 'executionQueue' does not exist on type 'OptimizationEngineCore'.
+electron/modules/optimizationEngine.ts(17,10): error TS2339: Property 'isProcessing' does not exist on type 'OptimizationEngineCore'.
+electron/modules/optimizationEngine.ts(24,24): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(27,5): error TS2571: Object is of type 'unknown'.
+electron/modules/optimizationEngine.ts(27,28): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(28,16): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(29,22): error TS2339: Property 'category' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(30,23): error TS2339: Property 'riskLevel' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(31,35): error TS2339: Property 'requiresAdmin' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(32,40): error TS2339: Property 'dependencies' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(32,61): error TS2339: Property 'dependencies' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(33,23): error TS2339: Property 'applyCode' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(34,25): error TS2339: Property 'restoreCode' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(36,54): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(64,26): error TS2571: Object is of type 'unknown'.
+electron/modules/optimizationEngine.ts(89,25): error TS2339: Property 'toUpperCase' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(89,64): error TS2339: Property 'toUpperCase' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(125,28): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/optimizationEngine.ts(144,32): error TS2339: Property 'toUpperCase' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(144,78): error TS2339: Property 'toUpperCase' does not exist on type '{}'.
+electron/modules/optimizationEngine.ts(168,66): error TS18046: 'ids' is of type 'unknown'.
+electron/modules/optimizationEngine.ts(175,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/optimizationEngine.ts(175,31): error TS18046: 'ids' is of type 'unknown'.
+electron/modules/optimizationEngine.ts(176,26): error TS18046: 'scriptMap' is of type 'unknown'.
+electron/modules/optimizationEngine.ts(203,20): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/optimizationEngine.ts(205,54): error TS18046: 'scriptMap' is of type 'unknown'.
+electron/modules/packageManager.ts(15,57): error TS2339: Property 'meta' does not exist on type '{}'.
+electron/modules/packageManager.ts(19,5): error TS2571: Object is of type 'unknown'.
+electron/modules/packageManager.ts(19,23): error TS18046: 'pkg' is of type 'unknown'.
+electron/modules/packageManager.ts(20,50): error TS18046: 'pkg' is of type 'unknown'.
+electron/modules/packageManager.ts(20,67): error TS18046: 'pkg' is of type 'unknown'.
+electron/modules/packageManager.ts(35,14): error TS2339: Property 'meta' does not exist on type '{}'.
+electron/modules/packageManager.ts(35,27): error TS2339: Property 'meta' does not exist on type '{}'.
+electron/modules/packageManager.ts(39,14): error TS2339: Property 'scripts' does not exist on type '{}'.
+electron/modules/packageManager.ts(39,31): error TS2339: Property 'scripts' does not exist on type '{}'.
+electron/modules/packageManager.ts(39,57): error TS2339: Property 'scripts' does not exist on type '{}'.
+electron/modules/packageManager.ts(55,9): error TS18046: 'pkg' is of type 'unknown'.
+electron/modules/packageManager.ts(55,45): error TS18046: 'pkg' is of type 'unknown'.
+electron/modules/packageManager.ts(70,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/packageManager.ts(70,31): error TS18046: 'packageIds' is of type 'unknown'.
+electron/modules/packageManager.ts(71,19): error TS2571: Object is of type 'unknown'.
+electron/modules/packageManager.ts(76,20): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/packageManager.ts(77,15): error TS18046: 'packageIds' is of type 'unknown'.
+electron/modules/packageManager.ts(85,20): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/packageManager.ts(86,38): error TS2571: Object is of type 'unknown'.
+electron/modules/packageManager.ts(88,34): error TS2571: Object is of type 'unknown'.
+electron/modules/packageManager.ts(100,55): error TS18046: 'b' is of type 'unknown'.
+electron/modules/packageManager.ts(100,75): error TS18046: 'a' is of type 'unknown'.
+electron/modules/packageManager.ts(113,23): error TS2571: Object is of type 'unknown'.
+electron/modules/packageManager.ts(120,12): error TS2571: Object is of type 'unknown'.
+electron/modules/pinoLogger.ts(6,5): error TS7034: Variable 'pinoLogger' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/pinoLogger.ts(9,7): error TS7005: Variable 'pinoLogger' implicitly has an 'any' type.
+electron/modules/pinoLogger.ts(34,18): error TS7005: Variable 'pinoLogger' implicitly has an 'any' type.
+electron/modules/pinoLogger.ts(39,18): error TS7005: Variable 'pinoLogger' implicitly has an 'any' type.
+electron/modules/pinoLogger.ts(44,18): error TS7005: Variable 'pinoLogger' implicitly has an 'any' type.
+electron/modules/platformEvolutionEngine.ts(45,85): error TS18046: 'change' is of type 'unknown'.
+electron/modules/platformEvolutionEngine.ts(45,116): error TS18046: 'change' is of type 'unknown'.
+electron/modules/platformEvolutionEngine.ts(52,9): error TS18046: 'change' is of type 'unknown'.
+electron/modules/platformEvolutionEngine.ts(57,9): error TS18046: 'change' is of type 'unknown'.
+electron/modules/platformEvolutionEngine.ts(63,72): error TS2339: Property 'split' does not exist on type '{}'.
+electron/modules/platformEvolutionEngine.ts(64,26): error TS18046: 'change' is of type 'unknown'.
+electron/modules/platformEvolutionEngine.ts(73,17): error TS18046: 'change' is of type 'unknown'.
+electron/modules/platformGovernanceEngine.ts(55,5): error TS2571: Object is of type 'unknown'.
+electron/modules/platformGovernanceEngine.ts(55,23): error TS18046: 'policyRule' is of type 'unknown'.
+electron/modules/platformGovernanceEngine.ts(56,74): error TS18046: 'policyRule' is of type 'unknown'.
+electron/modules/platformGovernanceEngine.ts(97,50): error TS18046: 'm' is of type 'unknown'.
+electron/modules/platformGovernanceEngine.ts(97,100): error TS18046: 'm' is of type 'unknown'.
+electron/modules/platformGovernanceEngine.ts(107,62): error TS18046: 'p' is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(55,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/platformIntegrationEngine.ts(64,5): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(64,24): error TS18046: 'contract' is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(65,78): error TS18046: 'contract' is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(65,103): error TS18046: 'contract' is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(72,23): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(73,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/platformIntegrationEngine.ts(83,10): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(84,7): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(86,5): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(99,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/platformIntegrationEngine.ts(99,17): error TS6133: 'id' is declared but its value is never read.
+electron/modules/platformIntegrationEngine.ts(99,43): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(100,59): error TS18046: 'm' is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(101,26): error TS2339: Property 'status' does not exist on type '{}'.
+electron/modules/platformIntegrationEngine.ts(111,32): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(112,29): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(130,19): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(131,33): error TS2571: Object is of type 'unknown'.
+electron/modules/platformIntegrationEngine.ts(131,81): error TS18046: 'c' is of type 'unknown'.
+electron/modules/productionOperationsPlatformEngine.ts(100,68): error TS18046: 'm' is of type 'unknown'.
+electron/modules/productionOperationsPlatformEngine.ts(107,47): error TS2571: Object is of type 'unknown'.
+electron/modules/productionReadinessPlatformEngine.ts(68,82): error TS18046: 'c' is of type 'unknown'.
+electron/modules/productionReadinessPlatformEngine.ts(83,74): error TS18046: 'c' is of type 'unknown'.
+electron/modules/productionReadinessPlatformEngine.ts(84,40): error TS18046: 'totalScore' is of type 'unknown'.
+electron/modules/productionReadinessPlatformEngine.ts(85,52): error TS18046: 'c' is of type 'unknown'.
+electron/modules/publicApiFramework.ts(11,10): error TS2339: Property 'automationTasks' does not exist on type 'PublicApiFrameworkCore'.
+electron/modules/publicApiFramework.ts(32,23): error TS2339: Property 'name' does not exist on type '{}'.
+electron/modules/publicApiFramework.ts(34,27): error TS2339: Property 'priority' does not exist on type '{}'.
+electron/modules/publicApiFramework.ts(35,29): error TS2339: Property 'packageIds' does not exist on type '{}'.
+electron/modules/publicApiFramework.ts(36,28): error TS2339: Property 'scriptMap' does not exist on type '{}'.
+electron/modules/publicApiFramework.ts(54,5): error TS2571: Object is of type 'unknown'.
+electron/modules/publicApiFramework.ts(63,21): error TS2571: Object is of type 'unknown'.
+electron/modules/qualityPlatformEngine.ts(42,80): error TS18046: 'c' is of type 'unknown'.
+electron/modules/qualityPlatformEngine.ts(70,5): error TS2571: Object is of type 'unknown'.
+electron/modules/qualityPlatformEngine.ts(85,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/qualityPlatformEngine.ts(85,50): error TS2571: Object is of type 'unknown'.
+electron/modules/releaseEngineeringPlatformEngine.ts(46,55): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/releaseEngineeringPlatformEngine.ts(82,18): error TS18046: 'changelog' is of type 'unknown'.
+electron/modules/schedulerEngine.ts(12,10): error TS2339: Property 'history' does not exist on type 'OptimizationSchedulerEngineCore'.
+electron/modules/schedulerEngine.ts(55,24): error TS2339: Property 'packageIds' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(55,58): error TS2339: Property 'packageIds' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(61,18): error TS2339: Property 'name' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(62,18): error TS2339: Property 'type' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(63,22): error TS2339: Property 'priority' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(64,24): error TS2339: Property 'packageIds' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(65,23): error TS2339: Property 'scriptMap' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(69,24): error TS2339: Property 'maxRetries' does not exist on type '{}'.
+electron/modules/schedulerEngine.ts(72,5): error TS2571: Object is of type 'unknown'.
+electron/modules/schedulerEngine.ts(74,5): error TS2571: Object is of type 'unknown'.
+electron/modules/schedulerEngine.ts(74,49): error TS18046: 'b' is of type 'unknown'.
+electron/modules/schedulerEngine.ts(74,62): error TS18046: 'a' is of type 'unknown'.
+electron/modules/schedulerEngine.ts(104,19): error TS2571: Object is of type 'unknown'.
+electron/modules/schedulerEngine.ts(104,56): error TS18046: 't' is of type 'unknown'.
+electron/modules/schedulerEngine.ts(106,27): error TS2571: Object is of type 'unknown'.
+electron/modules/schedulerEngine.ts(118,47): error TS2571: Object is of type 'unknown'.
+electron/modules/schedulerEngine.ts(123,18): error TS2571: Object is of type 'unknown'.
+electron/modules/schedulerEngine.ts(136,66): error TS18046: 'p' is of type 'unknown'.
+electron/modules/schedulerEngine.ts(163,9): error TS2571: Object is of type 'unknown'.
+electron/modules/securityManager.ts(17,10): error TS6133: 'sanitizeInput' is declared but its value is never read.
+electron/modules/securityManager.ts(22,10): error TS6133: 'setupSecurityPolicies' is declared but its value is never read.
+electron/modules/securityManager.ts(27,20): error TS2339: Property 'webContents' does not exist on type '{}'.
+electron/modules/securityManager.ts(30,7): error TS2339: Property 'webContents' does not exist on type '{}'.
+electron/modules/securityManager.ts(31,5): error TS18046: 'event' is of type 'unknown'.
+electron/modules/securityManager.ts(35,7): error TS2339: Property 'webContents' does not exist on type '{}'.
+electron/modules/securityManager.ts(41,9): error TS2339: Property 'webContents' does not exist on type '{}'.
+electron/modules/securityManager.ts(42,11): error TS2339: Property 'webContents' does not exist on type '{}'.
+electron/modules/securityPlatformEngine.ts(40,29): error TS2769: No overload matches this call.
+  Overload 1 of 5, '(algorithm: CipherGCMTypes, key: CipherKey, iv: BinaryLike, options?: CipherGCMOptions | undefined): CipherGCM', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'CipherKey'.
+  Overload 2 of 5, '(algorithm: "chacha20-poly1305", key: CipherKey, iv: BinaryLike, options?: CipherChaCha20Poly1305Options | undefined): CipherChaCha20Poly1305', gave the following error.
+    Argument of type '"aes-256-gcm"' is not assignable to parameter of type '"chacha20-poly1305"'.
+  Overload 3 of 5, '(algorithm: string, key: CipherKey, iv: BinaryLike | null, options?: TransformOptions<Transform> | undefined): Cipher', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'CipherKey'.
+electron/modules/securityPlatformEngine.ts(41,37): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(data: ArrayBufferView<ArrayBufferLike>, inputEncoding: undefined, outputEncoding: Encoding): string', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'ArrayBufferView<ArrayBufferLike>'.
+  Overload 2 of 4, '(data: string, inputEncoding: Encoding | undefined, outputEncoding: Encoding): string', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/securityPlatformEngine.ts(42,7): error TS2322: Type 'string' is not assignable to type 'NonSharedBuffer & string'.
+  Type 'string' is not assignable to type 'NonSharedBuffer'.
+electron/modules/securityPlatformEngine.ts(61,31): error TS2769: No overload matches this call.
+  Overload 1 of 5, '(algorithm: CipherGCMTypes, key: CipherKey, iv: BinaryLike, options?: CipherGCMOptions | undefined): DecipherGCM', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'CipherKey'.
+  Overload 2 of 5, '(algorithm: "chacha20-poly1305", key: CipherKey, iv: BinaryLike, options?: CipherChaCha20Poly1305Options | undefined): DecipherChaCha20Poly1305', gave the following error.
+    Argument of type '"aes-256-gcm"' is not assignable to parameter of type '"chacha20-poly1305"'.
+  Overload 3 of 5, '(algorithm: string, key: CipherKey, iv: BinaryLike | null, options?: TransformOptions<Transform> | undefined): Decipher', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'CipherKey'.
+electron/modules/securityPlatformEngine.ts(61,91): error TS18046: 'encryptedObj' is of type 'unknown'.
+electron/modules/securityPlatformEngine.ts(62,39): error TS18046: 'encryptedObj' is of type 'unknown'.
+electron/modules/securityPlatformEngine.ts(63,39): error TS18046: 'encryptedObj' is of type 'unknown'.
+electron/modules/securityPlatformEngine.ts(76,32): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/securityPlatformEngine.ts(77,7): error TS2571: Object is of type 'unknown'.
+electron/modules/securityPlatformEngine.ts(83,36): error TS2339: Property 'permissions' does not exist on type '{}'.
+electron/modules/securityPlatformEngine.ts(83,106): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/securityPlatformEngine.ts(86,7): error TS2571: Object is of type 'unknown'.
+electron/modules/securityPlatformEngine.ts(87,60): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/securityPlatformEngine.ts(98,38): error TS2571: Object is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(70,70): error TS18046: 'm' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(79,82): error TS18046: 'm' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(79,112): error TS18046: 'm' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(90,9): error TS18046: 'plan' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(91,52): error TS18046: 'plan' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(95,9): error TS2571: Object is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(100,5): error TS2571: Object is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(101,74): error TS18046: 'plan' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(104,16): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/selfHealingPlatformEngine.ts(104,33): error TS18046: 'plan' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(111,17): error TS18046: 'plan' is of type 'unknown'.
+electron/modules/selfHealingPlatformEngine.ts(120,64): error TS18046: 'plan' is of type 'unknown'.
+electron/modules/statsDatabase.ts(38,16): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/statsDatabase.ts(39,13): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/statsDatabase.ts(47,11): error TS2538: Type 'unknown' cannot be used as an index type.
+electron/modules/statsDatabase.ts(49,7): error TS2698: Spread types may only be created from object types.
+electron/modules/sysInfoWorker.ts(12,13): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/sysInfoWorker.ts(12,17): error TS2339: Property 'type' does not exist on type '{}'.
+electron/modules/sysInfoWorker.ts(25,9): error TS18047: 'parentPort' is possibly 'null'.
+electron/modules/sysInfoWorker.ts(36,9): error TS18047: 'parentPort' is possibly 'null'.
+electron/modules/sysInfoWorker.ts(46,9): error TS18047: 'parentPort' is possibly 'null'.
+electron/modules/sysInfoWorker.ts(52,9): error TS18047: 'parentPort' is possibly 'null'.
+electron/modules/sysInfoWorker.ts(59,7): error TS18047: 'parentPort' is possibly 'null'.
+electron/modules/systemInfo.ts(6,1): error TS6133: 'execAsync' is declared but its value is never read.
+electron/modules/systemInfo.ts(7,1): error TS6133: 'checkDiskSpace' is declared but its value is never read.
+electron/modules/systemInfo.ts(15,5): error TS7034: Variable 'sysWorker' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/systemInfo.ts(20,8): error TS7005: Variable 'sysWorker' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(26,17): error TS2339: Property 'id' does not exist on type '{}'.
+electron/modules/systemInfo.ts(26,21): error TS2339: Property 'success' does not exist on type '{}'.
+electron/modules/systemInfo.ts(26,30): error TS2339: Property 'data' does not exist on type '{}'.
+electron/modules/systemInfo.ts(26,36): error TS2339: Property 'error' does not exist on type '{}'.
+electron/modules/systemInfo.ts(39,72): error TS2339: Property 'message' does not exist on type '{}'.
+electron/modules/systemInfo.ts(58,7): error TS7005: Variable 'sysWorker' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(62,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/systemInfo.ts(79,7): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/systemInfo.ts(85,5): error TS7034: Variable 'previousCpuTimes' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/systemInfo.ts(91,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+electron/modules/systemInfo.ts(92,16): error TS2404: The left-hand side of a 'for...in' statement cannot use a type annotation.
+electron/modules/systemInfo.ts(93,16): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ user: number; nice: number; sys: number; idle: number; irq: number; }'.
+  No index signature with a parameter of type 'string' was found on type '{ user: number; nice: number; sys: number; idle: number; irq: number; }'.
+electron/modules/systemInfo.ts(103,9): error TS7005: Variable 'previousCpuTimes' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(118,27): error TS2769: No overload matches this call.
+  Overload 1 of 6, '(pid: string | number, options?: { [key: string]: any; } | undefined): Promise<Stat>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'string | number'.
+  Overload 2 of 6, '(pids: (string | number)[], options?: { [key: string]: any; } | undefined): Promise<{ [key: string]: Stat; }>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(string | number)[]'.
+electron/modules/systemInfo.ts(124,5): error TS7034: Variable 'cpuInterval' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/systemInfo.ts(127,8): error TS7005: Variable 'cpuInterval' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(145,18): error TS2339: Property 'cpuName' does not exist on type '{}'.
+electron/modules/systemInfo.ts(145,51): error TS2339: Property 'cpuName' does not exist on type '{}'.
+electron/modules/systemInfo.ts(146,18): error TS2339: Property 'osName' does not exist on type '{}'.
+electron/modules/systemInfo.ts(146,49): error TS2339: Property 'osName' does not exist on type '{}'.
+electron/modules/systemInfo.ts(169,19): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(171,31): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(172,31): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(172,40): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(174,61): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(182,19): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(184,31): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(185,31): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(185,40): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(187,61): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(199,5): error TS7034: Variable 'metricsInterval' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/systemInfo.ts(204,8): error TS7005: Variable 'metricsInterval' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(211,7): error TS7005: Variable 'metricsInterval' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(215,7): error TS7005: Variable 'cpuInterval' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(222,8): error TS7005: Variable 'metricsInterval' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(234,12): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(234,24): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(235,24): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(236,10): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(238,21): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(238,51): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(239,21): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(239,51): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(242,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(246,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(247,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(248,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(249,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(250,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(251,13): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(255,12): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(256,40): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(257,67): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(257,89): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(259,12): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(260,12): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(261,78): error TS2339: Property 'cpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(266,12): error TS2339: Property 'gpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(266,38): error TS2339: Property 'gpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(267,10): error TS2339: Property 'gpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(267,21): error TS2339: Property 'gpu' does not exist on type '{}'.
+electron/modules/systemInfo.ts(268,21): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(269,7): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(270,7): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(271,7): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(271,18): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(274,9): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(276,11): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(277,88): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(278,93): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(279,68): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(280,16): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(283,9): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(284,9): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(285,61): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(286,14): error TS18046: 'gpu' is of type 'unknown'.
+electron/modules/systemInfo.ts(293,12): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(293,38): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(295,10): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(295,29): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(296,20): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(297,7): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(298,7): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(299,7): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(301,28): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(302,28): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(302,57): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(302,83): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(303,33): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(303,62): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(303,88): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(304,33): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(304,62): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(304,88): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(307,9): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(309,31): error TS18046: 'mod' is of type 'unknown'.
+electron/modules/systemInfo.ts(312,10): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(313,10): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(313,30): error TS2339: Property 'ram' does not exist on type '{}'.
+electron/modules/systemInfo.ts(317,12): error TS2339: Property 'storage' does not exist on type '{}'.
+electron/modules/systemInfo.ts(317,42): error TS2339: Property 'storage' does not exist on type '{}'.
+electron/modules/systemInfo.ts(318,10): error TS2339: Property 'storage' does not exist on type '{}'.
+electron/modules/systemInfo.ts(318,25): error TS2339: Property 'storage' does not exist on type '{}'.
+electron/modules/systemInfo.ts(319,22): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(320,7): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(323,9): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(324,36): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(325,66): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(327,9): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(331,9): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(332,9): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(334,9): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(335,9): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(336,18): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(337,10): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(338,10): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(340,10): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(341,10): error TS18046: 'disk' is of type 'unknown'.
+electron/modules/systemInfo.ts(348,12): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(349,23): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(350,27): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(353,12): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(356,40): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(357,45): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(358,45): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(359,45): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(360,45): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(361,15): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(363,10): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(364,10): error TS2339: Property 'motherboard' does not exist on type '{}'.
+electron/modules/systemInfo.ts(367,12): error TS2339: Property 'bios' does not exist on type '{}'.
+electron/modules/systemInfo.ts(368,10): error TS2339: Property 'bios' does not exist on type '{}'.
+electron/modules/systemInfo.ts(369,10): error TS2339: Property 'bios' does not exist on type '{}'.
+electron/modules/systemInfo.ts(375,5): error TS7034: Variable 'hardwareSpecsCache' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/systemInfo.ts(378,5): error TS7034: Variable 'hardwareSpecsPromise' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/systemInfo.ts(381,7): error TS7005: Variable 'hardwareSpecsCache' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(384,7): error TS7005: Variable 'hardwareSpecsPromise' implicitly has an 'any' type.
+electron/modules/systemInfo.ts(390,15): error TS2339: Property 'cpu' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(390,20): error TS2339: Property 'gpus' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(390,26): error TS2339: Property 'mem' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(390,31): error TS2339: Property 'mb' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(390,35): error TS2339: Property 'bios' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(390,41): error TS2339: Property 'diskLayout' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(390,53): error TS2339: Property 'memLayout' does not exist on type 'unknown'.
+electron/modules/systemInfo.ts(403,17): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(404,19): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(404,42): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(405,19): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(406,22): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(413,27): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(414,20): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(415,25): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(416,38): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(430,18): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(431,32): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(432,17): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(433,22): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(464,19): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(465,21): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(465,44): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(466,21): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(467,24): error TS18046: 'g' is of type 'unknown'.
+electron/modules/systemInfo.ts(474,29): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(475,22): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(476,27): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(477,39): error TS18046: 'm' is of type 'unknown'.
+electron/modules/systemInfo.ts(491,20): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(492,33): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(493,19): error TS18046: 'd' is of type 'unknown'.
+electron/modules/systemInfo.ts(494,24): error TS18046: 'd' is of type 'unknown'.
+electron/modules/trayManager.ts(12,5): error TS7034: Variable 'trayInstance' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/trayManager.ts(20,13): error TS2339: Property 'isQuitting' does not exist on type 'App'.
+electron/modules/trayManager.ts(29,22): error TS2339: Property 'show' does not exist on type '{}'.
+electron/modules/trayManager.ts(30,22): error TS2339: Property 'focus' does not exist on type '{}'.
+electron/modules/trayManager.ts(35,85): error TS18046: 'e' is of type 'unknown'.
+electron/modules/trayManager.ts(38,10): error TS7005: Variable 'trayInstance' implicitly has an 'any' type.
+electron/modules/updateManager.ts(9,10): error TS6133: 'checkForUpdatesManual' is declared but its value is never read.
+electron/modules/updatePlatformEngine.ts(21,56): error TS18046: 'info' is of type 'unknown'.
+electron/modules/updatePlatformEngine.ts(24,41): error TS18046: 'info' is of type 'unknown'.
+electron/modules/updatePlatformEngine.ts(46,32): error TS2339: Property 'split' does not exist on type '{}'.
+electron/modules/updatePlatformEngine.ts(46,72): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/updatePlatformEngine.ts(47,32): error TS2339: Property 'split' does not exist on type '{}'.
+electron/modules/updatePlatformEngine.ts(47,72): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/updatePlatformEngine.ts(62,26): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'PathLike'.
+electron/modules/updatePlatformEngine.ts(64,42): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'PathLike'.
+electron/modules/updatePlatformEngine.ts(67,59): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'BinaryLike'.
+electron/modules/updatePlatformEngine.ts(70,11): error TS18046: 'resolve' is of type 'unknown'.
+electron/modules/updatePlatformEngine.ts(70,48): error TS18046: 'expectedSha256' is of type 'unknown'.
+electron/modules/updatePlatformEngine.ts(72,34): error TS18046: 'resolve' is of type 'unknown'.
+electron/modules/updatePlatformEngine.ts(121,63): error TS18046: 'r' is of type 'unknown'.
+electron/modules/updatePlatformEngine.ts(121,80): error TS18046: 'r' is of type 'unknown'.
+electron/modules/validationEngine.ts(16,5): error TS2571: Object is of type 'unknown'.
+electron/modules/validationEngine.ts(40,33): error TS2339: Property 'toUpperCase' does not exist on type '{}'.
+electron/modules/validationEngine.ts(40,80): error TS2339: Property 'toUpperCase' does not exist on type '{}'.
+electron/modules/validationEngine.ts(46,9): error TS2571: Object is of type 'unknown'.
+electron/modules/validationEngine.ts(48,33): error TS2571: Object is of type 'unknown'.
+electron/modules/windowManager.ts(11,5): error TS7034: Variable 'mainWindowInstance' implicitly has type 'any' in some locations where its type cannot be determined.
+electron/modules/windowManager.ts(13,10): error TS6133: 'getMainWindow' is declared but its value is never read.
+electron/modules/windowManager.ts(14,10): error TS7005: Variable 'mainWindowInstance' implicitly has an 'any' type.
+electron/modules/windowManager.ts(56,47): error TS6133: 'event' is declared but its value is never read.
+electron/modules/windowManager.ts(57,5): error TS2304: Cannot find name 'logError'.
+electron/modules/windowManager.ts(60,49): error TS6133: 'event' is declared but its value is never read.
+electron/modules/windowManager.ts(60,65): error TS2370: A rest parameter must be of an array type.
+electron/modules/windowManager.ts(61,5): error TS2304: Cannot find name 'logInfo'.
+electron/modules/windowManager.ts(61,45): error TS18046: 'args' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(17,9): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(17,47): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(18,22): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(19,16): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(20,22): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(21,16): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(22,22): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(23,17): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(23,51): error TS18046: 'command' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(26,24): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(command: string, options: ExecOptionsWithBufferEncoding): PromiseWithChild<{ stdout: NonSharedBuffer; stderr: NonSharedBuffer; }>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'string'.
+  Overload 2 of 4, '(command: string, options: ExecOptionsWithStringEncoding): PromiseWithChild<{ stdout: string; stderr: string; }>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'string'.
+  Overload 3 of 4, '(command: string, options: ExecOptions | null | undefined): PromiseWithChild<{ stdout: string | NonSharedBuffer; stderr: string | NonSharedBuffer; }>', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/windowsExecutionEngine.ts(26,77): error TS2698: Spread types may only be created from object types.
+electron/modules/windowsExecutionEngine.ts(48,9): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(48,59): error TS18046: 'options' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(49,10): error TS18046: 'options' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(54,11): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(56,11): error TS18046: 'resolve' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(62,9): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(78,40): error TS18046: 'crypto' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(81,26): error TS18046: 'net' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(83,13): error TS18046: 'stream' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(84,13): error TS18046: 'stream' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(97,17): error TS18046: 'resolve' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(101,17): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(106,13): error TS18046: 'reject' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(139,15): error TS2339: Property 'stdout' does not exist on type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(155,20): error TS18046: 'regCmd' is of type 'unknown'.
+electron/modules/windowsExecutionEngine.ts(167,32): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/modules/windowsExecutionEngine.ts(168,37): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+electron/preload.cts(80,102): error TS2698: Spread types may only be created from object types.
+electron/preload.cts(144,30): error TS2370: A rest parameter must be of an array type.
+electron/preload.cts(146,43): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+electron/preload.cts(150,30): error TS6133: 'event' is declared but its value is never read.
+electron/preload.cts(150,46): error TS2370: A rest parameter must be of an array type.
+electron/preload.cts(150,67): error TS18046: 'listener' is of type 'unknown'.
+electron/preload.cts(150,79): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/App.tsx(6,6): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: Props): ErrorBoundary', gave the following error.
+    Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & IntrinsicClassAttributes<ErrorBoundary>'.
+  Overload 2 of 2, '(props: Props, context: any): ErrorBoundary', gave the following error.
+    Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & IntrinsicClassAttributes<ErrorBoundary>'.
+src/App.tsx(6,6): error TS2786: 'ErrorBoundary' cannot be used as a JSX component.
+  Its type 'typeof ErrorBoundary' is not a valid JSX element type.
+    Type 'typeof ErrorBoundary' is not assignable to type 'new (props: any, context: any) => Component<any, any, any>'.
+      Construct signature return types 'ErrorBoundary' and 'Component<any, any, any>' are incompatible.
+        The types of 'props' are incompatible between these types.
+          Type 'unknown' is not assignable to type 'Readonly<any>'.
+src/app/AppShell.tsx(19,6): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: Props): ErrorBoundary', gave the following error.
+    Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & IntrinsicClassAttributes<ErrorBoundary>'.
+  Overload 2 of 2, '(props: Props, context: any): ErrorBoundary', gave the following error.
+    Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & IntrinsicClassAttributes<ErrorBoundary>'.
+src/app/AppShell.tsx(19,6): error TS2786: 'ErrorBoundary' cannot be used as a JSX component.
+  Its type 'typeof ErrorBoundary' is not a valid JSX element type.
+    Type 'typeof ErrorBoundary' is not assignable to type 'new (props: any, context: any) => Component<any, any, any>'.
+      Construct signature return types 'ErrorBoundary' and 'Component<any, any, any>' are incompatible.
+        The types of 'props' are incompatible between these types.
+          Type 'unknown' is not assignable to type 'Readonly<any>'.
+src/components/categories/BaseCategoryView.tsx(138,24): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/categories/BaseCategoryView.tsx(138,39): error TS18046: 'impact' is of type 'unknown'.
+src/components/categories/BaseCategoryView.tsx(138,61): error TS18046: 'impact' is of type 'unknown'.
+src/components/categories/BaseCategoryView.tsx(151,38): error TS18046: 'prev' is of type 'unknown'.
+src/components/categories/BaseCategoryView.tsx(182,20): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/categories/BaseCategoryView.tsx(198,28): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/categories/BaseCategoryView.tsx(224,22): error TS18046: 'setting' is of type 'unknown'.
+src/components/categories/BaseCategoryView.tsx(225,17): error TS2322: Type 'unknown' is not assignable to type '{ id: string; name: string; description: string; status: "default" | "checking" | "optimized"; applyCode?: string | undefined; restoreCode?: string | undefined; impacts?: { performance: { ...; }; latency: { ...; }; input: { ...; }; power: { ...; }; heat: { ...; }; } | undefined; }'.
+src/components/categories/BaseCategoryView.tsx(226,17): error TS2322: Type 'unknown' is not assignable to type 'number'.
+src/components/categories/BaseCategoryView.tsx(227,47): error TS18046: 'setting' is of type 'unknown'.
+src/components/categories/BaseCategoryView.tsx(228,51): error TS18046: 'setting' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(181,22): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/categories/MySystemCategory.tsx(185,24): error TS18046: 'g' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(190,77): error TS18046: 'g' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(194,77): error TS18046: 'g' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(245,22): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/categories/MySystemCategory.tsx(247,106): error TS18046: 'd' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(247,130): error TS18046: 'idx' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(248,24): error TS18046: 'd' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(248,48): error TS18046: 'idx' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(250,86): error TS18046: 'd' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(253,67): error TS18046: 'd' is of type 'unknown'.
+src/components/categories/MySystemCategory.tsx(254,89): error TS18046: 'd' is of type 'unknown'.
+src/components/categories/ToolsCategory.tsx(38,16): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/categories/ToolsCategory.tsx(40,59): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/categories/ToolsCategory.tsx(101,20): error TS18046: 'card' is of type 'unknown'.
+src/components/categories/ToolsCategory.tsx(104,60): error TS18046: 'i' is of type 'unknown'.
+src/components/categories/ToolsCategory.tsx(108,16): error TS2739: Type '{ onClick: (id: string) => void; }' is missing the following properties from type 'ToolCardProps': id, icon, title, description, improvements
+src/components/categories/ToolsCategory.tsx(109,21): error TS2698: Spread types may only be created from object types.
+src/components/CommandPaletteModal.tsx(79,56): error TS18046: 'result' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(95,44): error TS18046: 'prev' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(98,44): error TS18046: 'prev' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(136,52): error TS18046: 'e' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(156,32): error TS18046: 'cmd' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(160,28): error TS18046: 'cmd' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(161,53): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'CommandItem'.
+src/components/CommandPaletteModal.tsx(162,60): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<number>'.
+src/components/CommandPaletteModal.tsx(171,88): error TS18046: 'cmd' is of type 'unknown'.
+src/components/CommandPaletteModal.tsx(176,28): error TS18046: 'cmd' is of type 'unknown'.
+src/components/dashboard/HealthRing.tsx(10,68): error TS2339: Property 'score' does not exist on type 'unknown'.
+src/components/dashboard/HealthRing.tsx(10,75): error TS2339: Property 'size' does not exist on type 'unknown'.
+src/components/dashboard/HeroSection.tsx(48,26): error TS2339: Property 'displayName' does not exist on type '{}'.
+src/components/dashboard/HeroSection.tsx(48,46): error TS2339: Property 'email' does not exist on type '{}'.
+src/components/dashboard/RecommendedOptimizations.tsx(72,79): error TS18046: 's' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(74,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type '{ id: string; name: string; description: string; status: "default" | "checking" | "optimized"; applyCode?: string | undefined; restoreCode?: string | undefined; impacts?: { performance: { ...; }; latency: { ...; }; input: { ...; }; power: { ...; }; heat: { ...; }; } | undefined; }'.
+src/components/dashboard/RecommendedOptimizations.tsx(74,113): error TS2345: Argument of type 'unknown' is not assignable to parameter of type '{ id: string; name: string; description: string; status: "default" | "checking" | "optimized"; applyCode?: string | undefined; restoreCode?: string | undefined; impacts?: { performance: { ...; }; latency: { ...; }; input: { ...; }; power: { ...; }; heat: { ...; }; } | undefined; }'.
+src/components/dashboard/RecommendedOptimizations.tsx(160,53): error TS18046: 'item' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(161,47): error TS18046: 'item' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(162,57): error TS2345: Argument of type 'unknown' is not assignable to parameter of type '{ id: string; name: string; description: string; status: "default" | "checking" | "optimized"; applyCode?: string | undefined; restoreCode?: string | undefined; impacts?: { performance: { ...; }; latency: { ...; }; input: { ...; }; power: { ...; }; heat: { ...; }; } | undefined; }'.
+src/components/dashboard/RecommendedOptimizations.tsx(166,24): error TS18046: 'item' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(176,94): error TS18046: 'item' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(181,91): error TS18046: 'item' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(181,110): error TS18046: 'item' is of type 'unknown'.
+src/components/dashboard/RecommendedOptimizations.tsx(190,50): error TS2345: Argument of type 'unknown' is not assignable to parameter of type '{ id: string; name: string; description: string; status: "default" | "checking" | "optimized"; applyCode?: string | undefined; restoreCode?: string | undefined; impacts?: { performance: { ...; }; latency: { ...; }; input: { ...; }; power: { ...; }; heat: { ...; }; } | undefined; }'.
+src/components/ErrorBoundary.tsx(68,12): error TS2571: Object is of type 'unknown'.
+src/components/ErrorBoundary.tsx(71,5): error TS2416: Property 'props' in type 'ErrorBoundary' is not assignable to the same property in base type 'Component<Props, State, any>'.
+  Type 'unknown' is not assignable to type 'Readonly<Props>'.
+src/components/info/AdvancedSettingsCenterTools.tsx(30,24): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/components/info/AdvancedSettingsCenterTools.tsx(55,16): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/AdvancedSettingsCenterTools.tsx(58,16): error TS18046: 'group' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(59,27): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(61,73): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(62,73): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(66,22): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(68,54): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+src/components/info/AdvancedSettingsCenterTools.tsx(70,27): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(74,27): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(79,32): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(83,26): error TS18046: 'item' is of type 'unknown'.
+src/components/info/AdvancedSettingsCenterTools.tsx(84,35): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/AdvancedSettingsCenterTools.tsx(84,45): error TS2322: Type 'unknown' is not assignable to type 'string | number | readonly string[] | undefined'.
+src/components/info/AdvancedSettingsCenterTools.tsx(84,57): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/CloudBackupSyncTools.tsx(100,23): error TS18046: 'dev' is of type 'unknown'.
+src/components/info/CloudBackupSyncTools.tsx(107,73): error TS18046: 'dev' is of type 'unknown'.
+src/components/info/CloudBackupSyncTools.tsx(108,22): error TS18046: 'dev' is of type 'unknown'.
+src/components/info/CloudBackupSyncTools.tsx(112,79): error TS18046: 'dev' is of type 'unknown'.
+src/components/info/CloudBackupSyncTools.tsx(112,92): error TS18046: 'dev' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(47,15): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/DeveloperModeTools.tsx(48,43): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<"Inspector" | "Logs" | "Profiler" | "API">'.
+src/components/info/DeveloperModeTools.tsx(116,25): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(117,63): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(119,19): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(120,19): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(122,20): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(124,58): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DeveloperModeTools.tsx(125,51): error TS18046: 'log' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(29,41): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(29,69): error TS2698: Spread types may only be created from object types.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(127,21): error TS18046: 'item' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(130,126): error TS18046: 'item' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(131,69): error TS18046: 'item' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(133,70): error TS18046: 'item' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(137,15): error TS18046: 'item' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(138,15): error TS18046: 'item' is of type 'unknown'.
+src/components/info/DiagnosticsRecoveryCenterTools.tsx(141,16): error TS18046: 'item' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(24,44): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(28,46): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(28,106): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(32,38): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(33,11): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(34,27): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(35,18): error TS2698: Spread types may only be created from object types.
+src/components/info/ExtensionManagerTools.tsx(42,38): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(42,63): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(42,79): error TS2698: Spread types may only be created from object types.
+src/components/info/ExtensionManagerTools.tsx(76,54): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(95,32): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(98,22): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(99,46): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(107,128): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(109,21): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(110,21): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(112,22): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(116,82): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(119,26): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionManagerTools.tsx(120,26): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(19,53): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(22,38): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(22,63): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(22,79): error TS2698: Spread types may only be created from object types.
+src/components/info/ExtensionSdkTools.tsx(22,95): error TS18046: 'e' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(54,32): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(57,22): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(58,46): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(66,128): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(68,21): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(70,22): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(74,82): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(77,35): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(78,33): error TS18046: 'ext' is of type 'unknown'.
+src/components/info/ExtensionSdkTools.tsx(113,25): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/ExtensionSdkTools.tsx(114,21): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/HardwareExplorerTools.tsx(16,54): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(17,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(18,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(18,61): error TS18046: 's' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(18,122): error TS18046: 's' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(59,15): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/HardwareExplorerTools.tsx(60,48): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<string>'.
+src/components/info/HardwareExplorerTools.tsx(67,15): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/HardwareExplorerTools.tsx(77,54): error TS18046: 'e' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(93,21): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(96,128): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(97,67): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(107,16): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(108,27): error TS18046: 'spec' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(109,77): error TS18046: 'spec' is of type 'unknown'.
+src/components/info/HardwareExplorerTools.tsx(110,102): error TS18046: 'spec' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(27,59): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(28,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(29,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(61,15): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/HealthRecommendationsTools.tsx(62,48): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<string>'.
+src/components/info/HealthRecommendationsTools.tsx(69,15): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/HealthRecommendationsTools.tsx(79,54): error TS18046: 'e' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(95,45): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(97,23): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(100,66): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(105,21): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(107,22): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(112,73): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(113,122): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(115,69): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(121,28): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(138,54): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(143,54): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(148,54): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(153,80): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(155,69): error TS18046: 'item' is of type 'unknown'.
+src/components/info/HealthRecommendationsTools.tsx(155,130): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(16,47): error TS2698: Spread types may only be created from object types.
+src/components/info/MaintenanceCenterTools.tsx(25,41): error TS18046: 't' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(25,99): error TS18046: 'curr' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(29,33): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(29,58): error TS18046: 't' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(29,74): error TS2698: Spread types may only be created from object types.
+src/components/info/MaintenanceCenterTools.tsx(29,91): error TS18046: 't' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(33,54): error TS18046: 't' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(33,86): error TS18046: 't' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(75,68): error TS18046: 't' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(130,79): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+src/components/info/MaintenanceCenterTools.tsx(146,24): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(147,45): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(149,21): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(157,32): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(163,77): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(165,73): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MaintenanceCenterTools.tsx(170,76): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(26,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(26,92): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(27,61): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(35,35): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(35,63): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(35,82): error TS2698: Spread types may only be created from object types.
+src/components/info/MarketplaceTools.tsx(91,15): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/MarketplaceTools.tsx(92,48): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<string>'.
+src/components/info/MarketplaceTools.tsx(99,15): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/MarketplaceTools.tsx(109,54): error TS18046: 'e' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(125,21): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(128,126): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(131,26): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(135,74): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(136,73): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(141,64): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(142,65): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(146,46): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(147,45): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(147,56): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(149,19): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(154,36): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(159,21): error TS18046: 'item' is of type 'unknown'.
+src/components/info/MarketplaceTools.tsx(167,47): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(24,39): error TS18046: 'i' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(29,54): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(30,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(31,29): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(37,33): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(37,58): error TS18046: 'i' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(37,74): error TS2698: Spread types may only be created from object types.
+src/components/info/OptimizationLibraryTools.tsx(37,93): error TS18046: 'i' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(63,15): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/OptimizationLibraryTools.tsx(64,48): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<string>'.
+src/components/info/OptimizationLibraryTools.tsx(71,15): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/OptimizationLibraryTools.tsx(81,54): error TS18046: 'e' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(98,32): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(101,22): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(102,46): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(110,128): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(113,23): error TS18046: 'e' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(114,38): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(118,65): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(122,82): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(125,66): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationLibraryTools.tsx(127,70): error TS18046: 'item' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(23,39): error TS18046: 'p' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(62,32): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(65,22): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(66,46): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(74,128): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(75,85): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(78,67): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(81,66): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationPacksTools.tsx(83,70): error TS18046: 'pack' is of type 'unknown'.
+src/components/info/OptimizationSimulatorTools.tsx(51,15): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/OptimizationSimulatorTools.tsx(53,34): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<"Gaming" | "Power" | "Recommended" | "Balanced">'.
+src/components/info/OptimizationSimulatorTools.tsx(78,21): error TS18046: 'res' is of type 'unknown'.
+src/components/info/OptimizationSimulatorTools.tsx(80,67): error TS18046: 'res' is of type 'unknown'.
+src/components/info/OptimizationSimulatorTools.tsx(82,19): error TS18046: 'res' is of type 'unknown'.
+src/components/info/OptimizationSimulatorTools.tsx(89,78): error TS18046: 'res' is of type 'unknown'.
+src/components/info/OptimizationSimulatorTools.tsx(94,80): error TS18046: 'res' is of type 'unknown'.
+src/components/info/OptimizationSimulatorTools.tsx(100,22): error TS18046: 'res' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(54,35): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(55,13): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(56,28): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(58,44): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/components/info/RepairExecutionEngineTools.tsx(58,62): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(59,22): error TS2698: Spread types may only be created from object types.
+src/components/info/RepairExecutionEngineTools.tsx(61,20): error TS2698: Spread types may only be created from object types.
+src/components/info/RepairExecutionEngineTools.tsx(62,20): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(62,46): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(62,72): error TS18046: 'p' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(63,42): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/components/info/RepairExecutionEngineTools.tsx(63,58): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(64,20): error TS2698: Spread types may only be created from object types.
+src/components/info/RepairExecutionEngineTools.tsx(103,16): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/RepairExecutionEngineTools.tsx(105,15): error TS18046: 'idx' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(107,16): error TS18046: 'idx' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(109,30): error TS18046: 'idx' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(109,69): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/RepairExecutionEngineTools.tsx(110,14): error TS18046: 'idx' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(119,21): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(123,19): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(124,19): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(126,20): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(127,20): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(130,71): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(131,118): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(136,17): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(137,17): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(139,18): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(145,79): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(146,36): error TS18046: 't' is of type 'unknown'.
+src/components/info/RepairExecutionEngineTools.tsx(161,18): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/RepairExecutionEngineTools.tsx(163,21): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/RepairExecutionPreviewTools.tsx(21,55): error TS18046: 'p' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(54,32): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(57,22): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(58,50): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(66,118): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(67,91): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(69,82): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(71,108): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(73,26): error TS18046: 'item' is of type 'unknown'.
+src/components/info/RepairExecutionPreviewTools.tsx(109,26): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/RepairExecutionPreviewTools.tsx(110,23): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/RepairExecutionPreviewTools.tsx(124,27): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/RepairExecutionPreviewTools.tsx(125,23): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/SnapshotCenterTools.tsx(23,43): error TS18046: 's' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(30,39): error TS18046: 'prev' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(30,64): error TS18046: 's' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(30,88): error TS2698: Spread types may only be created from object types.
+src/components/info/SnapshotCenterTools.tsx(84,34): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(87,24): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(88,48): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(96,120): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(98,23): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(100,24): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(104,82): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(107,110): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(108,28): error TS18046: 'item' is of type 'unknown'.
+src/components/info/SnapshotCenterTools.tsx(108,49): error TS18046: 'item' is of type 'unknown'.
+src/components/info/StableReleaseTools.tsx(11,18): error TS18046: 'changelog' is of type 'unknown'.
+src/components/info/StableReleaseTools.tsx(17,67): error TS18046: 'changelog' is of type 'unknown'.
+src/components/info/StableReleaseTools.tsx(18,26): error TS18046: 'changelog' is of type 'unknown'.
+src/components/info/StableReleaseTools.tsx(22,18): error TS18046: 'changelog' is of type 'unknown'.
+src/components/info/StableReleaseTools.tsx(27,16): error TS18046: 'changelog' is of type 'unknown'.
+src/components/info/StableReleaseTools.tsx(28,21): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/info/StableReleaseTools.tsx(30,53): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/info/VisualWorkflowDesignerTools.tsx(24,51): error TS18046: 'n' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(68,34): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(70,27): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(72,54): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(80,96): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(82,109): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(83,75): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(87,77): error TS18046: 'node' is of type 'unknown'.
+src/components/info/VisualWorkflowDesignerTools.tsx(90,20): error TS18046: 'index' is of type 'unknown'.
+src/components/Layout.tsx(12,83): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(14,99): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(15,108): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(16,84): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(17,84): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(18,93): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(19,104): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(20,80): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(21,108): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(22,114): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(23,112): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(24,102): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(25,106): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(26,98): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(27,94): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(28,90): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(29,102): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(30,112): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(31,108): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(32,104): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(33,108): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(34,108): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(35,94): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(36,102): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(37,91): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(38,95): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(39,104): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(40,96): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(41,93): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(42,95): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(43,89): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(45,110): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(46,101): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(50,38): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/components/Layout.tsx(53,127): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(54,113): error TS18046: 'm' is of type 'unknown'.
+src/components/Layout.tsx(55,106): error TS18046: 'module' is of type 'unknown'.
+src/components/Layout.tsx(72,27): error TS2538: Type 'unknown' cannot be used as an index type.
+src/components/Layout.tsx(72,49): error TS2538: Type 'unknown' cannot be used as an index type.
+src/components/Layout.tsx(154,12): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: Props): ErrorBoundary', gave the following error.
+    Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & IntrinsicClassAttributes<ErrorBoundary>'.
+  Overload 2 of 2, '(props: Props, context: any): ErrorBoundary', gave the following error.
+    Type '{ children: Element; }' has no properties in common with type 'IntrinsicAttributes & IntrinsicClassAttributes<ErrorBoundary>'.
+src/components/Layout.tsx(154,12): error TS2786: 'ErrorBoundary' cannot be used as a JSX component.
+  Its type 'typeof ErrorBoundary' is not a valid JSX element type.
+    Type 'typeof ErrorBoundary' is not assignable to type 'new (props: any, context: any) => Component<any, any, any>'.
+      Construct signature return types 'ErrorBoundary' and 'Component<any, any, any>' are incompatible.
+        The types of 'props' are incompatible between these types.
+          Type 'unknown' is not assignable to type 'Readonly<any>'.
+src/components/Optimization.tsx(51,16): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/Optimization.tsx(53,70): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+src/components/Optimization.tsx(74,14): error TS18046: 'c' is of type 'unknown'.
+src/components/Optimization.tsx(75,14): error TS18046: 'c' is of type 'unknown'.
+src/components/Optimization.tsx(113,56): error TS18046: 'e' is of type 'unknown'.
+src/components/Optimization.tsx(141,20): error TS18046: 'card' is of type 'unknown'.
+src/components/Optimization.tsx(144,60): error TS18046: 'i' is of type 'unknown'.
+src/components/Optimization.tsx(147,16): error TS2739: Type '{ settingCount: number; onClick: (id: string) => void; }' is missing the following properties from type 'OptimizationCardProps': id, icon, title, description, improvements
+src/components/Optimization.tsx(148,21): error TS2698: Spread types may only be created from object types.
+src/components/Optimization.tsx(149,48): error TS18046: 'card' is of type 'unknown'.
+src/components/Sidebar.tsx(92,7): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(93,5): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(93,52): error TS18046: 'a' is of type 'unknown'.
+src/components/Sidebar.tsx(93,74): error TS18046: 'b' is of type 'unknown'.
+src/components/Sidebar.tsx(186,22): error TS18046: 'sub' is of type 'unknown'.
+src/components/Sidebar.tsx(187,17): error TS2322: Type 'unknown' is not assignable to type 'SubItem'.
+src/components/Sidebar.tsx(188,44): error TS18046: 'sub' is of type 'unknown'.
+src/components/Sidebar.tsx(206,22): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<User | null>'.
+src/components/Sidebar.tsx(245,7): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(245,45): error TS18046: 'sub' is of type 'unknown'.
+src/components/Sidebar.tsx(255,19): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(255,39): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(256,14): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(256,31): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'NavItem'.
+src/components/Sidebar.tsx(274,42): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/components/Sidebar.tsx(281,22): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(282,17): error TS2322: Type 'unknown' is not assignable to type 'NavItem'.
+src/components/Sidebar.tsx(283,41): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(284,33): error TS18046: 'item' is of type 'unknown'.
+src/components/Sidebar.tsx(284,50): error TS18046: 'item' is of type 'unknown'.
+src/components/SplashScreen.tsx(70,49): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+src/components/SplashScreen.tsx(74,49): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+src/components/tools/DebloatTools.tsx(70,114): error TS18046: 'a' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(70,135): error TS18046: 'b' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(84,53): error TS18046: 'a' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(84,74): error TS18046: 'b' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(106,46): error TS2698: Spread types may only be created from object types.
+src/components/tools/DebloatTools.tsx(110,48): error TS2698: Spread types may only be created from object types.
+src/components/tools/DebloatTools.tsx(116,36): error TS18046: 'prev' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(116,64): error TS18046: 'a' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(118,30): error TS2698: Spread types may only be created from object types.
+src/components/tools/DebloatTools.tsx(132,28): error TS2698: Spread types may only be created from object types.
+src/components/tools/DebloatTools.tsx(141,29): error TS18046: 'app' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(142,30): error TS18046: 'app' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(142,47): error TS18046: 'app' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(143,57): error TS18046: 'app' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(222,56): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(240,22): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/tools/DebloatTools.tsx(260,67): error TS18046: 'prev' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(272,24): error TS18046: 'app' is of type 'unknown'.
+src/components/tools/DebloatTools.tsx(273,19): error TS2322: Type 'unknown' is not assignable to type '{ id: string; name: string; publisher: string; version: string; type: "desktop" | "uwp"; uninstallString: string; packageFullName: string; }'.
+src/components/tools/GamesTools.tsx(74,41): error TS18046: 'prev' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(82,42): error TS18046: 'prev' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(144,42): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(161,38): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(200,54): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(callback: () => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '() => void'.
+  Overload 2 of 3, '(callback: (_: void) => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(_: void) => void'.
+  Overload 3 of 3, '(handler: TimerHandler, timeout?: number | undefined, ...arguments: any[]): number', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'TimerHandler'.
+src/components/tools/GamesTools.tsx(215,21): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(225,50): error TS2488: Type 'unknown' must have a '[Symbol.iterator]()' method that returns an iterator.
+src/components/tools/GamesTools.tsx(261,45): error TS18046: 'g' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(268,34): error TS18046: 'a' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(269,34): error TS18046: 'b' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(276,14): error TS18046: 'a' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(276,35): error TS18046: 'b' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(378,56): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(415,43): error TS18046: 'game' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(423,22): error TS18046: 'game' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(424,17): error TS2322: Type 'unknown' is not assignable to type '{ [x: string]: unknown; appid: string; name: string; launcher: string; sizeBytes: any; installDir: any; lastPlayed: any; localCover: any; localHeader: any; headerImage: any; coverImage: any; heroImage: any; isOptimized: any; }'.
+src/components/tools/GamesTools.tsx(428,118): error TS2322: Type 'unknown' is not assignable to type '{ [x: string]: unknown; appid: string; name: string; launcher: string; sizeBytes: any; installDir: any; lastPlayed: any; localCover: any; localHeader: any; headerImage: any; coverImage: any; heroImage: any; isOptimized: any; }'.
+src/components/tools/GamesTools.tsx(469,34): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(541,34): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/GamesTools.tsx(571,59): error TS18046: 'e' is of type 'unknown'.
+src/components/tools/StartupTools.tsx(96,46): error TS2698: Spread types may only be created from object types.
+src/components/tools/StartupTools.tsx(100,48): error TS2698: Spread types may only be created from object types.
+src/components/tools/StartupTools.tsx(103,35): error TS18046: 'prev' is of type 'unknown'.
+src/components/tools/StartupTools.tsx(104,10): error TS18046: 'i' is of type 'unknown'.
+src/components/tools/StartupTools.tsx(104,34): error TS18046: 'i' is of type 'unknown'.
+src/components/tools/StartupTools.tsx(105,15): error TS2698: Spread types may only be created from object types.
+src/components/tools/StartupTools.tsx(105,31): error TS18046: 'i' is of type 'unknown'.
+src/components/tools/StartupTools.tsx(111,30): error TS2698: Spread types may only be created from object types.
+src/components/tools/StartupTools.tsx(123,28): error TS2698: Spread types may only be created from object types.
+src/components/tools/StartupTools.tsx(179,22): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/tools/StartupTools.tsx(199,67): error TS18046: 'prev' is of type 'unknown'.
+src/components/tools/StartupTools.tsx(211,19): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+src/components/tools/StartupTools.tsx(212,19): error TS2322: Type 'unknown' is not assignable to type '{ name: string; enabled: boolean; command?: string | undefined; location?: string | undefined; user?: string | undefined; }'.
+src/components/tools/StartupTools.tsx(213,19): error TS2322: Type 'unknown' is not assignable to type 'number'.
+src/components/ui/Icons.tsx(30,3): error TS2724: '"lucide-react"' has no exported member named 'GithubIcon'. Did you mean 'GiftIcon'?
+src/components/ui/Icons.tsx(30,3): error TS6133: 'GithubIcon' is declared but its value is never read.
+src/components/ui/Icons.tsx(65,3): error TS2724: '"lucide-react"' has no exported member named 'TwitterIcon'. Did you mean 'TimerIcon'?
+src/components/ui/Icons.tsx(65,3): error TS6133: 'TwitterIcon' is declared but its value is never read.
+src/components/ui/Icons.tsx(130,38): error TS2304: Cannot find name 'Github'.
+src/components/ui/Icons.tsx(170,39): error TS2304: Cannot find name 'Twitter'.
+src/components/ui/LuperToggle.tsx(25,9): error TS18046: 'e' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(24,34): error TS18046: 'data' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(31,25): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<{ id: string; name: string; description: string; status: "default" | "checking" | "optimized"; applyCode?: string | undefined; restoreCode?: string | undefined; impacts?: { performance: { ...; }; latency: { ...; }; input: { ...; }; power: { ...; }; heat: { ...; }; } | undefined; }[] | null>'.
+src/hooks/useCategorySettings.ts(42,20): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'SetStateAction<Error | null>'.
+src/hooks/useCategorySettings.ts(57,53): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(timeout: string | number | Timeout | undefined): void', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'string | number | Timeout | undefined'.
+  Overload 2 of 2, '(id: number | undefined): void', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'number | undefined'.
+src/hooks/useCategorySettings.ts(70,44): error TS2339: Property 'map' does not exist on type '{}'.
+src/hooks/useCategorySettings.ts(71,51): error TS18046: 'item' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(73,17): error TS18046: 'item' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(75,24): error TS2698: Spread types may only be created from object types.
+src/hooks/useCategorySettings.ts(97,62): error TS18046: 's' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(101,46): error TS2698: Spread types may only be created from object types.
+src/hooks/useCategorySettings.ts(112,52): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(callback: () => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '() => void'.
+  Overload 2 of 3, '(callback: (_: void) => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(_: void) => void'.
+  Overload 3 of 3, '(handler: TimerHandler, timeout?: number | undefined, ...arguments: any[]): number', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'TimerHandler'.
+src/hooks/useCategorySettings.ts(132,37): error TS2339: Property 'map' does not exist on type '{}'.
+src/hooks/useCategorySettings.ts(132,57): error TS18046: 's' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(132,73): error TS2698: Spread types may only be created from object types.
+src/hooks/useCategorySettings.ts(134,48): error TS2698: Spread types may only be created from object types.
+src/hooks/useCategorySettings.ts(144,26): error TS2698: Spread types may only be created from object types.
+src/hooks/useCategorySettings.ts(157,37): error TS2339: Property 'map' does not exist on type '{}'.
+src/hooks/useCategorySettings.ts(157,57): error TS18046: 's' is of type 'unknown'.
+src/hooks/useCategorySettings.ts(157,73): error TS2698: Spread types may only be created from object types.
+src/hooks/useCategorySettings.ts(159,48): error TS2698: Spread types may only be created from object types.
+src/hooks/useSystemStatus.ts(13,41): error TS18046: 'sub' is of type 'unknown'.
+src/services/FirebaseService.ts(86,25): error TS18046: 'doc' is of type 'unknown'.
+src/services/FirebaseService.ts(88,15): error TS18046: 'doc' is of type 'unknown'.
+src/services/FirebaseService.ts(95,65): error TS18046: 'doc' is of type 'unknown'.
+src/services/FirebaseService.ts(144,47): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+src/services/FirebaseService.ts(154,64): error TS2538: Type 'unknown' cannot be used as an index type.
+src/services/FirebaseService.ts(159,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+src/services/FirebaseService.ts(171,14): error TS2483: The left-hand side of a 'for...of' statement cannot use a type annotation.
+src/services/SystemEngine.ts(57,26): error TS18046: 'reject' is of type 'unknown'.
+src/services/SystemEngine.ts(158,7): error TS2698: Spread types may only be created from object types.
+src/services/SystemEngine.ts(159,35): error TS18046: 'setting' is of type 'unknown'.
+src/services/SystemEngine.ts(236,51): error TS2322: Type 'unknown' is not assignable to type '{ name: string; enabled: boolean; command?: string | undefined; location?: string | undefined; user?: string | undefined; }[] | null'.
+src/services/SystemEngine.ts(237,52): error TS2322: Type 'unknown' is not assignable to type '{ id: string; name: string; publisher: string; version: string; type: "desktop" | "uwp"; uninstallString: string; packageFullName: string; }[] | null'.
+src/services/SystemEngine.ts(238,51): error TS2322: Type 'unknown' is not assignable to type '{ id: string; name: string; description: string; sizeBytes: number; }[] | null'.
+src/services/SystemEngine.ts(343,52): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(callback: () => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '() => void'.
+  Overload 2 of 3, '(callback: (_: void) => void, delay?: number | undefined): Timeout', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '(_: void) => void'.
+  Overload 3 of 3, '(handler: TimerHandler, timeout?: number | undefined, ...arguments: any[]): number', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'TimerHandler'.
+src/store/systemStore.ts(37,3): error TS2345: Argument of type 'StateCreator<{ specs: null; metrics: null; settings: UserSettings; loading: true; refreshing: false; error: null; updateSettings: (newSettings: Partial<UserSettings>) => void; resetSettings: () => void; loadData: () => Promise<...>; }, [], [...]>' is not assignable to parameter of type 'StateCreator<SystemState, [], [["zustand/persist", unknown]]>'.
+  Type 'StateCreator<{ specs: null; metrics: null; settings: UserSettings; loading: true; refreshing: false; error: null; updateSettings: (newSettings: Partial<UserSettings>) => void; resetSettings: () => void; loadData: () => Promise<...>; }, [], [...]>' is not assignable to type '(setState: { (partial: SystemState | Partial<SystemState> | ((state: SystemState) => SystemState | Partial<SystemState>), replace?: false | undefined): void; (state: SystemState | ((state: SystemState) => SystemState), replace: true): void; }, getState: () => SystemState, store: StoreApi<...>) => SystemState'.
+    Types of parameters 'getState' and 'getState' are incompatible.
+      Type '() => SystemState' is not assignable to type '() => { specs: null; metrics: null; settings: UserSettings; loading: true; refreshing: false; error: null; updateSettings: (newSettings: Partial<UserSettings>) => void; resetSettings: () => void; loadData: () => Promise<...>; }'.
+        Call signature return types 'SystemState' and '{ specs: null; metrics: null; settings: UserSettings; loading: true; refreshing: false; error: null; updateSettings: (newSettings: Partial<UserSettings>) => void; resetSettings: () => void; loadData: () => Promise<...>; }' are incompatible.
+          The types of 'specs' are incompatible between these types.
+            Type '{ [x: string]: unknown; cpu: { [x: string]: unknown; model: string; cores?: number | undefined; threads?: number | undefined; speed?: string | undefined; cache?: string | undefined; }; ram: { [x: string]: unknown; total?: string | undefined; free?: string | undefined; speed?: string | undefined; formFactor?: string ...' is not assignable to type 'null'.
+              Type '{ [x: string]: unknown; cpu: { [x: string]: unknown; model: string; cores?: number | undefined; threads?: number | undefined; speed?: string | undefined; cache?: string | undefined; }; ram: { [x: string]: unknown; total?: string | undefined; free?: string | undefined; speed?: string | undefined; formFactor?: string ...' is not assignable to type 'null'.
+src/store/systemStore.ts(47,9): error TS18046: 'set' is of type 'unknown'.
+src/store/systemStore.ts(48,26): error TS18046: 'state' is of type 'unknown'.
+src/store/systemStore.ts(53,9): error TS18046: 'set' is of type 'unknown'.
+src/store/systemStore.ts(57,9): error TS18046: 'set' is of type 'unknown'.
+src/store/systemStore.ts(57,63): error TS18046: 'state' is of type 'unknown'.
+src/store/systemStore.ts(63,11): error TS18046: 'set' is of type 'unknown'.
+src/store/systemStore.ts(71,11): error TS18046: 'set' is of type 'unknown'.
+src/store/systemStore.ts(83,16): error TS18046: 'state' is of type 'unknown'.
+src/store/systemStore.ts(84,19): error TS18046: 'state' is of type 'unknown'.
+src/store/systemStore.ts(90,21): error TS2339: Property 'specs' does not exist on type '{}'.
+src/store/systemStore.ts(91,19): error TS2339: Property 'loading' does not exist on type '{}'.
+vite.config.ts(20,17): error TS18046: 'id' is of type 'unknown'.
+vite.config.ts(21,19): error TS18046: 'id' is of type 'unknown'.
+vite.config.ts(24,19): error TS18046: 'id' is of type 'unknown'.

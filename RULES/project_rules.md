@@ -57,6 +57,7 @@ Every implementation across LUPER must strictly adhere to a disciplined developm
 
 # Execution & Command Standards
 - TÜM ALT AJANLAR (SUBAGENTS) İŞİNİ VE RAPORUNU TAMAMLAMADAN `npm start` VEYA HERHANGİ BİR UYGULAMA BAŞLATMA KOMUTU ÇALIŞTIRILAMAZ. Önce tüm subagent'ların kod modifikasyonları ve doğrulama raporları beklenir, ardından derleme kontrolü yapılıp uygulama başlatılır.
+- **Masaüstü Uygulama Başlatma Kuralı (Win32_Process Detached Launch):** Yapay zeka ajanları uygulamayı kullanıcının masaüstünde açmak istediğinde veya `npm start` istendiğinde, izole arka plan görevlerinin kapanmasından etkilenmemek için komutu doğrudan `Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = 'cmd.exe /c cd /d C:\Luper && npm start' }` ile başlatmalıdır.
 
 ---
 

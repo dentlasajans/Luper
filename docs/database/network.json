@@ -1,0 +1,1407 @@
+[
+  {
+    "id": "net_tcp_nagle_optimization",
+    "title": "Ağ İletişim Gecikme İyileştirmesi",
+    "description": "Veri paketlerini beklemeden gönderir. Ağ gecikmesini en aza indirir.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "latency",
+      "tcp",
+      "registry",
+      "powershell"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\MSMQ\\Parameters",
+        "key": "TCPNoDelay",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "TcpDelAckTicks",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "$interfaces = Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\Interfaces' | Select-Object Name; foreach ($iface in $interfaces) { $path = 'HKLM:\\' + $iface.Name -replace 'HKEY_LOCAL_MACHINE\\\\', ''; Set-ItemProperty -Path $path -Name 'TcpAckFrequency' -Value 1 -Type DWord; Set-ItemProperty -Path $path -Name 'TCPNoDelay' -Value 1 -Type DWord; }"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_tcp_global_optimization",
+    "title": "Genel Ağ Trafiği Ayarları",
+    "description": "İşletim sistemi ağ kısıtlamalarını kapatır. Ani bağlantı gecikmelerini engeller.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "latency",
+      "tcp",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global autotuninglevel=disabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set heuristics disabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global rsc=disabled"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_adapter_hardware_optimization",
+    "title": "Ağ Kartı Güç İyileştirmesi",
+    "description": "Ağ kartının güç tasarrufunu kapatır. Tam performanslı çalışma sağlar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "powershell",
+      "hardware"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Disable-NetAdapterAdvancedProperty -Name '*' -DisplayName 'Interrupt Moderation' -ErrorAction SilentlyContinue; Disable-NetAdapterAdvancedProperty -Name '*' -DisplayName 'Kesme Yönetimi' -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-NetAdapterLso -Name '*' -IPv4 -IPv6 -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "powershell",
+        "command": "Disable-NetAdapterAdvancedProperty -Name '*' -DisplayName 'Energy Efficient Ethernet' -ErrorAction SilentlyContinue; Disable-NetAdapterAdvancedProperty -Name '*' -DisplayName 'Green Ethernet' -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_high",
+        "description": ""
+      },
+      "heat": {
+        "level": "negative_medium",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_dns_cache_ttl",
+    "title": "Alan Adı Önbellek Hızlandırma",
+    "description": "Başarısız bağlantı yanıtlarını anında temizler. Bağlantı sorunlarını hızla çözer.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 90,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "dns",
+      "latency",
+      "registry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters",
+        "key": "NegativeCacheTime",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_afd_winsock_buffer",
+    "title": "Ağ Soket İletişim İyileştirmesi",
+    "description": "Veri paketi iletim sınırlarını genişletir. Ağ tıkanıklığını ve darboğazları önler.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "afd",
+      "winsock",
+      "registry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "DefaultReceiveWindow",
+        "value": "262144",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "DefaultSendWindow",
+        "value": "262144",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "FastSendDatagramThreshold",
+        "value": "1500",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "FastCopyReceiveThreshold",
+        "value": "1500",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_tcp_port_limit_opt",
+    "title": "Bağlantı Noktası Sınırı Artırma",
+    "description": "Kullanıcı bağlantı sınırını en yükseğe çıkarır. Ölü bağlantıları daha hızlı sonlandırır.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "tcp",
+      "registry"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "MaxUserPort",
+        "value": "65534",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "TcpTimedWaitDelay",
+        "value": "30",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "DefaultTTL",
+        "value": "64",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "SackOpts",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "Tcp1323Opts",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_tcp_fastopen_ecn",
+    "title": "Hızlı Bağlantı Tıkanıklık Kontrolü",
+    "description": "Sunucu bağlanma sürelerini kısaltır. Ağ tıkanıklığını daha hızlı tespit edip çözer.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "tcp",
+      "cmd",
+      "netsh"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global ecncapability=enabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global initialrto=300"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global fastopen=enabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global pacingprofile=off"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global timestamps=disabled"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_disable_protocol_bloat",
+    "title": "Gereksiz Ağ Kurallarını Kapatma",
+    "description": "Eski ve kullanılmayan iletişim servislerini kapatır. Ağ trafiğini önemli ölçüde rahatlatır.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "security",
+      "latency",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "netsh interface teredo set state disabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh interface 6to4 set state disabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh interface isatap set state disabled"
+      },
+      {
+        "type": "powershell",
+        "command": "Get-ChildItem 'HKLM:\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces' | ForEach-Object { Set-ItemProperty -Path $_.PSPath -Name 'NetbiosOptions' -Type DWord -Value 2 }"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+        "key": "EnableMulticast",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters",
+        "key": "EnableMDNS",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_nic_buffer_rss_opt",
+    "title": "Donanım Veri Belleği İyileştirmesi",
+    "description": "Ağ kartı belleklerini genişletir. Veri kayıplarını ve darboğazları sıfırlar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 94,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "nic",
+      "powershell"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-NetAdapterAdvancedProperty -Name '*' -RegistryKeyword '*ReceiveBuffers' -RegistryValue 1024 -ErrorAction SilentlyContinue; Set-NetAdapterAdvancedProperty -Name '*' -RegistryKeyword '*TransmitBuffers' -RegistryValue 1024 -ErrorAction SilentlyContinue; Set-NetAdapterAdvancedProperty -Name '*' -RegistryKeyword '*NumRssQueues' -RegistryValue 4 -ErrorAction SilentlyContinue; Set-NetAdapterAdvancedProperty -Name '*' -RegistryKeyword '*FlowControl' -RegistryValue 0 -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_bcdedit_dpc_latency",
+    "title": "Sistem Zamanlayıcı Gecikme İyileştirmesi",
+    "description": "İşletim sistemi çekirdek zamanlayıcısını eniyiler. Kesinti gecikmelerini milisaniyenin altına düşürür.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "bcdedit",
+      "latency",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "bcdedit /set disabledynamictick yes"
+      },
+      {
+        "type": "cmd",
+        "command": "bcdedit /set useplatformclock no"
+      },
+      {
+        "type": "cmd",
+        "command": "bcdedit /set tscsyncpolicy Enhanced"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_wifi_roaming_power",
+    "title": "Kablosuz Ağ Kesintisiz Bağlantı",
+    "description": "Kablosuz ağ güç tasarrufunu kapatır. Kesintisiz ve düşük gecikmeli bağlantı sunar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "wifi",
+      "latency",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-NetAdapterAdvancedProperty -Name '*' -DisplayName 'Roam Aggressiveness' -DisplayValue '1. Lowest' -ErrorAction SilentlyContinue; Set-NetAdapterAdvancedProperty -Name '*' -DisplayName 'Throughput Booster' -DisplayValue 'Enabled' -ErrorAction SilentlyContinue; Set-NetAdapterAdvancedProperty -Name '*' -DisplayName 'MIMO Power Save Mode' -DisplayValue 'No SMPS' -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh wlan set autoconfig enabled=no interface=\"*\""
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "negative_high",
+        "description": ""
+      },
+      "heat": {
+        "level": "negative_medium",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_qos_gaming_dscp",
+    "title": "Oyun Veri Paketi Önceliği",
+    "description": "Oyun ağ trafiğine özel etiket atar. Yönlendirici seviyesinde en yüksek önceliği sağlar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "qos",
+      "latency",
+      "registry",
+      "powershell"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\GamingQoS",
+        "key": "Version",
+        "value": "1.0",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\GamingQoS",
+        "key": "Application Name",
+        "value": "*",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\GamingQoS",
+        "key": "Protocol",
+        "value": "*",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\GamingQoS",
+        "key": "DSCP Value",
+        "value": "46",
+        "valueType": "REG_SZ"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\QoS\\GamingQoS",
+        "key": "Throttle Rate",
+        "value": "-1",
+        "valueType": "REG_SZ"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_multimedia_throttling",
+    "title": "Ağ Darboğaz Sınırlarını Kaldırma",
+    "description": "İşletim sisteminin ağ limitlerini kaldırır. İşlemci önceliğini oyunlara verir.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "key": "NetworkThrottlingIndex",
+        "value": "4294967295",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+        "key": "SystemResponsiveness",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_tcp_congestion_cubic",
+    "title": "Gelişmiş Ağ Tıkanıklık Kontrolü",
+    "description": "Ağ veri kayıplarında hız düşüşünü engeller. Bant genişliğini çok daha verimli kullanır.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "tcp",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set global congestionprovider=cubic"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh int tcp set supplemental template=custom congestionprovider=cubic"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-NetTCPSetting -SettingName \"InternetCustom\" -CongestionProvider CUBIC -ErrorAction SilentlyContinue; Set-NetTCPSetting -SettingName \"DatacenterCustom\" -CongestionProvider CUBIC -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_tcp_maxhashtable_size",
+    "title": "Veri Eşleme Tablosu Genişletme",
+    "description": "Yoğun veri akışında bellek gecikmelerini önler. Veri çakışmalarını tamamen sıfırlar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "tcp",
+      "latency",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "MaxHashTableSize",
+        "value": "65536",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "MaxFreeTcbs",
+        "value": "65536",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "MaxFreeTcbTable",
+        "value": "4096",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_arp_cache_life",
+    "title": "Fiziksel Adres Önbellek Süresi",
+    "description": "Fiziksel adres geçerlilik sürelerini uzatır. Gereksiz ağ sorgusu fırtınalarını engeller.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "latency",
+      "ipv4",
+      "arp",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "ArpCacheLife",
+        "value": "120",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "ArpCacheMinReferencedLife",
+        "value": "60",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-NetIPInterface -InterfaceAlias \"*\" -ReachableTimeMs 30000 -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_afd_priorityboost_worker",
+    "title": "Ağ İletişim İşleme Önceliği",
+    "description": "Ağ verilerinin işletim sistemi çekirdeğinde işlenmesini sağlar. Gecikmesiz yüksek öncelikli iletişim sunar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "afd",
+      "winsock",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "TransmitWorker",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "PriorityBoost",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+        "key": "DynamicBacklogCost",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_ndis_packet_coalescing",
+    "title": "Veri Paketi Birleştirmeyi Kapatma",
+    "description": "Gelen verilerin biriktirilmesini engeller. Her verinin anında işlenmesini zorunlu kılar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "latency",
+      "ndis",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Disable-NetAdapterPacketCoalescingFilter -Name \"*\" -ErrorAction SilentlyContinue"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NDIS\\Parameters",
+        "key": "RscIPv4",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NDIS\\Parameters",
+        "key": "RscIPv6",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_rss_cpu_isolation",
+    "title": "İşlemci Çekirdek İletişim Ayrımı",
+    "description": "Ağ kesintilerini ana oyun işlemlerinden ayırır. Boşta olan işlemci çekirdeklerine dağıtır.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "rss",
+      "powershell"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-NetAdapterRss -Name \"*\" -BaseProcessorNumber 2 -MaxProcessors 4 -MaxProcessorNumber 6 -Profile NUMAStatic -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_defender_nis_wfp_bypass",
+    "title": "Güvenlik Duvarı Gecikme Engellemesi",
+    "description": "Güvenlik duvarının ağ denetim gecikmelerini aşar. Ağ bağlantılarındaki veri akışını hızlandırır.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 94,
+    "risk_level": "high",
+    "tags": [
+      "network",
+      "latency",
+      "security",
+      "defender",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\NisSrv",
+        "key": "Start",
+        "value": "4",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -DisableArchiveScanning $true -DisableIntrusionPreventionSystem $true -DisableScanningNetworkFiles $true -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_wifi_background_scan_disable",
+    "title": "Kablosuz Arka Plan Tarama",
+    "description": "Kablosuz bağlantının gereksiz ağ aramasını durdurur. Oyunlardaki anlık gecikme fırlamalarını engeller.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "wifi",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Wireless\\Policy",
+        "key": "DisableBackgroundScan",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\wlansvc\\Parameters\\OEM",
+        "key": "ScanBackgroundTimeout",
+        "value": "2147483647",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh wlan set autoconfig enabled=no interface=\"Wi-Fi\""
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_ipv6_privacy_randomize_disable",
+    "title": "Rastgele Ağ Kimliğini Kapatma",
+    "description": "Sürekli geçici adres oluşturulmasını engeller. Yeniden bağlanma gecikmesini tamamen sıfırlar.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "latency",
+      "ipv6",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "netsh interface ipv6 set global randomizeidentifiers=disabled"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh interface ipv6 set privacy state=disabled"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+        "key": "UseTemporaryAddresses",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_tcp_syn_attack_retransmission",
+    "title": "Gelişmiş Ağ Veri İletimi",
+    "description": "Gereksiz veri inceleme yükünü kaldırır. Kayıp verilerin yeniden gönderimini hızlandırır.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "medium",
+    "tags": [
+      "network",
+      "latency",
+      "tcp",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "SynAttackProtect",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "TcpMaxConnectResponseRetransmissions",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+        "key": "TcpMaxDataRetransmissions",
+        "value": "3",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "net_dns_client_positive_cache",
+    "title": "Alan Adı Önbellek Uzatması",
+    "description": "Başarılı bağlantı sorgularının süresini uzatır. Hatalı bağlantıların belleğe alınmasını önler.",
+    "category_id": "network",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "low",
+    "tags": [
+      "network",
+      "latency",
+      "dns",
+      "registry",
+      "powershell",
+      "cmd"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters",
+        "key": "MaxCacheTtl",
+        "value": "86400",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters",
+        "key": "MaxNegativeCacheTtl",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters",
+        "key": "AddrConfigControl",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-DnsClientServerAddress -InterfaceAlias \"*\" -ServerAddresses (\"1.1.1.1\", \"1.0.0.1\", \"8.8.8.8\") -ErrorAction SilentlyContinue"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "none",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]

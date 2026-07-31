@@ -1,3 +1,4 @@
+import React, { Suspense } from 'react';
 import { AudioOptimization } from './categories/AudioOptimization';
 import { BaseCategoryView } from './categories/BaseCategoryView';
 import { BrowserOptimization } from './categories/BrowserOptimization';
@@ -13,8 +14,23 @@ import { SecurityOptimization } from './categories/SecurityOptimization';
 import { StorageOptimization } from './categories/StorageOptimization';
 import { TelemetryOptimization } from './categories/TelemetryOptimization';
 
+const MySystemCategory = React.lazy(() => import('./categories/MySystemCategory'));
+const ToolsCategory = React.lazy(() => import('./categories/ToolsCategory'));
+
 export function CategoryOptimization({ categoryId, onBack }: { categoryId: string; onBack: () => void }) {
   switch (categoryId) {
+    case 'my-system':
+      return (
+        <Suspense fallback={<div className="flex items-center justify-center h-full text-[#86868b] text-[14px]">Yükleniyor...</div>}>
+          <MySystemCategory />
+        </Suspense>
+      );
+    case 'tools':
+      return (
+        <Suspense fallback={<div className="flex items-center justify-center h-full text-[#86868b] text-[14px]">Yükleniyor...</div>}>
+          <ToolsCategory setActiveTab={() => {}} />
+        </Suspense>
+      );
     case 'network':
       return <NetworkOptimization onBack={onBack} />;
     case 'cpu':

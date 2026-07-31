@@ -1,0 +1,1443 @@
+[
+  {
+    "id": "optimize_windows_security_overhead",
+    "title": "Windows Güvenlik Yükünü Hafiflet",
+    "description": "Sanallaştırma tabanlı güvenlik ve çekirdek yalıtımı özelliklerini optimize eder. İşlemci yükünü azaltarak performansı artırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "high",
+    "tags": [
+      "security",
+      "vbs",
+      "core-isolation",
+      "defender",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard",
+        "key": "EnableVirtualizationBasedSecurity",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+        "key": "DisableAntiSpyware",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "hvci_memory_integrity",
+    "title": "Bellek Bütünlüğü Performans Ayarı",
+    "description": "Bellek bütünlüğü denetimini kapatmak oyunlarda performansı artırır ve gecikmeyi düşürür. Açık kalması ise sistem güvenliğini sağlar.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "high",
+    "tags": [
+      "security",
+      "hvci",
+      "vbs",
+      "gaming",
+      "performance"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity",
+        "key": "Enabled",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "spectre_meltdown_mitigation",
+    "title": "İşlemci Güvenlik Açığı Koruması",
+    "description": "İşlemcilerdeki donanım açıklarına karşı uygulanan yamaları yönetir. Performans ve güvenlik dengesini sağlar.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 90,
+    "risk_level": "high",
+    "tags": [
+      "security",
+      "cpu",
+      "spectre",
+      "meltdown",
+      "performance"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "key": "FeatureSettingsOverride",
+        "value": "3",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+        "key": "FeatureSettingsOverrideMask",
+        "value": "3",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "lsa_protection_runasppl",
+    "title": "Yerel Güvenlik İşlem Koruması",
+    "description": "Şifrelerin bellekten okunmasını engellemek için yerel güvenlik servisini korumalı modda çalıştırır. Sistem güvenliğini artırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "security",
+      "lsa",
+      "lsass",
+      "credential"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+        "key": "RunAsPPL",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "asr_rules_defender",
+    "title": "Saldırı Yüzeyi Azaltma Kuralları",
+    "description": "Zararlı yazılımların ve e-posta eklerinin sistemde çalışmasını engeller. Savunma kurallarını devreye alır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "asr",
+      "defender",
+      "ransomware"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -AttackSurfaceReductionRules_Ids \"9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2\" -AttackSurfaceReductionRules_Actions 1"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "exploit_protection_cfg",
+    "title": "Sistem Geneli Açık Koruması",
+    "description": "Bellek taşması ve kod enjeksiyonu saldırılarına karşı sistem genelinde güvenlik mekanizmalarını uygular. Oyun uyumluluğu için özelleştirilebilir.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 92,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "exploit-protection",
+      "cfg",
+      "dep",
+      "aslr"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-ProcessMitigation -System -Enable DEP, EmulateAtlThunks, BottomUpOptions, ForceRelocateImages"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "uac_secure_desktop",
+    "title": "Kullanıcı Hesabı Denetim Seviyesi",
+    "description": "Yetki yükseltme isteklerini ve ekran karartma mekanizmasını yönetir. Güvenli masaüstü deneyimini ayarlar.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 96,
+    "risk_level": "low",
+    "tags": [
+      "security",
+      "uac",
+      "desktop"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+        "key": "PromptOnSecureDesktop",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "disable_smbv1",
+    "title": "Eski Ağ Protokolünü Kapatma",
+    "description": "Fidye yazılımlarının kullandığı eski ağ paylaşım protokolünü tamamen kaldırır. Daha güvenli ağ iletişimi sağlar.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 99,
+    "risk_level": "low",
+    "tags": [
+      "security",
+      "smb",
+      "network",
+      "ransomware"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol -NoRestart"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "key": "RequireSecuritySignature",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      },
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+        "key": "EnableSecuritySignature",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "rdp_nla_require",
+    "title": "Uzaktan Masaüstü Ağ Doğrulaması",
+    "description": "Uzaktan masaüstü bağlantıları için ağ seviyesinde kimlik doğrulamasını şart koşar. Kaba kuvvet saldırılarını engeller.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 98,
+    "risk_level": "low",
+    "tags": [
+      "security",
+      "rdp",
+      "network"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp",
+        "key": "UserAuthentication",
+        "value": "1",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "smartscreen_config",
+    "title": "Akıllı Ekran Dosya Denetimi",
+    "description": "İnternetten indirilen bilinmeyen dosyaların çalıştırılmasındaki uyarıları yönetir. Uygulama denetim politikalarını ayarlar.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "smartscreen",
+      "app-control"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+        "key": "EnableSmartScreen",
+        "value": "0",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "kernel_dma_protection",
+    "title": "Çekirdek Bellek Erişim Koruması",
+    "description": "Harici donanımların doğrudan sistem belleğine erişerek şifreleri okumasını engeller. Donanımsal veri hırsızlığını önler.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 97,
+    "risk_level": "low",
+    "tags": [
+      "security",
+      "dma",
+      "hardware"
+    ],
+    "script_payloads": [
+      {
+        "type": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DmaSecurity\\AllowedBuses",
+        "key": "DeviceGuardDmaPolicy",
+        "value": "2",
+        "valueType": "REG_DWORD"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_1",
+    "title": "Gerçek Zamanlı Tarama Yükü",
+    "description": "Arka plan dosya taramalarının işlemci limitini düşürür. Oyun esnasındaki ani takılmaları önler.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -ScanAvgCPULoadFactor 10 -ScanLowPriority $true"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Scan\" /v AvgCPULoadFactor /t REG_DWORD /d 10 /f"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_2",
+    "title": "Ağ Paketi İnceleme Sürücüsü",
+    "description": "Ağ paketlerini inceleyerek gecikmeye neden olan sürücünün paket durdurma işlemini kapatır. Ağ performansını artırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -DisableDisableRealtimeMonitoring $false -DisableIntrusionPreventionSystem $true -DisableIOAVProtection $true"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisDrv\" /v Start /t REG_DWORD /d 4 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -DisableIntrusionPreventionSystem $true"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_3",
+    "title": "Kimlik Bilgisi Korumasını Kapatma",
+    "description": "Sanallaştırma kullanarak bellek tüketen kimlik bilgisi korumasını kapatır. Bireysel sistemlerde performansı artırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" /v LsaCfgFlags /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CredentialsGuard\" /v EnableVirtualizationBasedSecurity /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa\" -Name \"LsaCfgFlags\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_4",
+    "title": "Betik Tarama Gecikmesini Azaltma",
+    "description": "Arka planda çalışan betiklerin taranmasından kaynaklanan başlatma gecikmesini azaltır. Uygulama açılışlarını hızlandırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\ScriptedDiagnostics\" /v EnableDiagnostics /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\ScriptedDiagnostics\" -Name \"EnableDiagnostics\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_5",
+    "title": "Donanımsal Yığın Koruması Optimizasyonu",
+    "description": "Yığın ezme saldırılarını engelleyen donanımsal korumayı performans için ayarlar. Uyumlu işlemcilerde oyun deneyimini iyileştirir.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-ProcessMitigation -System -Disable UserShadowStack"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_6",
+    "title": "Akıllı Ekran Dosya Doğrulaması",
+    "description": "İndirilen dosyaların onay için sunuculara gönderilmesini devre dışı bırakır. Bekleme süresini ortadan kaldırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\" /v SmartScreenEnabled /t REG_SZ /d \"Off\" /f"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" /v EnableSmartScreen /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\" -Name \"EnableSmartScreen\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_7",
+    "title": "Güvenlik Denetim Günlüklerini Kapatma",
+    "description": "Arka planda diske sürekli yazılan denetim günlüklerini engeller. İşlemci ve disk tüketimini azaltır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "auditpol /set /category:* /success:disable /failure:disable"
+      },
+      {
+        "type": "powershell",
+        "command": "auditpol /set /subcategory:\"Process Creation\" /success:disable /failure:disable"
+      },
+      {
+        "type": "powershell",
+        "command": "auditpol /set /category:\"Detailed Tracking\" /success:disable /failure:disable"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_8",
+    "title": "Güvenlik Duvarı Günlüklerini Kapatma",
+    "description": "Güvenlik duvarının engellenen paketleri sürekli diske yazmasını kapatır. Ağ gecikmesini düşürür.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "netsh advfirewall set allprofiles logging droppedconnections disable"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh advfirewall set allprofiles logging successfulconnections disable"
+      },
+      {
+        "type": "cmd",
+        "command": "netsh advfirewall set global IPsec disable"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-NetFirewallProfile -All -LogDroppedConnections False -LogSuccessfulConnections False"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_9",
+    "title": "Bulut Tabanlı Koruma Beklemesi",
+    "description": "Bilinmeyen dosyaların buluta gönderilip analiz edilmesini beklerken oluşan donmaları engeller. Akıcı kullanım sağlar.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -MAPSReporting 0 -SubmitSamplesConsent 2"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /v SubmitSamplesConsent /t REG_DWORD /d 2 /f"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /v SpynetReporting /t REG_DWORD /d 0 /f"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_10",
+    "title": "Gereksiz Ağ Yayınlarını Kapatma",
+    "description": "Arka planda sürekli ağ yayını yapan protokolleri kapatır. Ağ kartı yükünü azaltır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient\" /v EnableMulticast /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object {$_.IPEnabled -eq $true} | ForEach-Object {$_.SetTcpipNetbios(2)}"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient\" -Name \"EnableMulticast\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_11",
+    "title": "Dışa Aktarım Tablosu Koruması",
+    "description": "Uygulamaların adres tablolarını sürekli izleyen korumayı kapatır. Oyunlarda akıcılığı artırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-ProcessMitigation -System -Disable EnableExportAddressFiltering, EnableExportAddressFilteringPlus, EnableImportAddressFiltering"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ProcessMitigation -System -Disable EnableExportAddressFiltering, EnableExportAddressFilteringPlus"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_12",
+    "title": "Dosya Şifreleme Servisini Kapatma",
+    "description": "Kullanılmayan dosya şifreleme sürücüsünü devre dışı bırakır. Okuma ve yazma işlemlerini hızlandırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "fsutil behavior set disableencryption 1"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Policies\" /v NtfsDisableEncryption /t REG_DWORD /d 1 /f"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\EFS\" /v Start /t REG_DWORD /d 4 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Policies\" -Name \"NtfsDisableEncryption\" -Value 1 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_13",
+    "title": "Güvenli Sistem Başlatma Optimizasyonu",
+    "description": "Donanımsal sistem gecikmelerini engellemek için güvenli başlatma özelliğini optimize eder. Kesintileri önler.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\SystemGuard\" /v Enabled /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\SystemGuard\" -Name \"Enabled\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_14",
+    "title": "Sürücü Engelleme Listesini Yönetme",
+    "description": "Eski donanım kontrol sürücülerinin yüklenmesini engelleyen listeyi yönetir. Sistem denetim yükünü azaltır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\CI\\Config\" /v VulnerableDriverBlocklistEnable /t REG_DWORD /d 0 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Control\\CI\\Config\" -Name \"VulnerableDriverBlocklistEnable\" -Value 0 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_15",
+    "title": "Güvenlik Merkezi Bildirimlerini Kapatma",
+    "description": "Güvenlik merkezinin durumu sürekli sorgulayarak arka planda bildirim yayınlamasını engeller. Gereksiz işlemleri durdurur.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Security Center\" /v AllAlertsDisabled /t REG_DWORD /d 1 /f"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Security Center\" /v DisableNotifications /t REG_DWORD /d 1 /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Security Center\" -Name \"DisableNotifications\" -Value 1 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_16",
+    "title": "Anonim Sistem Erişimini Kapatma",
+    "description": "Yerel ağ üzerinden kimlik doğrulaması olmadan sistem erişimini sağlayan açıkları kapatır. Güvenliği artırır.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v RestrictNullSessAccess /t REG_DWORD /d 1 /f"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" /v NullSessionPipes /t REG_MULTI_SZ /d \"\" /f"
+      },
+      {
+        "type": "powershell",
+        "command": "Set-ItemProperty -Path \"HKLM:\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\" -Name \"RestrictNullSessAccess\" -Value 1 -Type DWord"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "positive_medium",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_17",
+    "title": "Otomatik Örnek Gönderimini Kapatma",
+    "description": "Şüpheli dosyaların otomatik olarak analiz sunucularına yüklenmesini engeller. İnternet bant genişliğini korur.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-MpPreference -SubmitSamplesConsent 2"
+      },
+      {
+        "type": "cmd",
+        "command": "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /v SubmitSamplesConsent /t REG_DWORD /d 2 /f"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "positive_high",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": "phase2_security_tweak_18",
+    "title": "Dinamik Kod Oluşturma Koruması",
+    "description": "Dinamik olarak kod oluşturulmasını engelleyen korumaları performans süreçlerinde optimize eder. Oyun akıcılığını destekler.",
+    "category_id": "security",
+    "is_optimized": false,
+    "status": "idle",
+    "ai_confidence": 95,
+    "risk_level": "medium",
+    "tags": [
+      "security",
+      "phase2",
+      "performance",
+      "gaming"
+    ],
+    "script_payloads": [
+      {
+        "type": "powershell",
+        "command": "Set-ProcessMitigation -System -Disable DynamicCode"
+      }
+    ],
+    "impacts": {
+      "performance": {
+        "level": "negative_low",
+        "description": ""
+      },
+      "latency": {
+        "level": "none",
+        "description": ""
+      },
+      "input": {
+        "level": "none",
+        "description": ""
+      },
+      "power": {
+        "level": "none",
+        "description": ""
+      },
+      "heat": {
+        "level": "none",
+        "description": ""
+      }
+    }
+  }
+]

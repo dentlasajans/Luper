@@ -1,4 +1,4 @@
-import {
+﻿import {
   Pulse,
   Cpu,
   HardDrive,
@@ -8,44 +8,23 @@ import {
   ArrowsClockwise,
   Shield,
   Laptop
-} from '@phosphor-icons/react';
+} from '@/src/components/ui/Icons';
 import { motion } from 'motion/react';
-import { memo, useEffect, useState } from 'react';
-import { getHardwareSpecs, getSystemMetrics } from '../../services/SystemEngine';
-import { HardwareSpecs, SystemMetricsResponse } from '../../types';
+import { memo, useEffect } from 'react';
+import { useSystemStore } from '../../store/systemStore';
 
 export const MySystemCategory = memo(function MySystemCategory() {
-  const [specs, setSpecs] = useState<HardwareSpecs | null>(null);
-  const [metrics, setMetrics] = useState<SystemMetricsResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const loadData = async () => {
-    try {
-      const [hSpecs, sMetrics] = await Promise.all([
-        getHardwareSpecs(),
-        getSystemMetrics()
-      ]);
-      setSpecs(hSpecs);
-      if (sMetrics.success) setMetrics(sMetrics);
-    } catch (e) {
-      console.error('Failed to load system specs:', e);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
+  const { specs, metrics, loading, refreshing, loadData } = useSystemStore();
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   const handleManualRefresh = () => {
-    setRefreshing(true);
     loadData();
   };
 
-  const glassCardClasses = "bg-[#161619]/60 backdrop-blur-3xl border border-white/[0.08] rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative overflow-hidden group transition-all duration-500 hover:bg-[#161619]/80";
+  const glassCardClasses = "bg-luper-surface/60 backdrop-blur-3xl border border-white/[0.08] rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.3)] relative overflow-hidden group transition-all duration-500 hover:bg-luper-surface/80";
   
   const getIconBoxStyles = (colorType: 'blue' | 'cyan' | 'green' | 'purple' | 'orange' | 'white') => {
     const baseClasses = "w-10 h-10 rounded-xl flex items-center justify-center border mb-4 group-hover:scale-110 transition-transform duration-500";
@@ -57,14 +36,14 @@ export const MySystemCategory = memo(function MySystemCategory() {
       case 'white': return `${baseClasses} bg-white/5 text-white/80 border-white/10`;
       case 'blue':
       default:
-        return `${baseClasses} bg-[#1a5efd]/10 text-[#1a5efd] border-[#1a5efd]/20 shadow-[0_0_15px_rgba(26,94,253,0.15)]`;
+        return `${baseClasses} bg-luper-primary/10 text-luper-primary border-luper-primary/20 shadow-[0_0_15px_rgba(26,94,253,0.15)]`;
     }
   };
 
   if (loading) {
     return (
       <div className="p-8 w-full h-full flex flex-col items-center justify-center text-center">
-        <ArrowsClockwise size={32} weight="duotone" className="animate-spin text-[#1a5efd] mb-4" />
+        <ArrowsClockwise size={32} weight="duotone" className="animate-spin text-luper-primary mb-4" />
         <p className="text-[#a1a1a6] text-[14px]">Donanım ve cihaz bilgileri yükleniyor...</p>
       </div>
     );
@@ -93,13 +72,13 @@ export const MySystemCategory = memo(function MySystemCategory() {
   return (
     <div className="p-6 w-full h-full flex flex-col overflow-y-auto custom-scrollbar" style={{ WebkitAppRegion: 'no-drag' }}>
       {/* Header Banner - MacOS Sequoia Style */}
-      <div className="flex items-center justify-between mb-8 bg-[#161619]/60 backdrop-blur-3xl border border-white/[0.08] rounded-[24px] p-8 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-        <div className="absolute -top-24 -left-24 w-64 h-64 bg-[#1a5efd]/20 rounded-full blur-[80px] pointer-events-none" />
+      <div className="flex items-center justify-between mb-8 bg-luper-surface/60 backdrop-blur-3xl border border-white/[0.08] rounded-[24px] p-8 relative overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <div className="absolute -top-24 -left-24 w-64 h-64 bg-luper-primary/20 rounded-full blur-[80px] pointer-events-none" />
         <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-[#64d2ff]/10 rounded-full blur-[80px] pointer-events-none" />
         
         <div className="flex items-center space-x-5 relative z-10">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1a5efd] to-[#64d2ff] p-[1px] shadow-[0_0_20px_rgba(26,94,253,0.3)]">
-            <div className="w-full h-full bg-[#161619] rounded-2xl flex items-center justify-center">
+            <div className="w-full h-full bg-luper-surface rounded-2xl flex items-center justify-center">
               <Pulse size={28} weight="duotone" className="text-[#64d2ff]" />
             </div>
           </div>
@@ -151,7 +130,7 @@ export const MySystemCategory = memo(function MySystemCategory() {
             </div>
             <div className="flex justify-between items-center pb-1">
               <span className="text-[#a1a1a6] text-[13px]">Çalışma Süresi</span>
-              <span className="text-white text-[13px] font-semibold">{osData ? Math.floor(osData.osUptimeSeconds / 3600) : 0} Saat {osData ? Math.floor((osData.osUptimeSeconds % 3600) / 60) : 0} Dk</span>
+              <span className="text-white text-[13px] font-semibold">{osData?.osUptimeSeconds ? Math.floor(osData.osUptimeSeconds / 3600) : 0} Saat {osData?.osUptimeSeconds ? Math.floor((osData.osUptimeSeconds % 3600) / 60) : 0} Dk</span>
             </div>
           </div>
         </motion.div>
@@ -236,7 +215,7 @@ export const MySystemCategory = memo(function MySystemCategory() {
           <div className="space-y-4">
             <div className="flex justify-between items-center border-b border-white/[0.04] pb-3">
               <span className="text-[#a1a1a6] text-[13px]">Toplam Kapasite</span>
-              <span className="text-[#1a5efd] text-[15px] font-bold">{specs?.ram?.total || 'Bilinmiyor'}</span>
+              <span className="text-luper-primary text-[15px] font-bold">{specs?.ram?.total || 'Bilinmiyor'}</span>
             </div>
             <div className="flex justify-between items-center border-b border-white/[0.04] pb-3">
               <span className="text-[#a1a1a6] text-[13px]">Bellek Frekansı</span>
@@ -342,3 +321,7 @@ export const MySystemCategory = memo(function MySystemCategory() {
     </div>
   );
 });
+
+export default MySystemCategory;
+
+

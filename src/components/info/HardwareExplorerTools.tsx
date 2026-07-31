@@ -1,4 +1,4 @@
-import { CheckCircle, Cpu, DownloadSimple, MagnifyingGlass } from '@phosphor-icons/react';
+﻿import { CheckCircle, Cpu, DownloadSimple, MagnifyingGlass } from '@/src/components/ui/Icons';
 import { memo, useMemo, useState } from 'react';
 
 export interface HardwareSpec {
@@ -12,10 +12,10 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredHardware = useMemo(() => {
-    return ([] as HardwareSpec[]).filter(item => {
+    return ([] as HardwareSpec[]).filter((item) => {
       const matchesCat = activeCategory === 'all' || item.category.toLowerCase() === activeCategory.toLowerCase();
       const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            item.specs.some(s => s.label.toLowerCase().includes(searchQuery.toLowerCase()) || s.value.toLowerCase().includes(searchQuery.toLowerCase()));
+                            item.specs.some((s) => s.label.toLowerCase().includes(searchQuery.toLowerCase()) || s.value.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesCat && matchesSearch;
     });
   }, [activeCategory, searchQuery]);
@@ -36,7 +36,7 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
-            <Cpu weight="duotone" className="text-[#1a5efd]" size={28} />
+            <Cpu weight="duotone" className="text-luper-primary" size={28} />
             <span>Donanım & Bellenim (Firmware) Gezgini</span>
           </h1>
           <p className="text-sm text-[#86868b] mt-1">Sistem bileşenlerinin derinlemesine teknik özellik ve bellenim durum raporu (Salt Okunur).</p>
@@ -54,13 +54,13 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
       {/* Filter Toolbar */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center space-x-2">
-          {['all', 'CPU', 'GPU', 'RAM', 'Storage', 'Motherboard'].map(cat => (
+          {['all', 'CPU', 'GPU', 'RAM', 'Storage', 'Motherboard'].map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-[13px] font-medium transition-all ${
                 activeCategory === cat
-                  ? 'bg-[#1a5efd] text-white shadow-md'
+                  ? 'bg-luper-primary text-white shadow-md'
                   : 'bg-white/[0.04] text-[#86868b] hover:text-white hover:bg-white/[0.08]'
               }`}
             >
@@ -76,7 +76,7 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Donanım ara..."
-            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-[#1a5efd] w-60"
+            className="pl-9 pr-4 py-1.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-[13px] text-white focus:outline-none focus:border-luper-primary w-60"
           />
         </div>
       </div>
@@ -84,16 +84,16 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
       {/* Hardware Spec Cards */}
       <div className="space-y-6">
         {filteredHardware.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-12 text-center bg-[#161619] border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
+          <div className="flex flex-col items-center justify-center py-12 text-center bg-luper-surface border border-white/[0.08] rounded-2xl w-full col-span-full my-4">
             <h3 className="text-[14px] font-bold text-white mb-1">Veri Bulunamadı</h3>
             <p className="text-[12.5px] text-[#86868b]">Şu anda görüntülenecek veri bulunmuyor. Gerçek veri akışı bekleniyor.</p>
           </div>
         )}
-        {filteredHardware.length > 0 && filteredHardware.map(item => (
-          <div key={item.title} className="bg-[#161619] border border-white/[0.08] p-6 rounded-2xl space-y-4 luper-card">
+        {filteredHardware.length > 0 && filteredHardware.map((item) => (
+          <div key={item.title} className="bg-luper-surface border border-white/[0.08] p-6 rounded-2xl space-y-4 luper-card">
             <div className="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
               <div className="flex items-center space-x-3">
-                <span className="px-3 py-1 bg-[#1a5efd]/10 text-[#1a5efd] text-[12px] font-bold rounded-lg font-mono">{item.category}</span>
+                <span className="px-3 py-1 bg-luper-primary/10 text-luper-primary text-[12px] font-bold rounded-lg font-mono">{item.category}</span>
                 <h3 className="text-white font-bold text-[17px]">{item.title}</h3>
               </div>
 
@@ -104,7 +104,7 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
             </div>
 
             <div className="grid grid-cols-3 gap-4">
-              {item.specs.map(spec => (
+              {item.specs.map((spec) => (
                 <div key={spec.label} className="bg-white/[0.02] p-3.5 rounded-xl border border-white/[0.04]">
                   <span className="text-[12px] text-[#86868b] font-medium">{spec.label}</span>
                   <div className="text-[13.5px] font-bold text-[#f5f5f7] font-mono mt-0.5 truncate">{spec.value}</div>
@@ -117,3 +117,4 @@ export const HardwareExplorerTools = memo(function HardwareExplorerTools() {
     </div>
   );
 });
+
